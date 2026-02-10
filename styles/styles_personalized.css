@@ -1,0 +1,61 @@
+﻿.font-weight-300 {
+    font-weight: 300;
+}
+
+.font-weight-400 {
+    font-weight: 400;
+}
+
+.font-weight-normal {
+    font-weight: normal;
+}
+
+.font-weight-500 {
+    font-weight: 500;
+}
+
+.font-weight-600 {
+    font-weight: 600;
+}
+
+.font-weight-900 {
+    font-weight: 900;
+}
+
+.letter-spacing-1 {
+    letter-spacing: 1px;
+}
+
+.letter-spacing-2 {
+    letter-spacing: 2px;
+}
+
+*, *::after, *::before {
+    font-family: RobotoCondensed;
+}
+
+.input-container:hover .etiqueta-input {
+    color: #555;
+}
+
+.input {
+    font-weight: 300;
+    border: none;
+    border-radius: 0;
+    border-bottom: 2px solid #999;
+}
+
+.input:hover {
+    border-bottom-color: #555;
+}
+
+.etiqueta-input {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: #999;
+    transition: color .25s
+}
+
+.input-error {
+    font-size: .9rem;
+}
