@@ -177,24 +177,6 @@
     <Content Include="Content\bootstrap-grid.rtl.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
-    <Content Include="styles\assets\fonts\RobotoCondensed-Black.ttf" />
-    <Content Include="styles\assets\fonts\RobotoCondensed-BlackItalic.ttf" />
-    <Content Include="styles\assets\fonts\RobotoCondensed-Bold.ttf" />
-    <Content Include="styles\assets\fonts\RobotoCondensed-BoldItalic.ttf" />
-    <Content Include="styles\assets\fonts\RobotoCondensed-ExtraBold.ttf" />
-    <Content Include="styles\assets\fonts\RobotoCondensed-ExtraBoldItalic.ttf" />
-    <Content Include="styles\assets\fonts\RobotoCondensed-ExtraLight.ttf" />
-    <Content Include="styles\assets\fonts\RobotoCondensed-ExtraLightItalic.ttf" />
-    <Content Include="styles\assets\fonts\RobotoCondensed-Italic.ttf" />
-    <Content Include="styles\assets\fonts\RobotoCondensed-Light.ttf" />
-    <Content Include="styles\assets\fonts\RobotoCondensed-LightItalic.ttf" />
-    <Content Include="styles\assets\fonts\RobotoCondensed-Medium.ttf" />
-    <Content Include="styles\assets\fonts\RobotoCondensed-MediumItalic.ttf" />
-    <Content Include="styles\assets\fonts\RobotoCondensed-Regular.ttf" />
-    <Content Include="styles\assets\fonts\RobotoCondensed-SemiBold.ttf" />
-    <Content Include="styles\assets\fonts\RobotoCondensed-SemiBoldItalic.ttf" />
-    <Content Include="styles\assets\fonts\RobotoCondensed-Thin.ttf" />
-    <Content Include="styles\assets\fonts\RobotoCondensed-ThinItalic.ttf" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -354,6 +336,14 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.7.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.7.0.min.map" />
+    <Content Include="styles\assets\fonts\InterTight-Black.ttf" />
+    <Content Include="styles\assets\fonts\InterTight-Bold.ttf" />
+    <Content Include="styles\assets\fonts\InterTight-ExtraBold.ttf" />
+    <Content Include="styles\assets\fonts\InterTight-Light.ttf" />
+    <Content Include="styles\assets\fonts\InterTight-Medium.ttf" />
+    <Content Include="styles\assets\fonts\InterTight-Regular.ttf" />
+    <Content Include="styles\assets\fonts\InterTight-SemiBold.ttf" />
+    <Content Include="styles\assets\fonts\InterTight-Thin.ttf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -31,7 +31,7 @@
 }
 
 *, *::after, *::before {
-    font-family: RobotoCondensed;
+    font-family: 'InterTight';
 }
 
 .input-container:hover .etiqueta-input {
