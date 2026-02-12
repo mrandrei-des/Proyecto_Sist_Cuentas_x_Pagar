@@ -19,9 +19,6 @@
 
 .main__wrapper {
     flex-grow: 2;
-    padding: 25px;
-    display: flex;
-    justify-content: center;
 }
 
 .contenedor {
@@ -35,6 +32,18 @@
 }
 /* ----- VALORES PARA CONTENEDORES PRINCIPALES ----- */
 /* ----- FIN VALORES PARA CONTENEDORES PRINCIPALES ----- */
+
+/* ----- MAIN ----- */
+
+.main__wrapper {
+    max-width: 1300px;
+    padding: 25px;
+    display: flex;
+    justify-content: center;
+}
+
+/* ----- MAIN ----- */
+/* ----- FIN MAIN ----- */
 
 /* ----- HEADER -> MENÚ ----- */
 .header {

@@ -203,7 +203,9 @@
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="styles\fonts.css" />
+    <Content Include="styles\styles_botones.css" />
     <Content Include="styles\styles_colores.css" />
+    <Content Include="styles\styles_formulario.css" />
     <Content Include="styles\styles_personalized.css" />
     <Content Include="styles\styles_reset_elementos.css" />
     <Content Include="Usuario.aspx" />

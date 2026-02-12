@@ -7,6 +7,8 @@
     --colorLetraClaro: #fff; /* Texto claro, fondo oscuro*/
     --colorLetraOscuro: #669be4; /* Botones de accion, bordes 1F2937*/
     --colorLetraOscuroSecundario: #35537c; /* Hover del azul */
+    --colorGrisClaro: #3332;
+    --colorNegroLetra: #222;
 }
 /* ----- VARIBLES GLOBALES COLORES ----- */
 /* ----- FIN VARIBLES GLOBALES COLORES ----- */

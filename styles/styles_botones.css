@@ -1,0 +1,19 @@
+﻿.boton__guardar {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-family: 'InterTight';
+    font-size: 1em;
+    font-weight: 700;
+    color: var(--colorLetraClaro);
+    letter-spacing: 1px;
+    background-color: var(--colorLetraOscuroSecundario);
+    cursor: pointer;
+    transition: background-color .35s;
+}
+
+.boton__guardar:hover {
+    background-color: var(--colorLetraOscuro);
+    transition: background-color .25s;
+}

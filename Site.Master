@@ -17,6 +17,8 @@
     <link href="~/styles/styles_reset_elementos.css" rel="stylesheet" type="text/css"/>
     <link href="~/styles/fonts.css" rel="stylesheet" type="text/css"/>
     <link href="~/styles/styles_colores.css" rel="stylesheet" type="text/css"/>
+    <link href="~/styles/styles_botones.css" rel="stylesheet" type="text/css"/>
+    <link href="~/styles/styles_formulario.css" rel="stylesheet" type="text/css"/>    
     <link href="~/styles/styles_personalized.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
@@ -97,10 +99,10 @@
         <div class="main__wrapper">
 
             <%-- Aquí se agrega el código personalizado de cada página, lo demás se copia en todas las páginas --%>
-            <div class="container body-content">
+            <%--<div class="container body-content">--%>
                 <asp:ContentPlaceHolder ID="MainContent" runat="server">
                 </asp:ContentPlaceHolder>
-            </div>
+            <%--</div>--%>
 
         </div>
         <%-- ------- FIN MAIN ------- --%>
