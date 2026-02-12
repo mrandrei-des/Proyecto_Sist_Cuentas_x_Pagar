@@ -11,6 +11,7 @@
         usuario.Constrasenna = txtContrasenna.Text
         usuario.Nombre = txtNombre.Text
         usuario.Apellido1 = txtApellidoUno.Text
+
         usuario.Apellido2 = txtApellidoDos.Text
         usuario.Correo = txtCorreoUsuario.Text
         usuario.Estado = CInt(ddlEstadoUsuario.SelectedItem.Value)

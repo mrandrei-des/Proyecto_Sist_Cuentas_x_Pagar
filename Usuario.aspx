@@ -1,7 +1,8 @@
 ﻿<%@ Page Title="Usuario" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="Usuario.aspx.vb" Inherits="Proyecto_Sist_Cuentas_x_Pagar.Usuario" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">    
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    
+    <%-- Trabajar aquí en la implementación del formulario de creación de usuarios ya con los estilos personalizados --%>
     <div class="container p-4 border">
-
         <div class="row-cols-1">
             <h1 class="text-center font-weight-600">Registro de usuarios</h1>
             <p class="text-muted text-center">Complete la información para ingresar un nuevo usuario al sistema</p>
@@ -87,4 +88,5 @@
             </div>
         </div>
     </div>
+
 </asp:Content>

@@ -1,10 +1,9 @@
 ﻿<%@ Master Language="VB" AutoEventWireup="true" CodeBehind="Site.master.vb" Inherits="Proyecto_Sist_Cuentas_x_Pagar.SiteMaster" %>
 
 <!DOCTYPE html>
-
 <html lang="es">
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%: Page.Title %> - Sistema Cuentas por Pagar</title>
@@ -13,14 +12,15 @@
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
 
-    <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-    <link href="~/styles/styles_personalized.css" rel="stylesheet" type="text/css"/>
+
+    <link href="~/styles/styles_reset_elementos.css" rel="stylesheet" type="text/css"/>
     <link href="~/styles/fonts.css" rel="stylesheet" type="text/css"/>
-
-
+    <link href="~/styles/styles_colores.css" rel="stylesheet" type="text/css"/>
+    <link href="~/styles/styles_personalized.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
+    <%-- Este form es indispensable, hace de contenedor principal al mismo nivel que body, cualquier estilo debe considerarse a él --%>
     <form runat="server">
         <asp:ScriptManager runat="server">
             <Scripts>
@@ -41,34 +41,79 @@
             </Scripts>
         </asp:ScriptManager>
 
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
-            <div class="container">
-                <a class="navbar-brand" runat="server" href="~/">Sistema CxP</a>
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Alternar navegación" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/About">Acerca de</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Contact">Contacto</a></li>
-                    </ul>
+        <%-- ------- HEADER ------- --%>
+        <header class="header">
+            <nav class="menu">
+                <div class="menu__logo--container">
+                    <span class="menu__logo">Sistema CxP</span>
                 </div>
+                <ul class="menu__lista">                
+                    <li class="menu__item">
+                        <a href="index" class="menu__enlace">Inicio</a>
+                    </li>
+                    <li class="menu__item">
+                        <a href="#" class="menu__enlace">Documentos</a>
+                        <ul class="menu__submenu">
+                            <li class="submenu__item" id="registrarFacturas">
+                                <a href="Facturas" class="submenu__enlace">Registrar Factura</a>
+                            </li>
+                            <li class="submenu__item" id="registrarDocumentosPago">
+                                <a href="DocumentoPago" class="submenu__enlace">Registrar Documento Pago</a>
+                            </li>
+                            <li class="submenu__item" id="aplicarPago">
+                                <a href="#" class="submenu__enlace">Aplicar Pago</a>
+                            </li>                
+                        </ul>
+                    </li>
+                    <li class="menu__item">
+                        <a href="Proveedor" class="menu__enlace">Proveedores</a>
+                        <ul class="menu__submenu">
+                            <li class="submenu__item" id="mantenimientoProveedores">
+                                <a href="#" class="submenu__enlace">Mantenimiento</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu__item">
+                        <a href="#" class="menu__enlace">Usuarios</a>                    
+                        <ul class="menu__submenu">
+                            <li class="submenu__item" id="mantenimientoUsuario">
+                                <a href="Usuario" class="submenu__enlace">Mantenimiento</a>
+                            </li>
+                            <li class="submenu__item" id="cambioContrasenna">
+                                <a href="#" class="submenu__enlace">Cambiar Contraseña</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu__item">
+                        <a href="#" class="menu__enlace">Cerrar Sesión</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <%-- ------- FIN HEADER ------- --%>
+
+        <%-- ------- MAIN ------- --%>
+        <%-- Este es el contenedor del contenido principal --%>
+        <div class="main__wrapper">
+
+            <%-- Aquí se agrega el código personalizado de cada página, lo demás se copia en todas las páginas --%>
+            <div class="container body-content">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                </asp:ContentPlaceHolder>
             </div>
-        </nav>
-        <div class="container body-content">
-            <asp:ContentPlaceHolder ID="MainContent" runat="server">
-            </asp:ContentPlaceHolder>
-            <hr />
-            <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - Mi aplicación ASP.NET</p>
-            </footer>
+
         </div>
+        <%-- ------- FIN MAIN ------- --%>
+
+        <%-- ------- FOOTER ------- --%>
+        <footer class="footer">
+            <p class="footer__parrafo">
+                Desarrollado por <strong><a href="#" class="footer__enlace">Andrei Mesén Romero</a></strong> - 2026
+            </p>
+        </footer>
+        <%-- ------- FIN FOOTER ------- --%>
+
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </form>
-    <asp:PlaceHolder runat="server">
-        <%: Scripts.Render("~/Scripts/bootstrap.js") %>
-    </asp:PlaceHolder>
 </body>
 </html>

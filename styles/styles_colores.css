@@ -1,0 +1,12 @@
+﻿/* ----- VARIBLES GLOBALES COLORES ----- */
+:root {
+    --colorPrincipal: #3b977a; /* Título principal*/
+    --colorSecundario: #ccece3; /* Fondo Claro con toques de verde para dividir secciones*/
+    --colorFondoPrincipal: #eee; /* Fondo claro*/
+    --colorFondoClaro: #fff;
+    --colorLetraClaro: #fff; /* Texto claro, fondo oscuro*/
+    --colorLetraOscuro: #669be4; /* Botones de accion, bordes 1F2937*/
+    --colorLetraOscuroSecundario: #35537c; /* Hover del azul */
+}
+/* ----- VARIBLES GLOBALES COLORES ----- */
+/* ----- FIN VARIBLES GLOBALES COLORES ----- */
