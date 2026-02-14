@@ -215,6 +215,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.vb" />
     <Compile Include="App_Start\RouteConfig.vb" />
+    <Compile Include="Database\UsuarioDB.vb" />
     <Compile Include="DocumentoPago.aspx.designer.vb">
       <DependentUpon>DocumentoPago.aspx</DependentUpon>
     </Compile>
@@ -285,6 +286,7 @@
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Utils\DbHealper.vb" />
+    <Compile Include="Utils\SwalUtils.vb" />
     <Compile Include="ViewSwitcher.ascx.vb">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -341,7 +343,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Database\" />
     <Folder Include="styles\assets\icons\" />
     <Folder Include="styles\assets\img\" />
   </ItemGroup>

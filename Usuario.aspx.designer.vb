@@ -194,6 +194,33 @@ Partial Public Class Usuario
     Protected WithEvents rfvEstadoUsuario As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
     '''<summary>
+    '''Control lblRol.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblRol As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control ddlRoles.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents ddlRoles As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''Control rfvRolUsuario.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents rfvRolUsuario As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+    '''<summary>
     '''Control btnGuardar.
     '''</summary>
     '''<remarks>

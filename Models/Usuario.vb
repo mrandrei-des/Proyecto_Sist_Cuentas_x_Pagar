@@ -7,11 +7,12 @@
         Private _apellido2 As String
         Private _correo As String
         Private _estado As Integer
+        Private _rol As Integer
 
         Public Sub New()
         End Sub
 
-        Public Sub New(nombreUsuario As String, constrasenna As String, nombre As String, apellido1 As String, apellido2 As String, correo As String, estado As Integer)
+        Public Sub New(nombreUsuario As String, constrasenna As String, nombre As String, apellido1 As String, apellido2 As String, correo As String, estado As Integer, rol As Integer)
             Me.NombreUsuario = nombreUsuario
             Me.Constrasenna = constrasenna
             Me.Nombre = nombre
@@ -19,6 +20,7 @@
             Me.Apellido2 = apellido2
             Me.Correo = correo
             Me.Estado = estado
+            Me.Rol = rol
         End Sub
 
         Public Property NombreUsuario As String
@@ -81,6 +83,15 @@
             End Get
             Set(value As Integer)
                 _estado = value
+            End Set
+        End Property
+
+        Public Property Rol As Integer
+            Get
+                Return _rol
+            End Get
+            Set(value As Integer)
+                _rol = value
             End Set
         End Property
     End Class
