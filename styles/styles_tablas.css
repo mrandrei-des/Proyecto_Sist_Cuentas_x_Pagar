@@ -1,0 +1,117 @@
+﻿.contenedor__tabla {
+    padding: 25px 35px;
+    border-radius: 5px;
+    background-color: var(--colorFondoContainer);
+    box-shadow: 0 0 15px 0 #0005;
+    overflow-x: auto;
+}
+
+.tabla__header {
+    text-align: right;
+    margin-right: 5px;
+}
+
+.tabla__header-titulo {
+    color: var(--colorPrincipal);
+    font-size: 1.3em;
+}
+
+.tabla__header-parrafo {
+    margin-top: 5px;
+    color: var(--colorNegroLetra);
+}
+
+.contenedor__tabla-main {
+    margin-top: 15px;
+    border-radius: 5px;
+}
+
+.tabla {
+    width: 100%;
+    padding: 15px 30px;
+    border-collapse: collapse;
+    box-shadow: 0 0 15px 0 #0002;
+}
+
+.tabla__encabezado,
+.tabla__cuerpo,
+.tabla__pie {
+    width: 100%;
+}
+
+th, td {
+    padding: 10px 15px;
+    text-align: center;
+}
+
+td {
+    font-size: .8em;
+}
+
+.tabla__encabezado tr {
+    background-color: var(--colorPrincipal);
+    color: var(--colorLetraClaro);
+}
+
+.tabla__encabezado th {
+    font-size: .8em;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 2px;
+}
+
+    .tabla__encabezado th:nth-child(1) {
+        width: 15%;
+    }
+
+    .tabla__encabezado th:nth-child(2) {
+        width: 25%;
+    }
+
+    .tabla__encabezado th:nth-child(3) {
+        width: 15%;
+    }
+
+    .tabla__encabezado th:last-child {
+        width: 20%;
+    }
+
+.tabla__cuerpo tr {
+    box-shadow: 0;
+    border: none;
+    cursor: pointer;
+    transition: box-shadow .25s;
+}
+
+    .tabla__cuerpo tr:nth-child(odd) {
+        background-color: var(--colorFondoContainer);
+    }
+
+    .tabla__cuerpo tr:nth-child(even) {
+        background-color: var(--colorGrisClaro);
+        border-top: 2px solid var(--colorGrisClaro);
+        border-bottom: 2px solid var(--colorGrisClaro);
+    }
+
+    .tabla__cuerpo tr:hover {
+        box-shadow: 0 0 10px 0 #0002;
+    }
+
+.contenedor__tabla-footer {
+    margin-top: 15px;
+    padding: 5px 10px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.paginacion--actual {
+    display: inline-block;
+    padding: 3px 10px;
+    border: 2px solid var(--colorNegroLetra);
+    border-radius: 5px;
+    background-color: var(--colorFondoContainer);
+    color: var(--colorNegroLetra);
+}

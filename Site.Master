@@ -15,11 +15,14 @@
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
     <link href="~/styles/styles_reset_elementos.css" rel="stylesheet" type="text/css"/>
-    <link href="~/styles/fonts.css" rel="stylesheet" type="text/css"/>
     <link href="~/styles/styles_colores.css" rel="stylesheet" type="text/css"/>
-    <link href="~/styles/styles_botones.css" rel="stylesheet" type="text/css"/>
     <link href="~/styles/styles_formulario.css" rel="stylesheet" type="text/css"/>    
+    <link href="~/styles/styles_botones.css" rel="stylesheet" type="text/css"/>
+    <link href="~/styles/styles_tablas.css" rel="stylesheet" type="text/css"/>
+    <link href="~/styles/styles_icons.css" rel="stylesheet" type="text/css"/>
+    <link href="~/styles/styles_textos.css" rel="stylesheet" type="text/css"/>
     <link href="~/styles/styles_personalized.css" rel="stylesheet" type="text/css"/>
+    <link href="~/styles/fonts.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
     <%-- Este form es indispensable, hace de contenedor principal al mismo nivel que body, cualquier estilo debe considerarse a él --%>
@@ -76,10 +79,10 @@
                         </ul>
                     </li>
                     <li class="menu__item">
-                        <a href="#" class="menu__enlace">Usuarios</a>                    
+                        <a href="ListadoUsuarios" class="menu__enlace">Usuarios</a>                    
                         <ul class="menu__submenu">
                             <li class="submenu__item" id="mantenimientoUsuario">
-                                <a href="Usuario" class="submenu__enlace">Mantenimiento</a>
+                                <a href="MantenimientoUsuario" class="submenu__enlace">Mantenimiento</a>
                             </li>
                             <li class="submenu__item" id="cambioContrasenna">
                                 <a href="#" class="submenu__enlace">Cambiar Contraseña</a>

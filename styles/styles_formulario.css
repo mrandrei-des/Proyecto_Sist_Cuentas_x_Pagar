@@ -1,20 +1,10 @@
-﻿.formulario__contenedor {
-    width: 60%;
-    min-height: 500px;
-    margin: 10px;
-    padding: 25px 35px;
-    background-color: #F1F5F9;
-    box-shadow: 0 0 15px 0 #0005;
-    border-radius: 5px;
-}
-
-.formulario__header {
+﻿.formulario__header {
     text-align: center;
     margin-bottom: 15px;
 }
 
 .formulario__titulo {
-    font-size: 1.5em;
+    font-size: 1.3em;
 }
 
 .formulario__titulo,
@@ -24,35 +14,34 @@
 }
 
 .formulario__parrafo {
-    font-size: .9em;
-    font-weight: 600;
     color: var(--colorLetraOscuroSecundario);
 }
 
 .formulario__fieldset {
-    padding: 10px 20px;
+    padding: 10px 15px;
     margin: 10px 0;
-    border-radius: 5px;
     border-color: var(--colorGrisClaro);
+    border-radius: 5px;
 }
 
-.formulario__fieldset legend {
-    padding: 0 10px;
-    font-size: .9em;
-    color: var(--colorGrisClaro);
-    letter-spacing: 2px;
-    transition: color .25s;
-}
+    .formulario__fieldset legend {
+        padding: 0 5px;
+        font-size: .9em;
+        font-weight: 600;
+        color: var(--colorGrisClaro);
+        letter-spacing: 2px;
+        transition: color .25s;
+    }
 
-.formulario__fieldset:hover legend {
-    color: var(--colorNegroLetra);
-    transition-duration: .35s;
-}
+    .formulario__fieldset:hover legend {
+        color: var(--colorNegroLetra);
+        transition-duration: .35s;
+    }
 
 .formulario__contenedor-input {
     width: 100%;
+    margin-bottom: 5px;
 }
-
 /* Contenedor que permite que varios inputs se pongan uno al lado del otro */
 .formulario__contenedor-flex {
     width: 100%;
@@ -79,24 +68,33 @@
     width: 100%;
     margin-top: 10px;
     margin-bottom: 5px;
-    padding: 10px 15px;
+    padding: 7px 15px;
     border: none;
     border-bottom: 3px solid var(--colorLetraOscuro);
     outline: none;
+    font-size: 1em;
     font-family: 'InterTight';
     box-shadow: 0 3px 15px 0 #0002;
     transition: box-shadow .5s, border-bottom-color .5s;
 }
 
-.formulario__input:hover {
-    box-shadow: none;
-    transition-duration: .25s;
-}
+    .formulario__input:hover {
+        box-shadow: none;
+        transition-duration: .25s;
+    }
 
-.formulario__input:focus {
-    border-bottom-color: var(--colorLetraOscuroSecundario);
-    transition-duration: .25s;
-}
+    .formulario__input:focus {
+        border-bottom-color: var(--colorLetraOscuroSecundario);
+        transition-duration: .25s;
+    }
+
+    .formulario__input:valid {
+        border-bottom-color: var(--colorPrincipal);
+    }
+
+    .formulario__input[type="email"]:focus:invalid {
+        border-bottom-color: #f00;
+    }
 
 .formulario__opcional {
     color: var(--colorPrincipal);
@@ -107,16 +105,57 @@
 .formulario__contenedor-mensajes {
     display: block;
     padding: 5px;
+    display: none;
 }
 
 .formulario__mensaje {
-    margin: 5px 0;
     font-style: italic;
-    font-size: .80em;
+    font-size: .75em;
     color: #f00;
 }
 
 .formulario__footer {
     width: 100%;
     margin-top: 15px;
+    text-align: center;
 }
+
+/* ----- MAIN QUERIES -----*/
+@media screen and (max-width: 1450px) {
+}
+
+@media screen and (max-width: 900px) {
+    .formulario__titulo {
+        font-size: 1.1em;
+    }
+
+    .contenedor__titulo__principal {
+        text-align: left;
+    }
+
+    .formulario__fieldset {
+        padding: 10px;
+    }
+
+        .formulario__fieldset legend {
+            font-size: .8em;
+        }
+
+    .formulario__label {
+        font-size: .8em;
+    }
+
+    .formulario__mensaje {
+        font-size: .8em;
+    }
+
+    .formulario__contenedor-flex {
+        display: block;
+    }
+
+    .contenedor-input {
+        width: 100%;
+    }
+}
+
+/* ----- FIN MAIN QUERIES -----*/

@@ -146,7 +146,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="index.aspx" />
-    <Content Include="Proveedor.aspx" />
+    <Content Include="MantenimientoProveedor.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -175,6 +175,7 @@
     <Content Include="Content\bootstrap-grid.rtl.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="ListadoUsuarios.aspx" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -206,9 +207,12 @@
     <Content Include="styles\styles_botones.css" />
     <Content Include="styles\styles_colores.css" />
     <Content Include="styles\styles_formulario.css" />
+    <Content Include="styles\styles_icons.css" />
     <Content Include="styles\styles_personalized.css" />
     <Content Include="styles\styles_reset_elementos.css" />
-    <Content Include="Usuario.aspx" />
+    <Content Include="styles\styles_tablas.css" />
+    <Content Include="styles\styles_textos.css" />
+    <Content Include="MantenimientoUsuario.aspx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
   </ItemGroup>
@@ -264,11 +268,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Proveedor.aspx.designer.vb">
-      <DependentUpon>Proveedor.aspx</DependentUpon>
+    <Compile Include="MantenimientoProveedor.aspx.designer.vb">
+      <DependentUpon>MantenimientoProveedor.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Proveedor.aspx.vb">
-      <DependentUpon>Proveedor.aspx</DependentUpon>
+    <Compile Include="MantenimientoProveedor.aspx.vb">
+      <DependentUpon>MantenimientoProveedor.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Site.Master.designer.vb">
@@ -278,11 +282,11 @@
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Usuario.aspx.designer.vb">
-      <DependentUpon>Usuario.aspx</DependentUpon>
+    <Compile Include="MantenimientoUsuario.aspx.designer.vb">
+      <DependentUpon>MantenimientoUsuario.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Usuario.aspx.vb">
-      <DependentUpon>Usuario.aspx</DependentUpon>
+    <Compile Include="MantenimientoUsuario.aspx.vb">
+      <DependentUpon>MantenimientoUsuario.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Utils\DbHealper.vb" />
@@ -300,6 +304,13 @@
     </Compile>
     <Compile Include="Site.Mobile.Master.designer.vb">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
+    </Compile>
+    <Compile Include="ListadoUsuarios.aspx.designer.vb">
+      <DependentUpon>ListadoUsuarios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ListadoUsuarios.aspx.vb">
+      <DependentUpon>ListadoUsuarios.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>

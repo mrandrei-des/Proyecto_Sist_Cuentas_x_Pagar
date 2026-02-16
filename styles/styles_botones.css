@@ -1,19 +1,58 @@
-﻿.boton__guardar {
-    width: 100%;
-    padding: 10px;
+﻿.boton {
+    padding: 8px 10px;
     border: none;
     border-radius: 5px;
     font-family: 'InterTight';
     font-size: 1em;
-    font-weight: 700;
+    font-weight: 800;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: background-color .35s, outline-color .35s;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    width: 100%;
+}
+
+    .boton:hover {
+        transition-duration: .25s;
+    }
+
+/* --- BOTÓN PARA GUARDAR --- */
+.boton__guardar {
     color: var(--colorLetraClaro);
     letter-spacing: 1px;
     background-color: var(--colorLetraOscuroSecundario);
-    cursor: pointer;
-    transition: background-color .35s;
 }
 
-.boton__guardar:hover {
-    background-color: var(--colorLetraOscuro);
-    transition: background-color .25s;
+    .boton__guardar:hover {
+        background-color: #5984c0;
+        outline-color: var(--colorLetraOscuroSecundario);
+        transition: background-color .25s;
+    }
+
+.boton__eliminar {
+    background-color: #da2c38;
 }
+
+    .boton__eliminar:hover {
+        background-color: #ff2916;
+        outline-color: #da2c38;
+    }
+
+.boton__modificar {
+    background-color: #faa307;
+}
+
+    .boton__modificar:hover {
+        background-color: rgb(255, 187, 0);
+        outline-color: #faa307;
+    }
+
+.boton__refrescar {
+    background-color: var(--colorSecundario);
+}
+
+    .boton__refrescar:hover {
+        background-color: #88d6c0;
+        outline-color: var(--colorPrincipal);
+    }

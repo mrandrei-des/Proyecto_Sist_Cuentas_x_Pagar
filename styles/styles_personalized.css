@@ -1,11 +1,6 @@
 ﻿body {
     font-family: 'InterTight';
     background-color: var(--colorFondoPrincipal);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
     position: relative;
     z-index: 15;
 }
@@ -17,33 +12,8 @@
     width: 100%;
 }
 
-.main__wrapper {
-    flex-grow: 2;
-}
-
-.contenedor {
-    width: 70%;
-    min-height: 500px;
-    margin: 15px;
-    padding: 30px;
-    background-color: #F1F5F9;
-    box-shadow: 0 0 15px 0 #0005;
-    border-radius: 5px;
-}
 /* ----- VALORES PARA CONTENEDORES PRINCIPALES ----- */
 /* ----- FIN VALORES PARA CONTENEDORES PRINCIPALES ----- */
-
-/* ----- MAIN ----- */
-
-.main__wrapper {
-    max-width: 1300px;
-    padding: 25px;
-    display: flex;
-    justify-content: center;
-}
-
-/* ----- MAIN ----- */
-/* ----- FIN MAIN ----- */
 
 /* ----- HEADER -> MENÚ ----- */
 .header {
@@ -51,13 +21,17 @@
 }
 
 .menu {
-    width: 70%;
-    margin: 0 auto;
+    width: 100%;
     padding: 5px;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
+}
+
+.menu__logo--container {
+    width: 20%;
 }
 
 .menu__logo {
@@ -66,8 +40,9 @@
 }
 
 .menu__lista {
-    width: 50%;
+    width: 40%;
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
@@ -85,18 +60,18 @@
     padding: 10px 20px;
     border-radius: 5px;
     font-weight: 700;
-    font-size: 1.05em;
+    font-size: 1em;
     color: var(--colorLetraClaro);
     transition: background-color .25s, color .25s;
 }
 
-.menu__enlace:hover {
-    background-color: var(--colorLetraOscuroSecundario);
-}
+    .menu__enlace:hover {
+        background-color: var(--colorLetraOscuroSecundario);
+    }
 
-.menu__enlace:active {
-    color: var(--colorSecundario);
-}
+    .menu__enlace:active {
+        color: var(--colorSecundario);
+    }
 
 .menu__item:last-child .menu__enlace {
     background-color: var(--colorLetraOscuro);
@@ -114,7 +89,7 @@
 
 .submenu__item {
     display: block;
-    margin-bottom: 5px;
+    margin: 5px 0;
 }
 
 .menu__item:hover .menu__submenu {
@@ -137,14 +112,105 @@
     transition: background-color .25s, padding-left .25s, text-decoration .25s;
 }
 
-.submenu__enlace:hover {
-    background-color: var(--colorLetraOscuroSecundario);
-    padding-left: 25px;
-    text-decoration: underline;
-}
-
+    .submenu__enlace:hover {
+        background-color: var(--colorLetraOscuroSecundario);
+        padding-left: 25px;
+        text-decoration: underline;
+    }
 /* ----- HEADER -> MENÚ ----- */
 /* ----- FIN HEADER -> MENÚ ----- */
+
+/* ----- MAIN ----- */
+
+.main__wrapper {
+    max-width: 1400px;
+    padding: 25px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+.formulario__contenedor {
+    width: 55%;
+    padding: 20px 30px;
+    background-color: var(--colorFondoContainer);
+    box-shadow: 0 0 15px 0 #0005;
+    border-radius: 5px;
+}
+
+/* ----- MAIN QUERIES -----*/
+@media screen and (max-width: 1450px) {
+    .main__wrapper {
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 1275px) {
+    .menu__logo--container {
+        width: 100%;
+    }
+}
+
+
+@media screen and (max-width: 900px) {
+
+    .menu {
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
+    .menu__logo--container {
+        width: 100%;
+        text-align: left;
+    }
+
+    .menu__lista {
+        width: 100%;
+        margin-top: 10px;
+        flex-direction: column;
+        align-items: start;
+    }
+
+    .menu__submenu {
+        top: 0;
+        left: 100%;
+    }
+
+    .submenu__item {
+        margin-top: 0;
+        margin-left: 10px;
+    }
+
+    .menu__item:last-child {
+        margin-top: 50px;
+    }
+
+    .main__wrapper {
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
+    }
+
+    .contenedor__titulo__principal {
+        text-align: left;
+    }
+
+    .formulario__contenedor,
+    .contenedor__aside {
+        width: 100%;
+    }
+}
+
+/* ----- FIN MAIN QUERIES -----*/
+
+/* ----- MAIN ----- */
+/* ----- FIN MAIN ----- */
 
 /* ----- FOOTER ----- */
 .footer {

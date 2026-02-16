@@ -16,16 +16,18 @@ a {
 form {
     width: 100%;
     min-height: 100vh;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
     z-index: 15;
-
     font-family: 'InterTight';
     background-color: var(--colorFondoPrincipal);
+}
+
+h1, h2, h3, h4, h5, h6, label, p, a, legend {
+    text-wrap: pretty;
 }
 
 /* ----- RESETEAR ELEMENTOS ----- */

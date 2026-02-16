@@ -4,11 +4,13 @@
     --colorSecundario: #ccece3; /* Fondo Claro con toques de verde para dividir secciones*/
     --colorFondoPrincipal: #eee; /* Fondo claro*/
     --colorFondoClaro: #fff;
-    --colorLetraClaro: #fff; /* Texto claro, fondo oscuro*/
+    --colorLetraClaro: #f5f5f5; /* Texto claro, fondo oscuro*/
     --colorLetraOscuro: #669be4; /* Botones de accion, bordes 1F2937*/
     --colorLetraOscuroSecundario: #35537c; /* Hover del azul */
     --colorGrisClaro: #3332;
+    --colorNegroMedioTransparente: #3338;
     --colorNegroLetra: #222;
+    --colorFondoContainer: #F1F5F9;
 }
 /* ----- VARIBLES GLOBALES COLORES ----- */
 /* ----- FIN VARIBLES GLOBALES COLORES ----- */
