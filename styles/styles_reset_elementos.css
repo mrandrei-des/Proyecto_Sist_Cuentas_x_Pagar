@@ -16,17 +16,24 @@ a {
 form {
     width: 100%;
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    grid-template-rows: 50px 1fr 50px;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "header"
+        "main"
+        "footer";
     position: relative;
     z-index: 15;
     font-family: 'InterTight';
     background-color: var(--colorFondoPrincipal);
 }
 
-h1, h2, h3, h4, h5, h6, label, p, a, legend {
+h1, h2, h3, h4, h5, h6, label, a, legend {
+    text-wrap: balance;
+}
+
+p {
     text-wrap: pretty;
 }
 

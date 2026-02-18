@@ -48,10 +48,10 @@
 
         <%-- ------- HEADER ------- --%>
         <header class="header">
+            <div class="menu__logo--container">
+                <a href="index" class="menu__logo">Sistema CxP</a>
+            </div>
             <nav class="menu">
-                <div class="menu__logo--container">
-                    <span class="menu__logo">Sistema CxP</span>
-                </div>
                 <ul class="menu__lista">                
                     <li class="menu__item">
                         <a href="index" class="menu__enlace">Inicio</a>
@@ -65,16 +65,16 @@
                             <li class="submenu__item" id="registrarDocumentosPago">
                                 <a href="DocumentoPago" class="submenu__enlace">Registrar Documento Pago</a>
                             </li>
-                            <li class="submenu__item" id="aplicarPago">
+                            <li class="submenu__item" id="aplicarDocumentosPago">
                                 <a href="#" class="submenu__enlace">Aplicar Pago</a>
                             </li>                
                         </ul>
                     </li>
                     <li class="menu__item">
-                        <a href="Proveedor" class="menu__enlace">Proveedores</a>
+                        <a href="#" class="menu__enlace">Proveedores</a>
                         <ul class="menu__submenu">
                             <li class="submenu__item" id="mantenimientoProveedores">
-                                <a href="#" class="submenu__enlace">Mantenimiento</a>
+                                <a href="MantenimientoProveedor" class="submenu__enlace">Mantenimiento</a>
                             </li>
                         </ul>
                     </li>
@@ -90,11 +90,12 @@
                         </ul>
                     </li>
                     <li class="menu__item">
-                        <a href="#" class="menu__enlace">Cerrar Sesión</a>
+                        <button class="menu__boton--sesion" title="">Cerrar Sesión</button>
                     </li>
                 </ul>
             </nav>
         </header>
+
         <%-- ------- FIN HEADER ------- --%>
 
         <%-- ------- MAIN ------- --%>

@@ -1,101 +1,199 @@
-﻿.contenedor__tabla {
-    padding: 25px 35px;
+﻿.page__main--users {
+    display: grid;
+    grid-template-rows: repeat(2, auto) 1fr;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "titulo"
+        "herramientas"
+        "tabla";
+    padding: 30px 40px;
+}
+
+.contenedor__section--titulo {
+    grid-area: titulo;
+}
+
+.contenedor__section--herramientas {
+    grid-area: herramientas;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, auto);
+    margin-top: 15px;
+}
+
+.section--subtitulo {
+    font-size: 1.3rem;
+}
+
+.section--parrafo {
+    font-size: .9rem;
+    color: var(--colorLetraOscuroSecundario);
+}
+
+.contenedor__herramientas {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+.fieldset__filtros {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr) auto;
+    align-items: center;
+    justify-items: center;
+    gap: 10px;
+    padding: 15px 10px;
+    margin-top: 15px;
+    padding-bottom: 25px;
+    border: 2px solid var(--colorGrisClaro);
     border-radius: 5px;
-    background-color: var(--colorFondoContainer);
-    box-shadow: 0 0 15px 0 #0005;
-    overflow-x: auto;
+    transition: border-color .35s;
 }
 
-.tabla__header {
-    text-align: right;
-    margin-right: 5px;
+    .fieldset__filtros:hover {
+        border-color: var(--colorNegroLetra);
+        transition-duration: .25s;
+    }
+
+.fieldset__leyenda {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 0 10px;
+    letter-spacing: 2px;
 }
 
-.tabla__header-titulo {
-    color: var(--colorPrincipal);
-    font-size: 1.3em;
+.contenedor__filtro {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.tabla__header-parrafo {
+.filtro__label {
+    font-size: 1em;
+    letter-spacing: 1px;
+}
+
+.filtro__input {
+    width: 100%;
     margin-top: 5px;
-    color: var(--colorNegroLetra);
+    padding: 7px 15px;
+    border: none;
+    border-bottom: 4px solid var(--colorGrisClaro);
+    color: #333;
+    outline: none;
+    font-family: 'InterTight';
+    font-size: 1em;
+    transition: border-bottom-color .25s, box-shadow .25s;
 }
 
-.contenedor__tabla-main {
+    .filtro__input:hover {
+        box-shadow: 0 0 10px 0 #0002;
+    }
+
+    .filtro__input:focus {
+        border-bottom-color: var(--colorLetraOscuroSecundario);
+    }
+
+.contenedor__agregar--usuario {
+    padding: 10px;
+}
+
+.enlace__agregar--usuario {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 7px 15px;
+    background-color: var(--colorLetraOscuroSecundario);
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--colorLetraClaro);
+    cursor: pointer;
+    transition: color .35s;
+}
+
+.enlace__agregar--usuario:hover {
+    color: var(--colorPrincipal);
+    transition-duration: .25s;
+}
+
+.contenedor__section--tabla {
+    grid-area: tabla;
+    width: 100%;
+}
+
+.contenedor__tabla {
+    width: 100%;
+    padding: 15px 0;
     margin-top: 15px;
     border-radius: 5px;
+    overflow-x: auto;
 }
 
 .tabla {
     width: 100%;
-    padding: 15px 30px;
     border-collapse: collapse;
-    box-shadow: 0 0 15px 0 #0002;
-}
-
-.tabla__encabezado,
-.tabla__cuerpo,
-.tabla__pie {
-    width: 100%;
+    overflow-x: auto;
+    border: none;
 }
 
 th, td {
-    padding: 10px 15px;
+    padding: 7px 10px;
     text-align: center;
+    border: none;
 }
 
 td {
-    font-size: .8em;
+    font-size: 1rem;
+    font-weight: 400;
 }
 
-.tabla__encabezado tr {
-    background-color: var(--colorPrincipal);
-    color: var(--colorLetraClaro);
-}
-
-.tabla__encabezado th {
-    font-size: .8em;
-    font-weight: 600;
-    text-align: center;
-    letter-spacing: 2px;
-}
-
-    .tabla__encabezado th:nth-child(1) {
-        width: 15%;
+    td:has(a.boton__eliminar) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
-    .tabla__encabezado th:nth-child(2) {
-        width: 25%;
+    .tabla tr {
+        box-shadow: 0;
+        border: none;
+        border-bottom: 2px solid transparent;
+        cursor: pointer;
+        transition: box-shadow .25s;
     }
 
-    .tabla__encabezado th:nth-child(3) {
-        width: 15%;
-    }
-
-    .tabla__encabezado th:last-child {
-        width: 20%;
-    }
-
-.tabla__cuerpo tr {
-    box-shadow: 0;
-    border: none;
-    cursor: pointer;
-    transition: box-shadow .25s;
-}
-
-    .tabla__cuerpo tr:nth-child(odd) {
+    .tabla tr:nth-child(even) {
         background-color: var(--colorFondoContainer);
     }
 
-    .tabla__cuerpo tr:nth-child(even) {
+    .tabla tr:nth-child(odd) {
         background-color: var(--colorGrisClaro);
-        border-top: 2px solid var(--colorGrisClaro);
-        border-bottom: 2px solid var(--colorGrisClaro);
     }
 
-    .tabla__cuerpo tr:hover {
-        box-shadow: 0 0 10px 0 #0002;
+    .tabla tr:hover {
+        border-color: var(--colorNegroLetra);
     }
+
+    .tabla tr:first-child {
+        background-color: var(--colorLetraOscuro);
+        color: var(--colorLetraClaro);
+    }
+
+        .tabla tr:first-child th {
+            padding: 15px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-align: center;
+            letter-spacing: 1px;
+        }
 
 .contenedor__tabla-footer {
     margin-top: 15px;
@@ -114,4 +212,52 @@ td {
     border-radius: 5px;
     background-color: var(--colorFondoContainer);
     color: var(--colorNegroLetra);
+}
+
+@media screen and (max-width: 930px) {
+    .page__main--users {
+        padding: 15px;
+    }
+
+    .contenedor__section--herramientas {
+        padding: 0;
+    }
+
+    .contenedor__herramientas {
+        grid-template-columns: 1fr;
+    }
+
+    .fieldset__filtros {
+        grid-template-columns: 1fr;
+        align-items: start;
+        justify-items: start;
+    }
+
+    .contenedor__filtro {
+        width: 100%;
+        padding: 5px;
+        margin-top: 10px;
+        align-items: start;
+        order: 5;
+    }
+
+        .contenedor__filtro.filtro--restablecer {
+            order: 1;
+        }
+
+    .filtro__input {
+        width: 100%;
+    }
+
+    .contenedor__agregar--usuario {
+        margin-top: 10px;
+    }
+
+    .contenedor__tabla {
+        padding: 15px;
+    }
+
+    .boton {
+        padding: 1px;
+    }
 }

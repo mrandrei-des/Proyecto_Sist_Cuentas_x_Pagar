@@ -1,5 +1,5 @@
 ﻿.boton {
-    padding: 8px 10px;
+    padding: 5px 10px;
     border: none;
     border-radius: 5px;
     font-family: 'InterTight';
@@ -22,6 +22,7 @@
     color: var(--colorLetraClaro);
     letter-spacing: 1px;
     background-color: var(--colorLetraOscuroSecundario);
+    padding: 7px 15px;
 }
 
     .boton__guardar:hover {
@@ -32,14 +33,18 @@
 
 .boton__eliminar {
     background-color: #da2c38;
+    color: var(--colorFondoClaro);
+    width: auto;
 }
 
     .boton__eliminar:hover {
-        background-color: #ff2916;
+        background-color: #e43222;
         outline-color: #da2c38;
     }
 
 .boton__modificar {
+    width: auto;
+    margin-left: 7px;
     background-color: #faa307;
 }
 
@@ -56,3 +61,10 @@
         background-color: #88d6c0;
         outline-color: var(--colorPrincipal);
     }
+
+.boton--filtro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+}

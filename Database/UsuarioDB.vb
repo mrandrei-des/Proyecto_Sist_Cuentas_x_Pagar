@@ -24,8 +24,8 @@ Public Class UsuarioDB
         Return True
     End Function
 
-    'Función que tiene el script para eliminar un usuario
-    Public Function EliminarPersona(usuarioAfectado As String, usuarioElimino As String, ByRef errorMessage As String) As Boolean
+    'Función que tiene el query para eliminar un usuario
+    Public Function EliminarUsuario(usuarioAfectado As String, usuarioElimino As String, ByRef errorMessage As String) As Boolean
         Dim query As String = "EXEC sp_Eliminar_Usuario @UsuarioAfectado, @UsuarioElimino "
         Dim parameters As New Dictionary(Of String, Object) From {
             {"@UsuarioAfectado", usuarioAfectado},

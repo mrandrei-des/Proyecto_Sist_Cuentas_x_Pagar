@@ -1,50 +1,20 @@
-﻿.contenedor__titulo__principal {
-    width: 100%;
-    margin-bottom: 25px;
-    text-align: center;
-}
-
-h1 {
+﻿h1 {
     font-size: 1.5em;
-    background-color: var(--colorGrisClaro);
-    text-wrap: pretty;
-    transition: color .25s, background-color .25s;
 }
 
 .parrafo {
-    font-size: 1em;
-    font-weight: 600;
-    text-wrap: pretty;
+    font-size: .9em;
 }
 
-.parrafo span {
-    color: var(--colorPrincipal);
-}
+    .parrafo span {
+        color: var(--colorPrincipal);
+    }
 
 /* ----- MAIN QUERIES -----*/
-@media screen and (max-width: 1450px) {
-    .main__wrapper {
-        flex-direction: column;
-        justify-content: start;
-        align-items: center;
-    }
-
-    .contenedor__aside {
-        width: 55%;
-        margin-top: 25px;
-    }
+/*@media screen and (max-width: 1450px) {
 }
 
 @media screen and (max-width: 900px) {
-
-    h1 {
-        font-size: 1em;
-        text-align: center;
-    }
-
-    .parrafo {
-        font-size: .90em;
-    }
-}
+}*/
 
 /* ----- FIN MAIN QUERIES -----*/
