@@ -56,10 +56,10 @@
                         <a href="#" class="menu__enlace">Documentos</a>
                         <ul class="menu__submenu">
                             <li class="submenu__item" id="registrarFacturas">
-                                <a href="#" class="submenu__enlace">Registrar Factura</a>
+                                <a href="Facturas" class="submenu__enlace">Registrar Factura</a>
                             </li>
                             <li class="submenu__item" id="registrarDocumentosPago">
-                                <a href="#" class="submenu__enlace">Registrar Documento Pago</a>
+                                <a href="DocumentoPago" class="submenu__enlace">Registrar Documento Pago</a>
                             </li>
                             <li class="submenu__item" id="aplicarDocumentosPago">
                                 <a href="#" class="submenu__enlace">Aplicar Pago</a>
@@ -70,7 +70,7 @@
                         <a href="#" class="menu__enlace">Proveedores</a>
                         <ul class="menu__submenu">
                             <li class="submenu__item" id="mantenimientoProveedores">
-                                <a href="#" class="submenu__enlace">Mantenimiento</a>
+                                <a href="MantenimientoProveedor" class="submenu__enlace">Mantenimiento</a>
                             </li>
                         </ul>
                     </li>
