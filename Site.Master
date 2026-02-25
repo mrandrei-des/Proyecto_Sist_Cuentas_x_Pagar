@@ -6,14 +6,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - Sistema Cuentas por Pagar</title>
-
+    <title><%: Page.Title %> - Sistema CxP</title>
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
-
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-
     <link href="~/styles/styles_reset_elementos.css" rel="stylesheet" type="text/css"/>
     <link href="~/styles/styles_colores.css" rel="stylesheet" type="text/css"/>
     <link href="~/styles/styles_formulario.css" rel="stylesheet" type="text/css"/>    
@@ -45,14 +42,13 @@
                 <%--Site Scripts--%>
             </Scripts>
         </asp:ScriptManager>
-
         <%-- ------- HEADER ------- --%>
         <header class="header">
             <div class="menu__logo--container">
                 <a href="index" class="menu__logo">Sistema CxP</a>
             </div>
             <nav class="menu">
-                <ul class="menu__lista">                
+                <ul class="menu__lista">
                     <li class="menu__item">
                         <a href="index" class="menu__enlace">Inicio</a>
                     </li>
@@ -60,26 +56,26 @@
                         <a href="#" class="menu__enlace">Documentos</a>
                         <ul class="menu__submenu">
                             <li class="submenu__item" id="registrarFacturas">
-                                <a href="Facturas" class="submenu__enlace">Registrar Factura</a>
+                                <a href="#" class="submenu__enlace">Registrar Factura</a>
                             </li>
                             <li class="submenu__item" id="registrarDocumentosPago">
-                                <a href="DocumentoPago" class="submenu__enlace">Registrar Documento Pago</a>
+                                <a href="#" class="submenu__enlace">Registrar Documento Pago</a>
                             </li>
                             <li class="submenu__item" id="aplicarDocumentosPago">
                                 <a href="#" class="submenu__enlace">Aplicar Pago</a>
-                            </li>                
+                            </li>
                         </ul>
                     </li>
                     <li class="menu__item">
                         <a href="#" class="menu__enlace">Proveedores</a>
                         <ul class="menu__submenu">
                             <li class="submenu__item" id="mantenimientoProveedores">
-                                <a href="MantenimientoProveedor" class="submenu__enlace">Mantenimiento</a>
+                                <a href="#" class="submenu__enlace">Mantenimiento</a>
                             </li>
                         </ul>
                     </li>
                     <li class="menu__item">
-                        <a href="ListadoUsuarios" class="menu__enlace">Usuarios</a>                    
+                        <a href="ListadoUsuarios" class="menu__enlace">Usuarios</a>
                         <ul class="menu__submenu">
                             <li class="submenu__item" id="mantenimientoUsuario">
                                 <a href="MantenimientoUsuario" class="submenu__enlace">Mantenimiento</a>
@@ -95,9 +91,7 @@
                 </ul>
             </nav>
         </header>
-
         <%-- ------- FIN HEADER ------- --%>
-
         <%-- ------- MAIN ------- --%>
         <%-- Este es el contenedor del contenido principal --%>
         <div class="main__wrapper">
@@ -106,7 +100,6 @@
             </asp:ContentPlaceHolder>
         </div>
         <%-- ------- FIN MAIN ------- --%>
-
         <%-- ------- FOOTER ------- --%>
         <footer class="footer">
             <p class="footer__parrafo">
@@ -114,7 +107,6 @@
             </p>
         </footer>
         <%-- ------- FIN FOOTER ------- --%>
-
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </form>
 </body>
