@@ -94,11 +94,9 @@
         <%-- ------- FIN HEADER ------- --%>
         <%-- ------- MAIN ------- --%>
         <%-- Este es el contenedor del contenido principal --%>
-        <div class="main__wrapper">
-            <%-- Aquí se agrega el código personalizado de cada página, lo demás se copia en todas las páginas --%>
-            <asp:ContentPlaceHolder ID="MainContent" runat="server">
-            </asp:ContentPlaceHolder>
-        </div>
+        <%-- Aquí se agrega el código personalizado de cada página, lo demás se copia en todas las páginas --%>
+        <asp:ContentPlaceHolder ID="MainContent" runat="server">
+        </asp:ContentPlaceHolder>
         <%-- ------- FIN MAIN ------- --%>
         <%-- ------- FOOTER ------- --%>
         <footer class="footer">

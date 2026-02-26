@@ -150,6 +150,7 @@
 .main__wrapper {
     max-width: 1300px;
     width: 100%;
+    position: relative;
     justify-self: center;
     align-self: center;
 }

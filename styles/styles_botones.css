@@ -11,6 +11,10 @@
     outline: 2px solid transparent;
     outline-offset: 2px;
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 
     .boton:hover {
@@ -31,6 +35,7 @@
         transition: background-color .25s;
     }
 
+/* --- BOTÓN PARA ELIMINAR --- */
 .boton__eliminar {
     background-color: #da2c38;
     color: var(--colorFondoClaro);
@@ -42,9 +47,8 @@
         outline-color: #da2c38;
     }
 
+/* --- BOTÓN PARA MODIFICAR --- */
 .boton__modificar {
-    width: auto;
-    margin-left: 7px;
     background-color: #faa307;
 }
 
@@ -52,6 +56,11 @@
         background-color: rgb(255, 187, 0);
         outline-color: #faa307;
     }
+
+/* --- BOTÓN PARA ACTIVAR LA MODIFICACIÓN --- */
+.boton__modificar--accion {
+    width: auto;
+}
 
 .boton__refrescar {
     background-color: var(--colorSecundario);

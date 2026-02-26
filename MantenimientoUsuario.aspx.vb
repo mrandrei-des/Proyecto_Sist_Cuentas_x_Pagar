@@ -23,13 +23,15 @@ Public Class Usuario
 
         ' Antes de que cree un usuario debe validar que no exista, en caso de que exista:
         ' Si el usuario NO está con estado eliminado - 6 - Revisar tabla estados, indicar que ya existe un usuario creado con ese nombre de usuario
-        ' Si el usuario SÍ está con estado eliminado - 6 - Indicar que ya existió un usuario con ese nombre de usuario y que no se puede crear otro con el mismo nombre de usuario /Por temas de trazabilidad de la información/
+        ' Si el usuario SÍ está con estado eliminado - 6 - Indicar que ya existió un usuario con ese nombre de usuario y que no se puede crear otro con el mismo nombre de usuario /Por temas de trazabilidad de la información/ 
         If objUsuarioDB.CrearUsuario(modUsuario, errorMessage) Then
             SwalUtils.ShowSwal(Me, "¡Usuario creado exitosamente!")
             limpiarCampos()
         Else
             SwalUtils.ShowSwalError(Me, errorMessage)
         End If
+
+        'divMain.Style.Add("propiedad", "valor")
     End Sub
 
     Private Sub limpiarCampos()

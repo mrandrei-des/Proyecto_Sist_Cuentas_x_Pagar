@@ -23,13 +23,15 @@ Public Class WebForm1
         Dim errorMessage As String = "", nombreUsuarioElimino As String = "andre"
 
         Dim nombreUsuarioAfecto As String = gvUsuarios.DataKeys(e.RowIndex).Value
+        'divMain.Style.Add("propiedad", "valor")
+        modalModify.Style.Add("display", "flex")
 
-        If dbUsuario.EliminarUsuario(nombreUsuarioAfecto, nombreUsuarioElimino, errorMessage) Then
-            SwalUtils.ShowSwal(Me, "¡El usuario [" + nombreUsuarioAfecto + "] ha sido eliminado del sistema!")
-            gvUsuarios.DataBind()
-        Else
-            SwalUtils.ShowSwalError(Me, errorMessage)
-        End If
+        'If dbUsuario.EliminarUsuario(nombreUsuarioAfecto, nombreUsuarioElimino, errorMessage) Then
+        '    SwalUtils.ShowSwal(Me, "¡El usuario [" + nombreUsuarioAfecto + "] ha sido eliminado del sistema!")
+        '    gvUsuarios.DataBind()
+        'Else
+        '    SwalUtils.ShowSwalError(Me, errorMessage)
+        'End If
     End Sub
 
     Protected Sub gvUsuarios_RowEditing(sender As Object, e As GridViewEditEventArgs)
@@ -39,5 +41,13 @@ Public Class WebForm1
 
         Dim nombreUsuarioAfecto As String = gvUsuarios.DataKeys(e.NewEditIndex).Value
         'estUsuario = dbUsuario.ConsultarUsuario(nombreUsuarioAfecto, errorMessage)
+    End Sub
+
+    Protected Sub btnCerrarModal_Click(sender As Object, e As EventArgs)
+        modalModify.Style.Remove("display")
+    End Sub
+
+    Protected Sub btnModificarUsuario_Click(sender As Object, e As EventArgs)
+
     End Sub
 End Class

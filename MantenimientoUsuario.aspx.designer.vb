@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class Usuario
 
     '''<summary>
+    '''Control divMain.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents divMain As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+    '''<summary>
     '''Control lblUsuario.
     '''</summary>
     '''<remarks>

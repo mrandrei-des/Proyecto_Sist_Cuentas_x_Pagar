@@ -1,7 +1,9 @@
 ﻿<%@ Page Title="Usuario" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="MantenimientoUsuario.aspx.vb" Inherits="Proyecto_Sist_Cuentas_x_Pagar.Usuario" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">    
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+
+<div class="main__wrapper">
     <%-- Trabajar aquí en la implementación del formulario de creación de usuarios ya con los estilos personalizados --%>
-    <main class="page__main page__main--form">
+    <main class="page__main page__main--form" runat="server" id="divMain">
         <section class="contenedor__section--titulo">
             <h1>
                 <span class="fondo__icono">
@@ -73,6 +75,7 @@
                         </div>
                     </fieldset>
                 </div>
+
                 <div class="formulario__contenedor">
                     <fieldset class="formulario__fieldset formulario__fieldset--g3">
                         <legend>Datos del usuario:</legend>
@@ -123,6 +126,7 @@
                         </div>
                     </fieldset>
                 </div>
+
                 <div class="formulario__contenedor">
                     <fieldset class="formulario__fieldset formulario__fieldset--g2">
                         <legend>Atributos del usuario:</legend>
@@ -170,4 +174,6 @@
             </div>
         </section>
     </main>
+</div>
+
 </asp:Content>
