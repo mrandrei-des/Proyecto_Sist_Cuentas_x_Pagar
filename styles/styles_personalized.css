@@ -64,7 +64,10 @@
 }
 
 .menu__enlace {
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
     padding: 7px 20px;
     border-radius: 5px;
     font-weight: 700;
@@ -81,6 +84,29 @@
     .menu__enlace:active {
         color: var(--colorLetraOscuro);
     }
+
+.enlace__icon {
+    position: relative;
+    top: 0;
+    transition: transform .35s;
+    animation: movimientoVertical .5s infinite forwards alternate;
+    animation-timing-function: ease-in-out;
+    animation-play-state: running;
+}
+
+@keyframes movimientoVertical {
+    0% {
+        top: 0;
+    }
+
+    100% {
+        top: 3px;
+    }
+}
+
+.menu__item:hover .enlace__icon {
+    animation-play-state: paused;
+}
 
 .menu__boton--sesion {
     padding: 7px 20px;
@@ -238,3 +264,9 @@
     }
 /* ----- FOOTER ----- */
 /* ----- FIN FOOTER ----- */
+
+@media (prefers-reduced-motion: reduce) {
+    .enlace__icon {
+        animation: none;
+    }
+}

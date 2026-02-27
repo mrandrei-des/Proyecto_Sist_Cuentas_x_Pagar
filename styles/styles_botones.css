@@ -1,32 +1,36 @@
 ﻿.boton {
-    padding: 5px 10px;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
     border: none;
     border-radius: 5px;
+    padding: 5px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
     font-family: 'InterTight';
     font-size: 1em;
     font-weight: 800;
     letter-spacing: 2px;
     cursor: pointer;
     transition: background-color .35s, outline-color .35s;
-    outline: 2px solid transparent;
-    outline-offset: 2px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
 }
 
     .boton:hover {
         transition-duration: .25s;
     }
 
+.boton__guardar,
+.boton__modificar {
+    width: 100%;
+}
+
 /* --- BOTÓN PARA GUARDAR --- */
 .boton__guardar {
+    padding: 7px 15px;
     color: var(--colorLetraClaro);
     letter-spacing: 1px;
     background-color: var(--colorLetraOscuroSecundario);
-    padding: 7px 15px;
 }
 
     .boton__guardar:hover {
@@ -34,12 +38,11 @@
         outline-color: var(--colorLetraOscuroSecundario);
         transition: background-color .25s;
     }
-
 /* --- BOTÓN PARA ELIMINAR --- */
 .boton__eliminar {
-    background-color: #da2c38;
     width: auto;
     color: var(--colorFondoClaro);
+    background-color: #da2c38;
 }
 
     .boton__eliminar:hover {
@@ -48,7 +51,7 @@
     }
 
 /* --- BOTÓN PARA MODIFICAR --- */
-.boton__modificar, 
+.boton__modificar,
 .boton__modificar--accion {
     background-color: #faa307;
     color: var(--colorFondoClaro);
@@ -76,8 +79,5 @@
     }
 
 .boton--filtro {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     color: var(--colorPrincipal);
 }

@@ -37,6 +37,7 @@ Public Class WebForm1
         txtCorreoUsuario.Text = "amense@gmaolc.com"
         ddlEstadoUsuario.SelectedValue = 3
         ddlRoles.SelectedValue = 2
+        pSubtituloModal.InnerHtml = "Usuario: <span>" + nombreUsuarioAfectado + "<span>"
         modalModify.Style.Add("display", "flex")
     End Sub
 

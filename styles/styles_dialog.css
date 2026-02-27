@@ -1,0 +1,72 @@
+﻿/* ----- INICIO DIALOG -----*/
+.dialog {
+    position: absolute;
+    z-index: 50;
+    border: none;
+    width: 100%;
+    height: 100vh;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: #0006;
+}
+
+.contenedor__modal {
+    position: relative;
+    border-radius: 5px;
+    padding: 30px 40px;
+    width: 900px;
+    background-color: var(--colorFondoContainer);
+    box-shadow: 0;
+    transition: box-shadow .35s;
+}
+
+.modal__titulo {
+    padding-bottom: 10px;
+    font-size: 1.3rem;
+    text-align: center;
+    color: var(--colorLetraOscuroSecundario);
+}
+
+.modal__subtitulo {
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    color: var(--colorLetraOscuroSecundario);
+}
+
+    .modal__subtitulo:hover {
+        text-decoration: underline;
+    }
+
+    .modal__subtitulo span {
+        font-weight: 600;
+        letter-spacing: 1px;
+        color: var(--colorLetraOscuro);
+    }
+
+.boton__cierre-modal {
+    position: absolute;
+    top: 0;
+    right: 0;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    border: none;
+    border-radius: 5px;
+    padding: 7px 15px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: lowercase;
+    color: #fff;
+    background-color: var(--colorLetraOscuroSecundario);
+    cursor: pointer;
+    transition: outline-color .35s;
+}
+
+    .boton__cierre-modal:hover {
+        outline-color: var(--colorLetraOscuroSecundario);
+    }
+
+/* ----- FIN DIALOG -----*/

@@ -12,14 +12,15 @@
     </asp:PlaceHolder>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link href="~/styles/styles_reset_elementos.css" rel="stylesheet" type="text/css"/>
-    <link href="~/styles/styles_colores.css" rel="stylesheet" type="text/css"/>
-    <link href="~/styles/styles_formulario.css" rel="stylesheet" type="text/css"/>    
-    <link href="~/styles/styles_botones.css" rel="stylesheet" type="text/css"/>
-    <link href="~/styles/styles_tablas.css" rel="stylesheet" type="text/css"/>
-    <link href="~/styles/styles_icons.css" rel="stylesheet" type="text/css"/>
-    <link href="~/styles/styles_textos.css" rel="stylesheet" type="text/css"/>
-    <link href="~/styles/styles_personalized.css" rel="stylesheet" type="text/css"/>
     <link href="~/styles/fonts.css" rel="stylesheet" type="text/css"/>
+    <link href="~/styles/styles_colores.css" rel="stylesheet" type="text/css"/>
+    <link href="~/styles/styles_textos.css" rel="stylesheet" type="text/css"/>
+    <link href="~/styles/styles_icons.css" rel="stylesheet" type="text/css"/>
+    <link href="~/styles/styles_dialog.css" rel="stylesheet" type="text/css"/>
+    <link href="~/styles/styles_botones.css" rel="stylesheet" type="text/css"/>
+    <link href="~/styles/styles_formulario.css" rel="stylesheet" type="text/css"/>    
+    <link href="~/styles/styles_tablas.css" rel="stylesheet" type="text/css"/>
+    <link href="~/styles/styles_personalized.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
     <%-- Este form es indispensable, hace de contenedor principal al mismo nivel que body, cualquier estilo debe considerarse a él --%>
@@ -53,7 +54,14 @@
                         <a href="index" class="menu__enlace">Inicio</a>
                     </li>
                     <li class="menu__item">
-                        <a href="#" class="menu__enlace">Documentos</a>
+                        <a href="#" class="menu__enlace">
+                            <span>
+                                Documentos
+                            </span>
+                            <span class="enlace__icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-down"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 9l6 6l6 -6" /></svg>
+                            </span>
+                        </a>
                         <ul class="menu__submenu">
                             <li class="submenu__item" id="registrarFacturas">
                                 <a href="Facturas" class="submenu__enlace">Registrar Factura</a>
@@ -67,7 +75,14 @@
                         </ul>
                     </li>
                     <li class="menu__item">
-                        <a href="#" class="menu__enlace">Proveedores</a>
+                        <a href="#" class="menu__enlace">
+                            <span>
+                                Proveedores
+                            </span>
+                            <span class="enlace__icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-down"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 9l6 6l6 -6" /></svg>
+                            </span>
+                        </a>
                         <ul class="menu__submenu">
                             <li class="submenu__item" id="mantenimientoProveedores">
                                 <a href="MantenimientoProveedor" class="submenu__enlace">Mantenimiento</a>
@@ -75,7 +90,14 @@
                         </ul>
                     </li>
                     <li class="menu__item">
-                        <a href="ListadoUsuarios" class="menu__enlace">Usuarios</a>
+                        <a href="ListadoUsuarios" class="menu__enlace">
+                            <span>
+                                Usuarios
+                            </span>
+                            <span class="enlace__icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-down"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 9l6 6l6 -6" /></svg>
+                            </span>
+                        </a>
                         <ul class="menu__submenu">
                             <li class="submenu__item" id="mantenimientoUsuario">
                                 <a href="MantenimientoUsuario" class="submenu__enlace">Mantenimiento</a>
