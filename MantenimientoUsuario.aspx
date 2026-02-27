@@ -25,7 +25,7 @@
         <section class="contenedor__section--subtitulo">
             <div class="contenedor__subtitulo">
                 <h2 class="formulario__subtitulo">Formulario Usuarios</h2>
-                <p class="formulario__parrafo parrafo">Complete cada uno de los campos para crear o modificar un usuario</p>
+                <p class="formulario__parrafo parrafo">Complete cada uno de los campos para registrar un nuevo usuario</p>
             </div>
             <div class="contenedor__ver--usuario">
                 <a href="ListadoUsuarios" class="enlace__ver--usuario" title="Ver usuarios registrados">
@@ -41,9 +41,9 @@
             </div>
         </section>
         <section class="contenedor__section--formulario">
-            <div class="formulario" role="form">
+            <div class="formulario formulario--gr4" role="form">
                 <div class="formulario__contenedor">
-                    <fieldset class="formulario__fieldset formulario__fieldset--g2">
+                    <fieldset class="formulario__fieldset formulario__fieldset--gc2">
                         <legend>Datos para acceso:</legend>
                         <!-- Nombre Usuario -->
                         <div class="formulario__contenedor-input">
@@ -74,7 +74,7 @@
                 </div>
 
                 <div class="formulario__contenedor">
-                    <fieldset class="formulario__fieldset formulario__fieldset--g3">
+                    <fieldset class="formulario__fieldset formulario__fieldset--gc3">
                         <legend>Datos del usuario:</legend>
                         <!-- Nombre -->
                         <div class="formulario__contenedor-input">
@@ -125,7 +125,7 @@
                 </div>
 
                 <div class="formulario__contenedor">
-                    <fieldset class="formulario__fieldset formulario__fieldset--g2">
+                    <fieldset class="formulario__fieldset formulario__fieldset--gc2">
                         <legend>Atributos del usuario:</legend>
                         <div class="formulario__contenedor-input">
                             <!-- Estado del usuario -->
@@ -165,9 +165,11 @@
                         </div>
                     </fieldset>
                 </div>
+
                 <footer class="formulario__contenedor formulario__footer">
                     <asp:Button ID="btnGuardar" runat="server" Text="Guardar Usuario" CssClass="boton boton__guardar" OnClick="btnGuardar_Click" />
                 </footer>
+
             </div>
         </section>
     </main>
