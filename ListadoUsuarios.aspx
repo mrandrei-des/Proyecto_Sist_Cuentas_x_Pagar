@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="ListadoUsuarios.aspx.vb" Inherits="Proyecto_Sist_Cuentas_x_Pagar.WebForm1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
+<%-- INICIO DEL MODAL --%>
 <div class="dialog" runat="server" id="modalModify" role="dialog">
     <div class="contenedor__modal contenedor__modal--modify">
         <h2 class="modal__titulo">Modificación de Usuarios</h2>
@@ -100,14 +101,17 @@
             </div>
 
             <footer class="formulario__contenedor formulario__footer">
-                <button id="btnGuardar" runat="server" class="boton boton__modificar">
+
+            <%-- FALTA BUSCAR LA FORMA DE AGREGAR UN ÍCONO A LOS BUTTONS --%>
+
+
+                <%--<button id="btnGuardar" runat="server" class="boton boton__modificar">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-pencil">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                         <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
                         <path d="M13.5 6.5l4 4" />
-                    </svg>
-                    
-                </button>
+                    </svg>                    
+                </button>--%>
 
             <asp:Button ID="btnModificarUsuario" runat="server" Text="Modificar Usuario" CssClass="boton boton__modificar" OnClick="btnModificarUsuario_Click" ToolTip="Guardar cambios" />
 
@@ -116,6 +120,7 @@
         </div>
     </div>
 </div>
+<%-- FIN DEL MODAL --%>
 
 <div class="main__wrapper">
     <main class="page__main page__main--users">
@@ -212,7 +217,7 @@
 
         <section class="contenedor__section--tabla">
             <div class="contenedor__tabla">
-                <asp:GridView ID="gvUsuarios" runat="server" AutoGenerateColumns="False" DataKeyNames="Usuario" DataSourceID="SqlDataSource2" CssClass="tabla" OnRowDeleting="gvUsuarios_RowDeleting">
+                <asp:GridView ID="gvUsuarios" runat="server" AutoGenerateColumns="False" DataKeyNames="Usuario" DataSourceID="SqlDataSource2" CssClass="tabla" OnRowCommand="gvUsuarios_RowCommand">
                     <%-- OnRowEditing="gvUsuarios_RowEditing" --%>
                     <Columns>
                         <asp:BoundField DataField="Usuario" HeaderText="Usuario" ReadOnly="True" SortExpression="Usuario" />
@@ -220,7 +225,16 @@
                         <asp:BoundField DataField="Correo" HeaderText="Correo" SortExpression="Correo" />
                         <asp:BoundField DataField="Estado" HeaderText="Estado" SortExpression="Estado" />
                         <asp:BoundField DataField="Rol" HeaderText="Rol" SortExpression="Rol" />
-                        <asp:CommandField HeaderText="Eliminar" ShowDeleteButton="true" ControlStyle-CssClass="boton boton__eliminar" DeleteText="<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icons-tabler-outline icon-tabler-trash'><path stroke='none' d='M0 0h24v24H0z' fill='none'/><path d='M4 7l16 0' /><path d='M10 11l0 6' /><path d='M14 11l0 6' /><path d='M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12' /><path d='M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3' /></svg>"/>
+
+                        <%-- FALTA REVISAR ESTA PARTE PORQUE LOS BOTONES NO ESTÁN EJECUTANDO EL EVENTO --%>
+                        <asp:TemplateField HeaderText="Acciones">
+                            <ItemTemplate>
+                                <asp:Button id="btnEliminarUsuario" runat="server" CssClass="boton boton__eliminar" Text="Eliminar" ToolTip="Eliminar Usuario" CommandName="AccionEliminar" CommandArgument='<%# Eval("Usuario") %>' OnClientClick=""/>
+                                <asp:Button id="btnModificarUsuario" runat="server" CssClass="boton boton__modificar" Text="Modificar" ToolTip="Modificar Usuario" CommandName="AccionModificar" CommandArgument='<%# Eval("Usuario") %>' />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+
+      <%--                  <asp:CommandField HeaderText="Eliminar" ShowDeleteButton="true" ControlStyle-CssClass="boton boton__eliminar" DeleteText="<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icons-tabler-outline icon-tabler-trash'><path stroke='none' d='M0 0h24v24H0z' fill='none'/><path d='M4 7l16 0' /><path d='M10 11l0 6' /><path d='M14 11l0 6' /><path d='M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12' /><path d='M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3' /></svg>"/>--%>
     <%--                    <asp:CommandField ShowEditButton="true" ControlStyle-CssClass="btn btn-warning boton__modificar--accion" EditText ="<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icons-tabler-outline icon-tabler-pencil'><path stroke='none' d='M0 0h24v24H0z' fill='none'/><path d='M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4' /><path d='M13.5 6.5l4 4' /></svg>"/>--%>
                     </Columns>
                 </asp:GridView>

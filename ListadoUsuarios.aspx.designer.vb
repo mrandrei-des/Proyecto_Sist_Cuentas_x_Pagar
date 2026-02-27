@@ -176,15 +176,6 @@ Partial Public Class WebForm1
     Protected WithEvents rfvRolUsuario As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
     '''<summary>
-    '''Control btnGuardar.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents btnGuardar As Global.System.Web.UI.HtmlControls.HtmlButton
-
-    '''<summary>
     '''Control btnModificarUsuario.
     '''</summary>
     '''<remarks>
