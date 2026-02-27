@@ -23,7 +23,7 @@
 </head>
 <body>
     <%-- Este form es indispensable, hace de contenedor principal al mismo nivel que body, cualquier estilo debe considerarse a él --%>
-    <form runat="server">
+    <form id="form1" runat="server">
         <asp:ScriptManager runat="server">
             <Scripts>
                 <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>

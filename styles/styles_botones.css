@@ -38,8 +38,8 @@
 /* --- BOTÓN PARA ELIMINAR --- */
 .boton__eliminar {
     background-color: #da2c38;
-    color: var(--colorFondoClaro);
     width: auto;
+    color: var(--colorFondoClaro);
 }
 
     .boton__eliminar:hover {
@@ -48,11 +48,14 @@
     }
 
 /* --- BOTÓN PARA MODIFICAR --- */
-.boton__modificar {
+.boton__modificar, 
+.boton__modificar--accion {
     background-color: #faa307;
+    color: var(--colorFondoClaro);
 }
 
-    .boton__modificar:hover {
+    .boton__modificar:hover,
+    .boton__modificar--accion:hover {
         background-color: rgb(255, 187, 0);
         outline-color: #faa307;
     }
@@ -64,6 +67,7 @@
 
 .boton__refrescar {
     background-color: var(--colorSecundario);
+    color: var(--colorPrincipal);
 }
 
     .boton__refrescar:hover {
@@ -75,5 +79,5 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px 20px;
+    color: var(--colorPrincipal);
 }

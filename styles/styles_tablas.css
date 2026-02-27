@@ -159,8 +159,9 @@ td {
 
     td:has(a.boton__eliminar) {
         display: flex;
-        justify-content: center;
+        justify-content: space-evenly;
         align-items: center;
+        gap: 5px;
     }
 
     .tabla tr {

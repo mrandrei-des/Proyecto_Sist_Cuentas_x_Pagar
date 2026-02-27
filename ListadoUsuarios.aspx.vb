@@ -8,28 +8,14 @@ Public Class WebForm1
 
     End Sub
 
-    Protected Sub btnRestFiltros_Click(sender As Object, e As EventArgs)
-        prcLimpiarFiltros()
-    End Sub
-
     Private Sub prcLimpiarFiltros()
         txtFiltNombre.Text = ""
         ddlFiltEstado.SelectedIndex = 0
         ddlFiltRoles.SelectedIndex = 0
     End Sub
 
-    ' Se usa este evento para que en la misma celda del grid estén los dos botones
-    ' Lo que hace es, cada botón tiene su respectivo CommandName Eliminar/Modificar que además, trae el CommandArgument que es donde viene el nombre del usuario de la fila donde se hizo click al botón
-    Protected Sub gvUsuarios_RowCommand(sender As Object, e As GridViewCommandEventArgs)
-        ' Se captura el argumento que trae cada botón, en este caso el nombre del usuario. Esto porque tanto modificar como eliminar ocupan ese dato
-        Dim nombreUsuarioEjecuto As String = "andre", nombreUsuarioAfectado As String = e.CommandArgument
-
-        ' Se revisa cuál de las 2 acciones fue la que invocó al evento
-        If e.CommandName = "AccionEliminar" Then
-            prcEliminarUsuario(nombreUsuarioAfectado, nombreUsuarioEjecuto)
-        Else
-            prcModificarUsuario(nombreUsuarioAfectado)
-        End If
+    Protected Sub btnLimpiarFiltros_Click(sender As Object, e As EventArgs)
+        prcLimpiarFiltros()
     End Sub
 
     Private Sub prcEliminarUsuario(nombreUsuarioAfectado As String, nombreUsuarioElimino As String)
@@ -54,22 +40,55 @@ Public Class WebForm1
         modalModify.Style.Add("display", "flex")
     End Sub
 
-    'Protected Sub gvUsuarios_RowEditing(sender As Object, e As GridViewEditEventArgs)
-    '    e.Cancel = True
-    '    Dim estUsuario As New Usuario
-    '    Dim errorMessage As String = "", nombreUsuarioModifico As String = "andre"
+    Protected Sub gvUsuarios_RowCommand(sender As Object, e As GridViewCommandEventArgs)
 
-    '    Dim nombreUsuarioAfecto As String = gvUsuarios.DataKeys(e.NewEditIndex).Value
-    '    'estUsuario = dbUsuario.ConsultarUsuario(nombreUsuarioAfecto, errorMessage)
-    'End Sub
+        Dim indexColNombreUsuario = Convert.ToInt32(e.CommandArgument)
+        Dim nombreUsuarioAfectado = gvUsuarios.DataKeys(indexColNombreUsuario).Value
+        Dim nombreUsuarioEjecutaAccion = "andre"
 
-    Protected Sub btnCerrarModal_Click(sender As Object, e As EventArgs)
+        Select Case e.CommandName
+            Case "EditarUsuario"
+                prcModificarUsuario(nombreUsuarioAfectado)
+
+            Case "EliminarUsuario"
+                prcEliminarUsuario(nombreUsuarioAfectado, nombreUsuarioEjecutaAccion)
+        End Select
+
+    End Sub
+    Protected Sub btnCerrarModal_Click(sender As Object, e As EventArgs) Handles btnCerrarModal.Click
         modalModify.Style.Remove("display")
     End Sub
 
-    Protected Sub btnModificarUsuario_Click(sender As Object, e As EventArgs)
-        'Procede a ejecutar los cambios al usuario
-
+    Private Sub prcLimpiarModal()
+        txtNombre.Text = ""
+        txtApellidoUno.Text = ""
+        txtApellidoDos.Text = ""
+        txtCorreoUsuario.Text = ""
+        ddlEstadoUsuario.SelectedIndex = 0
+        ddlRoles.SelectedIndex = 0
     End Sub
 
+    Protected Sub btnModificarUsuario_Click(sender As Object, e As EventArgs)
+        Dim modUsuario As New Models.Usuario
+        Dim objUsuarioDB As New UsuarioDB
+        Dim errorMessage As String = ""
+        Dim nombreUsuarioEjecutaAccion = "andre"
+
+        modUsuario.NombreUsuario = "" 'txtUsuario.Text
+        modUsuario.Nombre = txtNombre.Text
+        modUsuario.Apellido1 = txtApellidoUno.Text
+        modUsuario.Apellido2 = txtApellidoDos.Text
+        modUsuario.Correo = txtCorreoUsuario.Text
+        modUsuario.Estado = CInt(ddlEstadoUsuario.SelectedItem.Value)
+        modUsuario.Rol = CInt(ddlRoles.SelectedItem.Value)
+
+        If objUsuarioDB.ModificarUsuario(modUsuario, nombreUsuarioEjecutaAccion, errorMessage) Then
+            prcLimpiarModal()
+            modalModify.Style.Remove("display")
+            SwalUtils.ShowSwal(Me, "¡Usuario modificado exitosamente!")
+            gvUsuarios.DataBind()
+        Else
+            SwalUtils.ShowSwalError(Me, errorMessage)
+        End If
+    End Sub
 End Class

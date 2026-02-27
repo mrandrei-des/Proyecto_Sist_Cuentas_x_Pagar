@@ -34,4 +34,24 @@ Public Class UsuarioDB
         'Se debe buscar la opcion para que el usuario creación sea el usuario que está logueado y no uno quemado
         Return db.ExecuteNonQuery(query, parameters, errorMessage)
     End Function
+
+    Public Function ModificarUsuario(ByVal objUsuario As Models.Usuario, ByVal usuarioEjecutaAccion As String, ByRef errorMessage As String) As Boolean
+        Using db.GetConnection()
+            Dim query As String = ""
+            Dim parameters As New Dictionary(Of String, Object) From {
+                {"@Usuario", objUsuario.NombreUsuario},
+                {"@Contrasenna", objUsuario.Constrasenna},
+                {"@Nombre", objUsuario.Nombre},
+                {"@Apellido1", objUsuario.Apellido1},
+                {"@Apellido2", objUsuario.Apellido2},
+                {"@CorreoElectronico", objUsuario.Correo},
+                {"@Estado", objUsuario.Estado},
+                {"@Rol", objUsuario.Rol},
+                {"@UsuarioCreacion", usuarioEjecutaAccion}
+            }
+            'Se debe buscar la opcion para que el usuario creación sea el usuario que está logueado y no uno quemado
+            Return db.ExecuteNonQuery(query, parameters, errorMessage)
+        End Using
+        Return True
+    End Function
 End Class
