@@ -4,7 +4,7 @@ Public Class UsuarioDB
     Private db As New DbHealper
 
     'Función que tiene el script para agregar un usuario nuevo
-    Public Function CrearUsuario(ByVal objUsuario As Models.Usuario, ByRef errorMessage As String) As Boolean
+    Public Function CrearUsuario(ByVal objUsuario As Models.Usuario, ByVal usuarioCreacion As String, ByRef errorMessage As String) As Boolean
         Using db.GetConnection()
             Dim query As String = "EXEC sp_Inserta_Usuario_Nuevo @Usuario, @Contrasenna, @Nombre, @Apellido1, @Apellido2, @CorreoElectronico, @Estado, @Rol, @UsuarioCreacion "
             Dim parameters As New Dictionary(Of String, Object) From {
@@ -16,9 +16,8 @@ Public Class UsuarioDB
                 {"@CorreoElectronico", objUsuario.Correo},
                 {"@Estado", objUsuario.Estado},
                 {"@Rol", objUsuario.Rol},
-                {"@UsuarioCreacion", "andre"}
+                {"@UsuarioCreacion", usuarioCreacion}
             }
-            'Se debe buscar la opcion para que el usuario creación sea el usuario que está logueado y no uno quemado
             Return db.ExecuteNonQuery(query, parameters, errorMessage)
         End Using
         Return True
@@ -31,11 +30,11 @@ Public Class UsuarioDB
             {"@UsuarioAfectado", usuarioAfectado},
             {"@UsuarioElimino", usuarioElimino}
         }
-        'Se debe buscar la opcion para que el usuario creación sea el usuario que está logueado y no uno quemado
         Return db.ExecuteNonQuery(query, parameters, errorMessage)
     End Function
 
-    Public Function ModificarUsuario(ByVal objUsuario As Models.Usuario, ByVal usuarioEjecutaAccion As String, ByRef errorMessage As String) As Boolean
+    'Función que tiene el query para modificar un usuario
+    Public Function ModificarUsuario(ByVal objUsuario As Models.Usuario, ByVal usuarioModifico As String, ByRef errorMessage As String) As Boolean
         Using db.GetConnection()
             Dim query As String = ""
             Dim parameters As New Dictionary(Of String, Object) From {
@@ -47,9 +46,8 @@ Public Class UsuarioDB
                 {"@CorreoElectronico", objUsuario.Correo},
                 {"@Estado", objUsuario.Estado},
                 {"@Rol", objUsuario.Rol},
-                {"@UsuarioCreacion", usuarioEjecutaAccion}
+                {"@UsuarioCreacion", usuarioModifico}
             }
-            'Se debe buscar la opcion para que el usuario creación sea el usuario que está logueado y no uno quemado
             Return db.ExecuteNonQuery(query, parameters, errorMessage)
         End Using
         Return True

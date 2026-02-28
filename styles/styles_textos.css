@@ -2,6 +2,13 @@
     font-size: 1.5em;
 }
 
+.titulo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
 .parrafo {
     font-size: .9em;
 }

@@ -85,27 +85,16 @@
         color: var(--colorLetraOscuro);
     }
 
-.enlace__icon {
-    position: relative;
-    top: 0;
-    transition: transform .35s;
-    animation: movimientoVertical .5s infinite forwards alternate;
-    animation-timing-function: ease-in-out;
-    animation-play-state: running;
+.enlace__home {
+    background-color: var(--colorLetraOscuroSecundario);
 }
 
-@keyframes movimientoVertical {
-    0% {
-        top: 0;
-    }
-
-    100% {
-        top: 3px;
-    }
+.contenedor__icono {
+    transition: transform .25s;
 }
 
-.menu__item:hover .enlace__icon {
-    animation-play-state: paused;
+.menu__item:hover .contenedor__icono {
+    transform: rotate(180deg);
 }
 
 .menu__boton--sesion {

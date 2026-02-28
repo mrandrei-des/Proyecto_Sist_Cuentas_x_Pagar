@@ -1,4 +1,34 @@
-﻿.fondo__icono {
+﻿.contenedor__icono--titulo {
+}
+
+    .contenedor__icono--titulo i {
+        font-size: 2rem;
+        color: var(--colorLetraOscuroSecundario);
+    }
+
+.contenedor__icono--subtitulo {
+}
+
+    .contenedor__icono--subtitulo i {
+        font-size: 1.5rem;
+    }
+
+    .contenedor__icono__accion--externa {
+    }
+
+    .contenedor__icono__accion--externa i {
+        font-size: 1.35rem;
+    }
+
+.contenedor__icono {
+
+}
+
+    .contenedor__icono i {
+        font-size: 1.2rem;
+    }
+
+.fondo__icono {
     display: inline-block;
     padding: 5px;
     border-radius: 15px;

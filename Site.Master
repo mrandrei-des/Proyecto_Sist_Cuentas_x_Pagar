@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head runat="server">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%: Page.Title %> - Sistema CxP</title>
@@ -11,16 +11,16 @@
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-    <link href="~/styles/styles_reset_elementos.css" rel="stylesheet" type="text/css"/>
-    <link href="~/styles/fonts.css" rel="stylesheet" type="text/css"/>
-    <link href="~/styles/styles_colores.css" rel="stylesheet" type="text/css"/>
-    <link href="~/styles/styles_textos.css" rel="stylesheet" type="text/css"/>
-    <link href="~/styles/styles_icons.css" rel="stylesheet" type="text/css"/>
-    <link href="~/styles/styles_dialog.css" rel="stylesheet" type="text/css"/>
-    <link href="~/styles/styles_botones.css" rel="stylesheet" type="text/css"/>
-    <link href="~/styles/styles_formulario.css" rel="stylesheet" type="text/css"/>    
-    <link href="~/styles/styles_tablas.css" rel="stylesheet" type="text/css"/>
-    <link href="~/styles/styles_personalized.css" rel="stylesheet" type="text/css"/>
+    <link href="~/styles/styles_reset_elementos.css" rel="stylesheet" type="text/css" />
+    <link href="~/styles/fonts.css" rel="stylesheet" type="text/css" />
+    <link href="~/styles/styles_colores.css" rel="stylesheet" type="text/css" />
+    <link href="~/styles/styles_textos.css" rel="stylesheet" type="text/css" />
+    <link href="~/styles/styles_icons.css" rel="stylesheet" type="text/css" />
+    <link href="~/styles/styles_dialog.css" rel="stylesheet" type="text/css" />
+    <link href="~/styles/styles_botones.css" rel="stylesheet" type="text/css" />
+    <link href="~/styles/styles_formulario.css" rel="stylesheet" type="text/css" />
+    <link href="~/styles/styles_tablas.css" rel="stylesheet" type="text/css" />
+    <link href="~/styles/styles_personalized.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <%-- Este form es indispensable, hace de contenedor principal al mismo nivel que body, cualquier estilo debe considerarse a él --%>
@@ -51,15 +51,14 @@
             <nav class="menu">
                 <ul class="menu__lista">
                     <li class="menu__item">
-                        <a href="index" class="menu__enlace">Inicio</a>
+                        <a href="index" class="menu__enlace enlace__home">Home</a>
                     </li>
                     <li class="menu__item">
                         <a href="#" class="menu__enlace">
-                            <span>
-                                Documentos
+                            <span>Documentos
                             </span>
-                            <span class="enlace__icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-down"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 9l6 6l6 -6" /></svg>
+                            <span class="contenedor__icono">
+                                <i class="fa-solid fa-angle-down"></i>
                             </span>
                         </a>
                         <ul class="menu__submenu">
@@ -75,32 +74,30 @@
                         </ul>
                     </li>
                     <li class="menu__item">
-                        <a href="#" class="menu__enlace">
-                            <span>
-                                Proveedores
+                        <a href="ListadoProveedores" class="menu__enlace">
+                            <span>Proveedores
                             </span>
-                            <span class="enlace__icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-down"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 9l6 6l6 -6" /></svg>
+                            <span class="contenedor__icono">
+                                <i class="fa-solid fa-angle-down"></i>
                             </span>
                         </a>
                         <ul class="menu__submenu">
                             <li class="submenu__item" id="mantenimientoProveedores">
-                                <a href="MantenimientoProveedor" class="submenu__enlace">Mantenimiento</a>
+                                <a href="MantenimientoProveedor" class="submenu__enlace">Registro Nuevo</a>
                             </li>
                         </ul>
                     </li>
                     <li class="menu__item">
                         <a href="ListadoUsuarios" class="menu__enlace">
-                            <span>
-                                Usuarios
+                            <span>Usuarios
                             </span>
-                            <span class="enlace__icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-down"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 9l6 6l6 -6" /></svg>
+                            <span class="contenedor__icono">
+                                <i class="fa-solid fa-angle-down"></i>
                             </span>
                         </a>
                         <ul class="menu__submenu">
                             <li class="submenu__item" id="mantenimientoUsuario">
-                                <a href="MantenimientoUsuario" class="submenu__enlace">Mantenimiento</a>
+                                <a href="MantenimientoUsuario" class="submenu__enlace">Registro Nuevo</a>
                             </li>
                             <li class="submenu__item" id="cambioContrasenna">
                                 <a href="#" class="submenu__enlace">Cambiar Contraseña</a>
@@ -127,6 +124,7 @@
             </p>
         </footer>
         <%-- ------- FIN FOOTER ------- --%>
+        <script src="https://kit.fontawesome.com/1de8be47a9.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </form>
 </body>

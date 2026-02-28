@@ -29,6 +29,10 @@ form {
     background-color: var(--colorFondoPrincipal);
 }
 
+input::placeholder {
+    letter-spacing: 1px;
+}
+
 h1, h2, h3, h4, h5, h6, label, a, legend {
     text-wrap: balance;
 }

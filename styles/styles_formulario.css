@@ -12,6 +12,7 @@
 
 .contenedor__section--titulo {
     grid-area: titulo;
+    margin: 0 auto;
 }
 
 .contenedor__section--subtitulo {
@@ -31,27 +32,27 @@
     color: var(--colorLetraOscuroSecundario);
 }
 
-.contenedor__ver--usuario {
+.contenedor__accion--externa {
     padding: 10px;
 }
 
-.enlace__ver--usuario {
+.enlace__accion--externa {
     display: flex;
     flex-direction: column;
     align-items: center;
     color: var(--colorLetraOscuroSecundario);
     padding: 5px 15px;
     background-color: var(--colorLetraOscuro);
-    border-radius: 10px;
+    border-radius: 15px;
     position: relative;
 }
 
-    .enlace__ver--usuario:hover {
-        color: var(--colorLetraClaro);
-        transition-duration: .25s;
-    }
+.contenedor__accion--externa:hover .enlace__accion--externa {
+    color: var(--colorLetraClaro);
+    transition-duration: .25s;
+}
 
-    .enlace__ver--usuario span {
+    .enlace__accion--externa .span__flotante__accion--externa {
         display: inline-block;
         position: absolute;
         top: -30px;
@@ -66,11 +67,11 @@
         transition: top .35s, opacity .35s;
     }
 
-    .enlace__ver--usuario:hover span {
-        top: -40px;
-        opacity: 1;
-        transition-duration: .25s;
-    }
+.contenedor__accion--externa:hover .span__flotante__accion--externa {
+    top: -40px;
+    opacity: 1;
+    transition-duration: .25s;
+}
 
 .contenedor__section--formulario {
     grid-area: formulario;

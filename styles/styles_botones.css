@@ -23,11 +23,11 @@
 .boton__guardar,
 .boton__modificar {
     width: 100%;
+    padding: 10px 15px;
 }
 
 /* --- BOTÓN PARA GUARDAR --- */
 .boton__guardar {
-    padding: 7px 15px;
     color: var(--colorLetraClaro);
     letter-spacing: 1px;
     background-color: var(--colorLetraOscuroSecundario);
@@ -59,7 +59,6 @@
 
     .boton__modificar:hover,
     .boton__modificar--accion:hover {
-        background-color: rgb(255, 187, 0);
         outline-color: #faa307;
     }
 

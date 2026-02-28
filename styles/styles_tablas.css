@@ -12,6 +12,7 @@
 
 .contenedor__section--titulo {
     grid-area: titulo;
+    margin: 0 auto;
 }
 
 .contenedor__section--herramientas {
@@ -101,7 +102,7 @@
         border-bottom-color: var(--colorLetraOscuroSecundario);
     }
 
-.contenedor__agregar--usuario {
+.contenedor__accion--externa {
     padding: 10px;
     margin-right: 15px;
 }
@@ -117,7 +118,7 @@
     position: relative;
 }
 
-    .enlace__agregar--usuario span {
+    .enlace__agregar--usuario .span__flotante__accion--externa {
         display: inline-block;
         position: absolute;
         top: -30px;
@@ -132,16 +133,16 @@
         transition: top .35s, opacity .35s;
     }
 
-    .enlace__agregar--usuario:hover span {
-        top: -40px;
-        opacity: 1;
-        transition-duration: .25s;
-    }
+.contenedor__accion--externa:hover .span__flotante__accion--externa {
+    top: -40px;
+    opacity: 1;
+    transition-duration: .25s;
+}
 
-    .enlace__agregar--usuario:hover {
-        color: var(--colorLetraClaro);
-        transition-duration: .25s;
-    }
+.contenedor__accion--externa:hover .enlace__accion--externa {
+    color: var(--colorLetraClaro);
+    transition-duration: .25s;
+}
 
 .contenedor__section--tabla {
     grid-area: tabla;
@@ -164,7 +165,7 @@
 }
 
 th, td {
-    padding: 7px 10px;
+    padding: 10px 15px;
     text-align: center;
     border: none;
 }

@@ -130,6 +130,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="index.aspx" />
+    <Content Include="ListadoProveedores.aspx" />
     <Content Include="MantenimientoProveedor.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -188,6 +189,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.vb" />
     <Compile Include="App_Start\RouteConfig.vb" />
+    <Compile Include="Database\ProveedorDB.vb" />
     <Compile Include="Database\UsuarioDB.vb" />
     <Compile Include="DocumentoPago.aspx.designer.vb">
       <DependentUpon>DocumentoPago.aspx</DependentUpon>
@@ -211,6 +213,13 @@
     </Compile>
     <Compile Include="index.aspx.vb">
       <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="ListadoProveedores.aspx.designer.vb">
+      <DependentUpon>ListadoProveedores.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ListadoProveedores.aspx.vb">
+      <DependentUpon>ListadoProveedores.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="MantenimientoProveedor.aspx.designer.vb">

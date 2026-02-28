@@ -4,8 +4,17 @@
     <%-- INICIO DEL MODAL --%>
     <div class="dialog" runat="server" id="modalModify" role="dialog">
         <div class="contenedor__modal contenedor__modal--modify">
-            <h2 class="modal__titulo">Modificación de Usuarios</h2>
-            <p class="modal__subtitulo" ID="pSubtituloModal" runat="server"></p>
+            <div class="contenedor__modal--titulo">
+                <h2 class="modal__titulo">
+                    <span class="contenedor__icono--subtitulo">
+                        <i class="fa-solid fa-user-gear"></i>
+                    </span>
+                    <span>Modificación de Usuarios
+                    </span>
+                </h2>
+                <p class="modal__subtitulo" id="pSubtituloModal" runat="server"></p>
+            </div>
+
             <div class="modal__formulario">
 
                 <div class="formulario__contenedor">
@@ -114,15 +123,12 @@
     <div class="main__wrapper">
         <main class="page__main page__main--users">
             <section class="contenedor__section--titulo">
-                <h1>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-users">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path d="M5 7a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
-                        <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                        <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
-                    </svg>
-                    Usuarios registrados
+                <h1 class="titulo">
+                    <span class="contenedor__icono--titulo">
+                        <i class="fa-solid fa-users"></i>
+                    </span>
+                    <span>Usuarios registrados
+                    </span>
                 </h1>
             </section>
 
@@ -132,37 +138,26 @@
                     <p class="section--parrafo">Estos son los usuarios registrados en el sistema</p>
                 </div>
 
-                <div class="contenedor__agregar--usuario">
-                    <a href="MantenimientoUsuario" class="enlace__agregar--usuario">
-
-                        <span>Agregar</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-user-plus">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
-                            <path d="M16 19h6" />
-                            <path d="M19 16v6" />
-                            <path d="M6 21v-2a4 4 0 0 1 4 -4h4" />
-                        </svg>
-
+                <div class="contenedor__accion--externa">
+                    <a href="MantenimientoUsuario" class="enlace__accion--externa">
+                        <span class="span__flotante__accion--externa">Agregar</span>
+                        <span class="contenedor__icono__accion--externa">
+                            <i class="fa-solid fa-user-pen"></i>
+                        </span>
                     </a>
                 </div>
-
             </section>
 
             <section class="contenedor__section--herramientas">
                 <div class="contenedor__herramientas">
                     <div class="filtros">
                         <fieldset class="fieldset__filtros">
-                            <legend class="fieldset__leyenda"><span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-user-search">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
-                                    <path d="M6 21v-2a4 4 0 0 1 4 -4h1.5" />
-                                    <path d="M15 18a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
-                                    <path d="M20.2 20.2l1.8 1.8" />
-                                </svg>
-                            </span>
-                                Filtrar por:
+                            <legend class="fieldset__leyenda">
+                                <span class="contenedor__icono">
+                                    <i class="fa-solid fa-filter"></i>
+
+                                </span>
+                                Filtrar por :
                             </legend>
 
                             <div class="contenedor__filtro">
@@ -200,7 +195,9 @@
 
                             <div class="contenedor__filtro filtro--restablecer">
                                 <asp:LinkButton ID="btnLimpiarFiltros" CssClass="boton boton__refrescar boton--filtro" ToolTip="Restablecer Filtros" runat="server" OnClick="btnLimpiarFiltros_Click" CausesValidation="false">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-rotate"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19.95 11a8 8 0 1 0 -.5 4m.5 5v-5h-5" /></svg>
+                                <span class="contenedor__icono">
+                                    <i class="fa-solid fa-arrows-rotate"></i>
+                                </span>
                                 </asp:LinkButton>
                             </div>
                         </fieldset>
@@ -221,13 +218,15 @@
                             <asp:TemplateField HeaderText="Acciones">
                                 <ItemTemplate>
                                     <asp:LinkButton ID="btnEliminar" runat="server" CssClass="boton boton__eliminar" CommandName="EliminarUsuario" CommandArgument='<%# Container.DataItemIndex %>' CausesValidation="false" ToolTip="Eliminar Usuario">
-                                        <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icons-tabler-outline icon-tabler-trash'><path stroke='none' d='M0 0h24v24H0z' fill='none'/><path d='M4 7l16 0' /><path d='M10 11l0 6' /><path d='M14 11l0 6' /><path d='M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12' /><path d='M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3' />
-                                        </svg>
+                                        <span class="contenedor__icono">                                        
+                                            <i class="fa-solid fa-trash"></i>
+                                        </span>
                                     </asp:LinkButton>
 
                                     <asp:LinkButton ID="btnEditar" runat="server" CssClass="boton boton__modificar--accion" CommandName="EditarUsuario" CommandArgument='<%# Container.DataItemIndex %>' CausesValidation="false" ToolTip="Editar Usuario">
-                                        <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='icon icon-tabler icons-tabler-outline icon-tabler-pencil'><path stroke='none' d='M0 0h24v24H0z' fill='none'/><path d='M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4' /><path d='M13.5 6.5l4 4' />
-                                        </svg>
+                                        <span class="contenedor__icono">                                        
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </span>
                                     </asp:LinkButton>
                                 </ItemTemplate>
                             </asp:TemplateField>
