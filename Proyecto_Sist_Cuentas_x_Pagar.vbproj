@@ -124,6 +124,21 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="BD Scripts\Stored Procedures\Proveedores\sp_Consultar_Proveedor.sql" />
+    <Content Include="BD Scripts\Stored Procedures\Proveedores\sp_Consultar_Proveedores_Registrados.sql" />
+    <Content Include="BD Scripts\Stored Procedures\Proveedores\sp_Eliminar_Proveedor.sql" />
+    <Content Include="BD Scripts\Stored Procedures\Proveedores\sp_Inserta_Proveedor_Nuevo.sql" />
+    <Content Include="BD Scripts\Stored Procedures\Proveedores\sp_Inserta_Registro_Bitacora_Cambio_Proveedores.sql" />
+    <Content Include="BD Scripts\Stored Procedures\Proveedores\sp_Modificar_Proveedor.sql" />
+    <Content Include="BD Scripts\Stored Procedures\Roles\sp_Inserta_Rol_Nuevo.sql" />
+    <Content Include="BD Scripts\Stored Procedures\Usuarios\sp_Consultar_Usuario.sql" />
+    <Content Include="BD Scripts\Stored Procedures\Usuarios\sp_Consultar_Usuarios_Sistema.sql" />
+    <Content Include="BD Scripts\Stored Procedures\Usuarios\sp_Eliminar_Usuario.sql" />
+    <Content Include="BD Scripts\Stored Procedures\Usuarios\sp_Inserta_Registro_Bitacora_Cambio_Usuarios.sql" />
+    <Content Include="BD Scripts\Stored Procedures\Usuarios\sp_Inserta_Usuario_Nuevo.sql" />
+    <Content Include="BD Scripts\Stored Procedures\Usuarios\sp_Modificar_Usuario.sql" />
+    <Content Include="BD Scripts\Tables\Cargar valores tablas iniciales.sql" />
+    <Content Include="BD Scripts\Tables\Creación de tablas.sql" />
     <Content Include="Content\Site.css" />
     <Content Include="DocumentoPago.aspx" />
     <Content Include="Facturas.aspx" />
@@ -332,6 +347,13 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="BD Scripts\Stored Procedures\Aplicación Pagos\" />
+    <Folder Include="BD Scripts\Stored Procedures\Documentos Pago\" />
+    <Folder Include="BD Scripts\Stored Procedures\Facturas\" />
+    <Folder Include="BD Scripts\Stored Procedures\Permisos\" />
+    <Folder Include="BD Scripts\Stored Procedures\Permisos_x_Roles\" />
+    <Folder Include="BD Scripts\Stored Procedures\Reportes\" />
+    <Folder Include="BD Scripts\Stored Procedures\Roles_x_Usuario\" />
     <Folder Include="styles\assets\icons\" />
     <Folder Include="styles\assets\img\" />
   </ItemGroup>

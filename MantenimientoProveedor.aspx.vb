@@ -10,7 +10,7 @@ Public Class MantenimientoProveedor
     Protected Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
         Dim modProveedor As New Models.Proveedor
         Dim objProveedorDB As New ProveedorDB
-        Dim errorMessage As String = "", usuarioCreacion As String = ""
+        Dim errorMessage As String = "", usuarioCreacion As String = "andre"
 
         modProveedor.TipoIdentificacion = CInt(ddlTipoIdentificacion.SelectedItem.Value)
         modProveedor.NumeroIdentificacion = txtIdentificacion.Text
