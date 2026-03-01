@@ -36,20 +36,21 @@ Public Class UsuarioDB
     'Función que tiene el query para modificar un usuario
     Public Function ModificarUsuario(ByVal objUsuario As Models.Usuario, ByVal usuarioModifico As String, ByRef errorMessage As String) As Boolean
         Using db.GetConnection()
-            Dim query As String = ""
+            Dim query As String = "EXEC sp_Modificar_Usuario @UsuarioAfectado, @Nombre, @Apellido1, @Apellido2, @CorreoElectronico, @Estado, @Rol, @UsuarioModifico "
             Dim parameters As New Dictionary(Of String, Object) From {
                 {"@Usuario", objUsuario.NombreUsuario},
-                {"@Contrasenna", objUsuario.Constrasenna},
                 {"@Nombre", objUsuario.Nombre},
                 {"@Apellido1", objUsuario.Apellido1},
                 {"@Apellido2", objUsuario.Apellido2},
                 {"@CorreoElectronico", objUsuario.Correo},
                 {"@Estado", objUsuario.Estado},
                 {"@Rol", objUsuario.Rol},
-                {"@UsuarioCreacion", usuarioModifico}
+                {"@UsuarioModifico", usuarioModifico}
             }
             Return db.ExecuteNonQuery(query, parameters, errorMessage)
         End Using
         Return True
     End Function
 End Class
+
+

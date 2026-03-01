@@ -3,7 +3,8 @@
 CREATE PROC sp_Consultar_Proveedores_Registrados
 AS
 BEGIN
-	SELECT p.ID_Proveedor, p.Nombre, p.TipoIdentificacion, p.Identificacion, p.CorreoElectronico, p.Estado, e.Descripcion as EstadoDescripcion
+	SELECT p.ID_Proveedor as 'ID Proveedor', p.Nombre, p.Identificacion as 'Identificación', 
+	p.CorreoElectronico as 'Correo Electrónico', e.Descripcion as Estado
 	FROM Proveedores p
 	JOIN Estados e on p.Estado = e.ID_Estado
 	WHERE p.Estado <> 6

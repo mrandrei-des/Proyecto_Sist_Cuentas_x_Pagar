@@ -85,10 +85,6 @@
         color: var(--colorLetraOscuro);
     }
 
-.enlace__home {
-    background-color: var(--colorLetraOscuroSecundario);
-}
-
 .contenedor__icono {
     transition: transform .25s;
 }

@@ -3,7 +3,7 @@
 CREATE PROC sp_Modificar_Usuario
 (
 @UsuarioAfectado varchar(25),
-@Contrasenna varchar(125),
+--@Contrasenna varchar(125),
 @Nombre varchar(30),
 @Apellido1 varchar(30),
 @Apellido2 varchar(30),
@@ -17,11 +17,11 @@ BEGIN
 	Declare @DescripcionAccion varchar(250) = 'Al usuario se le modificó: ', @cantCambios int = 0
 
 	/* VERIFICA QUÉ FUE LO QUE CAMBIÓ A NIVEL DE DATOS DEL USUARIO */
-	IF @Contrasenna <> (SELECT Contrasenna FROM Usuarios WHERE NombreUsuario = @UsuarioAfectado)
-		BEGIN
-			SET @DescripcionAccion = @DescripcionAccion + 'Contraseña, '
-			SET @cantCambios = @cantCambios + 1
-		END
+	--IF @Contrasenna <> (SELECT Contrasenna FROM Usuarios WHERE NombreUsuario = @UsuarioAfectado)
+	--	BEGIN
+	--		SET @DescripcionAccion = @DescripcionAccion + 'Contraseña, '
+	--		SET @cantCambios = @cantCambios + 1
+	--	END
 
 	IF @Nombre <> (SELECT Nombre FROM Usuarios WHERE NombreUsuario = @UsuarioAfectado)
 		BEGIN
@@ -58,7 +58,7 @@ BEGIN
 		IF @cantCambios > 0
 			BEGIN
 				UPDATE Usuarios
-				SET Contrasenna = @Contrasenna, Nombre = @Nombre, Apellido1 = @Apellido1,
+				SET Nombre = @Nombre, Apellido1 = @Apellido1,
 				Apellido2 = @Apellido2, CorreoElectronico = @CorreoElectronico, Estado = @Estado
 				WHERE NombreUsuario = @UsuarioAfectado
 			END

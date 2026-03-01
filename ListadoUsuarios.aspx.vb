@@ -1,11 +1,15 @@
-﻿Imports Proyecto_Sist_Cuentas_x_Pagar.Utils
+﻿Imports System.Drawing
+Imports System.Security.Policy
+Imports Proyecto_Sist_Cuentas_x_Pagar.Utils
 
 Public Class WebForm1
     Inherits System.Web.UI.Page
     Private dbUsuario As New UsuarioDB
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-
+        ' Busca al elemento HTML que se le indique y se le dan estilos de línea
+        Dim enlace As HtmlAnchor = Master.FindControl("enlaceUsuarios")
+        enlace.Style.Add("background-color", "var(--colorLetraOscuroSecundario)")
     End Sub
 
     Private Sub prcLimpiarFiltros()

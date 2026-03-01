@@ -4,8 +4,6 @@ CREATE PROC sp_Modificar_Proveedor
 (
 @ID_ProveedorAfectado int,
 @Nombre varchar(30),
-@TipoIdentificacion int,
-@Identificacion varchar(30),
 @CorreoElectronico varchar(30),
 @Estado int,
 @UsuarioModifico varchar(25)
@@ -18,18 +16,6 @@ BEGIN
 	IF @Nombre <> (SELECT Nombre FROM Proveedores WHERE ID_Proveedor = @ID_ProveedorAfectado)
 		BEGIN
 			SET @DescripcionAccion = @DescripcionAccion + 'Nombre, '
-			SET @cantCambios = @cantCambios + 1
-		END
-
-	IF @TipoIdentificacion <> (SELECT TipoIdentificacion FROM Proveedores WHERE ID_Proveedor = @ID_ProveedorAfectado)
-		BEGIN
-			SET @DescripcionAccion = @DescripcionAccion + 'Tipo Identificación, '
-			SET @cantCambios = @cantCambios + 1
-		END
-
-	IF @Identificacion <> (SELECT Identificacion FROM Proveedores WHERE ID_Proveedor = @ID_ProveedorAfectado)
-		BEGIN
-			SET @DescripcionAccion = @DescripcionAccion + 'Identificación, '
 			SET @cantCambios = @cantCambios + 1
 		END
 
@@ -50,8 +36,7 @@ BEGIN
 		IF @cantCambios > 0
 			BEGIN
 				UPDATE Proveedores
-				SET Nombre = @Nombre, TipoIdentificacion = @TipoIdentificacion,
-				Identificacion = @Identificacion, CorreoElectronico = @CorreoElectronico, Estado = @Estado
+				SET Nombre = @Nombre, CorreoElectronico = @CorreoElectronico, Estado = @Estado
 				WHERE ID_Proveedor = @ID_ProveedorAfectado
 			END
 

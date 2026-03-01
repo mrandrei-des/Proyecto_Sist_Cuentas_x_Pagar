@@ -51,10 +51,10 @@
             <nav class="menu">
                 <ul class="menu__lista">
                     <li class="menu__item">
-                        <a href="index" class="menu__enlace enlace__home">Home</a>
+                        <a href="index" class="menu__enlace" id="enlaceHome" runat="server">Home</a>
                     </li>
                     <li class="menu__item">
-                        <a href="#" class="menu__enlace">
+                        <a href="#" class="menu__enlace" id="enlaceDocumentos" runat="server">
                             <span>Documentos
                             </span>
                             <span class="contenedor__icono">
@@ -74,7 +74,7 @@
                         </ul>
                     </li>
                     <li class="menu__item">
-                        <a href="ListadoProveedores" class="menu__enlace">
+                        <a href="ListadoProveedores" class="menu__enlace" id="enlaceProveedores" runat="server">
                             <span>Proveedores
                             </span>
                             <span class="contenedor__icono">
@@ -88,7 +88,7 @@
                         </ul>
                     </li>
                     <li class="menu__item">
-                        <a href="ListadoUsuarios" class="menu__enlace">
+                        <a href="ListadoUsuarios" class="menu__enlace" id="enlaceUsuarios" runat="server">
                             <span>Usuarios
                             </span>
                             <span class="contenedor__icono">

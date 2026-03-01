@@ -4,7 +4,6 @@
     <div class="main__wrapper">
         <main class="page__main page__main--form" runat="server" id="divMain">
             <section class="contenedor__section--titulo">
-
                 <h1 class="titulo">
                     <span class="contenedor__icono--titulo">
                         <i class="fa-solid fa-building"></i>
