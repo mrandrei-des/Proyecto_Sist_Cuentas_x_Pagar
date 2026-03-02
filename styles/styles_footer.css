@@ -1,0 +1,19 @@
+﻿/* ----- FOOTER ----- */
+.footer {
+    padding: 20px;
+    margin-top: auto;
+    text-align: center;
+    background-color: var(--colorLetraOscuroSecundario);
+}
+
+.footer__parrafo {
+    color: var(--colorFondoClaro);
+}
+
+.footer__enlace {
+    color: var(--colorPrincipal);
+}
+
+    .footer__enlace:hover {
+        text-decoration: underline;
+    }

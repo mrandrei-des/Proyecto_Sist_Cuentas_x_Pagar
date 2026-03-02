@@ -82,7 +82,7 @@
     <%-- FIN DEL MODAL --%>
 
     <div class="main__wrapper">
-        <main class="page__main page__main--users">
+        <main class="page__main page__main--listado">
             <section class="contenedor__section--titulo">
                 <h1 class="titulo">
                     <span class="contenedor__icono--titulo">

@@ -1,0 +1,27 @@
+﻿/* ----- MAIN ----- */
+.main__wrapper {
+    max-width: 1300px;
+    width: 100%;
+    position: relative;
+    justify-self: center;
+    align-self: center;
+}
+
+.page__main {
+    background-color: var(--colorLetraClaro);
+    border-radius: 5px;
+    box-shadow: 0 0 15px 0 #0002;
+}
+
+.contenedor__section--titulo {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* ----- MAIN QUERIES -----*/
+@media screen and (max-width: 930px) {
+    .main__wrapper {
+        justify-self: start;
+        align-self: start;
+    }
+}

@@ -1,4 +1,5 @@
-﻿h1 {
+﻿/* --- ESTILOS PARA TÍTULOS, SUBTÍTULOS Y PÁRRAFOS --- */
+h1 {
     font-size: 1.5em;
 }
 
@@ -16,12 +17,3 @@
     .parrafo span {
         color: var(--colorPrincipal);
     }
-
-/* ----- MAIN QUERIES -----*/
-/*@media screen and (max-width: 1450px) {
-}
-
-@media screen and (max-width: 900px) {
-}*/
-
-/* ----- FIN MAIN QUERIES -----*/

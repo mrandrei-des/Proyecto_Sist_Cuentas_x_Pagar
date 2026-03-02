@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
 <div class="main__wrapper">
-    <main class="page__main page__main--users">
+    <main class="page__main page__main--listado">
         <h1>Pantalla de Home</h1>
     </main>
 </div>

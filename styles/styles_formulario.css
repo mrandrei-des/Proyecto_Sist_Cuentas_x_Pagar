@@ -1,29 +1,4 @@
-﻿.page__main--form {
-    padding: 30px 40px;
-    display: grid;
-    grid-template-rows: repeat(2, auto) 1fr;
-    grid-template-areas:
-        "titulo"
-        "subtitulo"
-        "formulario";
-    max-width: 900px;
-    margin: 30px auto;
-}
-
-.contenedor__section--titulo {
-    grid-area: titulo;
-    margin: 0 auto;
-}
-
-.contenedor__section--subtitulo {
-    grid-area: subtitulo;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: center;
-    margin-top: 15px;
-}
-
-.formulario__subtitulo {
+﻿.formulario__subtitulo {
     font-size: 1.3em;
 }
 
@@ -52,30 +27,25 @@
     transition-duration: .25s;
 }
 
-    .enlace__accion--externa .span__flotante__accion--externa {
-        display: inline-block;
-        position: absolute;
-        top: -30px;
-        padding: 5px 10px;
-        border: 2px solid var(--colorLetraOscuroSecundario);
-        border-radius: 10px;
-        font-weight: 400;
-        letter-spacing: 2px;
-        background-color: var(--colorLetraOscuro);
-        color: var(--colorLetraClaro);
-        opacity: 0;
-        transition: top .35s, opacity .35s;
-    }
+.enlace__accion--externa .span__flotante__accion--externa {
+    display: inline-block;
+    position: absolute;
+    top: -30px;
+    padding: 5px 10px;
+    border: 2px solid var(--colorLetraOscuroSecundario);
+    border-radius: 10px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    background-color: var(--colorLetraOscuro);
+    color: var(--colorLetraClaro);
+    opacity: 0;
+    transition: top .35s, opacity .35s;
+}
 
 .contenedor__accion--externa:hover .span__flotante__accion--externa {
     top: -40px;
     opacity: 1;
     transition-duration: .25s;
-}
-
-.contenedor__section--formulario {
-    grid-area: formulario;
-    margin-top: 15px;
 }
 
 .formulario {
@@ -100,10 +70,9 @@
     grid-template-rows: repeat(4, auto);
 }
 
-
-    .formulario__contenedor {
-        width: 100%;
-    }
+.formulario__contenedor {
+    width: 100%;
+}
 
 .formulario__fieldset {
     padding: 10px 15px;
@@ -216,18 +185,8 @@
     text-align: center;
 }
 
-/* ----- MAIN QUERIES -----*/
-@media screen and (max-width: 1450px) {
-}
-
+/* ----- MEDIA QUERIES -----*/
 @media screen and (max-width: 900px) {
-
-    .contenedor__section--subtitulo {
-        margin-top: 5px;
-        text-align: center;
-        grid-template-columns: 1fr;
-    }
-
     .formulario__subtitulo {
         font-size: 1.1em;
     }
@@ -276,5 +235,3 @@
         width: 100%;
     }
 }
-
-/* ----- FIN MAIN QUERIES -----*/

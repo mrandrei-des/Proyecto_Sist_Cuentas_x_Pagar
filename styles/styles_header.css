@@ -1,36 +1,7 @@
-﻿body {
-    font-family: 'InterTight';
-    background-color: var(--colorFondoPrincipal);
-    position: relative;
-    z-index: 15;
-    min-height: 100vh;
-    display: grid;
-    grid-template-rows: 50px 1fr 50px;
-    grid-template-columns: 1fr;
-    grid-template-areas:
-        "header"
-        "main"
-        "footer";
-}
-
-/* ----- VALORES PARA CONTENEDORES PRINCIPALES ----- */
-
-/* ----- VALORES PARA CONTENEDORES PRINCIPALES ----- */
-/* ----- FIN VALORES PARA CONTENEDORES PRINCIPALES ----- */
-
-/* ----- HEADER -> MENÚ ----- */
+﻿/* ----- HEADER ----- */
 .header {
     background-color: var(--colorPrincipal);
     grid-area: header;
-}
-
-.main__wrapper {
-    grid-area: main;
-    justify-self: center;
-}
-
-.footer {
-    grid-area: footer;
 }
 
 .header {
@@ -100,12 +71,10 @@
     border-radius: 10px;
     outline: 2px solid transparent;
     outline-offset: 3px;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 10px;
-
     font-family: 'InterTight';
     font-size: 1em;
     font-weight: 600;
@@ -159,36 +128,7 @@
         text-decoration: underline;
     }
 
-/* ----- HEADER ----- */
-/* ----- FIN HEADER ----- */
-
-/* ----- MAIN ----- */
-
-.main__wrapper {
-    max-width: 1300px;
-    width: 100%;
-    position: relative;
-    justify-self: center;
-    align-self: center;
-}
-
-.page__main {
-    background-color: var(--colorLetraClaro);
-    border-radius: 5px;
-    box-shadow: 0 0 15px 0 #0002;
-}
-
-.contenedor__section--titulo {
-    text-align: center;
-    margin-bottom: 10px;
-}
-
-/* ----- MAIN QUERIES -----*/
 @media screen and (max-width: 930px) {
-    body {
-        grid-template-rows: auto 2fr 50px;
-    }
-
     .header {
         padding: 12px;
         flex-direction: column;
@@ -223,38 +163,7 @@
     .menu__boton--sesion {
         margin-left: 0;
     }
-
-    .main__wrapper {
-        justify-self: start;
-        align-self: start;
-    }
 }
-
-/* ----- FIN MAIN QUERIES -----*/
-/* ----- MAIN ----- */
-/* ----- FIN MAIN ----- */
-
-/* ----- FOOTER ----- */
-.footer {
-    padding: 20px;
-    margin-top: auto;
-    text-align: center;
-    background-color: var(--colorLetraOscuroSecundario);
-}
-
-.footer__parrafo {
-    color: var(--colorFondoClaro);
-}
-
-.footer__enlace {
-    color: var(--colorPrincipal);
-}
-
-    .footer__enlace:hover {
-        text-decoration: underline;
-    }
-/* ----- FOOTER ----- */
-/* ----- FIN FOOTER ----- */
 
 @media (prefers-reduced-motion: reduce) {
     .enlace__icon {

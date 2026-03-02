@@ -1,16 +1,16 @@
 ﻿/* ----- VARIBLES GLOBALES COLORES ----- */
 :root {
-    --colorPrincipal: #3b977a; /* Título principal*/
-    --colorSecundario: #ccece3; /* Fondo Claro con toques de verde para dividir secciones*/
-    --colorFondoPrincipal: #eee; /* Fondo claro*/
+    --colorPrincipal: #3b977a;
+    --colorSecundario: #ccece3;
+    --colorFondoPrincipal: #eee;
     --colorFondoClaro: #fff;
-    --colorLetraClaro: #f5f5f5; /* Texto claro, fondo oscuro*/
-    --colorLetraOscuro: #669be4; /* Botones de accion, bordes 1F2937*/
-    --colorLetraOscuroSecundario: #35537c; /* Hover del azul */
+    --colorLetraClaro: #f5f5f5;
+    --colorLetraOscuro: #669be4;
+    --colorLetraOscuroSecundario: #35537c;
     --colorGrisClaro: #3332;
     --colorNegroMedioTransparente: #3338;
     --colorNegroLetra: #222;
-    --colorFondoContainer: #F1F5F9;
+    --colorFondoContainer: #f1f5f9;
 }
 /* ----- VARIBLES GLOBALES COLORES ----- */
 /* ----- FIN VARIBLES GLOBALES COLORES ----- */

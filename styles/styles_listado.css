@@ -1,0 +1,190 @@
+﻿.page__main--listado {
+    display: grid;
+    grid-template-rows: repeat(3, auto) 1fr;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "titulo"
+        "subtitulo"
+        "herramientas"
+        "tabla";
+    padding: 30px 40px;
+}
+
+.contenedor__section--titulo {
+    grid-area: titulo;
+    margin: 0 auto;
+}
+
+.contenedor__section--herramientas {
+    grid-area: herramientas;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    margin-top: 15px;
+}
+
+.contenedor__section--tabla {
+    grid-area: tabla;
+    width: 100%;
+}
+
+.section--subtitulo {
+    font-size: 1.3rem;
+}
+
+.section--parrafo {
+    font-size: .9rem;
+    color: var(--colorLetraOscuroSecundario);
+}
+
+.contenedor__herramientas {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+.fieldset__filtros {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr) auto;
+    align-items: center;
+    justify-items: center;
+    gap: 10px;
+    padding: 15px 10px;
+    margin-top: 15px;
+    padding-bottom: 25px;
+    border: 2px solid var(--colorGrisClaro);
+    border-radius: 5px;
+    transition: border-color .35s;
+}
+
+    .fieldset__filtros:hover {
+        border-color: var(--colorNegroLetra);
+        transition-duration: .25s;
+    }
+
+.fieldset__leyenda {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 0 10px;
+    letter-spacing: 2px;
+}
+
+.contenedor__filtro {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.filtro__label {
+    font-size: 1em;
+    letter-spacing: 1px;
+}
+
+.filtro__input {
+    width: 100%;
+    margin-top: 5px;
+    padding: 7px 15px;
+    border: none;
+    border-bottom: 4px solid var(--colorGrisClaro);
+    color: #333;
+    outline: none;
+    font-family: 'InterTight';
+    font-size: 1em;
+    transition: border-bottom-color .25s, box-shadow .25s;
+}
+
+    .filtro__input:hover {
+        box-shadow: 0 0 10px 0 #0002;
+    }
+
+    .filtro__input:focus {
+        border-bottom-color: var(--colorLetraOscuroSecundario);
+    }
+
+.contenedor__accion--externa {
+    padding: 10px;
+    margin-right: 15px;
+}
+
+.enlace__agregar--usuario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--colorLetraOscuroSecundario);
+    padding: 5px 15px;
+    background-color: var(--colorLetraOscuro);
+    border-radius: 10px;
+    position: relative;
+}
+
+    .enlace__agregar--usuario .span__flotante__accion--externa {
+        display: inline-block;
+        position: absolute;
+        top: -30px;
+        padding: 5px 10px;
+        border: 2px solid var(--colorLetraOscuroSecundario);
+        border-radius: 10px;
+        font-weight: 400;
+        letter-spacing: 2px;
+        background-color: var(--colorLetraOscuro);
+        color: var(--colorLetraClaro);
+        opacity: 0;
+        transition: top .35s, opacity .35s;
+    }
+
+.contenedor__accion--externa:hover .span__flotante__accion--externa {
+    top: -40px;
+    opacity: 1;
+    transition-duration: .25s;
+}
+
+.contenedor__accion--externa:hover .enlace__accion--externa {
+    color: var(--colorLetraClaro);
+    transition-duration: .25s;
+}
+
+@media screen and (max-width: 930px) {
+    .page__main--listado {
+        padding: 15px;
+    }
+
+    .contenedor__section--herramientas {
+        padding: 0;
+    }
+
+    .contenedor__herramientas {
+        grid-template-columns: 1fr;
+    }
+
+    .fieldset__filtros {
+        grid-template-columns: 1fr;
+        align-items: start;
+        justify-items: start;
+    }
+
+    .contenedor__filtro {
+        width: 100%;
+        padding: 5px;
+        margin-top: 10px;
+        align-items: start;
+        order: 5;
+    }
+
+        .contenedor__filtro.filtro--restablecer {
+            order: 1;
+        }
+
+    .filtro__input {
+        width: 100%;
+    }
+
+    .contenedor__agregar--usuario {
+        margin-top: 10px;
+    }
+}

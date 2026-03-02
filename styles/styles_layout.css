@@ -1,0 +1,36 @@
+﻿/* ESTRUCTURA GENERAL DE LA PÁGINA */
+body {
+    font-family: 'InterTight';
+    background-color: var(--colorFondoPrincipal);
+    position: relative;
+    z-index: 15;
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: 50px 1fr 50px;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "header"
+        "main"
+        "footer";
+}
+
+/* ----- HEADER, MAIN, FOOTER ----- */
+
+.header {
+    grid-area: header;
+}
+
+.main__wrapper {
+    grid-area: main;
+}
+
+.footer {
+    grid-area: footer;
+}
+
+/* ----- MEDIA QUERIES -----*/
+@media screen and (max-width: 930px) {
+    body {
+        grid-template-rows: auto 2fr 50px;
+    }
+}

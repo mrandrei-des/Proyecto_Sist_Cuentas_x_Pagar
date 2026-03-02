@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="main__wrapper">
-        <main class="page__main page__main--form" runat="server" id="divMain">
+        <main class="page__main page__main--registro" runat="server" id="divMain">
             <section class="contenedor__section--titulo">
                 <h1 class="titulo">
                     <span class="contenedor__icono--titulo">
