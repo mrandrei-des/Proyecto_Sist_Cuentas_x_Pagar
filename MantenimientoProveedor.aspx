@@ -19,7 +19,7 @@
                 </div>
 
                 <div class="contenedor__accion--externa">
-                    <a href="#" class="enlace__accion--externa">
+                    <a href="ListadoProveedores" class="enlace__accion--externa">
                         <span class="span__flotante__accion--externa">Listar</span>
                         <span class="contenedor__icono__accion--externa">
                             <i class="fa-solid fa-building-circle-check"></i>

@@ -105,7 +105,14 @@
                         </ul>
                     </li>
                     <li class="menu__item">
-                        <button class="menu__boton--sesion" title="">Cerrar Sesión</button>
+                        <button class="menu__boton--sesion" title="">
+                            <span>
+                                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                            </span>
+                            <span>
+                                Cerrar Sesión
+                            </span>
+                        </button>
                     </li>
                 </ul>
             </nav>

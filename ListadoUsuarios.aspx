@@ -69,7 +69,7 @@
                 </div>
 
                 <div class="formulario__contenedor">
-                    <fieldset class="formulario__fieldset formulario__fieldset--g2">
+                    <fieldset class="formulario__fieldset formulario__fieldset--gc2">
                         <legend>Atributos del usuario:</legend>
                         <div class="formulario__contenedor-input">
                             <!-- Estado del usuario -->
