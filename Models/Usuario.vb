@@ -1,7 +1,7 @@
 ﻿Namespace Models
     Public Class Usuario
         Private _nombreUsuario As String
-        Private _constrasenna As String
+        Private _contrasenna As String
         Private _nombre As String
         Private _apellido1 As String
         Private _apellido2 As String
@@ -12,9 +12,9 @@
         Public Sub New()
         End Sub
 
-        Public Sub New(nombreUsuario As String, constrasenna As String, nombre As String, apellido1 As String, apellido2 As String, correo As String, estado As Integer, rol As Integer)
+        Public Sub New(nombreUsuario As String, contrasenna As String, nombre As String, apellido1 As String, apellido2 As String, correo As String, estado As Integer, rol As Integer)
             Me.NombreUsuario = nombreUsuario
-            Me.Constrasenna = constrasenna
+            Me.Contrasenna = contrasenna
             Me.Nombre = nombre
             Me.Apellido1 = apellido1
             Me.Apellido2 = apellido2
@@ -32,12 +32,12 @@
             End Set
         End Property
 
-        Public Property Constrasenna As String
+        Public Property Contrasenna As String
             Get
-                Return _constrasenna
+                Return _contrasenna
             End Get
             Set(value As String)
-                _constrasenna = value
+                _contrasenna = value
             End Set
         End Property
 

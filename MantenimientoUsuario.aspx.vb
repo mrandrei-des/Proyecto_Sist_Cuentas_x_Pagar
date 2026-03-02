@@ -15,7 +15,7 @@ Public Class Usuario
         Dim errorMessage As String = "", usuarioCreacion As String = ""
 
         modUsuario.NombreUsuario = txtUsuario.Text
-        modUsuario.Constrasenna = txtContrasenna.Text
+        modUsuario.Contrasenna = txtContrasenna.Text
         modUsuario.Nombre = txtNombre.Text
         modUsuario.Apellido1 = txtApellidoUno.Text
         modUsuario.Apellido2 = txtApellidoDos.Text

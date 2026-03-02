@@ -83,6 +83,7 @@
     align-items: start;
     border-color: var(--colorGrisClaro);
     border-radius: 5px;
+    text-align: left;
 }
 
 .formulario__fieldset--gc1 {
@@ -162,6 +163,11 @@
     .formulario__input[type="email"]:focus:invalid {
         border-bottom-color: #f00;
     }
+
+.formulario__input--invalid {
+    border-bottom-color: #f00;
+    background-color: pink;
+}
 
 .formulario__opcional {
     color: var(--colorPrincipal);

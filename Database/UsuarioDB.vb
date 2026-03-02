@@ -9,7 +9,7 @@ Public Class UsuarioDB
             Dim query As String = "EXEC sp_Inserta_Usuario_Nuevo @Usuario, @Contrasenna, @Nombre, @Apellido1, @Apellido2, @CorreoElectronico, @Estado, @Rol, @UsuarioCreacion "
             Dim parameters As New Dictionary(Of String, Object) From {
                 {"@Usuario", objUsuario.NombreUsuario},
-                {"@Contrasenna", objUsuario.Constrasenna},
+                {"@Contrasenna", objUsuario.Contrasenna},
                 {"@Nombre", objUsuario.Nombre},
                 {"@Apellido1", objUsuario.Apellido1},
                 {"@Apellido2", objUsuario.Apellido2},
@@ -46,6 +46,19 @@ Public Class UsuarioDB
                 {"@Estado", objUsuario.Estado},
                 {"@Rol", objUsuario.Rol},
                 {"@UsuarioModifico", usuarioModifico}
+            }
+            Return db.ExecuteNonQuery(query, parameters, errorMessage)
+        End Using
+        Return True
+    End Function
+
+    'Función que tiene el query para que el usuario pueda modificar su propia contraseña
+    Public Function CambioContrasenna(ByVal objUsuario As Models.Usuario, ByRef errorMessage As String) As Boolean
+        Using db.GetConnection()
+            Dim query As String = "EXEC sp_Cambio_Contrasenna @NombreUsuario, @ContrasennaNueva "
+            Dim parameters As New Dictionary(Of String, Object) From {
+                {"@NombreUsuario", objUsuario.NombreUsuario},
+                {"@ContrasennaNueva", objUsuario.Contrasenna}
             }
             Return db.ExecuteNonQuery(query, parameters, errorMessage)
         End Using

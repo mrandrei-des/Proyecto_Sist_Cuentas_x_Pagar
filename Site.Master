@@ -22,7 +22,8 @@
     <link href="~/styles/styles_header.css" rel="stylesheet" type="text/css" />
     <link href="~/styles/styles_main.css" rel="stylesheet" type="text/css" />
     <link href="~/styles/styles_footer.css" rel="stylesheet" type="text/css" />
-    <link href="~/styles/styles_dialog.css" rel="stylesheet" type="text/css" />   
+    <link href="~/styles/styles_dialog.css" rel="stylesheet" type="text/css" /> 
+    <link href="~/styles/styles_login.css" rel="stylesheet" type="text/css" /> 
     <link href="~/styles/styles_registro.css" rel="stylesheet" type="text/css" />
     <link href="~/styles/styles_formulario.css" rel="stylesheet" type="text/css" />    
     <link href="~/styles/styles_listado.css" rel="stylesheet" type="text/css" />
@@ -106,7 +107,7 @@
                                 <a href="MantenimientoUsuario" class="submenu__enlace">Registro Nuevo</a>
                             </li>
                             <li class="submenu__item" id="cambioContrasenna">
-                                <a href="#" class="submenu__enlace">Cambiar Contraseña</a>
+                                <a href="CambioContrasenna" class="submenu__enlace">Cambiar Contraseña</a>
                             </li>
                         </ul>
                     </li>

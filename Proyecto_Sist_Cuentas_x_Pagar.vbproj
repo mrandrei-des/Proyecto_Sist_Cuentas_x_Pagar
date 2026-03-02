@@ -139,6 +139,7 @@
     <Content Include="BD Scripts\Stored Procedures\Usuarios\sp_Modificar_Usuario.sql" />
     <Content Include="BD Scripts\Tables\Cargar valores tablas iniciales.sql" />
     <Content Include="BD Scripts\Tables\Creación de tablas.sql" />
+    <Content Include="CambioContrasenna.aspx" />
     <Content Include="Content\Site.css" />
     <Content Include="DocumentoPago.aspx" />
     <Content Include="Facturas.aspx" />
@@ -161,6 +162,7 @@
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="ListadoUsuarios.aspx" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
+    <Content Include="Scripts\cxp_Scripts\cambioContrasenna.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
     <Content Include="Scripts\jquery-3.7.0.slim.js" />
@@ -197,6 +199,7 @@
     <Content Include="styles\styles_icons.css" />
     <Content Include="styles\styles_layout.css" />
     <Content Include="styles\styles_listado.css" />
+    <Content Include="styles\styles_login.css" />
     <Content Include="styles\styles_main.css" />
     <Content Include="styles\styles_registro.css" />
     <Content Include="styles\styles_reset_elementos.css" />
@@ -209,6 +212,13 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.vb" />
     <Compile Include="App_Start\RouteConfig.vb" />
+    <Compile Include="CambioContrasenna.aspx.designer.vb">
+      <DependentUpon>CambioContrasenna.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CambioContrasenna.aspx.vb">
+      <DependentUpon>CambioContrasenna.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Database\ProveedorDB.vb" />
     <Compile Include="Database\UsuarioDB.vb" />
     <Compile Include="DocumentoPago.aspx.designer.vb">
