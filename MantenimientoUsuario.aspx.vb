@@ -7,6 +7,9 @@ Public Class Usuario
         ' Busca al elemento HTML que se le indique y se le dan estilos de línea
         Dim enlace As HtmlAnchor = Master.FindControl("enlaceUsuarios")
         enlace.Style.Add("background-color", "var(--colorLetraOscuroSecundario)")
+
+        prcLlena_ddlEstados()
+        prcLlena_ddlRoles()
     End Sub
 
     Protected Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
@@ -43,5 +46,45 @@ Public Class Usuario
         txtCorreoUsuario.Text = ""
         ddlEstadoUsuario.SelectedIndex = 0
         ddlRoles.SelectedIndex = 0
+    End Sub
+
+    Private Sub prcLlena_ddlEstados()
+        Dim listEstados As List(Of Models.Estado)
+        Dim objEstadoDB As New EstadoDB
+        Dim errorMessage As String = ""
+
+        listEstados = objEstadoDB.ConsultarEstados(errorMessage)
+        If listEstados.Count > 0 Then
+            ddlEstadoUsuario.Items.Clear()
+            ddlEstadoUsuario.Items.Add(New ListItem("Seleccione una opción", ""))
+
+            For Each modEstado As Models.Estado In listEstados
+                ddlEstadoUsuario.Items.Add(New ListItem(modEstado.Descripcion.ToString(), modEstado.IdEstado))
+            Next
+
+            ddlEstadoUsuario.SelectedIndex = 0
+        Else
+            SwalUtils.ShowSwalError(Me, errorMessage)
+        End If
+    End Sub
+
+    Private Sub prcLlena_ddlRoles()
+        Dim listRoles As List(Of Models.Rol)
+        Dim objRolDB As New RolDB
+        Dim errorMessage As String = ""
+
+        listRoles = objRolDB.ConsultarRoles(errorMessage)
+        If listRoles.Count > 0 Then
+            ddlRoles.Items.Clear()
+            ddlRoles.Items.Add(New ListItem("Seleccione una opción", ""))
+
+            For Each modRol As Models.Rol In listRoles
+                ddlRoles.Items.Add(New ListItem(modRol.Descripcion.ToString(), modRol.IdRol))
+            Next
+
+            ddlRoles.SelectedIndex = 0
+        Else
+            SwalUtils.ShowSwalError(Me, errorMessage)
+        End If
     End Sub
 End Class

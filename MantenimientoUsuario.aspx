@@ -118,9 +118,6 @@
                                 <!-- Estado del usuario -->
                                 <asp:Label ID="lblEstadoUsuario" runat="server" Text="El usuario se encuentra:" CssClass="formulario__label">Estado:
                                     <asp:DropDownList ID="ddlEstadoUsuario" runat="server" CssClass="formulario__input" required="true">
-                                        <asp:ListItem Value="" Text="Seleccione una opción" />
-                                        <asp:ListItem Value="4" Text="Activo" />
-                                        <asp:ListItem Value="3" Text="Inactivo" />
                                     </asp:DropDownList>
                                 </asp:Label>
                                 <%-- Validación del estado del usuario --%>
@@ -134,13 +131,6 @@
                             <div class="formulario__contenedor-input">
                                 <asp:Label ID="lblRol" runat="server" Text="Rol del usuario:" CssClass="formulario__label">Rol en el sistema:
                                     <asp:DropDownList ID="ddlRoles" runat="server" CssClass="formulario__input" required="true">
-                                        <%-- Esto realmente debe cargar los roles definidos anteriormente --%>
-                                        <asp:ListItem Value="" Text="Seleccione una opción" />
-                                        <asp:ListItem Value="1" Text="Administrador" />
-                                        <asp:ListItem Value="2" Text="Digitador Facturas" />
-                                        <asp:ListItem Value="3" Text="Digitador Documentos Pago" />
-                                        <asp:ListItem Value="4" Text="Asociador Pagos" />
-                                        <asp:ListItem Value="5" Text="Reportes" />
                                     </asp:DropDownList>
                                 </asp:Label>
                                 <%-- Validación del rol del usuario --%>

@@ -11,6 +11,9 @@ Public Class ListadoProveedores
         ' Busca al elemento HTML que se le indique y se le dan estilos de línea
         Dim enlace As HtmlAnchor = Master.FindControl("enlaceProveedores")
         enlace.Style.Add("background-color", "var(--colorLetraOscuroSecundario)")
+
+        prcLlena_ddlFiltTipoIdentificacion()
+        prcLlena_ddls_Estado()
     End Sub
 
     Protected Sub btnLimpiarFiltros_Click(sender As Object, e As EventArgs)
@@ -70,6 +73,8 @@ Public Class ListadoProveedores
     End Sub
 
     Private Sub prcModificarProveedor(idProveedorAfectado As Integer)
+
+
         ' Aquí se debe ir a consultar los datos del proveedor a la base de datos para poder cargarlos en pantalla y a la hora de ver el modal se despliegue con los datos del proveedor
         txtNombre.Text = "Andre"
         txtCorreo.Text = "andrei@corre.com"
@@ -78,6 +83,9 @@ Public Class ListadoProveedores
 
         pSubtituloModal.InnerHtml = "Proveedor: <span>" + proveedor + "<span>"
         modalModify.Style.Add("display", "flex")
+
+
+
     End Sub
 
     Private Sub prcEliminarProveedor(idProveedorAfectado As Integer, usuarioElimino As String)
@@ -86,6 +94,51 @@ Public Class ListadoProveedores
         If dbProveedor.EliminarProveedor(idProveedorAfectado, usuarioElimino, errorMessage) Then
             SwalUtils.ShowSwal(Me, "¡El proveedor [" + idProveedorAfectado + "] ha sido eliminado del sistema!")
             gvProveedores.DataBind()
+        Else
+            SwalUtils.ShowSwalError(Me, errorMessage)
+        End If
+    End Sub
+
+    Private Sub prcLlena_ddls_Estado()
+        Dim listEstados As List(Of Models.Estado)
+        Dim objEstadoDB As New EstadoDB
+        Dim errorMessage As String = ""
+
+        listEstados = objEstadoDB.ConsultarEstados(errorMessage)
+        If listEstados.Count > 0 Then
+            ddlEstado.Items.Clear()
+            ddlFiltEstado.Items.Clear()
+
+            ddlEstado.Items.Add(New ListItem("Seleccione una opción", ""))
+            ddlFiltEstado.Items.Add(New ListItem("Seleccione una opción", ""))
+
+            For Each modEstado As Models.Estado In listEstados
+                ddlEstado.Items.Add(New ListItem(modEstado.Descripcion.ToString(), modEstado.IdEstado))
+                ddlFiltEstado.Items.Add(New ListItem(modEstado.Descripcion.ToString(), modEstado.IdEstado))
+            Next
+
+            ddlEstado.SelectedIndex = 0
+            ddlFiltEstado.SelectedIndex = 0
+        Else
+            SwalUtils.ShowSwalError(Me, errorMessage)
+        End If
+    End Sub
+
+    Private Sub prcLlena_ddlFiltTipoIdentificacion()
+        Dim listTipoIdentificaciones As List(Of Models.TipoIdentificaciones)
+        Dim objTipoIdentificacionBD As New TipoIdentificacionesDB
+        Dim errorMessage As String = ""
+
+        listTipoIdentificaciones = objTipoIdentificacionBD.ConsultarTipoIdentificaciones(errorMessage)
+        If listTipoIdentificaciones.Count > 0 Then
+            ddlFiltTipoIdentificacion.Items.Clear()
+            ddlFiltTipoIdentificacion.Items.Add(New ListItem("Seleccione una opción", ""))
+
+            For Each modTipoIdentificacion As Models.TipoIdentificaciones In listTipoIdentificaciones
+                ddlFiltTipoIdentificacion.Items.Add(New ListItem(modTipoIdentificacion.Descripcion.ToString(), modTipoIdentificacion.IdTipo))
+            Next
+
+            ddlFiltTipoIdentificacion.SelectedIndex = 0
         Else
             SwalUtils.ShowSwalError(Me, errorMessage)
         End If

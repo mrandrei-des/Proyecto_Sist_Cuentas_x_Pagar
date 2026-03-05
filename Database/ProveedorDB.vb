@@ -46,4 +46,7 @@ Public Class ProveedorDB
         End Using
         Return True
     End Function
+
+    ' Cargar el proveedor indicado según el id que se le pase a la función
+
 End Class

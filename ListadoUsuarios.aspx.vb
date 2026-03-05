@@ -12,6 +12,9 @@ Public Class WebForm1
         ' Busca al elemento HTML que se le indique y se le dan estilos de línea
         Dim enlace As HtmlAnchor = Master.FindControl("enlaceUsuarios")
         enlace.Style.Add("background-color", "var(--colorLetraOscuroSecundario)")
+
+        prcLlena_ddls_Estado()
+        prcLlena_ddls_Roles()
     End Sub
 
     Protected Sub btnLimpiarFiltros_Click(sender As Object, e As EventArgs)
@@ -100,5 +103,56 @@ Public Class WebForm1
             SwalUtils.ShowSwalError(Me, errorMessage)
         End If
     End Sub
+
+    Private Sub prcLlena_ddls_Estado() 'Carga los dos dropdownlist de estados, el del modal y el de los filtros
+        Dim listEstados As List(Of Models.Estado)
+        Dim objEstadoDB As New EstadoDB
+        Dim errorMessage As String = ""
+
+        listEstados = objEstadoDB.ConsultarEstados(errorMessage)
+        If listEstados.Count > 0 Then
+            ddlEstadoUsuario.Items.Clear()
+            ddlFiltEstado.Items.Clear()
+
+            ddlEstadoUsuario.Items.Add(New ListItem("Seleccione una opción", ""))
+            ddlFiltEstado.Items.Add(New ListItem("Seleccione una opción", ""))
+
+            For Each modEstado As Models.Estado In listEstados
+                ddlEstadoUsuario.Items.Add(New ListItem(modEstado.Descripcion.ToString(), modEstado.IdEstado))
+                ddlFiltEstado.Items.Add(New ListItem(modEstado.Descripcion.ToString(), modEstado.IdEstado))
+            Next
+
+            ddlEstadoUsuario.SelectedIndex = 0
+            ddlFiltEstado.SelectedIndex = 0
+        Else
+            SwalUtils.ShowSwalError(Me, errorMessage)
+        End If
+    End Sub
+
+    Private Sub prcLlena_ddls_Roles() 'Carga los dos dropdownlist de roles, el del modal y el de los filtros
+        Dim listRoles As List(Of Models.Rol)
+        Dim objRolDB As New RolDB
+        Dim errorMessage As String = ""
+
+        listRoles = objRolDB.ConsultarRoles(errorMessage)
+        If listRoles.Count > 0 Then
+            ddlRoles.Items.Clear()
+            ddlFiltRoles.Items.Clear()
+
+            ddlRoles.Items.Add(New ListItem("Seleccione una opción", ""))
+            ddlFiltRoles.Items.Add(New ListItem("Seleccione una opción", ""))
+
+            For Each modRol As Models.Rol In listRoles
+                ddlRoles.Items.Add(New ListItem(modRol.Descripcion.ToString(), modRol.IdRol))
+                ddlFiltRoles.Items.Add(New ListItem(modRol.Descripcion.ToString(), modRol.IdRol))
+            Next
+
+            ddlRoles.SelectedIndex = 0
+            ddlFiltRoles.SelectedIndex = 0
+        Else
+            SwalUtils.ShowSwalError(Me, errorMessage)
+        End If
+    End Sub
+
     '' FIN FUNCIONES Y MÉTODOS DE LA PÁGINA
 End Class

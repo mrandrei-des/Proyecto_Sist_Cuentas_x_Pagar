@@ -1,0 +1,9 @@
+-- CARGA LOS ROLES UTILIZADOS PARA LOS USUARIOS Y SE USA PARA LLENAR LOS SELECT/DropDownList
+CREATE PROC sp_Cargar_Roles_Usuario_ddl
+AS
+BEGIN
+	SELECT ID_Rol as Valor, Descripcion as Texto, Estado
+	FROM Roles
+	WHERE Estado IN (4)
+	ORDER BY ID_Rol ASC
+END

@@ -51,12 +51,6 @@
                             <div class="formulario__contenedor-input">
                                 <asp:Label ID="lblTipoIdentificacion" runat="server" Text="Tipo Identificación:" CssClass="formulario__label">Tipo Identificación:
                                     <asp:DropDownList ID="ddlTipoIdentificacion" runat="server" CssClass="formulario__input" required="true">
-                                        <%-- Esto realmente debe cargar los tipos de identificación definidos anteriormente --%>
-                                        <asp:ListItem Value="" Text="Seleccione una opción" />
-                                        <asp:ListItem Value="1" Text="Cédula Física" />
-                                        <asp:ListItem Value="2" Text="Cédula Jurídica" />
-                                        <asp:ListItem Value="3" Text="Pasaporte" />
-                                        <asp:ListItem Value="4" Text="DIMEX" />
                                     </asp:DropDownList>
                                 </asp:Label>
                                 <%-- Validación del tipo de identificación --%>
@@ -102,9 +96,6 @@
                                 <!-- Estado del proveedor -->
                                 <asp:Label ID="lblEstado" runat="server" Text="El proveedor se encuentra:" CssClass="formulario__label">Estado:
                                     <asp:DropDownList ID="ddlEstado" runat="server" CssClass="formulario__input" required="true">
-                                        <asp:ListItem Value="" Text="Seleccione una opción" />
-                                        <asp:ListItem Value="4" Text="Activo" />
-                                        <asp:ListItem Value="3" Text="Inactivo" />
                                     </asp:DropDownList>
                                 </asp:Label>
                                 <%-- Validación del estado del proveedor --%>

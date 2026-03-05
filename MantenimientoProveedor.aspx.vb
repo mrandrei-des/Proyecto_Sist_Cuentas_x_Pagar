@@ -7,6 +7,9 @@ Public Class MantenimientoProveedor
         ' Busca al elemento HTML que se le indique y se le dan estilos de línea
         Dim enlace As HtmlAnchor = Master.FindControl("enlaceProveedores")
         enlace.Style.Add("background-color", "var(--colorLetraOscuroSecundario)")
+
+        prcLlena_ddlTipoIdentificacion()
+        prcLlena_ddlEstado()
     End Sub
 
     Protected Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
@@ -34,5 +37,45 @@ Public Class MantenimientoProveedor
         txtNombre.Text = ""
         txtCorreo.Text = ""
         ddlEstado.SelectedIndex = 0
+    End Sub
+
+    Private Sub prcLlena_ddlEstado()
+        Dim listEstados As List(Of Models.Estado)
+        Dim objEstadoDB As New EstadoDB
+        Dim errorMessage As String = ""
+
+        listEstados = objEstadoDB.ConsultarEstados(errorMessage)
+        If listEstados.Count > 0 Then
+            ddlEstado.Items.Clear()
+            ddlEstado.Items.Add(New ListItem("Seleccione una opción", ""))
+
+            For Each modEstado As Models.Estado In listEstados
+                ddlEstado.Items.Add(New ListItem(modEstado.Descripcion.ToString(), modEstado.IdEstado))
+            Next
+
+            ddlEstado.SelectedIndex = 0
+        Else
+            SwalUtils.ShowSwalError(Me, errorMessage)
+        End If
+    End Sub
+
+    Private Sub prcLlena_ddlTipoIdentificacion()
+        Dim listTipoIdentificaciones As List(Of Models.TipoIdentificaciones)
+        Dim objTipoIdentificacionBD As New TipoIdentificacionesDB
+        Dim errorMessage As String = ""
+
+        listTipoIdentificaciones = objTipoIdentificacionBD.ConsultarTipoIdentificaciones(errorMessage)
+        If listTipoIdentificaciones.Count > 0 Then
+            ddlTipoIdentificacion.Items.Clear()
+            ddlTipoIdentificacion.Items.Add(New ListItem("Seleccione una opción", ""))
+
+            For Each modTipoIdentificacion As Models.TipoIdentificaciones In listTipoIdentificaciones
+                ddlTipoIdentificacion.Items.Add(New ListItem(modTipoIdentificacion.Descripcion.ToString(), modTipoIdentificacion.IdTipo))
+            Next
+
+            ddlTipoIdentificacion.SelectedIndex = 0
+        Else
+            SwalUtils.ShowSwalError(Me, errorMessage)
+        End If
     End Sub
 End Class

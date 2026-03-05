@@ -1,0 +1,8 @@
+-- CARGA LOS TIPOS DE IDENTIFICACIÓN UTILIZADOS PARA LOS PROVEEDORES Y SE USA PARA LLENAR LOS SELECT/DropDownList
+CREATE PROC sp_Cargar_TipoIdentificaciones_ddl
+AS
+BEGIN
+	SELECT ID_Tipo as Valor, Descripcion as Texto
+	FROM TipoIdentificaciones
+	ORDER BY ID_Tipo ASC
+END

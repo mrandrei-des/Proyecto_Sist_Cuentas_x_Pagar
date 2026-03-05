@@ -44,5 +44,40 @@ Namespace Utils
             End Using
         End Function
 
+        Public Function ExecuteQuery(ByRef errorMessage As String, query As String, esStoredProcedure As Boolean, Optional parameters As Dictionary(Of String, Object) = Nothing) As DataTable
+            If String.IsNullOrWhiteSpace(query) Then
+                Throw New ArgumentException("La consulta no puede estar vacía.")
+            End If
+
+            Dim dt As New DataTable()
+            Using conn As SqlConnection = GetConnection()
+                Using cmd As New SqlCommand(query, conn)
+                    ' Agrega cada uno de los parámetros que contenga el diccionario en el parameters del SQL Command
+                    If parameters IsNot Nothing Then
+                        For Each param In parameters
+                            cmd.Parameters.AddWithValue(param.Key, param.Value)
+                        Next
+                    End If
+
+                    If esStoredProcedure Then
+                        cmd.CommandType = CommandType.StoredProcedure
+                    End If
+
+                    Try
+                        'Asegurarse de que la conexión esté abierta antes de ejecutar la consulta
+                        If conn.State = ConnectionState.Closed Then
+                            conn.Open()
+                        End If
+                        Using adapter As New SqlDataAdapter(cmd)
+                            adapter.Fill(dt)
+                        End Using
+                        Return dt
+                    Catch ex As Exception
+                        errorMessage = "Error al ejecutar la consulta: [" & ex.Message & "]"
+                        Return Nothing
+                    End Try
+                End Using
+            End Using
+        End Function
     End Class
 End Namespace

@@ -55,9 +55,6 @@
                             <!-- Estado del proveedor -->
                             <asp:Label ID="lblEstado" runat="server" Text="El proveedor se encuentra:" CssClass="formulario__label">Estado:
                                     <asp:DropDownList ID="ddlEstado" runat="server" CssClass="formulario__input" required="true">
-                                        <asp:ListItem Value="" Text="Seleccione una opción" />
-                                        <asp:ListItem Value="4" Text="Activo" />
-                                        <asp:ListItem Value="3" Text="Inactivo" />
                                     </asp:DropDownList>
                             </asp:Label>
                             <%-- Validación del estado del proveedor --%>
@@ -72,7 +69,6 @@
 
 
                 <footer class="formulario__contenedor formulario__footer">
-                    <%-- FALTA BUSCAR LA FORMA DE AGREGAR UN ÍCONO A LOS BUTTONS --%>
                     <asp:Button ID="btnModificarProveedor" runat="server" Text="Modificar Proveedor" CssClass="boton boton__modificar" OnClick="btnModificarProveedor_Click" ToolTip="Guardar cambios" />
                 </footer>
                 <asp:Button ID="btnCerrarModal" runat="server" Text="x" CssClass="boton__cierre-modal" OnClick="btnCerrarModal_Click" ToolTip="Cerrar Modal" CausesValidation="false" />
@@ -125,12 +121,6 @@
                                     Tipo Identificación:
                                 </label>
                                 <asp:DropDownList ID="ddlFiltTipoIdentificacion" runat="server" CssClass="filtro__input">
-                                    <%-- Esto realmente debe cargar los tipos de identificación definidos anteriormente --%>
-                                    <asp:ListItem Value="" Text="Seleccione una opción" />
-                                    <asp:ListItem Value="1" Text="Cédula Física" />
-                                    <asp:ListItem Value="2" Text="Cédula Jurídica" />
-                                    <asp:ListItem Value="3" Text="Pasaporte" />
-                                    <asp:ListItem Value="4" Text="DIMEX" />
                                 </asp:DropDownList>
                             </div>
 
@@ -146,9 +136,6 @@
                                     Estado:
                                 </label>
                                 <asp:DropDownList ID="ddlFiltEstado" runat="server" CssClass="filtro__input">
-                                    <asp:ListItem Value="" Text="Seleccione una opción" />
-                                    <asp:ListItem Value="4" Text="Activo" />
-                                    <asp:ListItem Value="3" Text="Inactivo" />
                                 </asp:DropDownList>
                             </div>
 
