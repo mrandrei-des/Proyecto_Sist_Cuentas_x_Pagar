@@ -141,9 +141,9 @@
 
                             <div class="contenedor__filtro filtro--restablecer">
                                 <asp:LinkButton ID="btnLimpiarFiltros" CssClass="boton boton__refrescar boton--filtro" ToolTip="Restablecer Filtros" runat="server" OnClick="btnLimpiarFiltros_Click" CausesValidation="false">
-                             <span class="contenedor__icono">
-                                 <i class="fa-solid fa-arrows-rotate"></i>
-                             </span>
+                                     <span class="contenedor__icono">
+                                         <i class="fa-solid fa-arrows-rotate"></i>
+                                     </span>
                                 </asp:LinkButton>
                             </div>
                         </fieldset>
@@ -152,36 +152,38 @@
             </section>
 
             <section class="contenedor__section--tabla">
-             <div class="contenedor__tabla">
-                 <asp:GridView ID="gvProveedores" runat="server" AutoGenerateColumns="False" DataKeyNames="ID Proveedor" DataSourceID="SqlDataSource1" CssClass="tabla" OnRowCommand="gvProveedores_RowCommand">
-                     <Columns>
-                         <asp:BoundField DataField="ID Proveedor" HeaderText="Proveedor" InsertVisible="False" ReadOnly="True" SortExpression="ID Proveedor" />
-                         <asp:BoundField DataField="Nombre" HeaderText="Nombre" SortExpression="Nombre" />
-                         <asp:BoundField DataField="Identificación" HeaderText="Identificación" SortExpression="Identificación" />
-                         <asp:BoundField DataField="Correo Electrónico" HeaderText="Correo Electrónico" SortExpression="Correo Electrónico" />
-                         <asp:BoundField DataField="Estado" HeaderText="Estado" SortExpression="Estado" />
+                <asp:HiddenField ID="hfIdProveedor" runat="server" />
 
-                         <asp:TemplateField HeaderText="Acciones">
-                             <ItemTemplate>
-                                 <asp:LinkButton ID="btnEliminar" runat="server" CssClass="boton boton__eliminar" CommandName="EliminarProveedor" CommandArgument='<%# Container.DataItemIndex %>' CausesValidation="false" ToolTip="Eliminar Proveedor">
-                                     <span class="contenedor__icono">                                        
-                                         <i class="fa-solid fa-trash"></i>
-                                     </span>
-                                 </asp:LinkButton>
+                 <div class="contenedor__tabla">
+                     <asp:GridView ID="gvProveedores" runat="server" AutoGenerateColumns="False" DataKeyNames="ID Proveedor" DataSourceID="SqlDataSource1" CssClass="tabla" OnRowCommand="gvProveedores_RowCommand">
+                         <Columns>
+                             <asp:BoundField DataField="ID Proveedor" HeaderText="Proveedor" InsertVisible="False" ReadOnly="True" SortExpression="ID Proveedor" Visible="false" />
+                             <asp:BoundField DataField="Nombre" HeaderText="Nombre" SortExpression="Nombre" />
+                             <asp:BoundField DataField="Identificación" HeaderText="Identificación" SortExpression="Identificación" />
+                             <asp:BoundField DataField="Correo Electrónico" HeaderText="Correo Electrónico" SortExpression="Correo Electrónico" />
+                             <asp:BoundField DataField="Estado" HeaderText="Estado" SortExpression="Estado" />
 
-                                 <asp:LinkButton ID="btnEditar" runat="server" CssClass="boton boton__modificar--accion" CommandName="EditarProveedor" CommandArgument='<%# Container.DataItemIndex %>' CausesValidation="false" ToolTip="Editar Proveedor">
-                                     <span class="contenedor__icono">                                        
-                                         <i class="fa-solid fa-pen-to-square"></i>
-                                     </span>
-                                 </asp:LinkButton>
-                             </ItemTemplate>
-                         </asp:TemplateField>
+                             <asp:TemplateField HeaderText="Acciones">
+                                 <ItemTemplate>
+                                     <asp:LinkButton ID="btnEliminar" runat="server" CssClass="boton boton__eliminar" CommandName="EliminarProveedor" CommandArgument='<%# Container.DataItemIndex %>' CausesValidation="false" ToolTip="Eliminar Proveedor">
+                                         <span class="contenedor__icono">                                        
+                                             <i class="fa-solid fa-trash"></i>
+                                         </span>
+                                     </asp:LinkButton>
 
-                     </Columns>
+                                     <asp:LinkButton ID="btnEditar" runat="server" CssClass="boton boton__modificar--accion" CommandName="EditarProveedor" CommandArgument='<%# Container.DataItemIndex %>' CausesValidation="false" ToolTip="Editar Proveedor">
+                                         <span class="contenedor__icono">                                        
+                                             <i class="fa-solid fa-pen-to-square"></i>
+                                         </span>
+                                     </asp:LinkButton>
+                                 </ItemTemplate>
+                             </asp:TemplateField>
 
-                 </asp:GridView>
-                 <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Sist_Cuentas_x_PagarConnectionString %>" SelectCommand="sp_Consultar_Proveedores_Registrados" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
-             </div>
+                         </Columns>
+
+                     </asp:GridView>
+                     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Sist_Cuentas_x_PagarConnectionString %>" SelectCommand="sp_Consultar_Proveedores_Registrados" SelectCommandType="StoredProcedure"></asp:SqlDataSource>
+                 </div>
          </section>
         </main>
     </div>

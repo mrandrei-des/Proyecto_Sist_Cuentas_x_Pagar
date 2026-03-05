@@ -4,8 +4,6 @@ Imports Proyecto_Sist_Cuentas_x_Pagar.Utils
 
 Public Class WebForm1
     Inherits System.Web.UI.Page
-    Private dbUsuario As New UsuarioDB
-    Private modUsuario As New Models.Usuario
 
     '' INICIO EVENTOS DE LA PÁGINA
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -13,8 +11,10 @@ Public Class WebForm1
         Dim enlace As HtmlAnchor = Master.FindControl("enlaceUsuarios")
         enlace.Style.Add("background-color", "var(--colorLetraOscuroSecundario)")
 
-        prcLlena_ddls_Estado()
-        prcLlena_ddls_Roles()
+        If Not IsPostBack Then
+            prcLlena_ddls_Estado()
+            prcLlena_ddls_Roles()
+        End If
     End Sub
 
     Protected Sub btnLimpiarFiltros_Click(sender As Object, e As EventArgs)
@@ -25,11 +25,11 @@ Public Class WebForm1
         Dim indexColNombreUsuario = Convert.ToInt32(e.CommandArgument)
         Dim nombreUsuarioAfectado = gvUsuarios.DataKeys(indexColNombreUsuario).Value
         Dim nombreUsuarioEjecutaAccion = "andre"
-        modUsuario.NombreUsuario = nombreUsuarioAfectado
+        hfUsuario.Value = nombreUsuarioAfectado
 
         Select Case e.CommandName
             Case "EditarUsuario"
-                prcModificarUsuario(nombreUsuarioAfectado)
+                prcCargaUsuarioModal(nombreUsuarioAfectado)
 
             Case "EliminarUsuario"
                 prcEliminarUsuario(nombreUsuarioAfectado, nombreUsuarioEjecutaAccion)
@@ -46,7 +46,7 @@ Public Class WebForm1
         Dim errorMessage As String = ""
         Dim nombreUsuarioEjecutaAccion = "andre"
 
-        modUsuario.NombreUsuario = "" 'txtUsuario.Text
+        modUsuario.NombreUsuario = hfUsuario.Value
         modUsuario.Nombre = txtNombre.Text
         modUsuario.Apellido1 = txtApellidoUno.Text
         modUsuario.Apellido2 = txtApellidoDos.Text
@@ -66,16 +66,25 @@ Public Class WebForm1
     '' FIN EVENTOS DE LA PÁGINA
 
     '' INICIO FUNCIONES Y MÉTODOS DE LA PÁGINA
-    Private Sub prcModificarUsuario(nombreUsuarioAfectado As String)
+    Private Sub prcCargaUsuarioModal(nombreUsuarioAfectado As String)
         ' Aquí se debe ir a consultar los datos del usuario a la base de datos para poder cargarlos en pantalla y a la hora de ver el modal se despliegue con los datos del usuario
-        txtNombre.Text = "Andre"
-        txtApellidoUno.Text = "Mesén"
-        txtApellidoDos.Text = "Romero"
-        txtCorreoUsuario.Text = "amense@gmaolc.com"
-        ddlEstadoUsuario.SelectedValue = 3
-        ddlRoles.SelectedValue = 2
-        pSubtituloModal.InnerHtml = "Usuario: <span>" + nombreUsuarioAfectado + "<span>"
-        modalModify.Style.Add("display", "flex")
+        Dim objUsuarioDB As New UsuarioDB
+        Dim modUsuario As Models.Usuario
+        Dim errorMessage As String = ""
+
+        modUsuario = objUsuarioDB.ConsultarUsuario_x_Username(nombreUsuarioAfectado, errorMessage)
+        If modUsuario IsNot Nothing Then
+            txtNombre.Text = modUsuario.Nombre
+            txtApellidoUno.Text = modUsuario.Apellido1
+            txtApellidoDos.Text = modUsuario.Apellido2
+            txtCorreoUsuario.Text = modUsuario.Correo
+            ddlEstadoUsuario.SelectedValue = modUsuario.Estado
+            ddlRoles.SelectedValue = modUsuario.Rol
+            pSubtituloModal.InnerHtml = "Usuario: <span>" + nombreUsuarioAfectado + "<span>"
+            modalModify.Style.Add("display", "flex")
+        Else
+            SwalUtils.ShowSwalError(Me, errorMessage)
+        End If
     End Sub
 
     Private Sub prcLimpiarModal()
@@ -94,9 +103,10 @@ Public Class WebForm1
     End Sub
 
     Private Sub prcEliminarUsuario(nombreUsuarioAfectado As String, nombreUsuarioElimino As String)
+        Dim objUsuarioDB As New UsuarioDB
         Dim errorMessage As String = ""
 
-        If dbUsuario.EliminarUsuario(nombreUsuarioAfectado, nombreUsuarioElimino, errorMessage) Then
+        If objUsuarioDB.EliminarUsuario(nombreUsuarioAfectado, nombreUsuarioElimino, errorMessage) Then
             SwalUtils.ShowSwal(Me, "¡El usuario [" + nombreUsuarioAfectado + "] ha sido eliminado del sistema!")
             gvUsuarios.DataBind()
         Else

@@ -8,8 +8,10 @@ Public Class Usuario
         Dim enlace As HtmlAnchor = Master.FindControl("enlaceUsuarios")
         enlace.Style.Add("background-color", "var(--colorLetraOscuroSecundario)")
 
-        prcLlena_ddlEstados()
-        prcLlena_ddlRoles()
+        If Not IsPostBack Then
+            prcLlena_ddlEstados()
+            prcLlena_ddlRoles()
+        End If
     End Sub
 
     Protected Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click

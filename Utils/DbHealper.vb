@@ -17,8 +17,8 @@ Namespace Utils
             Return conn
         End Function
 
-        'Método para ejecutar un comando SQL (INSERT, UPDATE, DELETE)
-        Public Function ExecuteNonQuery(query As String, parameters As Dictionary(Of String, Object), ByRef errorMessage As String) As Boolean
+        'Función para ejecutar un comando SQL (INSERT, UPDATE, DELETE)
+        Public Function ExecuteNonQuery(query As String, parameters As List(Of SqlParameter), ByRef errorMessage As String) As Boolean
             If String.IsNullOrWhiteSpace(query) Then
                 Throw New ArgumentException("La consulta no puede estar vacía.")
             End If
@@ -28,11 +28,11 @@ Namespace Utils
                 'Se crea una variable de SqlCommand con el query a ejecutar y la conexión donde debe ejecutarlo
                 Using cmd As New SqlCommand(query, conn)
                     If parameters IsNot Nothing Then
-                        ' Agrega cada uno de los parámetros que contenga el diccionario en el parameters del SQL Command
-                        For Each param In parameters
-                            cmd.Parameters.AddWithValue(param.Key, param.Value)
-                        Next
+                        cmd.Parameters.AddRange(parameters.ToArray())
                     End If
+
+                    cmd.CommandType = CommandType.StoredProcedure
+
                     Try
                         cmd.ExecuteNonQuery()
                         Return True
@@ -44,7 +44,8 @@ Namespace Utils
             End Using
         End Function
 
-        Public Function ExecuteQuery(ByRef errorMessage As String, query As String, esStoredProcedure As Boolean, Optional parameters As Dictionary(Of String, Object) = Nothing) As DataTable
+        'Función para ejecutar un comando SELECT
+        Public Function ExecuteQuery(ByRef errorMessage As String, query As String, esStoredProcedure As Boolean, Optional parameters As List(Of SqlParameter) = Nothing) As DataTable
             If String.IsNullOrWhiteSpace(query) Then
                 Throw New ArgumentException("La consulta no puede estar vacía.")
             End If
@@ -54,9 +55,10 @@ Namespace Utils
                 Using cmd As New SqlCommand(query, conn)
                     ' Agrega cada uno de los parámetros que contenga el diccionario en el parameters del SQL Command
                     If parameters IsNot Nothing Then
-                        For Each param In parameters
-                            cmd.Parameters.AddWithValue(param.Key, param.Value)
-                        Next
+                        'For Each param In parameters
+                        '    cmd.Parameters.AddWithValue(param.Key, param.Value)
+                        'Next
+                        cmd.Parameters.AddRange(parameters.ToArray())
                     End If
 
                     If esStoredProcedure Then

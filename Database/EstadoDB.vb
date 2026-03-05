@@ -5,7 +5,7 @@ Public Class EstadoDB
 
     Public Function ConsultarEstados(ByRef errorMessage) As List(Of Models.Estado)
 
-        Dim query As String = "sp_Cargar_Estados_Usuarios_Proveedores_ddl "
+        Dim query As String = "sp_Cargar_Estados_Usuarios_Proveedores_ddl"
         Dim dt As DataTable = db.ExecuteQuery(errorMessage, query, True)
 
         If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then

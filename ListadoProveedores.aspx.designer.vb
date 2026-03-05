@@ -167,6 +167,15 @@ Partial Public Class ListadoProveedores
     Protected WithEvents btnLimpiarFiltros As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
+    '''Control hfIdProveedor.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents hfIdProveedor As Global.System.Web.UI.WebControls.HiddenField
+
+    '''<summary>
     '''Control gvProveedores.
     '''</summary>
     '''<remarks>

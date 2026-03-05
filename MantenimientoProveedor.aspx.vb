@@ -8,8 +8,10 @@ Public Class MantenimientoProveedor
         Dim enlace As HtmlAnchor = Master.FindControl("enlaceProveedores")
         enlace.Style.Add("background-color", "var(--colorLetraOscuroSecundario)")
 
-        prcLlena_ddlTipoIdentificacion()
-        prcLlena_ddlEstado()
+        If Not IsPostBack Then
+            prcLlena_ddlTipoIdentificacion()
+            prcLlena_ddlEstado()
+        End If
     End Sub
 
     Protected Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click

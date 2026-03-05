@@ -3,7 +3,7 @@
 Public Class TipoIdentificacionesDB
     Private db As New DbHealper
     Public Function ConsultarTipoIdentificaciones(ByRef errorMessage) As List(Of Models.TipoIdentificaciones)
-        Dim query As String = "sp_Cargar_TipoIdentificaciones_ddl "
+        Dim query As String = "sp_Cargar_TipoIdentificaciones_ddl"
         Dim dt As DataTable = db.ExecuteQuery(errorMessage, query, True)
 
         If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then

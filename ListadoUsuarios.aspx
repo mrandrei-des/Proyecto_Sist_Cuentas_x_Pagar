@@ -186,6 +186,7 @@
             </section>
 
             <section class="contenedor__section--tabla">
+                <asp:HiddenField ID="hfUsuario" runat="server" />
                 <div class="contenedor__tabla">
                     <asp:GridView ID="gvUsuarios" runat="server" AutoGenerateColumns="False" DataKeyNames="Usuario" DataSourceID="SqlDataSource2" CssClass="tabla" OnRowCommand="gvUsuarios_RowCommand">
                         <Columns>
