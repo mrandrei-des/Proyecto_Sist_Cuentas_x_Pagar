@@ -1,4 +1,5 @@
 ﻿Imports System.Data.SqlClient
+Imports Microsoft.Ajax.Utilities
 Imports Proyecto_Sist_Cuentas_x_Pagar.Models
 Imports Proyecto_Sist_Cuentas_x_Pagar.Utils
 
@@ -100,6 +101,37 @@ Public Class ProveedorDB
                 .Estado = Convert.ToInt32(row("Estado"))
             }
             Return modProveedor
+        End If
+        Return Nothing
+    End Function
+
+    Public Function FiltrarProveedores(filtTipoIdentificacion As Integer, filtNombre As String, filtEstado As Integer, errorMessage As String) As DataTable
+        Dim query As String = "sp_Filtrar_Proveedores"
+
+        ' Se agregan los parámetros del procedimiento almacenado a una lista de SqlParameter
+        Dim parameters As New List(Of SqlParameter)
+
+        If filtTipoIdentificacion = 0 Then
+            parameters.Add(New SqlParameter("@FiltTipoIdentificacion", DBNull.Value))
+        Else
+            parameters.Add(New SqlParameter("@FiltTipoIdentificacion", filtTipoIdentificacion))
+        End If
+
+        If filtNombre.IsNullOrWhiteSpace() Then
+            parameters.Add(New SqlParameter("@FiltEnNombre", DBNull.Value))
+        Else
+            parameters.Add(New SqlParameter("@FiltEnNombre", filtNombre))
+        End If
+
+        If filtEstado = 0 Then
+            parameters.Add(New SqlParameter("@FiltEstado", DBNull.Value))
+        Else
+            parameters.Add(New SqlParameter("@FiltEstado", filtEstado))
+        End If
+
+        Dim dt As DataTable = db.ExecuteQuery(errorMessage, query, True, parameters)
+        If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
+            Return dt
         End If
         Return Nothing
     End Function

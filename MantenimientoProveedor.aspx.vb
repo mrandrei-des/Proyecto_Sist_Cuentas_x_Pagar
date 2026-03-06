@@ -21,7 +21,9 @@ Public Class MantenimientoProveedor
         Dim tipoIdentificacion As Integer = CInt(ddlTipoIdentificacion.SelectedItem.Value)
         Dim numeroIdentificacion As String = txtIdentificacion.Text
 
-        If objProveedorDB.BuscarProveedor_x_Identificacion(tipoIdentificacion, numeroIdentificacion, errorMessage) Is Nothing Then
+        modProveedor = objProveedorDB.BuscarProveedor_x_Identificacion(tipoIdentificacion, numeroIdentificacion, errorMessage)
+        If modProveedor Is Nothing Then
+            modProveedor = New Models.Proveedor
             modProveedor.TipoIdentificacion = CInt(ddlTipoIdentificacion.SelectedItem.Value)
             modProveedor.NumeroIdentificacion = txtIdentificacion.Text
             modProveedor.Nombre = txtNombre.Text

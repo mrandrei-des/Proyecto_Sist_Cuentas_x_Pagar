@@ -17,11 +17,12 @@ Public Class Usuario
     Protected Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
         Dim modUsuario As New Models.Usuario
         Dim objUsuarioDB As New UsuarioDB
-        Dim errorMessage As String = "", usuarioCreacion As String = ""
+        Dim errorMessage As String = "", usuarioCreacion As String = "andre"
         Dim nombreUsuario As String = txtUsuario.Text.Trim()
 
         modUsuario = objUsuarioDB.ConsultarUsuario_x_Username(nombreUsuario, errorMessage)
         If modUsuario Is Nothing Then ' Si el resultado de la consulta es nulo, significa que no existe un usuario con ese nombre de usuario, por lo tanto se puede crear
+            modUsuario = New Models.Usuario
             modUsuario.NombreUsuario = txtUsuario.Text
             modUsuario.Contrasenna = txtContrasenna.Text
             modUsuario.Nombre = txtNombre.Text

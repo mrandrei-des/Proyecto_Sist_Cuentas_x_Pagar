@@ -77,7 +77,7 @@ Public Class UsuarioDB
 
     ' Cargar el usuario indicado según el nombre de usuario que se le pase a la función
     Public Function ConsultarUsuario_x_Username(ByVal nombreUsuario As String, errorMessage As String) As Models.Usuario
-        Dim query As String = "sp_Consultar_Usuario"
+        Dim query As String = "sp_Buscar_Usuario"
 
         ' Se agregan los parámetros del procedimiento almacenado a una lista de SqlParameter
         Dim parameters As New List(Of SqlParameter) From {

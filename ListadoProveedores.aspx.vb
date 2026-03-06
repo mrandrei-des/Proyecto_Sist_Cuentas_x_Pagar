@@ -1,4 +1,5 @@
-﻿Imports Proyecto_Sist_Cuentas_x_Pagar.Models
+﻿Imports Microsoft.Ajax.Utilities
+Imports Proyecto_Sist_Cuentas_x_Pagar.Models
 Imports Proyecto_Sist_Cuentas_x_Pagar.Utils
 
 Public Class ListadoProveedores
@@ -68,6 +69,9 @@ Public Class ListadoProveedores
             SwalUtils.ShowSwalError(Me, errorMessage)
         End If
     End Sub
+
+
+
     '' FIN EVENTOS DE LA PÁGINA
 
     '' INICIO DE FUNCIONES Y MÉTODOS DE LA PÁGINA
@@ -158,5 +162,43 @@ Public Class ListadoProveedores
             SwalUtils.ShowSwalError(Me, errorMessage)
         End If
     End Sub
+
+    Private Sub ddlFiltEstado_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ddlFiltEstado.SelectedIndexChanged
+
+        Dim objProveedorDB As New ProveedorDB
+        Dim errorMessage As String = ""
+        Dim filtNombre As String = ""
+        Dim filtTipoIdentificacion As Integer = 0, filtEstado As Integer = 0
+        Dim dtResultados As DataTable
+
+        filtTipoIdentificacion = prcDevuelveParametroFiltro_int(ddlFiltTipoIdentificacion.SelectedValue)
+        filtNombre = prcDevuelveParametroFiltro_str(txtFiltNombre.Text)
+        filtEstado = prcDevuelveParametroFiltro_int(ddlFiltEstado.SelectedValue)
+
+        dtResultados = objProveedorDB.FiltrarProveedores(filtTipoIdentificacion, filtNombre, filtEstado, errorMessage)
+        If dtResultados IsNot Nothing Then
+            gvProveedores.DataSource = dtResultados
+            gvProveedores.DataBind()
+        Else
+            SwalUtils.ShowSwalError(Me, errorMessage)
+        End If
+
+    End Sub
+
+    Private Function prcDevuelveParametroFiltro_int(valorFiltro As String) As Integer
+        If valorFiltro.IsNullOrWhiteSpace() Then
+            Return 0
+        Else
+            Return CInt(valorFiltro)
+        End If
+    End Function
+
+    Private Function prcDevuelveParametroFiltro_str(valorFiltro As String) As String
+        If valorFiltro.IsNullOrWhiteSpace() Then
+            Return ""
+        Else
+            Return valorFiltro
+        End If
+    End Function
     '' FIN DE FUNCIONES Y MÉTODOS DE LA PÁGINA
 End Class
