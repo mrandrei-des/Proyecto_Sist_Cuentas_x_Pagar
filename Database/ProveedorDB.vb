@@ -77,4 +77,30 @@ Public Class ProveedorDB
         End If
         Return Nothing
     End Function
+
+    ' Busca al proveedor que coincida con el tipo y número de identificación que se le pase a la función
+    Public Function BuscarProveedor_x_Identificacion(tipoIdentificacion As Integer, numeroIdentificacion As String, errorMessage As String) As Models.Proveedor
+        Dim query As String = "sp_Buscar_Proveedor"
+
+        ' Se agregan los parámetros del procedimiento almacenado a una lista de SqlParameter
+        Dim parameters As New List(Of SqlParameter) From {
+             New SqlParameter("@TipoIdentificacion", tipoIdentificacion),
+             New SqlParameter("@NumeroIdentificacion", numeroIdentificacion)
+        }
+
+        Dim dt As DataTable = db.ExecuteQuery(errorMessage, query, True, parameters)
+        If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
+            Dim row As DataRow = dt.Rows(0)
+            Dim modProveedor As New Models.Proveedor With {
+                .NumeroProveedor = Convert.ToInt32(row("ID_Proveedor")),
+                .Nombre = row("Nombre").ToString(),
+                .TipoIdentificacion = Convert.ToInt32(row("TipoIdentificacion")),
+                .NumeroIdentificacion = row("Identificacion").ToString(),
+                .Correo = row("CorreoElectronico").ToString(),
+                .Estado = Convert.ToInt32(row("Estado"))
+            }
+            Return modProveedor
+        End If
+        Return Nothing
+    End Function
 End Class

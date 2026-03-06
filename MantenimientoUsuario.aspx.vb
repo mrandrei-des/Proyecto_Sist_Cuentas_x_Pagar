@@ -18,24 +18,27 @@ Public Class Usuario
         Dim modUsuario As New Models.Usuario
         Dim objUsuarioDB As New UsuarioDB
         Dim errorMessage As String = "", usuarioCreacion As String = ""
+        Dim nombreUsuario As String = txtUsuario.Text.Trim()
 
-        modUsuario.NombreUsuario = txtUsuario.Text
-        modUsuario.Contrasenna = txtContrasenna.Text
-        modUsuario.Nombre = txtNombre.Text
-        modUsuario.Apellido1 = txtApellidoUno.Text
-        modUsuario.Apellido2 = txtApellidoDos.Text
-        modUsuario.Correo = txtCorreoUsuario.Text
-        modUsuario.Estado = CInt(ddlEstadoUsuario.SelectedItem.Value)
-        modUsuario.Rol = CInt(ddlRoles.SelectedItem.Value)
+        modUsuario = objUsuarioDB.ConsultarUsuario_x_Username(nombreUsuario, errorMessage)
+        If modUsuario Is Nothing Then ' Si el resultado de la consulta es nulo, significa que no existe un usuario con ese nombre de usuario, por lo tanto se puede crear
+            modUsuario.NombreUsuario = txtUsuario.Text
+            modUsuario.Contrasenna = txtContrasenna.Text
+            modUsuario.Nombre = txtNombre.Text
+            modUsuario.Apellido1 = txtApellidoUno.Text
+            modUsuario.Apellido2 = txtApellidoDos.Text
+            modUsuario.Correo = txtCorreoUsuario.Text
+            modUsuario.Estado = CInt(ddlEstadoUsuario.SelectedItem.Value)
+            modUsuario.Rol = CInt(ddlRoles.SelectedItem.Value)
 
-        ' Antes de que cree un usuario debe validar que no exista, en caso de que exista:
-        ' Si el usuario NO está con estado eliminado - 6 - Revisar tabla estados, indicar que ya existe un usuario creado con ese nombre de usuario
-        ' Si el usuario SÍ está con estado eliminado - 6 - Indicar que ya existió un usuario con ese nombre de usuario y que no se puede crear otro con el mismo nombre de usuario /Por temas de trazabilidad de la información/ 
-        If objUsuarioDB.CrearUsuario(modUsuario, usuarioCreacion, errorMessage) Then
-            SwalUtils.ShowSwal(Me, "¡Usuario creado exitosamente!")
-            limpiarCampos()
+            If objUsuarioDB.CrearUsuario(modUsuario, usuarioCreacion, errorMessage) Then
+                SwalUtils.ShowSwal(Me, "¡Usuario creado exitosamente!")
+                limpiarCampos()
+            Else
+                SwalUtils.ShowSwalError(Me, errorMessage)
+            End If
         Else
-            SwalUtils.ShowSwalError(Me, errorMessage)
+            SwalUtils.ShowSwalError(Me, "Ya existe un usuario con ese nombre de usuario, por favor ingrese otro.")
         End If
     End Sub
 

@@ -18,19 +18,26 @@ Public Class MantenimientoProveedor
         Dim modProveedor As New Models.Proveedor
         Dim objProveedorDB As New ProveedorDB
         Dim errorMessage As String = "", usuarioCreacion As String = "andre"
+        Dim tipoIdentificacion As Integer = CInt(ddlTipoIdentificacion.SelectedItem.Value)
+        Dim numeroIdentificacion As String = txtIdentificacion.Text
 
-        modProveedor.TipoIdentificacion = CInt(ddlTipoIdentificacion.SelectedItem.Value)
-        modProveedor.NumeroIdentificacion = txtIdentificacion.Text
-        modProveedor.Nombre = txtNombre.Text
-        modProveedor.Correo = txtCorreo.Text
-        modProveedor.Estado = CInt(ddlEstado.SelectedItem.Value)
+        If objProveedorDB.BuscarProveedor_x_Identificacion(tipoIdentificacion, numeroIdentificacion, errorMessage) Is Nothing Then
+            modProveedor.TipoIdentificacion = CInt(ddlTipoIdentificacion.SelectedItem.Value)
+            modProveedor.NumeroIdentificacion = txtIdentificacion.Text
+            modProveedor.Nombre = txtNombre.Text
+            modProveedor.Correo = txtCorreo.Text
+            modProveedor.Estado = CInt(ddlEstado.SelectedItem.Value)
 
-        If objProveedorDB.CrearProveedor(modProveedor, usuarioCreacion, errorMessage) Then
-            SwalUtils.ShowSwal(Me, "¡Proveedor creado exitosamente!")
-            limpiarCampos()
+            If objProveedorDB.CrearProveedor(modProveedor, usuarioCreacion, errorMessage) Then
+                SwalUtils.ShowSwal(Me, "¡Proveedor creado exitosamente!")
+                limpiarCampos()
+            Else
+                SwalUtils.ShowSwalError(Me, errorMessage)
+            End If
         Else
-            SwalUtils.ShowSwalError(Me, errorMessage)
+            SwalUtils.ShowSwalError(Me, "Ya existe un proveedor con ese tipo y número de identificación.")
         End If
+
     End Sub
 
     Private Sub limpiarCampos()
