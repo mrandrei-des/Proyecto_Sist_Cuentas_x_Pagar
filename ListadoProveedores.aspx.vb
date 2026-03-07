@@ -19,6 +19,9 @@ Public Class ListadoProveedores
 
     Protected Sub btnLimpiarFiltros_Click(sender As Object, e As EventArgs)
         prcLimpiarFiltros()
+        ' Al limpiar los filtros, se vuelve a cargar el grid con todos los proveedores disponibles
+        gvProveedores.DataSourceID = "SqlDataSource1"
+        gvProveedores.DataBind()
     End Sub
 
     Protected Sub gvProveedores_RowCommand(sender As Object, e As GridViewCommandEventArgs)
@@ -70,7 +73,9 @@ Public Class ListadoProveedores
         End If
     End Sub
 
-
+    Protected Sub txtFiltNombre_TextChanged(sender As Object, e As EventArgs)
+        prcFiltrarProveedores()
+    End Sub
 
     '' FIN EVENTOS DE LA PÁGINA
 
@@ -163,42 +168,37 @@ Public Class ListadoProveedores
         End If
     End Sub
 
-    Private Sub ddlFiltEstado_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ddlFiltEstado.SelectedIndexChanged
+    Protected Sub ddlFiltEstado_SelectedIndexChanged(sender As Object, e As EventArgs)
+        prcFiltrarProveedores()
+    End Sub
 
+    Protected Sub ddlFiltTipoIdentificacion_SelectedIndexChanged(sender As Object, e As EventArgs)
+        prcFiltrarProveedores()
+    End Sub
+
+    Private Sub prcFiltrarProveedores()
         Dim objProveedorDB As New ProveedorDB
+        Dim objHerramientas As New Herramientas
         Dim errorMessage As String = ""
         Dim filtNombre As String = ""
         Dim filtTipoIdentificacion As Integer = 0, filtEstado As Integer = 0
         Dim dtResultados As DataTable
 
-        filtTipoIdentificacion = prcDevuelveParametroFiltro_int(ddlFiltTipoIdentificacion.SelectedValue)
-        filtNombre = prcDevuelveParametroFiltro_str(txtFiltNombre.Text)
-        filtEstado = prcDevuelveParametroFiltro_int(ddlFiltEstado.SelectedValue)
+        filtTipoIdentificacion = objHerramientas.prcDevuelveParametroFiltro_int(ddlFiltTipoIdentificacion.SelectedValue)
+        filtNombre = objHerramientas.prcDevuelveParametroFiltro_str(txtFiltNombre.Text)
+        filtEstado = objHerramientas.prcDevuelveParametroFiltro_int(ddlFiltEstado.SelectedValue)
 
         dtResultados = objProveedorDB.FiltrarProveedores(filtTipoIdentificacion, filtNombre, filtEstado, errorMessage)
         If dtResultados IsNot Nothing Then
+            gvProveedores.DataSourceID = ""
             gvProveedores.DataSource = dtResultados
             gvProveedores.DataBind()
         Else
-            SwalUtils.ShowSwalError(Me, errorMessage)
+            SwalUtils.ShowSwalMessage(Me, "Consulta", "No se encontraron coincidencias con los filtros utilizados.", "")
+            gvProveedores.DataSourceID = "SqlDataSource1"
+            gvProveedores.DataBind()
         End If
-
     End Sub
 
-    Private Function prcDevuelveParametroFiltro_int(valorFiltro As String) As Integer
-        If valorFiltro.IsNullOrWhiteSpace() Then
-            Return 0
-        Else
-            Return CInt(valorFiltro)
-        End If
-    End Function
-
-    Private Function prcDevuelveParametroFiltro_str(valorFiltro As String) As String
-        If valorFiltro.IsNullOrWhiteSpace() Then
-            Return ""
-        Else
-            Return valorFiltro
-        End If
-    End Function
     '' FIN DE FUNCIONES Y MÉTODOS DE LA PÁGINA
 End Class

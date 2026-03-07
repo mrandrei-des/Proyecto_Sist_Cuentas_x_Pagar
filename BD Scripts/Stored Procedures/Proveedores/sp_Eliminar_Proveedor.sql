@@ -11,7 +11,7 @@ BEGIN
 	/* HACE UNA ELIMINACIÓN LÓGICA DEL PROVEEDOR*/
 	BEGIN
 		UPDATE Proveedores
-		SET Estado = 6
+		SET Estado = 6, PermiteVer = 'N'
 		WHERE ID_Proveedor = @ID_Proveedor
 		-- Estado = 6 quiere decir eliminado. Cualquier duda revisar tabla Estados
 	END

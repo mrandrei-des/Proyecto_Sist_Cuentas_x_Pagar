@@ -304,6 +304,7 @@
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Utils\DbHealper.vb" />
+    <Compile Include="Utils\Herramientas.vb" />
     <Compile Include="Utils\SwalUtils.vb" />
     <Compile Include="ViewSwitcher.ascx.vb">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>

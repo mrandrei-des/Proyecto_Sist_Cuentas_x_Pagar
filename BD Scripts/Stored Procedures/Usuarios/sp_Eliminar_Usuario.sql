@@ -1,4 +1,3 @@
-
 -- PROCEDIMIENTO ALMACENADO CREACIÓN DE USUARIOS
 -- EXEC sp_Eliminar_Usuario '', ''
 CREATE PROC sp_Eliminar_Usuario
@@ -11,7 +10,7 @@ BEGIN
 	/* HACE UNA ELIMINACIÓN LÓGICA DEL USUARIO*/
 	BEGIN
 		UPDATE Usuarios
-		SET Estado = 6
+		SET Estado = 6, PermiteVer = 'N'
 		WHERE NombreUsuario = @UsuarioAfectado
 		-- Estado = 6 quiere decir eliminado. Cualquier duda revisar tabla Estados
 	END

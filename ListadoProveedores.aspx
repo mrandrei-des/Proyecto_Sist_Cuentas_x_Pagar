@@ -120,7 +120,7 @@
                                 <label class="filtro__label" for="ddlFiltTipoIdentificacion">
                                     Tipo Identificación:
                                 </label>
-                                <asp:DropDownList ID="ddlFiltTipoIdentificacion" runat="server" CssClass="filtro__input">
+                                <asp:DropDownList ID="ddlFiltTipoIdentificacion" runat="server" CssClass="filtro__input" AutoPostBack="true" OnSelectedIndexChanged="ddlFiltTipoIdentificacion_SelectedIndexChanged">
                                 </asp:DropDownList>
                             </div>
 
@@ -128,14 +128,14 @@
                                 <label class="filtro__label" for="txtFiltNombre">
                                     Nombre:
                                 </label>
-                                <asp:TextBox ID="txtFiltNombre" runat="server" CssClass="filtro__input" placeholder="Ingrese dato a buscar"></asp:TextBox>
+                                <asp:TextBox ID="txtFiltNombre" runat="server" CssClass="filtro__input" placeholder="Ingrese dato a buscar" AutoPostBack="true" OnTextChanged="txtFiltNombre_TextChanged"></asp:TextBox>
                             </div>
 
                             <div class="contenedor__filtro">
                                 <label class="filtro__label" for="ddlFiltEstado">
                                     Estado:
                                 </label>
-                                <asp:DropDownList ID="ddlFiltEstado" runat="server" CssClass="filtro__input">
+                                <asp:DropDownList ID="ddlFiltEstado" runat="server" CssClass="filtro__input" AutoPostBack="true" OnSelectedIndexChanged="ddlFiltEstado_SelectedIndexChanged">
                                 </asp:DropDownList>
                             </div>
 

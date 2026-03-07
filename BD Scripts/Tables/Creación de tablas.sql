@@ -69,6 +69,7 @@ Apellido2 varchar(30) null default '',
 CorreoElectronico varchar(30) not null,
 Estado int not null,
 FechaHoraCreacion datetime not null default GETDATE(),
+PermiteVer char(1) NOT NULL DEFAULT ('S')
 FOREIGN KEY (Estado) References Estados(ID_Estado)
 )
 
@@ -162,6 +163,7 @@ CorreoElectronico varchar(30) not null,
 Estado int not null,
 UsuarioCreacion varchar(25) not null,
 FechaCreacion datetime not null default GETDATE(),
+PermiteVer char(1) NOT NULL DEFAULT ('S')
 PRIMARY KEY (TipoIdentificacion, Identificacion),
 FOREIGN KEY (TipoIdentificacion) References TipoIdentificaciones(ID_Tipo),
 FOREIGN KEY (Estado) References Estados(ID_Estado),

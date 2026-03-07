@@ -19,6 +19,8 @@ Public Class WebForm1
 
     Protected Sub btnLimpiarFiltros_Click(sender As Object, e As EventArgs)
         prcLimpiarFiltros()
+        gvUsuarios.DataSourceID = "SqlDataSource2"
+        gvUsuarios.DataBind()
     End Sub
 
     Protected Sub gvUsuarios_RowCommand(sender As Object, e As GridViewCommandEventArgs)
@@ -63,6 +65,19 @@ Public Class WebForm1
             SwalUtils.ShowSwalError(Me, errorMessage)
         End If
     End Sub
+
+    Protected Sub txtFiltNombre_TextChanged(sender As Object, e As EventArgs)
+        prcFiltrarUsuarios()
+    End Sub
+
+    Protected Sub ddlFiltEstado_SelectedIndexChanged(sender As Object, e As EventArgs)
+        prcFiltrarUsuarios()
+    End Sub
+
+    Protected Sub ddlFiltRoles_SelectedIndexChanged(sender As Object, e As EventArgs)
+        prcFiltrarUsuarios()
+    End Sub
+
     '' FIN EVENTOS DE LA PÁGINA
 
     '' INICIO FUNCIONES Y MÉTODOS DE LA PÁGINA
@@ -161,6 +176,30 @@ Public Class WebForm1
             ddlFiltRoles.SelectedIndex = 0
         Else
             SwalUtils.ShowSwalError(Me, errorMessage)
+        End If
+    End Sub
+
+    Private Sub prcFiltrarUsuarios()
+        Dim objUsuarioDB As New UsuarioDB
+        Dim ObjHerramientas As New Herramientas
+        Dim errorMessage As String = ""
+        Dim filtNombre As String = ""
+        Dim filtRol As Integer = 0, filtEstado As Integer = 0
+        Dim dtResultados As DataTable
+
+        filtNombre = ObjHerramientas.prcDevuelveParametroFiltro_str(txtFiltNombre.Text)
+        filtEstado = ObjHerramientas.prcDevuelveParametroFiltro_int(ddlFiltEstado.SelectedValue)
+        filtRol = ObjHerramientas.prcDevuelveParametroFiltro_int(ddlFiltRoles.SelectedValue)
+
+        dtResultados = objUsuarioDB.FiltrarUsuarios(filtNombre, filtEstado, filtRol, errorMessage)
+        If dtResultados IsNot Nothing Then
+            gvUsuarios.DataSourceID = ""
+            gvUsuarios.DataSource = dtResultados
+            gvUsuarios.DataBind()
+        Else
+            SwalUtils.ShowSwalMessage(Me, "Consulta", "No se encontraron coincidencias con los filtros utilizados.", "")
+            gvUsuarios.DataSourceID = "SqlDataSource2"
+            gvUsuarios.DataBind()
         End If
     End Sub
 

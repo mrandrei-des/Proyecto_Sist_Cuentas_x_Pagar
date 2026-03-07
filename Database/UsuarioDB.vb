@@ -1,4 +1,5 @@
 ﻿Imports System.Data.SqlClient
+Imports Microsoft.Ajax.Utilities
 Imports Proyecto_Sist_Cuentas_x_Pagar.Utils
 
 Public Class UsuarioDB
@@ -96,6 +97,37 @@ Public Class UsuarioDB
                 .Rol = Convert.ToInt32(row("Rol"))
             }
             Return modUsuario
+        End If
+        Return Nothing
+    End Function
+
+    Public Function FiltrarUsuarios(filtNombre As String, filtEstado As Integer, filtRol As Integer, errorMessage As String) As DataTable
+        Dim query As String = "sp_Filtrar_Usuarios"
+
+        ' Se agregan los parámetros del procedimiento almacenado a una lista de SqlParameter
+        Dim parameters As New List(Of SqlParameter)
+
+        If filtRol = 0 Then
+            parameters.Add(New SqlParameter("@FiltRol", DBNull.Value))
+        Else
+            parameters.Add(New SqlParameter("@FiltRol", filtRol))
+        End If
+
+        If filtNombre.IsNullOrWhiteSpace() Then
+            parameters.Add(New SqlParameter("@FiltEnNombre", DBNull.Value))
+        Else
+            parameters.Add(New SqlParameter("@FiltEnNombre", filtNombre))
+        End If
+
+        If filtEstado = 0 Then
+            parameters.Add(New SqlParameter("@FiltEstado", DBNull.Value))
+        Else
+            parameters.Add(New SqlParameter("@FiltEstado", filtEstado))
+        End If
+
+        Dim dt As DataTable = db.ExecuteQuery(errorMessage, query, True, parameters)
+        If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
+            Return dt
         End If
         Return Nothing
     End Function
