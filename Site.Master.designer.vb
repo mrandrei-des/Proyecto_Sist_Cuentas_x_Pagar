@@ -41,6 +41,15 @@ Partial Public Class SiteMaster
     Protected WithEvents enlaceDocumentos As Global.System.Web.UI.HtmlControls.HtmlAnchor
 
     '''<summary>
+    '''Control enlaceRegistroDocumentos.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents enlaceRegistroDocumentos As Global.System.Web.UI.HtmlControls.HtmlAnchor
+
+    '''<summary>
     '''Control enlaceProveedores.
     '''</summary>
     '''<remarks>

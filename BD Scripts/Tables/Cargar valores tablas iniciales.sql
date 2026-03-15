@@ -11,11 +11,17 @@
 	INSERT INTO Estados (ID_Estado, Descripcion)
 	VALUES (1, 'Pendiente'), (2, 'Aplicado'), (3, 'Inactivo'), (4, 'Activo'), (5, 'Temporal'), (6, 'Eliminado')
 */
+
+/* CategoriaDocumentos:
+
+	INSERT INTO CategoriaDocumentos (Descripcion)
+	VALUES ('Facturas'), ('Documentos de Pago')
+*/
  
 /*	Tipo de Documentos:
 
-	INSERT INTO TipoDocumentos (Tipo_Documento, Descripcion)
-	VALUES ('FACR', 'Factura de Crédito'), ('FACO', 'Factura de Contado'), ('EFEC', 'Efectivo'), ('SINP', 'SinpeMovil'), ('TRAN', 'Transferencia'), ('CHEQ', 'Cheque')
+	INSERT INTO TipoDocumentos (Descripcion, IdCategoria)
+	VALUES ('Factura de Crédito', 1), ('Factura de Contado', 1), ('Efectivo', 2), ('SinpeMovil', 2), ('Transferencia', 2), ('Cheque', 2)
 */
 
 /*	Monedas:

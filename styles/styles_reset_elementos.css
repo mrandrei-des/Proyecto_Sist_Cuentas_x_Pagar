@@ -41,5 +41,9 @@ p {
     text-wrap: pretty;
 }
 
+label {
+    cursor: pointer;
+}
+
 /* ----- RESETEAR ELEMENTOS ----- */
 /* ----- FIN RESETEAR ELEMENTOS ----- */

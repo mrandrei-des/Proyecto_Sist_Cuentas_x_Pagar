@@ -14,20 +14,26 @@ ID_Estado int primary key,
 Descripcion varchar(50) not null
 )
 
+-- Categoria Documentos
+CREATE TABLE CategoriaDocumentos
+(
+ID_Categoria int identity(1,1) primary key,
+Descripcion varchar(30) NOT NULL
+)
+/*
+Facturas
+Documentos Pago
+*/
+
+
 -- Tipo Documentos
 CREATE TABLE TipoDocumentos
 (
-Tipo_Documento varchar(4) primary key,
-Descripcion varchar(50) not null
+ID_TipoDocumento int identity(1,1) primary key,
+Descripcion varchar(50) not null,
+ID_Categoria int NOT NULL
+FOREIGN KEY (ID_Categoria) References CategoriaDocumentos(ID_Categoria)
 )
-/*
-FACR
-FACO
-EFEC
-SINP
-TRAN
-CHEQ
-*/
 
 -- Monedas
 CREATE TABLE Monedas

@@ -69,11 +69,8 @@
                             </span>
                         </a>
                         <ul class="menu__submenu">
-                            <li class="submenu__item" id="registrarFacturas">
-                                <a href="Facturas" class="submenu__enlace">Registrar Factura</a>
-                            </li>
-                            <li class="submenu__item" id="registrarDocumentosPago">
-                                <a href="DocumentoPago" class="submenu__enlace">Registrar Documento Pago</a>
+                            <li class="submenu__item">
+                                <a href="CreacionDocumentos" class="submenu__enlace" id="enlaceRegistroDocumentos" runat="server">Registrar Documentos</a>
                             </li>
                             <li class="submenu__item" id="aplicarDocumentosPago">
                                 <a href="#" class="submenu__enlace">Aplicar Pago</a>

@@ -1,0 +1,8 @@
+-- CARGA LAS CATEGORÍAS DE LOS DOCUMENTOS. ESTO SE USA PARA LLENAR LOS SELECT/DROPDOWNLIST
+CREATE PROC sp_Cargar_Categoria_Documento_ddl
+AS
+BEGIN
+	SELECT ID_Categoria AS Valor, Descripcion as Texto 
+	FROM CategoriaDocumentos
+	ORDER BY VALOR ASC
+END
