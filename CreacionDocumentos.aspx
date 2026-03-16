@@ -24,7 +24,7 @@
                     <a href="#" class="enlace__accion--externa">
                         <span class="span__flotante__accion--externa">Listar</span>
                         <span class="contenedor__icono__accion--externa">
-                            <i class="fa-solid fa-file-invoice-dollar"></i>
+                            <i class="fa-solid fa-file-lines"></i>
                         </span>
                     </a>
                 </div>
@@ -122,7 +122,7 @@
                             </div>
 
                             <%-- Estado Documento --%>
-                            <div class="formulario__contenedor-input formulario__contenedor-input__toggle">
+<%--                            <div class="formulario__contenedor-input formulario__contenedor-input__toggle">
                                 <asp:Label ID="lblEstado" runat="server" Text="Estado Documento:" CssClass="formulario__label label__toggle">
                                     <span>Estado: </span>
                                     <div class="contenedor__toggleButton">
@@ -132,7 +132,7 @@
                                         </asp:LinkButton>
                                     </div>
                                 </asp:Label>
-                            </div>
+                            </div>--%>
 
                             <%-- Observacion Documento --%>
                             <div class="formulario__contenedor-input formulario__contenedor-input-sp2">
@@ -177,13 +177,31 @@
                     </div>
 
                     <footer class="formulario__contenedor formulario__footer">
-                        <asp:Button ID="btnGuardar" runat="server" Text="Guardar Documento" CssClass="boton boton__guardar" OnClick="btnGuardar_Click" />
-                        <asp:Button ID="btnAplicar" runat="server" Text="Aplicar Documento" CssClass="boton boton__modificar" OnClick="btnAplicar_Click" />
-                        <asp:LinkButton ID="btnCancelar" runat ="server" Text="Cancelar" CssClass="boton boton__refrescar" OnClick="btnCancelar_Click" CausesValidation="false"/>
+
+                        <asp:LinkButton ID="btnGuardar" runat ="server" Text="Guardar" CssClass="boton boton__guardar" OnClick="btnGuardar_Click">
+                            <span>Guardar</span>
+                            <span class="contenedor__icono">
+                               <i class="fa-solid fa-file-pen"></i>
+                            </span>  
+                        </asp:LinkButton>
+
+                        <asp:LinkButton ID="btnAplicar" runat ="server" Text="Cancelar" CssClass="boton boton__modificar" OnClick="btnAplicar_Click">
+                            <span>Aplicar</span>
+                            <span class="contenedor__icono">
+                               <i class="fa-solid fa-file-circle-check"></i>
+                            </span>  
+                        </asp:LinkButton>
+
+                        <asp:LinkButton ID="btnCancelar" runat ="server" CssClass="boton boton__refrescar" OnClick="btnCancelar_Click" CausesValidation="false">
+                            <span>Cancelar</span>
+                            <span class="contenedor__icono">
+                                <i class="fa-solid fa-eraser"></i>                               
+                            </span>  
+                        </asp:LinkButton>
                     </footer>
                 </div>
             </section>
         </main>
     </div>
-    <script src="Scripts/cxp_Scripts/toggleButton.js"></script>
+    <%--<script src="Scripts/cxp_Scripts/toggleButton.js"></script>--%>
 </asp:Content>

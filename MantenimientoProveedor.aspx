@@ -8,7 +8,7 @@
                     <span class="contenedor__icono--titulo">
                         <i class="fa-solid fa-building"></i>
                     </span>
-                    <span>Agregar Proveedor
+                    <span>Creación de Proveedores
                     </span>
                 </h1>
             </section>
@@ -22,7 +22,7 @@
                     <a href="ListadoProveedores" class="enlace__accion--externa">
                         <span class="span__flotante__accion--externa">Listar</span>
                         <span class="contenedor__icono__accion--externa">
-                            <i class="fa-solid fa-building-circle-check"></i>
+                            <i class="fa-solid fa-table-list"></i>
                         </span>
                     </a>
                 </div>
@@ -110,9 +110,13 @@
                     </div>
 
                     <footer class="formulario__contenedor formulario__footer">
-                        <asp:Button ID="btnGuardar" runat="server" Text="Guardar Proveedor" CssClass="boton boton__guardar" OnClick="btnGuardar_Click" />
+                        <asp:LinkButton ID="btnGuardar" runat ="server" CssClass="boton boton__guardar" OnClick="btnGuardar_Click">
+                            <span>Guardar</span>
+                            <span class="contenedor__icono">
+                               <i class="fa-solid fa-building-circle-check"></i>
+                            </span>  
+                        </asp:LinkButton>
                     </footer>
-
                 </div>
             </section>
         </main>

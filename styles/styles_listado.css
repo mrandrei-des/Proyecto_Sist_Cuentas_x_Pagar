@@ -76,48 +76,85 @@
 .contenedor__filtro {
     width: 100%;
     padding: 10px;
+    align-self: self-end;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.filtro__label {
-    font-size: 1em;
-    letter-spacing: 1px;
+    .contenedor__filtro.filtro--restablecer {
+/*        padding: 0 10px;*/
+    }
+
+    .filtro__label {
+        font-size: 1em;
+        letter-spacing: 1px;
+    }
+
+.filtro__contenedor__input {
+    margin-top: 5px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0 15px;
+    background-color: #fff;
+    color: #333;
+    border: none;
+    border-bottom: 4px solid var(--colorGrisClaro);
+    transition: border-bottom-color .25s, box-shadow .25s;
 }
+
+    .filtro__contenedor__input:hover {
+        box-shadow: 0 0 10px 0 #0002;
+    }
+
+    .filtro__contenedor__input:has(.filtro__input:focus) {
+        border-bottom-color: var(--colorLetraOscuroSecundario);
+    }
 
 .filtro__input {
     width: 100%;
     margin-top: 5px;
     padding: 7px 15px;
+    outline: none;
     border: none;
     border-bottom: 4px solid var(--colorGrisClaro);
-    color: #333;
-    outline: none;
     font-family: 'InterTight';
-    font-size: 1em;
+    font-size: .9rem;
     transition: border-bottom-color .25s, box-shadow .25s;
 }
 
-    .filtro__input:hover {
-        box-shadow: 0 0 10px 0 #0002;
-    }
-
-    .filtro__input:focus {
-        border-bottom-color: var(--colorLetraOscuroSecundario);
-    }
-
-.contenedor__accion--externa {
-    padding: 10px;
-    margin-right: 15px;
+.filtro__label + .filtro__input:hover {
+    box-shadow: 0 0 10px 0 #0002;
 }
+
+.filtro__label + .filtro__input:focus {
+    border-bottom-color: var(--colorLetraOscuroSecundario);
+}
+
+.filtro__contenedor__input .filtro__input:hover {
+    box-shadow: 0;
+}
+
+.filtro__contenedor__input :is(.filtro__input, .filtro__input:focus) {
+    border: none;
+    margin-top: 0;
+}
+
+.filtro__contenedor__input .filtro__input {
+    flex-grow: 1;
+}
+
+    .contenedor__accion--externa {
+        margin-right: 15px;
+    }
 
 .enlace__agregar--usuario {
     display: flex;
     flex-direction: column;
     align-items: center;
     color: var(--colorLetraOscuroSecundario);
-    padding: 5px 15px;
     background-color: var(--colorLetraOscuro);
     border-radius: 10px;
     position: relative;
@@ -141,11 +178,6 @@
 .contenedor__accion--externa:hover .span__flotante__accion--externa {
     top: -40px;
     opacity: 1;
-    transition-duration: .25s;
-}
-
-.contenedor__accion--externa:hover .enlace__accion--externa {
-    color: var(--colorLetraClaro);
     transition-duration: .25s;
 }
 

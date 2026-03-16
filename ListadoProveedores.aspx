@@ -16,7 +16,6 @@
             </div>
 
             <div class="modal__formulario">
-
                 <div class="formulario__contenedor">
                     <fieldset class="formulario__fieldset formulario__fieldset--gc1">
                         <legend>Datos del proveedor:</legend>
@@ -99,7 +98,7 @@
                     <a href="MantenimientoProveedor" class="enlace__accion--externa">
                         <span class="span__flotante__accion--externa">Agregar</span>
                         <span class="contenedor__icono__accion--externa">
-                            <i class="fa-solid fa-building"></i>
+                            <i class="fa-solid fa-circle-plus"></i>
                         </span>
                     </a>
                 </div>
@@ -116,19 +115,24 @@
                                 Filtrar por :
                             </legend>
 
-                                <div class="contenedor__filtro">
+                            <div class="contenedor__filtro">
+                                <label class="filtro__label" for="txtFiltNombre">
+                                    Nombre:
+                                </label>
+                                <div class="filtro__contenedor__input">
+                                    <span>
+                                        <i class="fa-solid fa-magnifying-glass"></i>
+                                    </span>
+                                    <asp:TextBox ID="txtFiltNombre" runat="server" CssClass="filtro__input" placeholder="Ingrese dato a buscar" AutoPostBack="true" OnTextChanged="txtFiltNombre_TextChanged"></asp:TextBox>
+                                </div>
+                            </div>
+
+                            <div class="contenedor__filtro">
                                 <label class="filtro__label" for="ddlFiltTipoIdentificacion">
                                     Tipo Identificación:
                                 </label>
                                 <asp:DropDownList ID="ddlFiltTipoIdentificacion" runat="server" CssClass="filtro__input" AutoPostBack="true" OnSelectedIndexChanged="ddlFiltTipoIdentificacion_SelectedIndexChanged">
                                 </asp:DropDownList>
-                            </div>
-
-                            <div class="contenedor__filtro">
-                                <label class="filtro__label" for="txtFiltNombre">
-                                    Nombre:
-                                </label>
-                                <asp:TextBox ID="txtFiltNombre" runat="server" CssClass="filtro__input" placeholder="Ingrese dato a buscar" AutoPostBack="true" OnTextChanged="txtFiltNombre_TextChanged"></asp:TextBox>
                             </div>
 
                             <div class="contenedor__filtro">
@@ -142,7 +146,7 @@
                             <div class="contenedor__filtro filtro--restablecer">
                                 <asp:LinkButton ID="btnLimpiarFiltros" CssClass="boton boton__refrescar boton--filtro" ToolTip="Restablecer Filtros" runat="server" OnClick="btnLimpiarFiltros_Click" CausesValidation="false">
                                      <span class="contenedor__icono">
-                                         <i class="fa-solid fa-arrows-rotate"></i>
+                                         <i class="fa-solid fa-filter-circle-xmark"></i>
                                      </span>
                                 </asp:LinkButton>
                             </div>

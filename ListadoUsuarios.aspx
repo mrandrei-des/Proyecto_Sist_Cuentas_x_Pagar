@@ -87,7 +87,7 @@
                         <!-- Rol del usuario -->
                         <div class="formulario__contenedor-input">
                             <asp:Label ID="lblRol" runat="server" Text="Rol del usuario:" CssClass="formulario__label">Rol en el sistema:
-                            <asp:DropDownList ID="ddlRoles" runat="server" CssClass="formulario__input">                                
+                            <asp:DropDownList ID="ddlRoles" runat="server" CssClass="formulario__input">
                             </asp:DropDownList>
                             </asp:Label>
                             <%-- Validación del rol del usuario --%>
@@ -115,7 +115,7 @@
             <section class="contenedor__section--titulo">
                 <h1 class="titulo">
                     <span class="contenedor__icono--titulo">
-                        <i class="fa-solid fa-users"></i>
+                        <i class="fa-solid fa-table-list"></i>
                     </span>
                     <span>Usuarios registrados
                     </span>
@@ -132,7 +132,7 @@
                     <a href="MantenimientoUsuario" class="enlace__accion--externa">
                         <span class="span__flotante__accion--externa">Agregar</span>
                         <span class="contenedor__icono__accion--externa">
-                            <i class="fa-solid fa-user-pen"></i>
+                            <i class="fa-solid fa-circle-plus"></i>
                         </span>
                     </a>
                 </div>
@@ -154,15 +154,12 @@
                                 <label class="filtro__label" for="txtFiltNombre">
                                     Nombre:
                                 </label>
-                                <asp:TextBox ID="txtFiltNombre" runat="server" CssClass="filtro__input" placeholder="Ingrese dato a buscar" AutoPostBack="true" OnTextChanged="txtFiltNombre_TextChanged"></asp:TextBox>
-                            </div>
-
-                            <div class="contenedor__filtro">
-                                <label class="filtro__label" for="ddlFiltEstado">
-                                    Estado:
-                                </label>
-                                <asp:DropDownList ID="ddlFiltEstado" runat="server" CssClass="filtro__input" AutoPostBack="true" OnSelectedIndexChanged="ddlFiltEstado_SelectedIndexChanged">
-                                </asp:DropDownList>
+                                <div class="filtro__contenedor__input">
+                                    <span>
+                                        <i class="fa-solid fa-magnifying-glass"></i>
+                                    </span>
+                                    <asp:TextBox ID="txtFiltNombre" runat="server" CssClass="filtro__input" placeholder="Ingrese dato a buscar" AutoPostBack="true" OnTextChanged="txtFiltNombre_TextChanged"></asp:TextBox>
+                                </div>
                             </div>
 
                             <div class="contenedor__filtro">
@@ -173,10 +170,18 @@
                                 </asp:DropDownList>
                             </div>
 
+                            <div class="contenedor__filtro">
+                                <label class="filtro__label" for="ddlFiltEstado">
+                                    Estado:
+                                </label>
+                                <asp:DropDownList ID="ddlFiltEstado" runat="server" CssClass="filtro__input" AutoPostBack="true" OnSelectedIndexChanged="ddlFiltEstado_SelectedIndexChanged">
+                                </asp:DropDownList>
+                            </div>
+
                             <div class="contenedor__filtro filtro--restablecer">
                                 <asp:LinkButton ID="btnLimpiarFiltros" CssClass="boton boton__refrescar boton--filtro" ToolTip="Restablecer Filtros" runat="server" OnClick="btnLimpiarFiltros_Click" CausesValidation="false">
                                 <span class="contenedor__icono">
-                                    <i class="fa-solid fa-arrows-rotate"></i>
+                                    <i class="fa-solid fa-filter-circle-xmark"></i>
                                 </span>
                                 </asp:LinkButton>
                             </div>

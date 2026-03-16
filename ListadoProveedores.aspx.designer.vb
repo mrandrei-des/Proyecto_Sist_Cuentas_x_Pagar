@@ -131,15 +131,6 @@ Partial Public Class ListadoProveedores
     Protected WithEvents btnCerrarModal As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
-    '''Control ddlFiltTipoIdentificacion.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents ddlFiltTipoIdentificacion As Global.System.Web.UI.WebControls.DropDownList
-
-    '''<summary>
     '''Control txtFiltNombre.
     '''</summary>
     '''<remarks>
@@ -147,6 +138,15 @@ Partial Public Class ListadoProveedores
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents txtFiltNombre As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control ddlFiltTipoIdentificacion.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents ddlFiltTipoIdentificacion As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
     '''Control ddlFiltEstado.

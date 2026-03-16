@@ -212,15 +212,6 @@ Partial Public Class WebForm1
     Protected WithEvents txtFiltNombre As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control ddlFiltEstado.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents ddlFiltEstado As Global.System.Web.UI.WebControls.DropDownList
-
-    '''<summary>
     '''Control ddlFiltRoles.
     '''</summary>
     '''<remarks>
@@ -228,6 +219,15 @@ Partial Public Class WebForm1
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents ddlFiltRoles As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''Control ddlFiltEstado.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents ddlFiltEstado As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
     '''Control btnLimpiarFiltros.

@@ -55,7 +55,7 @@
 .boton__modificar,
 .boton__modificar--accion {
     background-color: #faa307;
-    color: var(--colorFondoClaro);
+    color: var(--colorNegroLetra);
 }
 
     .boton__modificar:hover,

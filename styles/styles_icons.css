@@ -15,14 +15,27 @@
     }
 
 .contenedor__icono__accion--externa {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+/*    background-color: var(--colorLetraOscuro);*/
+    border-radius: 16px;
 }
 
     .contenedor__icono__accion--externa i {
-        font-size: 1.35rem;
+        font-size: 1.8rem;
+        scale: 1;
+        transition: scale .35s;
     }
 
-.contenedor__icono {
-}
+    .contenedor__icono__accion--externa:hover i {
+        scale: 1.2;
+        transition-duration: .35s;
+    }
+
+        .contenedor__icono {
+        }
 
     .contenedor__icono i {
         font-size: 1.2rem;

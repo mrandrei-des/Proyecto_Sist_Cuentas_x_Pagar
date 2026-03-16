@@ -16,15 +16,7 @@
     flex-direction: column;
     align-items: center;
     color: var(--colorLetraOscuroSecundario);
-    padding: 5px 15px;
-    background-color: var(--colorLetraOscuro);
-    border-radius: 15px;
     position: relative;
-}
-
-.contenedor__accion--externa:hover .enlace__accion--externa {
-    color: var(--colorLetraClaro);
-    transition-duration: .25s;
 }
 
 .enlace__accion--externa .span__flotante__accion--externa {

@@ -158,33 +158,6 @@ Partial Public Class CreacionDocumentos
     Protected WithEvents rfvFechaEmision As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
     '''<summary>
-    '''Control lblEstado.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents lblEstado As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''Control btnChkInput.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents btnChkInput As Global.System.Web.UI.WebControls.LinkButton
-
-    '''<summary>
-    '''Control chkInput.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents chkInput As Global.System.Web.UI.WebControls.CheckBox
-
-    '''<summary>
     '''Control lblObservacion.
     '''</summary>
     '''<remarks>
@@ -272,7 +245,7 @@ Partial Public Class CreacionDocumentos
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents btnGuardar As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents btnGuardar As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
     '''Control btnAplicar.
@@ -281,7 +254,7 @@ Partial Public Class CreacionDocumentos
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents btnAplicar As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents btnAplicar As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
     '''Control btnCancelar.

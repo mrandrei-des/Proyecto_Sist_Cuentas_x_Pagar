@@ -6,10 +6,10 @@
         <main class="page__main page__main--registro" runat="server" id="divMain">
             <section class="contenedor__section--titulo">
                 <h1 class="titulo">
-                    <span class="contenedor__icono--titulo">
-                        <i class="fa-solid fa-circle-user"></i>
+                    <span>Creación de Usuarios
                     </span>
-                    <span>Agregar Usuario
+                    <span class="contenedor__icono--titulo">
+                        <i class="fa-solid fa-user-plus"></i>
                     </span>
                 </h1>
             </section>
@@ -22,7 +22,7 @@
                     <a href="ListadoUsuarios" class="enlace__accion--externa" title="Ver usuarios registrados">
                         <span class="span__flotante__accion--externa">Listar</span>
                         <span class="contenedor__icono__accion--externa">
-                            <i class="fa-solid fa-users"></i>
+                            <i class="fa-solid fa-table-list"></i>
                         </span>
                     </a>
                 </div>
@@ -89,7 +89,7 @@
                             </div>
                             <!-- Segundo Apellido (Opcional)-->
                             <div class="formulario__contenedor-input">
-                                <asp:Label ID="lblApellidoDos" runat="server" Text="Segundo Apellido:" CssClass="formulario__label">Segundo Apellido: <span class="formulario__opcional" title="Opcional">(?)</span>
+                                <asp:Label ID="lblApellidoDos" runat="server" Text="Segundo Apellido:" CssClass="formulario__label">Segundo Apellido: <span class="formulario__opcional" title="Opcional"><i class="fa-solid fa-circle-info"></i></span>
                                     <asp:TextBox ID="txtApellidoDos" runat="server" CssClass="formulario__input" placeholder="Ingrese el segundo apellido"></asp:TextBox>
                                 </asp:Label>
                                 <div class="formulario__contenedor-mensajes">
@@ -144,9 +144,13 @@
                     </div>
 
                     <footer class="formulario__contenedor formulario__footer">
-                        <asp:Button ID="btnGuardar" runat="server" Text="Guardar Usuario" CssClass="boton boton__guardar" OnClick="btnGuardar_Click" />
+                        <asp:LinkButton ID="btnGuardar" runat ="server" CssClass="boton boton__guardar" OnClick="btnGuardar_Click">
+                            <span>Guardar</span>
+                            <span class="contenedor__icono">
+                               <i class="fa-solid fa-user-check"></i>
+                            </span>  
+                        </asp:LinkButton>
                     </footer>
-
                 </div>
             </section>
         </main>

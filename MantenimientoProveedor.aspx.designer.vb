@@ -164,5 +164,5 @@ Partial Public Class MantenimientoProveedor
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents btnGuardar As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents btnGuardar As Global.System.Web.UI.WebControls.LinkButton
 End Class

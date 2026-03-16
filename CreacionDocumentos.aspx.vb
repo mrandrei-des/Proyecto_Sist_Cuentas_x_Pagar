@@ -12,10 +12,6 @@ Public Class CreacionDocumentos
         End If
     End Sub
 
-    Protected Sub btnGuardar_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
     Private Sub prcLlena_ddls()
         prcLlena__ddlCategoria()
         Dim idCategoria As Integer = Convert.ToInt32(ddlCategoria.SelectedValue)
@@ -168,6 +164,10 @@ Public Class CreacionDocumentos
     End Sub
 
     Protected Sub btnAplicar_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Protected Sub btnGuardar_Click(sender As Object, e As EventArgs)
 
     End Sub
 End Class
