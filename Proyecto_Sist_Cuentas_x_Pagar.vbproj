@@ -228,6 +228,7 @@
     </Compile>
     <Compile Include="Database\CategoriaDocumentoDB.vb" />
     <Compile Include="Database\EstadoDB.vb" />
+    <Compile Include="Database\MonedaDB.vb" />
     <Compile Include="Database\ProveedorDB.vb" />
     <Compile Include="Database\RolDB.vb" />
     <Compile Include="Database\TipoDocumentoDB.vb" />
@@ -262,6 +263,7 @@
     <Compile Include="Models\DocumentoPago.vb" />
     <Compile Include="Models\Estado.vb" />
     <Compile Include="Models\Factura.vb" />
+    <Compile Include="Models\Moneda.vb" />
     <Compile Include="Models\Proveedor.vb" />
     <Compile Include="Models\Rol.vb" />
     <Compile Include="Models\TipoDocumento.vb" />

@@ -135,4 +135,32 @@ Public Class ProveedorDB
         End If
         Return Nothing
     End Function
+
+    Public Function FiltrarProveedores_Nombre(filtNombre As String, ByRef errorMessage As String) As List(Of Models.Proveedor)
+        Dim query As String = "sp_Filtrar_Proveedores_Nombre_ddl"
+
+        ' Se agregan los parámetros del procedimiento almacenado a una lista de SqlParameter
+        Dim parameters As New List(Of SqlParameter)
+
+        If filtNombre.IsNullOrWhiteSpace() Then
+            parameters.Add(New SqlParameter("@FiltEnNombre", DBNull.Value))
+        Else
+            parameters.Add(New SqlParameter("@FiltEnNombre", filtNombre))
+        End If
+
+        Dim dt As DataTable = db.ExecuteQuery(errorMessage, query, True, parameters)
+        If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
+            Dim listaProveedores As New List(Of Models.Proveedor)()
+            For x As Integer = 0 To dt.Rows.Count - 1
+                Dim proveedor As New Models.Proveedor() With {
+                    .NumeroProveedor = Convert.ToInt32(dt.Rows(x)("idProveedor").ToString()),
+                    .Nombre = dt.Rows(x)("Nombre").ToString()
+                }
+                listaProveedores.Add(proveedor)
+            Next
+            Return listaProveedores
+        End If
+        Return Nothing
+    End Function
+
 End Class

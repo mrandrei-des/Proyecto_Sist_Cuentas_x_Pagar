@@ -60,6 +60,12 @@ Public Class Usuario
         Dim errorMessage As String = ""
 
         listEstados = objEstadoDB.ConsultarEstados(errorMessage)
+
+        If listEstados Is Nothing Then
+            SwalUtils.ShowSwalError(Me, errorMessage)
+            Return
+        End If
+
         If listEstados.Count > 0 Then
             ddlEstadoUsuario.Items.Clear()
             ddlEstadoUsuario.Items.Add(New ListItem("Seleccione una opción", ""))
@@ -80,6 +86,12 @@ Public Class Usuario
         Dim errorMessage As String = ""
 
         listRoles = objRolDB.ConsultarRoles(errorMessage)
+
+        If listRoles Is Nothing Then
+            SwalUtils.ShowSwalError(Me, errorMessage)
+            Return
+        End If
+
         If listRoles.Count > 0 Then
             ddlRoles.Items.Clear()
             ddlRoles.Items.Add(New ListItem("Seleccione una opción", ""))

@@ -258,6 +258,10 @@
 }
 
 .formulario__footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
     padding-top: 15px;
     text-align: center;
 }

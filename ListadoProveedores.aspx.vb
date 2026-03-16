@@ -154,6 +154,12 @@ Public Class ListadoProveedores
         Dim errorMessage As String = ""
 
         listTipoIdentificaciones = objTipoIdentificacionBD.ConsultarTipoIdentificaciones(errorMessage)
+
+        If listTipoIdentificaciones Is Nothing Then
+            SwalUtils.ShowSwalError(Me, errorMessage)
+            Return
+        End If
+
         If listTipoIdentificaciones.Count > 0 Then
             ddlFiltTipoIdentificacion.Items.Clear()
             ddlFiltTipoIdentificacion.Items.Add(New ListItem("Seleccione una opción", ""))
@@ -189,6 +195,7 @@ Public Class ListadoProveedores
         filtEstado = objHerramientas.prcDevuelveParametroFiltro_int(ddlFiltEstado.SelectedValue)
 
         dtResultados = objProveedorDB.FiltrarProveedores(filtTipoIdentificacion, filtNombre, filtEstado, errorMessage)
+
         If dtResultados IsNot Nothing Then
             gvProveedores.DataSourceID = ""
             gvProveedores.DataSource = dtResultados

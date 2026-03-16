@@ -55,15 +55,15 @@
                             <%-- Buscar Proveedor --%>
                             <div class="formulario__contenedor-input">
                                 <asp:Label ID="lblFiltProveedor" runat="server" Text="Buscar Nombre:" CssClass="formulario__label">
-                                    <asp:TextBox ID="txtFiltProveedor" runat="server" CssClass="formulario__input" placeholder="Los Patitos SA"></asp:TextBox>
+                                    <asp:TextBox ID="txtFiltProveedor" runat="server" CssClass="formulario__input" placeholder="Los Patitos SA" OnTextChanged="txtFiltProveedor_TextChanged" AutoPostBack="true"></asp:TextBox>
                                 </asp:Label>
                             </div>
 
                             <%-- Proveedor --%>
                             <div class="formulario__contenedor-input">
                                 <asp:Label ID="lblProveedor" runat="server" Text="Proveedor:" CssClass="formulario__label">Proveedor:
-                                <asp:DropDownList ID="ddlProveedor" runat="server" CssClass="formulario__input" required="true">
-                                </asp:DropDownList>
+                                    <asp:DropDownList ID="ddlProveedor" runat="server" CssClass="formulario__input" required="true">
+                                    </asp:DropDownList>
                                 </asp:Label>
                                 <%-- Validación del tipo de identificación --%>
                                 <div class="formulario__contenedor-mensajes">
@@ -81,10 +81,11 @@
 
                             <%-- Tipo Documento --%>
                             <div class="formulario__contenedor-input">
-                                <asp:Label ID="lblTipoDocumento" runat="server" Text="Tipo Documento:" CssClass="formulario__label">Tipo Documento:
-                                    <asp:DropDownList ID="ddlTipoDocumento" runat="server" CssClass="formulario__input" required="true">
-                                    </asp:DropDownList>
+                                <asp:Label ID="lblTipoDocumento" runat="server" Text="Tipo Documento:" CssClass="formulario__label" AssociatedControlID="ddlTipoDocumento">Tipo Documento:
                                 </asp:Label>
+                                <asp:DropDownList ID="ddlTipoDocumento" runat="server" CssClass="formulario__input" required="true">
+                                </asp:DropDownList>
+
                                 <%-- Validación del tipo de documento --%>
                                 <div class="formulario__contenedor-mensajes">
                                     <p class="formulario__mensaje">
@@ -95,9 +96,9 @@
 
                             <%-- Número Documento --%>
                             <div class="formulario__contenedor-input">
-                                <asp:Label ID="lblNumeroDocumento" runat="server" Text="Número Documento:" CssClass="formulario__label">
-                                    <asp:TextBox ID="txtNumDocumento" runat="server" CssClass="formulario__input" placeholder="17056312" required="true"></asp:TextBox>
+                                <asp:Label ID="lblNumeroDocumento" runat="server" Text="Número Documento:" CssClass="formulario__label" AssociatedControlID="txtNumDocumento">
                                 </asp:Label>
+                                <asp:TextBox ID="txtNumDocumento" runat="server" CssClass="formulario__input" placeholder="17056312" required="true"></asp:TextBox>
 
                                 <%-- Validación Número Documento --%>
                                 <div class="formulario__contenedor-mensajes">
@@ -109,9 +110,9 @@
 
                             <%-- Fecha Documento --%>
                             <div class="formulario__contenedor-input">
-                                <asp:Label ID="lblFechaEmision" runat="server" Text="Fecha Emisión:" CssClass="formulario__label">
-                                    <asp:TextBox ID="txtFechaEmision" runat="server" CssClass="formulario__input" TextMode="Date" required="true"></asp:TextBox>
+                                <asp:Label ID="lblFechaEmision" runat="server" Text="Fecha de Emisión:" CssClass="formulario__label" AssociatedControlID="txtFechaEmision">
                                 </asp:Label>
+                                <asp:TextBox ID="txtFechaEmision" runat="server" CssClass="formulario__input" TextMode="Date" required="true"></asp:TextBox>
                                 <%-- Validación Fecha Documento --%>
                                 <div class="formulario__contenedor-mensajes">
                                     <p class="formulario__mensaje">
@@ -163,8 +164,8 @@
                             <%-- Monto Documento --%>
                             <div class="formulario__contenedor-input">
                                 <asp:Label ID="lblMonto" runat="server" Text="Monto Total:" CssClass="formulario__label">
-                                    <asp:TextBox ID="txtMontoTotal" runat="server" CssClass="formulario__input" required="true"></asp:TextBox>
                                 </asp:Label>
+                                <asp:TextBox ID="txtMontoTotal" runat="server" CssClass="formulario__input" required="true" placeholder="50000"></asp:TextBox>
                                 <%-- Validación Monto Documento --%>
                                 <div class="formulario__contenedor-mensajes">
                                     <p class="formulario__mensaje">
@@ -172,12 +173,13 @@
                                     </p>
                                 </div>
                             </div>
-
                         </fieldset>
                     </div>
 
                     <footer class="formulario__contenedor formulario__footer">
                         <asp:Button ID="btnGuardar" runat="server" Text="Guardar Documento" CssClass="boton boton__guardar" OnClick="btnGuardar_Click" />
+                        <asp:Button ID="btnAplicar" runat="server" Text="Aplicar Documento" CssClass="boton boton__modificar" OnClick="btnAplicar_Click" />
+                        <asp:LinkButton ID="btnCancelar" runat ="server" Text="Cancelar" CssClass="boton boton__refrescar" OnClick="btnCancelar_Click" CausesValidation="false"/>
                     </footer>
                 </div>
             </section>

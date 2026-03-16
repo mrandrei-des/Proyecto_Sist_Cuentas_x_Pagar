@@ -56,6 +56,12 @@ Public Class MantenimientoProveedor
         Dim errorMessage As String = ""
 
         listEstados = objEstadoDB.ConsultarEstados(errorMessage)
+
+        If listEstados Is Nothing Then
+            SwalUtils.ShowSwalError(Me, errorMessage)
+            Return
+        End If
+
         If listEstados.Count > 0 Then
             ddlEstado.Items.Clear()
             ddlEstado.Items.Add(New ListItem("Seleccione una opción", ""))
@@ -76,6 +82,12 @@ Public Class MantenimientoProveedor
         Dim errorMessage As String = ""
 
         listTipoIdentificaciones = objTipoIdentificacionBD.ConsultarTipoIdentificaciones(errorMessage)
+
+        If listTipoIdentificaciones Is Nothing Then
+            SwalUtils.ShowSwalError(Me, errorMessage)
+            Return
+        End If
+
         If listTipoIdentificaciones.Count > 0 Then
             ddlTipoIdentificacion.Items.Clear()
             ddlTipoIdentificacion.Items.Add(New ListItem("Seleccione una opción", ""))

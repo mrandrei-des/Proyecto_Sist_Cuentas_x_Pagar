@@ -135,6 +135,12 @@ Public Class WebForm1
         Dim errorMessage As String = ""
 
         listEstados = objEstadoDB.ConsultarEstados(errorMessage)
+
+        If listEstados Is Nothing Then
+            SwalUtils.ShowSwalError(Me, errorMessage)
+            Return
+        End If
+
         If listEstados.Count > 0 Then
             ddlEstadoUsuario.Items.Clear()
             ddlFiltEstado.Items.Clear()
@@ -160,6 +166,12 @@ Public Class WebForm1
         Dim errorMessage As String = ""
 
         listRoles = objRolDB.ConsultarRoles(errorMessage)
+
+        If listRoles Is Nothing Then
+            SwalUtils.ShowSwalError(Me, errorMessage)
+            Return
+        End If
+
         If listRoles.Count > 0 Then
             ddlRoles.Items.Clear()
             ddlFiltRoles.Items.Clear()
