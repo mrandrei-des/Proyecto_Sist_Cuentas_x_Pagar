@@ -27,7 +27,7 @@ Public Class Usuario
             Return
         End If
 
-        If modUsuario Is New Models.Usuario Then ' Si el resultado de la consulta vuelve vacío, significa que no existe un usuario con ese nombre de usuario, por lo tanto se puede crear
+        If modUsuario.NombreUsuario Is Nothing Then ' Si el resultado de la consulta vuelve vacío, significa que no existe un usuario con ese nombre de usuario, por lo tanto se puede crear
             modUsuario = New Models.Usuario
             modUsuario.NombreUsuario = txtUsuario.Text
             modUsuario.Contrasenna = txtContrasenna.Text

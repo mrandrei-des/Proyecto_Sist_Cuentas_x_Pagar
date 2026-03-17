@@ -90,7 +90,7 @@ Public Class FacturaDB
                     .FechaEmision = Convert.ToDateTime(row("FechaEmision"))
                     .Estado = Convert.ToInt32(row("Estado"))
                     .Moneda = row("Moneda").ToString()
-                    .TipoCambio = Convert.ToDouble(row("Moneda").ToString())
+                    .TipoCambio = Convert.ToDouble(row("TipoCambio").ToString())
                     .Total = Convert.ToDouble(row("Total").ToString())
                     .SaldoActual = Convert.ToDouble(row("SaldoActual").ToString())
                 End With

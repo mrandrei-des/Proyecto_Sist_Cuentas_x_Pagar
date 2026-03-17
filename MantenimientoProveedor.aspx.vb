@@ -88,7 +88,7 @@ Public Class MantenimientoProveedor
             Return
         End If
 
-        If modProveedor Is New Models.Proveedor Then
+        If modProveedor.NumeroIdentificacion Is Nothing Then
             modProveedor = New Models.Proveedor With {
                 .TipoIdentificacion = CInt(ddlTipoIdentificacion.SelectedItem.Value),
                 .NumeroIdentificacion = txtIdentificacion.Text,

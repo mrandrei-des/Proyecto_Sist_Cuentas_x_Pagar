@@ -104,7 +104,7 @@ Public Class ListadoProveedores
             Return
         End If
 
-        If modProveedor IsNot New Models.Proveedor Then
+        If modProveedor.NumeroIdentificacion IsNot Nothing Then
             Dim proveedor As String = "" & modProveedor.NumeroIdentificacion & " - " & modProveedor.Nombre
             txtNombre.Text = modProveedor.Nombre
             txtCorreo.Text = modProveedor.Correo

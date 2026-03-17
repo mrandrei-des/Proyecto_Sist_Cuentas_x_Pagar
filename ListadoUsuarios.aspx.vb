@@ -94,7 +94,7 @@ Public Class WebForm1
             Return
         End If
 
-        If modUsuario IsNot New Models.Usuario Then
+        If modUsuario.NombreUsuario IsNot Nothing Then
             txtNombre.Text = modUsuario.Nombre
             txtApellidoUno.Text = modUsuario.Apellido1
             txtApellidoDos.Text = modUsuario.Apellido2

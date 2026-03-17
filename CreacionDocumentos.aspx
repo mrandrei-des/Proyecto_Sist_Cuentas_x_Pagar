@@ -28,7 +28,6 @@
                         </span>
                     </a>
                 </div>
-
             </section>
 
             <section class="contenedor__section--formulario">
@@ -93,12 +92,11 @@
                                     </p>
                                 </div>
                             </div>
-
                             <%-- Número Documento --%>
                             <div class="formulario__contenedor-input">
                                 <asp:Label ID="lblNumeroDocumento" runat="server" Text="Número Documento:" CssClass="formulario__label" AssociatedControlID="txtNumDocumento">
                                 </asp:Label>
-                                <asp:TextBox ID="txtNumDocumento" runat="server" CssClass="formulario__input" placeholder="17056312" required="true"></asp:TextBox>
+                                <asp:TextBox ID="txtNumDocumento" runat="server" CssClass="formulario__input" placeholder="17056312" required="true" OnTextChanged="txtNumDocumento_TextChanged" AutoPostBack="true"></asp:TextBox>
 
                                 <%-- Validación Número Documento --%>
                                 <div class="formulario__contenedor-mensajes">

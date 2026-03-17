@@ -1,4 +1,5 @@
-﻿Imports Proyecto_Sist_Cuentas_x_Pagar.Utils
+﻿Imports Microsoft.Ajax.Utilities
+Imports Proyecto_Sist_Cuentas_x_Pagar.Utils
 
 Public Class CreacionDocumentos
     Inherits System.Web.UI.Page
@@ -60,7 +61,7 @@ Public Class CreacionDocumentos
             ddlProveedor.Items.Clear()
 
             For Each modProveedor As Models.Proveedor In listProveedores
-                ddlProveedor.Items.Add(New ListItem(modProveedor.Nombre.ToString(), modProveedor.NumeroProveedor))
+                ddlProveedor.Items.Add(New ListItem($"{modProveedor.NumeroProveedor} - {modProveedor.Nombre.ToString()}", modProveedor.NumeroProveedor))
             Next
 
             ddlProveedor.SelectedIndex = 0
@@ -155,6 +156,60 @@ Public Class CreacionDocumentos
         'btnChkInput.CssClass = "contenedor__btnCircle"
     End Sub
 
+    Private Function ExisteDocumento(ByRef errorMessage) As Boolean
+
+        If ddlCategoria.SelectedValue.IsNullOrWhiteSpace() Or ddlTipoDocumento.SelectedValue.IsNullOrWhiteSpace() Or ddlProveedor.SelectedValue.IsNullOrWhiteSpace() Or txtNumDocumento.Text.IsNullOrWhiteSpace() Then
+            Return False
+        End If
+
+        Dim categoriaDocumento As Integer = Convert.ToInt32(ddlCategoria.SelectedValue)
+        Dim tipoDocumento As Integer = Convert.ToInt32(ddlTipoDocumento.SelectedValue)
+        Dim idProveedor As Integer = Convert.ToInt32(ddlProveedor.SelectedValue)
+        Dim numeroDocumento As String = txtNumDocumento.Text
+
+        If categoriaDocumento = 1 Then ' Revisa si existe la factura
+            Dim modFactura As New Models.Factura
+            Dim objFactura As New FacturaDB
+
+            With modFactura
+                .IdProveedor = idProveedor
+                .TipoFactura = tipoDocumento
+                .NumeroFactura = numeroDocumento
+            End With
+
+            modFactura = objFactura.ConsultarExistenciaFactura(modFactura, errorMessage)
+
+            If modFactura Is Nothing Then
+                Return True ' No se pudo completar el proceso
+            End If
+
+            If modFactura.NumeroFactura Is Nothing Then
+                Return False ' No existe la factura
+            Else
+                Return True ' Sí existe la factura
+            End If
+        Else ' Revisa si existe el documento de pago
+            Return True
+        End If
+    End Function
+
+    Private Function ContinuarProcesoGuardado() As Boolean
+        Dim errorMessage As String = ""
+        Dim respuestaExistencia = ExisteDocumento(errorMessage)
+
+        If respuestaExistencia And errorMessage <> "" Then
+            SwalUtils.ShowSwalError(Me, errorMessage)
+            Return False
+        End If
+
+        If respuestaExistencia Then
+            SwalUtils.ShowSwalMessage(Me, "Consulta", "Ya existe una factura de este tipo para el proveedor.", "warning")
+            Return False
+        End If
+
+        Return True
+    End Function
+
     Protected Sub btnCancelar_Click(sender As Object, e As EventArgs)
         prcLimpiarCampos()
     End Sub
@@ -165,5 +220,46 @@ Public Class CreacionDocumentos
 
     Protected Sub btnGuardar_Click(sender As Object, e As EventArgs)
         'Lo que hace es hacer un insert con el estato pendiente
+        If Not ContinuarProcesoGuardado() Then
+            Return
+        End If
+
+        Dim categoriaDocumento As Integer = Convert.ToInt32(ddlCategoria.SelectedValue)
+        Dim usuarioInserta As String = "andre", errorMessage As String = ""
+
+        If categoriaDocumento = 1 Then ' Se está guardando una factura
+            Dim modFactura As New Models.Factura
+            Dim objFactura As New FacturaDB
+
+            With modFactura
+                .IdProveedor = Convert.ToInt32(ddlProveedor.SelectedValue)
+                .TipoFactura = Convert.ToInt32(ddlTipoDocumento.SelectedValue)
+                .NumeroFactura = txtNumDocumento.Text.Trim()
+                .Observacion = txtAreaObservacion.Value.ToString().Trim()
+                .FechaEmision = txtFechaEmision.Text
+                .Estado = 1
+                .Moneda = ddlMoneda.SelectedValue.ToString()
+                .TipoCambio = 500
+                .Total = Convert.ToDouble(txtMontoTotal.Text)
+                .SaldoActual = Convert.ToDouble(txtMontoTotal.Text)
+            End With
+
+            If objFactura.CrearFactura(modFactura, usuarioInserta, errorMessage) Then
+                SwalUtils.ShowSwal(Me, "¡Factura guardada exitosamente!", "El documento está listo para ser aplicado.")
+                ' Ocultar el botón de guardar y habilitar el de modificar
+
+            Else ' Se está guardando un documento de pago
+                SwalUtils.ShowSwalError(Me, "Atención", $"No se logró guardar la factura. {errorMessage}")
+            End If
+        End If
+
+    End Sub
+
+    Protected Sub txtNumDocumento_TextChanged(sender As Object, e As EventArgs)
+
+        'If ExisteDocumento() Then
+        '    ' Tomar el modelo del documento y valorar el estado, para ver si puede modificarlo, aplicarlo o si está eliminado
+        '    SwalUtils.ShowSwalError(Me, "Ya existe una factura de este tipo para el proveedor.")
+        'End If
     End Sub
 End Class
