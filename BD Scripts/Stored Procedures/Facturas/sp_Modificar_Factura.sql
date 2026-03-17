@@ -97,7 +97,7 @@ BEGIN
 				-- INSERTAR UN REGISTRO DE BITÁCORA DEL UPDATE A LA FACTURA SI REALMENTE SE HIZO ALGÚN CAMBIO
 				-- ID_Accion = 2 es modificado. Cualquier duda revisar tabla TipoAcciones
 				SET @DescripcionAccion = SUBSTRING(@DescripcionAccion, 1, (LEN(@DescripcionAccion) - 1))
-				EXECUTE sp_Inserta_Registro_Bitacora_Cambio_Facturas 1, @ID_Proveedor, @TipoFactura, @NumeroFactura,  'La factura ha sido registrado en el sistema.', @UsuarioModifico
+				EXECUTE sp_Inserta_Registro_Bitacora_Cambio_Facturas 2, @ID_Proveedor, @TipoFactura, @NumeroFactura,  @DescripcionAccion, @UsuarioModifico
 			END
 	END
 END

@@ -22,7 +22,8 @@
     }
 
 .boton__guardar,
-.boton__modificar {
+.boton__modificar,
+.boton__aplicar {
 /*    width: 100%;*/
     padding: 10px 15px;
 }
@@ -68,11 +69,20 @@
     width: auto;
 }
 
-.boton__refrescar {
-    background-color: var(--colorSecundario);
-    padding: 10px 15px;
-    color: var(--colorPrincipal);
+.boton__aplicar {
+    background-color: var(--colorLetraOscuro);
+    color: var(--colorLetraOscuroSecundario);
 }
+
+    .boton__aplicar:hover {
+        outline-color: var(--colorLetraOscuro);
+    }
+
+    .boton__refrescar {
+        background-color: var(--colorSecundario);
+        padding: 10px 15px;
+        color: var(--colorPrincipal);
+    }
 
     .boton__refrescar:hover {
         background-color: #88d6c0;
@@ -81,4 +91,8 @@
 
 .boton--filtro {
     color: var(--colorPrincipal);
+}
+
+.boton__ocultar {
+    display: none;
 }

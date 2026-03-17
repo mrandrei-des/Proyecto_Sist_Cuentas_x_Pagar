@@ -176,22 +176,29 @@
 
                     <footer class="formulario__contenedor formulario__footer">
 
-                        <asp:LinkButton ID="btnGuardar" runat ="server" Text="Guardar" CssClass="boton boton__guardar" OnClick="btnGuardar_Click">
+                        <asp:LinkButton ID="btnGuardar" runat ="server" Text="Guardar" CssClass="boton boton__guardar" OnClick="btnGuardar_Click" ToolTip="Guardar Borrador de Documento">
                             <span>Guardar</span>
+                            <span class="contenedor__icono">
+                               <i class="fa-solid fa-floppy-disk"></i>
+                            </span>  
+                        </asp:LinkButton>
+
+                        <asp:LinkButton ID="btnModificar" runat ="server" Text="Modificar" CssClass="boton boton__modificar" OnClick="btnModificar_Click" ToolTip="Modificar Documento">
+                            <span>Modificar</span>
                             <span class="contenedor__icono">
                                <i class="fa-solid fa-file-pen"></i>
                             </span>  
                         </asp:LinkButton>
 
-                        <asp:LinkButton ID="btnAplicar" runat ="server" Text="Cancelar" CssClass="boton boton__modificar" OnClick="btnAplicar_Click">
+                        <asp:LinkButton ID="btnAplicar" runat ="server" Text="Cancelar" CssClass="boton boton__aplicar" OnClick="btnAplicar_Click" ToolTip="Aplicar Documento">
                             <span>Aplicar</span>
                             <span class="contenedor__icono">
                                <i class="fa-solid fa-file-circle-check"></i>
                             </span>  
                         </asp:LinkButton>
 
-                        <asp:LinkButton ID="btnCancelar" runat ="server" CssClass="boton boton__refrescar" OnClick="btnCancelar_Click" CausesValidation="false">
-                            <span>Cancelar</span>
+                        <asp:LinkButton ID="btnCancelar" runat ="server" CssClass="boton boton__refrescar" OnClick="btnCancelar_Click" CausesValidation="false" ToolTip="Limpiar campos">
+                            <span>Limpiar</span>
                             <span class="contenedor__icono">
                                 <i class="fa-solid fa-eraser"></i>                               
                             </span>  

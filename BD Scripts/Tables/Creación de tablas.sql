@@ -235,10 +235,10 @@ FOREIGN KEY (UsuarioRealizoAccion) REFERENCES Usuarios (NombreUsuario)
 )
 
 -- Documentos Formas de Pago
-CREATE TABLE DocumentosFormasPago
+CREATE TABLE Documentos_Formas_Pago
 (
 ID_Proveedor int not null,
-TipoDocumento varchar(4) not null,
+TipoDocumento int not null,
 NumeroDocumento varchar(10) not null,
 Observacion varchar(100) not null,
 FechaEmision date not null,
@@ -251,10 +251,27 @@ UsuarioCreacion varchar(25) not null,
 FechaCreacion datetime not null default GETDATE(),
 PRIMARY KEY (ID_Proveedor, TipoDocumento, NumeroDocumento),
 FOREIGN KEY (ID_Proveedor) References Proveedores(ID_Proveedor),
-FOREIGN KEY (TipoDocumento) References TipoDocumentos(Tipo_Documento),
+FOREIGN KEY (TipoDocumento) References TipoDocumentos(ID_TipoDocumento),
 FOREIGN KEY (Estado) References Estados(ID_Estado),
 FOREIGN KEY (Moneda) References Monedas(CodigoMoneda),
 FOREIGN KEY (UsuarioCreacion) References Usuarios(NombreUsuario)
+)
+
+-- BITÁCORA DE Documentos_Formas_Pago
+CREATE TABLE Bitacora_Cambios_Documentos_Formas_Pago
+(
+ID_Cambio int identity(1,1) PRIMARY KEY,
+ID_Accion int not null,
+ID_Proveedor int not null,
+TipoDocumento int not null,
+NumeroDocumento varchar(10) not null,
+DescripcionAccion varchar(150) not null,
+UsuarioRealizoAccion varchar(25) not null,
+FechaHoraAccion datetime not null default GETDATE(),
+FOREIGN KEY (ID_Accion) REFERENCES TipoAcciones (ID_Accion),
+FOREIGN KEY (ID_Proveedor) REFERENCES Proveedores (ID_Proveedor),
+FOREIGN KEY (ID_Proveedor, TipoDocumento, NumeroDocumento) REFERENCES Documentos_Formas_Pago (ID_Proveedor, TipoDocumento, NumeroDocumento),
+FOREIGN KEY (UsuarioRealizoAccion) REFERENCES Usuarios (NombreUsuario)
 )
 
 -- Documentos Formas de Pago
