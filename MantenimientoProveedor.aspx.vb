@@ -81,7 +81,7 @@ Public Class MantenimientoProveedor
         Dim tipoIdentificacion As Integer = CInt(ddlTipoIdentificacion.SelectedItem.Value)
         Dim numeroIdentificacion As String = txtIdentificacion.Text
 
-        modProveedor = objProveedorDB.BuscarProveedor_x_Identificacion(tipoIdentificacion, numeroIdentificacion, errorMessage)
+        modProveedor = objProveedorDB.ConsultarExistenciaProveedor(tipoIdentificacion, numeroIdentificacion, errorMessage)
 
         If modProveedor Is Nothing Then
             SwalUtils.ShowSwalError(Me, errorMessage)

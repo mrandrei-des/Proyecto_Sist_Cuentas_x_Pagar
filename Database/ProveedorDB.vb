@@ -24,7 +24,7 @@ Public Class ProveedorDB
         End Try
     End Function
 
-    'Función que tiene el query para eliminar un usuario
+    'Función que tiene el query para eliminar un proveedor
     Public Function EliminarProveedor(idProveedorAfectado As Integer, usuarioElimino As String, ByRef errorMessage As String) As Boolean
         Try
             Dim query As String = "sp_Eliminar_Proveedor"
@@ -55,9 +55,9 @@ Public Class ProveedorDB
     End Function
 
     ' Cargar el proveedor indicado según el id que se le pase a la función
-    Public Function ConsultarProveedor_x_ID(ByVal idProveedor As Integer, errorMessage As String) As Models.Proveedor
+    Public Function BuscarProveedor_x_ID(ByVal idProveedor As Integer, errorMessage As String) As Models.Proveedor
         Try
-            Dim query As String = "sp_Consultar_Proveedor"
+            Dim query As String = "sp_Buscar_Proveedor"
             Dim parameters As New List(Of SqlParameter) From {
                  New SqlParameter("@ID_Proveedor", idProveedor)
             }
@@ -86,11 +86,9 @@ Public Class ProveedorDB
     End Function
 
     ' Busca al proveedor que coincida con el tipo y número de identificación que se le pase a la función
-    Public Function BuscarProveedor_x_Identificacion(tipoIdentificacion As Integer, numeroIdentificacion As String, ByRef errorMessage As String) As Models.Proveedor
+    Public Function ConsultarExistenciaProveedor(tipoIdentificacion As Integer, numeroIdentificacion As String, ByRef errorMessage As String) As Models.Proveedor
         Try
-            Dim query As String = "sp_Buscar_Proveedor"
-
-            ' Se agregan los parámetros del procedimiento almacenado a una lista de SqlParameter
+            Dim query As String = "sp_Consultar_Existencia_Proveedor"
             Dim parameters As New List(Of SqlParameter) From {
                  New SqlParameter("@TipoIdentificacion", tipoIdentificacion),
                  New SqlParameter("@NumeroIdentificacion", numeroIdentificacion)

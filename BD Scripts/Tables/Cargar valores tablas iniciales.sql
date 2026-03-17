@@ -9,7 +9,7 @@
 /*	Estados:
 
 	INSERT INTO Estados (ID_Estado, Descripcion)
-	VALUES (1, 'Pendiente'), (2, 'Aplicado'), (3, 'Inactivo'), (4, 'Activo'), (5, 'Temporal'), (6, 'Eliminado')
+	VALUES (1, 'Pendiente'), (2, 'Aplicado'), (3, 'Inactivo'), (4, 'Activo'), (5, 'Temporal'), (6, 'Eliminado'), (7, 'Cancelado')
 */
 
 /* CategoriaDocumentos:

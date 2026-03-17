@@ -160,10 +160,10 @@ Public Class CreacionDocumentos
     End Sub
 
     Protected Sub btnAplicar_Click(sender As Object, e As EventArgs)
-
+        'Lo que hace es hacer un update a los datos y al final cambia el estado de la factura para que aparezca para ser cancelada
     End Sub
 
     Protected Sub btnGuardar_Click(sender As Object, e As EventArgs)
-
+        'Lo que hace es hacer un insert con el estato pendiente
     End Sub
 End Class

@@ -97,7 +97,7 @@ Public Class ListadoProveedores
         Dim modProveedor As Models.Proveedor
         Dim errorMessage As String = ""
 
-        modProveedor = objProveedorBD.ConsultarProveedor_x_ID(idProveedorAfectado, errorMessage)
+        modProveedor = objProveedorBD.BuscarProveedor_x_ID(idProveedorAfectado, errorMessage)
 
         If modProveedor Is Nothing Then
             SwalUtils.ShowSwalError(Me, errorMessage)

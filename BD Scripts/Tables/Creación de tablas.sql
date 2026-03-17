@@ -175,6 +175,8 @@ FOREIGN KEY (TipoIdentificacion) References TipoIdentificaciones(ID_Tipo),
 FOREIGN KEY (Estado) References Estados(ID_Estado),
 FOREIGN KEY (UsuarioCreacion) References Usuarios(NombreUsuario)
 )
+CREATE UNIQUE INDEX UX_ID_Proveedor ON Proveedores(ID_Proveedor);
+
 
 -- BITÁCORA DE PROVEEDORES
 CREATE TABLE Bitacora_Cambios_Proveedores
@@ -193,10 +195,10 @@ FOREIGN KEY (UsuarioRealizoAccion) REFERENCES Usuarios (NombreUsuario)
 )
 
 -- Facturas
-CREATE DROP TABLE Facturas
+CREATE TABLE Facturas
 (
 ID_Proveedor int not null,
-TipoFactura varchar(4) not null,
+TipoFactura int not null,
 NumeroFactura varchar(10) not null,
 Observacion varchar(100) not null,
 FechaEmision date not null,
@@ -208,16 +210,32 @@ SaldoActual float not null,
 UsuarioCreacion varchar(25) not null,
 FechaCreacion datetime not null default GETDATE(),
 PRIMARY KEY (ID_Proveedor, TipoFactura, NumeroFactura),
-
 FOREIGN KEY (ID_Proveedor) References Proveedores(ID_Proveedor),
-FOREIGN KEY (TipoFactura) References TipoDocumentos(Tipo_Documento),
+FOREIGN KEY (TipoFactura) References TipoDocumentos(ID_TipoDocumento),
 FOREIGN KEY (Estado) References Estados(ID_Estado),
 FOREIGN KEY (Moneda) References Monedas(CodigoMoneda),
 FOREIGN KEY (UsuarioCreacion) References Usuarios(NombreUsuario)
 )
 
+-- BITÁCORA DE FACTURAS
+CREATE TABLE Bitacora_Cambios_Facturas
+(
+ID_Cambio int identity(1,1) PRIMARY KEY,
+ID_Accion int not null,
+ID_Proveedor int not null,
+TipoFactura int not null,
+NumeroFactura varchar(10) not null,
+DescripcionAccion varchar(150) not null,
+UsuarioRealizoAccion varchar(25) not null,
+FechaHoraAccion datetime not null default GETDATE(),
+FOREIGN KEY (ID_Accion) REFERENCES TipoAcciones (ID_Accion),
+FOREIGN KEY (ID_Proveedor) REFERENCES Proveedores (ID_Proveedor),
+FOREIGN KEY (ID_Proveedor, TipoFactura, NumeroFactura) REFERENCES Facturas (ID_Proveedor, TipoFactura, NumeroFactura),
+FOREIGN KEY (UsuarioRealizoAccion) REFERENCES Usuarios (NombreUsuario)
+)
+
 -- Documentos Formas de Pago
-CREATE DROP TABLE DocumentosFormasPago
+CREATE TABLE DocumentosFormasPago
 (
 ID_Proveedor int not null,
 TipoDocumento varchar(4) not null,

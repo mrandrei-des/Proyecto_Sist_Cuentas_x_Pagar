@@ -228,6 +228,7 @@
     </Compile>
     <Compile Include="Database\CategoriaDocumentoDB.vb" />
     <Compile Include="Database\EstadoDB.vb" />
+    <Compile Include="Database\FacturaDB.vb" />
     <Compile Include="Database\MonedaDB.vb" />
     <Compile Include="Database\ProveedorDB.vb" />
     <Compile Include="Database\RolDB.vb" />
