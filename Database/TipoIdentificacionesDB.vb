@@ -6,10 +6,13 @@ Public Class TipoIdentificacionesDB
         Try
             Dim query As String = "sp_Cargar_TipoIdentificaciones_ddl"
             Dim dt As DataTable = db.ExecuteQuery(errorMessage, query, True)
+            Dim listaTipoIdentificaciones As New List(Of Models.TipoIdentificaciones)()
+
+            If dt Is Nothing AndAlso errorMessage <> "" Then
+                Return Nothing
+            End If
 
             If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
-                Dim listaTipoIdentificaciones As New List(Of Models.TipoIdentificaciones)()
-
                 For x As Integer = 0 To dt.Rows.Count - 1
                     Dim tipoIdentificacion As New Models.TipoIdentificaciones() With {
                         .IdTipo = Convert.ToInt32(dt.Rows(x)("Valor").ToString()),
@@ -17,10 +20,8 @@ Public Class TipoIdentificacionesDB
                     }
                     listaTipoIdentificaciones.Add(tipoIdentificacion)
                 Next
-
-                Return listaTipoIdentificaciones
             End If
-            Return Nothing
+            Return listaTipoIdentificaciones
         Catch ex As Exception
             Return Nothing
         End Try

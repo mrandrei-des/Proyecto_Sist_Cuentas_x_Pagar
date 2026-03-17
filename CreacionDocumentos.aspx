@@ -109,7 +109,7 @@
                             </div>
 
                             <%-- Fecha Documento --%>
-                            <div class="formulario__contenedor-input">
+                            <div class="formulario__contenedor-input formulario__contenedor-input-sp2">
                                 <asp:Label ID="lblFechaEmision" runat="server" Text="Fecha de Emisión:" CssClass="formulario__label" AssociatedControlID="txtFechaEmision">
                                 </asp:Label>
                                 <asp:TextBox ID="txtFechaEmision" runat="server" CssClass="formulario__input" TextMode="Date" required="true"></asp:TextBox>

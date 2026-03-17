@@ -9,21 +9,16 @@ Public Class ProveedorDB
     'Función que tiene el query para agregar un proveedor nuevo
     Public Function CrearProveedor(ByVal objProveedor As Models.Proveedor, ByVal usuarioInserta As String, ByRef errorMessage As String) As Boolean
         Try
-            Using db.GetConnection()
-                Dim query As String = "sp_Inserta_Proveedor_Nuevo"
-
-                Dim parameters As New List(Of SqlParameter) From {
-                    New SqlParameter("@Nombre", objProveedor.Nombre),
-                    New SqlParameter("@TipoIdentificacion", objProveedor.TipoIdentificacion),
-                    New SqlParameter("@Identificacion", objProveedor.NumeroIdentificacion),
-                    New SqlParameter("@CorreoElectronico", objProveedor.Correo),
-                    New SqlParameter("@Estado", objProveedor.Estado),
-                    New SqlParameter("@UsuarioCreacion", usuarioInserta)
-                }
-
-                Return db.ExecuteNonQuery(query, parameters, errorMessage)
-            End Using
-            Return True
+            Dim query As String = "sp_Inserta_Proveedor_Nuevo"
+            Dim parameters As New List(Of SqlParameter) From {
+                New SqlParameter("@Nombre", objProveedor.Nombre),
+                New SqlParameter("@TipoIdentificacion", objProveedor.TipoIdentificacion),
+                New SqlParameter("@Identificacion", objProveedor.NumeroIdentificacion),
+                New SqlParameter("@CorreoElectronico", objProveedor.Correo),
+                New SqlParameter("@Estado", objProveedor.Estado),
+                New SqlParameter("@UsuarioCreacion", usuarioInserta)
+            }
+            Return db.ExecuteNonQuery(query, parameters, errorMessage)
         Catch ex As Exception
             Return False
         End Try
@@ -33,12 +28,10 @@ Public Class ProveedorDB
     Public Function EliminarProveedor(idProveedorAfectado As Integer, usuarioElimino As String, ByRef errorMessage As String) As Boolean
         Try
             Dim query As String = "sp_Eliminar_Proveedor"
-
             Dim parameters As New List(Of SqlParameter) From {
                 New SqlParameter("@ID_Proveedor", idProveedorAfectado),
                 New SqlParameter("@UsuarioElimino", usuarioElimino)
             }
-
             Return db.ExecuteNonQuery(query, parameters, errorMessage)
         Catch ex As Exception
             Return False
@@ -47,20 +40,15 @@ Public Class ProveedorDB
 
     Public Function ModificarProveedor(ByVal objProveedor As Models.Proveedor, ByVal usuarioModifico As String, ByRef errorMessage As String) As Boolean
         Try
-            Using db.GetConnection()
-                Dim query As String = "sp_Modificar_Proveedor"
-
-                Dim parameters As New List(Of SqlParameter) From {
-                    New SqlParameter("@ID_ProveedorAfectado", objProveedor.NumeroProveedor),
-                    New SqlParameter("@Nombre", objProveedor.Nombre),
-                    New SqlParameter("@CorreoElectronico", objProveedor.Correo),
-                    New SqlParameter("@Estado", objProveedor.Estado),
-                    New SqlParameter("@UsuarioModifico", usuarioModifico)
-                }
-
-                Return db.ExecuteNonQuery(query, parameters, errorMessage)
-            End Using
-            Return True
+            Dim query As String = "sp_Modificar_Proveedor"
+            Dim parameters As New List(Of SqlParameter) From {
+                New SqlParameter("@ID_ProveedorAfectado", objProveedor.NumeroProveedor),
+                New SqlParameter("@Nombre", objProveedor.Nombre),
+                New SqlParameter("@CorreoElectronico", objProveedor.Correo),
+                New SqlParameter("@Estado", objProveedor.Estado),
+                New SqlParameter("@UsuarioModifico", usuarioModifico)
+            }
+            Return db.ExecuteNonQuery(query, parameters, errorMessage)
         Catch ex As Exception
             Return False
         End Try
@@ -70,33 +58,35 @@ Public Class ProveedorDB
     Public Function ConsultarProveedor_x_ID(ByVal idProveedor As Integer, errorMessage As String) As Models.Proveedor
         Try
             Dim query As String = "sp_Consultar_Proveedor"
-
-            ' Se agregan los parámetros del procedimiento almacenado a una lista de SqlParameter
             Dim parameters As New List(Of SqlParameter) From {
                  New SqlParameter("@ID_Proveedor", idProveedor)
             }
-
+            Dim modProveedor As New Models.Proveedor
             Dim dt As DataTable = db.ExecuteQuery(errorMessage, query, True, parameters)
+
+            If dt Is Nothing AndAlso errorMessage <> "" Then
+                Return Nothing
+            End If
+
             If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
                 Dim row As DataRow = dt.Rows(0)
-                Dim modProveedor As New Models.Proveedor With {
-                    .NumeroProveedor = Convert.ToInt32(row("ID_Proveedor")),
-                    .Nombre = row("Nombre").ToString(),
-                    .TipoIdentificacion = Convert.ToInt32(row("TipoIdentificacion")),
-                    .NumeroIdentificacion = row("Identificacion").ToString(),
-                    .Correo = row("CorreoElectronico").ToString(),
+                With modProveedor
+                    .NumeroProveedor = Convert.ToInt32(row("ID_Proveedor"))
+                    .Nombre = row("Nombre").ToString()
+                    .TipoIdentificacion = Convert.ToInt32(row("TipoIdentificacion"))
+                    .NumeroIdentificacion = row("Identificacion").ToString()
+                    .Correo = row("CorreoElectronico").ToString()
                     .Estado = Convert.ToInt32(row("Estado"))
-                }
-                Return modProveedor
+                End With
             End If
-            Return Nothing
+            Return modProveedor
         Catch ex As Exception
             Return Nothing
         End Try
     End Function
 
     ' Busca al proveedor que coincida con el tipo y número de identificación que se le pase a la función
-    Public Function BuscarProveedor_x_Identificacion(tipoIdentificacion As Integer, numeroIdentificacion As String, errorMessage As String) As Models.Proveedor
+    Public Function BuscarProveedor_x_Identificacion(tipoIdentificacion As Integer, numeroIdentificacion As String, ByRef errorMessage As String) As Models.Proveedor
         Try
             Dim query As String = "sp_Buscar_Proveedor"
 
@@ -105,27 +95,31 @@ Public Class ProveedorDB
                  New SqlParameter("@TipoIdentificacion", tipoIdentificacion),
                  New SqlParameter("@NumeroIdentificacion", numeroIdentificacion)
             }
-
+            Dim modProveedor As New Models.Proveedor
             Dim dt As DataTable = db.ExecuteQuery(errorMessage, query, True, parameters)
+
+            If dt Is Nothing AndAlso errorMessage <> "" Then
+                Return Nothing
+            End If
+
             If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
                 Dim row As DataRow = dt.Rows(0)
-                Dim modProveedor As New Models.Proveedor With {
-                    .NumeroProveedor = Convert.ToInt32(row("ID_Proveedor")),
-                    .Nombre = row("Nombre").ToString(),
-                    .TipoIdentificacion = Convert.ToInt32(row("TipoIdentificacion")),
-                    .NumeroIdentificacion = row("Identificacion").ToString(),
-                    .Correo = row("CorreoElectronico").ToString(),
+                With modProveedor
+                    .NumeroProveedor = Convert.ToInt32(row("ID_Proveedor"))
+                    .Nombre = row("Nombre").ToString()
+                    .TipoIdentificacion = Convert.ToInt32(row("TipoIdentificacion"))
+                    .NumeroIdentificacion = row("Identificacion").ToString()
+                    .Correo = row("CorreoElectronico").ToString()
                     .Estado = Convert.ToInt32(row("Estado"))
-                }
-                Return modProveedor
+                End With
             End If
-            Return Nothing
+            Return modProveedor
         Catch ex As Exception
             Return Nothing
         End Try
     End Function
 
-    Public Function FiltrarProveedores(filtTipoIdentificacion As Integer, filtNombre As String, filtEstado As Integer, errorMessage As String) As DataTable
+    Public Function FiltrarProveedores(filtTipoIdentificacion As Integer, filtNombre As String, filtEstado As Integer, ByRef errorMessage As String) As DataTable
         Try
             Dim query As String = "sp_Filtrar_Proveedores"
 
@@ -151,10 +145,16 @@ Public Class ProveedorDB
             End If
 
             Dim dt As DataTable = db.ExecuteQuery(errorMessage, query, True, parameters)
+
+            If dt Is Nothing AndAlso errorMessage <> "" Then
+                Return Nothing
+            End If
+
             If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
                 Return dt
             End If
-            Return Nothing
+
+            Return New DataTable
         Catch ex As Exception
             Return Nothing
         End Try
@@ -174,8 +174,13 @@ Public Class ProveedorDB
             End If
 
             Dim dt As DataTable = db.ExecuteQuery(errorMessage, query, True, parameters)
+            Dim listaProveedores As New List(Of Models.Proveedor)()
+
+            If dt Is Nothing AndAlso errorMessage <> "" Then
+                Return Nothing
+            End If
+
             If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
-                Dim listaProveedores As New List(Of Models.Proveedor)()
                 For x As Integer = 0 To dt.Rows.Count - 1
                     Dim proveedor As New Models.Proveedor() With {
                     .NumeroProveedor = Convert.ToInt32(dt.Rows(x)("idProveedor").ToString()),
@@ -183,9 +188,8 @@ Public Class ProveedorDB
                 }
                     listaProveedores.Add(proveedor)
                 Next
-                Return listaProveedores
             End If
-            Return Nothing
+            Return listaProveedores
         Catch ex As Exception
             Return Nothing
         End Try

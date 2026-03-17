@@ -41,7 +41,7 @@ Public Class CreacionDocumentos
 
             ddlCategoria.SelectedIndex = 0
         Else
-            SwalUtils.ShowSwalError(Me, errorMessage)
+            SwalUtils.ShowSwalError(Me, "No se han encontrado Categorías de Documentos en el sistema. Revise la configuración correspondiente.")
         End If
     End Sub
 
@@ -59,15 +59,13 @@ Public Class CreacionDocumentos
         If listProveedores.Count > 0 Then
             ddlProveedor.Items.Clear()
 
-            ddlProveedor.Items.Add(New ListItem("Seleccione una opción", ""))
-
             For Each modProveedor As Models.Proveedor In listProveedores
                 ddlProveedor.Items.Add(New ListItem(modProveedor.Nombre.ToString(), modProveedor.NumeroProveedor))
             Next
 
             ddlProveedor.SelectedIndex = 0
         Else
-            SwalUtils.ShowSwalMessage(Me, "Consulta", "No se encontraron coincidencias con los filtros utilizados.", "")
+            SwalUtils.ShowSwalMessage(Me, "Consulta", "No se encontraron proveedores con los filtros utilizados.", "")
         End If
     End Sub
 
@@ -94,7 +92,7 @@ Public Class CreacionDocumentos
 
             ddlTipoDocumento.SelectedIndex = 0
         Else
-            SwalUtils.ShowSwalError(Me, errorMessage)
+            SwalUtils.ShowSwalError(Me, "No se encontraron tipos de documento en el sistema. Revise la configuración correspondiente.")
         End If
 
     End Sub
@@ -122,7 +120,7 @@ Public Class CreacionDocumentos
 
             ddlMoneda.SelectedIndex = 0
         Else
-            SwalUtils.ShowSwalError(Me, errorMessage)
+            SwalUtils.ShowSwalError(Me, "No se encontraron monedas en el sistema. Revise la configuración correspondiente.")
         End If
     End Sub
 
@@ -151,12 +149,10 @@ Public Class CreacionDocumentos
         txtFiltProveedor.Text = ""
         txtNumDocumento.Text = ""
         txtFechaEmision.Text = ""
-
-        chkInput.Checked = False
         txtAreaObservacion.InnerText = ""
         txtMontoTotal.Text = ""
 
-        btnChkInput.CssClass = "contenedor__btnCircle"
+        'btnChkInput.CssClass = "contenedor__btnCircle"
     End Sub
 
     Protected Sub btnCancelar_Click(sender As Object, e As EventArgs)

@@ -88,7 +88,13 @@ Public Class WebForm1
         Dim errorMessage As String = ""
 
         modUsuario = objUsuarioDB.ConsultarUsuario_x_Username(nombreUsuarioAfectado, errorMessage)
-        If modUsuario IsNot Nothing Then
+
+        If modUsuario Is Nothing Then
+            SwalUtils.ShowSwalError(Me, errorMessage)
+            Return
+        End If
+
+        If modUsuario IsNot New Models.Usuario Then
             txtNombre.Text = modUsuario.Nombre
             txtApellidoUno.Text = modUsuario.Apellido1
             txtApellidoDos.Text = modUsuario.Apellido2
@@ -98,7 +104,7 @@ Public Class WebForm1
             pSubtituloModal.InnerHtml = "Usuario: <span>" + nombreUsuarioAfectado + "<span>"
             modalModify.Style.Add("display", "flex")
         Else
-            SwalUtils.ShowSwalError(Me, errorMessage)
+            SwalUtils.ShowSwalError(Me, "No se encontró información del usuario en el sistema.")
         End If
     End Sub
 
@@ -156,7 +162,7 @@ Public Class WebForm1
             ddlEstadoUsuario.SelectedIndex = 0
             ddlFiltEstado.SelectedIndex = 0
         Else
-            SwalUtils.ShowSwalError(Me, errorMessage)
+            SwalUtils.ShowSwalError(Me, "No se encontraron estados en el sistema. Revise la configuración correspondiente.")
         End If
     End Sub
 
@@ -187,7 +193,7 @@ Public Class WebForm1
             ddlRoles.SelectedIndex = 0
             ddlFiltRoles.SelectedIndex = 0
         Else
-            SwalUtils.ShowSwalError(Me, errorMessage)
+            SwalUtils.ShowSwalError(Me, "No se encontraron roles en el sistema. Revise la configuración correspondiente.")
         End If
     End Sub
 
@@ -204,7 +210,13 @@ Public Class WebForm1
         filtRol = ObjHerramientas.prcDevuelveParametroFiltro_int(ddlFiltRoles.SelectedValue)
 
         dtResultados = objUsuarioDB.FiltrarUsuarios(filtNombre, filtEstado, filtRol, errorMessage)
-        If dtResultados IsNot Nothing Then
+
+        If dtResultados Is Nothing Then
+            SwalUtils.ShowSwalError(Me, errorMessage)
+            Return
+        End If
+
+        If dtResultados.Rows.Count > 0 Then
             gvUsuarios.DataSourceID = ""
             gvUsuarios.DataSource = dtResultados
             gvUsuarios.DataBind()

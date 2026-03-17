@@ -98,7 +98,13 @@ Public Class ListadoProveedores
         Dim errorMessage As String = ""
 
         modProveedor = objProveedorBD.ConsultarProveedor_x_ID(idProveedorAfectado, errorMessage)
-        If modProveedor IsNot Nothing Then
+
+        If modProveedor Is Nothing Then
+            SwalUtils.ShowSwalError(Me, errorMessage)
+            Return
+        End If
+
+        If modProveedor IsNot New Models.Proveedor Then
             Dim proveedor As String = "" & modProveedor.NumeroIdentificacion & " - " & modProveedor.Nombre
             txtNombre.Text = modProveedor.Nombre
             txtCorreo.Text = modProveedor.Correo
@@ -107,7 +113,7 @@ Public Class ListadoProveedores
             pSubtituloModal.InnerHtml = "Proveedor: <span>" + proveedor + "<span>"
             modalModify.Style.Add("display", "flex")
         Else
-            SwalUtils.ShowSwalError(Me, errorMessage)
+            SwalUtils.ShowSwalMessage(Me, "Consulta", "No se encontró información del proveedor seleccionado.", "")
         End If
     End Sub
 
@@ -129,6 +135,12 @@ Public Class ListadoProveedores
         Dim errorMessage As String = ""
 
         listEstados = objEstadoDB.ConsultarEstados(errorMessage)
+
+        If listEstados Is Nothing Then
+            SwalUtils.ShowSwalError(Me, errorMessage)
+            Return
+        End If
+
         If listEstados.Count > 0 Then
             ddlEstado.Items.Clear()
             ddlFiltEstado.Items.Clear()
@@ -144,7 +156,7 @@ Public Class ListadoProveedores
             ddlEstado.SelectedIndex = 0
             ddlFiltEstado.SelectedIndex = 0
         Else
-            SwalUtils.ShowSwalError(Me, errorMessage)
+            SwalUtils.ShowSwalError(Me, "No se encontraron estados en el sistema. Revise la configuración correspondiente.")
         End If
     End Sub
 
@@ -170,7 +182,7 @@ Public Class ListadoProveedores
 
             ddlFiltTipoIdentificacion.SelectedIndex = 0
         Else
-            SwalUtils.ShowSwalError(Me, errorMessage)
+            SwalUtils.ShowSwalError(Me, "No se encontraron tipos de identificación en el sistema. Revise la configuración correspondiente.")
         End If
     End Sub
 
@@ -196,7 +208,12 @@ Public Class ListadoProveedores
 
         dtResultados = objProveedorDB.FiltrarProveedores(filtTipoIdentificacion, filtNombre, filtEstado, errorMessage)
 
-        If dtResultados IsNot Nothing Then
+        If dtResultados Is Nothing Then
+            SwalUtils.ShowSwalError(Me, errorMessage)
+            Return
+        End If
+
+        If dtResultados.Rows.Count > 0 Then
             gvProveedores.DataSourceID = ""
             gvProveedores.DataSource = dtResultados
             gvProveedores.DataBind()

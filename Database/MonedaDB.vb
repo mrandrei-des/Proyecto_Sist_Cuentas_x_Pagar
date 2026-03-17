@@ -7,8 +7,12 @@ Public Class MonedaDB
             Dim query As String = "sp_Carga_Monedas_ddl"
             Dim dt As DataTable = db.ExecuteQuery(errorMessage, query, True)
 
+            If dt Is Nothing AndAlso errorMessage <> "" Then
+                Return Nothing
+            End If
+
+            Dim listaMonedas As New List(Of Models.Moneda)()
             If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
-                Dim listaMonedas As New List(Of Models.Moneda)()
 
                 For x As Integer = 0 To dt.Rows.Count - 1
                     Dim moneda As New Models.Moneda() With {
@@ -18,10 +22,8 @@ Public Class MonedaDB
                     }
                     listaMonedas.Add(moneda)
                 Next
-
-                Return listaMonedas
             End If
-            Return Nothing
+            Return listaMonedas
         Catch ex As Exception
             Return Nothing
         End Try

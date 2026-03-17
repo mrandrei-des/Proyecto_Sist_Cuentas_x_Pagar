@@ -8,8 +8,12 @@ Public Class EstadoDB
             Dim query As String = "sp_Cargar_Estados_Usuarios_Proveedores_ddl"
             Dim dt As DataTable = db.ExecuteQuery(errorMessage, query, True)
 
+            If dt Is Nothing AndAlso errorMessage <> "" Then
+                Return Nothing
+            End If
+
+            Dim listaEstados As New List(Of Models.Estado)()
             If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
-                Dim listaEstados As New List(Of Models.Estado)()
 
                 For x As Integer = 0 To dt.Rows.Count - 1
                     Dim estado As New Models.Estado() With {
@@ -18,10 +22,8 @@ Public Class EstadoDB
                     }
                     listaEstados.Add(estado)
                 Next
-
-                Return listaEstados
             End If
-            Return Nothing
+            Return listaEstados
         Catch ex As Exception
             Return Nothing
         End Try

@@ -7,10 +7,13 @@ Public Class RolDB
         Try
             Dim query As String = "sp_Cargar_Roles_Usuario_ddl"
             Dim dt As DataTable = db.ExecuteQuery(errorMessage, query, True)
+            Dim listaRoles As New List(Of Models.Rol)()
+
+            If dt Is Nothing AndAlso errorMessage <> "" Then
+                Return Nothing
+            End If
 
             If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
-                Dim listaRoles As New List(Of Models.Rol)()
-
                 For x As Integer = 0 To dt.Rows.Count - 1
                     Dim rol As New Models.Rol() With {
                         .IdRol = Convert.ToInt32(dt.Rows(x)("Valor").ToString()),
@@ -19,10 +22,8 @@ Public Class RolDB
                     }
                     listaRoles.Add(rol)
                 Next
-
-                Return listaRoles
             End If
-            Return Nothing
+            Return listaRoles
         Catch ex As Exception
             Return Nothing
         End Try

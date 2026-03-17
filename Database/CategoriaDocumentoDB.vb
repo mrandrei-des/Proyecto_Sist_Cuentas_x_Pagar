@@ -8,8 +8,12 @@ Public Class CategoriaDocumentoDB
             Dim query As String = "sp_Cargar_Categoria_Documento_ddl"
             Dim dt As DataTable = db.ExecuteQuery(errorMessage, query, True)
 
+            If dt Is Nothing AndAlso errorMessage <> "" Then
+                Return Nothing
+            End If
+
+            Dim listaCategoriaDocumentos As New List(Of Models.CategoriaDocumento)()
             If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
-                Dim listaCategoriaDocumentos As New List(Of Models.CategoriaDocumento)()
 
                 For x As Integer = 0 To dt.Rows.Count - 1
                     Dim estado As New Models.CategoriaDocumento() With {
@@ -18,10 +22,9 @@ Public Class CategoriaDocumentoDB
                     }
                     listaCategoriaDocumentos.Add(estado)
                 Next
-
-                Return listaCategoriaDocumentos
             End If
-            Return Nothing
+
+            Return listaCategoriaDocumentos
         Catch ex As Exception
             Return Nothing
         End Try

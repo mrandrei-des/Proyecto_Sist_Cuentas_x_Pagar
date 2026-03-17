@@ -12,10 +12,13 @@ Public Class TipoDocumentoDB
             }
 
             Dim dt As DataTable = db.ExecuteQuery(errorMessage, query, True, parameters)
+            Dim listaTipoDocumentos As New List(Of Models.TipoDocumento)()
+
+            If dt Is Nothing AndAlso errorMessage <> "" Then
+                Return Nothing
+            End If
 
             If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
-                Dim listaTipoDocumentos As New List(Of Models.TipoDocumento)()
-
                 For x As Integer = 0 To dt.Rows.Count - 1
                     Dim tipoDocumento As New Models.TipoDocumento() With {
                         .IdTipoDocumento = Convert.ToInt32(dt.Rows(x)("Valor").ToString()),
@@ -24,10 +27,8 @@ Public Class TipoDocumentoDB
                     }
                     listaTipoDocumentos.Add(tipoDocumento)
                 Next
-
-                Return listaTipoDocumentos
             End If
-            Return Nothing
+            Return listaTipoDocumentos
         Catch ex As Exception
             Return Nothing
         End Try

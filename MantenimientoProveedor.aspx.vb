@@ -44,7 +44,7 @@ Public Class MantenimientoProveedor
 
             ddlEstado.SelectedIndex = 0
         Else
-            SwalUtils.ShowSwalError(Me, errorMessage)
+            SwalUtils.ShowSwalError(Me, "No se encontraron estados en el sistema. Revise la configuración correspondiente.")
         End If
     End Sub
 
@@ -70,7 +70,7 @@ Public Class MantenimientoProveedor
 
             ddlTipoIdentificacion.SelectedIndex = 0
         Else
-            SwalUtils.ShowSwalError(Me, errorMessage)
+            SwalUtils.ShowSwalError(Me, "No se encontraron tipos de identificación en el sistema. Revise la configuración correspondiente.")
         End If
     End Sub
 
@@ -82,13 +82,20 @@ Public Class MantenimientoProveedor
         Dim numeroIdentificacion As String = txtIdentificacion.Text
 
         modProveedor = objProveedorDB.BuscarProveedor_x_Identificacion(tipoIdentificacion, numeroIdentificacion, errorMessage)
+
         If modProveedor Is Nothing Then
-            modProveedor = New Models.Proveedor
-            modProveedor.TipoIdentificacion = CInt(ddlTipoIdentificacion.SelectedItem.Value)
-            modProveedor.NumeroIdentificacion = txtIdentificacion.Text
-            modProveedor.Nombre = txtNombre.Text
-            modProveedor.Correo = txtCorreo.Text
-            modProveedor.Estado = CInt(ddlEstado.SelectedItem.Value)
+            SwalUtils.ShowSwalError(Me, errorMessage)
+            Return
+        End If
+
+        If modProveedor Is New Models.Proveedor Then
+            modProveedor = New Models.Proveedor With {
+                .TipoIdentificacion = CInt(ddlTipoIdentificacion.SelectedItem.Value),
+                .NumeroIdentificacion = txtIdentificacion.Text,
+                .Nombre = txtNombre.Text,
+                .Correo = txtCorreo.Text,
+                .Estado = CInt(ddlEstado.SelectedItem.Value)
+            }
 
             If objProveedorDB.CrearProveedor(modProveedor, usuarioCreacion, errorMessage) Then
                 SwalUtils.ShowSwal(Me, "¡Proveedor creado exitosamente!")

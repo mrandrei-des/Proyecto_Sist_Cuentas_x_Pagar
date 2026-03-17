@@ -21,7 +21,13 @@ Public Class Usuario
         Dim nombreUsuario As String = txtUsuario.Text.Trim()
 
         modUsuario = objUsuarioDB.ConsultarUsuario_x_Username(nombreUsuario, errorMessage)
-        If modUsuario Is Nothing Then ' Si el resultado de la consulta es nulo, significa que no existe un usuario con ese nombre de usuario, por lo tanto se puede crear
+
+        If modUsuario Is Nothing Then
+            SwalUtils.ShowSwalError(Me, errorMessage)
+            Return
+        End If
+
+        If modUsuario Is New Models.Usuario Then ' Si el resultado de la consulta vuelve vacío, significa que no existe un usuario con ese nombre de usuario, por lo tanto se puede crear
             modUsuario = New Models.Usuario
             modUsuario.NombreUsuario = txtUsuario.Text
             modUsuario.Contrasenna = txtContrasenna.Text
@@ -76,7 +82,7 @@ Public Class Usuario
 
             ddlEstadoUsuario.SelectedIndex = 0
         Else
-            SwalUtils.ShowSwalError(Me, errorMessage)
+            SwalUtils.ShowSwalError(Me, "No se encontraron estados en el sistema. Revise la configuración correspondiente.")
         End If
     End Sub
 
@@ -102,7 +108,7 @@ Public Class Usuario
 
             ddlRoles.SelectedIndex = 0
         Else
-            SwalUtils.ShowSwalError(Me, errorMessage)
+            SwalUtils.ShowSwalError(Me, "No se encontraron roles en el sistema. Revise la configuración correspondiente.")
         End If
     End Sub
 End Class
