@@ -1,4 +1,6 @@
-﻿Imports Microsoft.Ajax.Utilities
+﻿Imports Antlr.Runtime.Tree
+Imports Microsoft.Ajax.Utilities
+Imports Proyecto_Sist_Cuentas_x_Pagar.Models
 Imports Proyecto_Sist_Cuentas_x_Pagar.Utils
 
 Public Class CreacionDocumentos
@@ -10,10 +12,9 @@ Public Class CreacionDocumentos
         enlace.Style.Add("background-color", "var(--colorLetraOscuroSecundario)")
         If Not IsPostBack Then
             prcLlena_ddls()
+            btnModificar.CssClass = "boton boton__modificar boton__ocultar"
+            btnAplicar.CssClass = "boton boton__aplicar boton__ocultar"
         End If
-
-        btnModificar.CssClass = "boton boton__modificar boton__ocultar"
-        btnAplicar.CssClass = "boton boton__aplicar boton__ocultar"
     End Sub
 
     Private Sub prcLlena_ddls()
@@ -158,8 +159,11 @@ Public Class CreacionDocumentos
         btnGuardar.CssClass = "boton boton__guardar"
         btnModificar.CssClass = "boton boton__modificar boton__ocultar"
         btnAplicar.CssClass = "boton boton__aplicar boton__ocultar"
-
-        'btnChkInput.CssClass = "contenedor__btnCircle"
+        ddlCategoria.Enabled = True
+        ddlTipoDocumento.Enabled = True
+        txtFiltProveedor.Enabled = True
+        ddlProveedor.Enabled = True
+        txtNumDocumento.Enabled = True
     End Sub
 
     Protected Sub btnGuardar_Click(sender As Object, e As EventArgs)
@@ -169,14 +173,14 @@ Public Class CreacionDocumentos
         End If
 
         ' Variables para las validaciones y proceso de guardado
-        Dim idCategoriaDocumento As String = ddlCategoria.SelectedValue, idTipoDocumeto As String = ddlTipoDocumento.SelectedValue
+        Dim idCategoriaDocumento As String = ddlCategoria.SelectedValue, idTipoDocumento As String = ddlTipoDocumento.SelectedValue
         Dim idProveedor As String = ddlProveedor.SelectedValue
         Dim numDocumento As String = txtNumDocumento.Text.ToString(), observacion As String = txtAreaObservacion.Value.ToString()
         Dim fechaEmision As String = txtFechaEmision.Text
         Dim moneda As String = ddlMoneda.SelectedValue.ToString(), montoTotal As String = txtMontoTotal.Text, saldoActual = txtMontoTotal.Text
 
         ' Valida que los datos estén correctos, para el momento de hacer la conversión
-        If Not ValidarDatos(idCategoriaDocumento, idProveedor, idTipoDocumeto, numDocumento, observacion, fechaEmision, moneda, montoTotal, saldoActual) Then
+        If Not ValidarDatos(idCategoriaDocumento, idProveedor, idTipoDocumento, numDocumento, observacion, fechaEmision, moneda, montoTotal, saldoActual) Then
             SwalUtils.ShowSwalError(Me, "Atención", "Los datos ingresados no son válidos. Por favor revisar")
             Return
         End If
@@ -190,7 +194,7 @@ Public Class CreacionDocumentos
 
             With modFactura
                 .IdProveedor = Convert.ToInt32(idProveedor)
-                .TipoFactura = Convert.ToInt32(idTipoDocumeto)
+                .TipoFactura = Convert.ToInt32(idTipoDocumento)
                 .NumeroFactura = numDocumento.Trim()
                 .Observacion = observacion.Trim()
                 .FechaEmision = fechaEmision
@@ -207,6 +211,11 @@ Public Class CreacionDocumentos
                 btnGuardar.CssClass = "boton boton__guardar boton__ocultar"
                 btnModificar.CssClass = "boton boton__modificar"
                 btnAplicar.CssClass = "boton boton__aplicar"
+                ddlCategoria.Enabled = False
+                ddlTipoDocumento.Enabled = False
+                txtFiltProveedor.Enabled = False
+                ddlProveedor.Enabled = False
+                txtNumDocumento.Enabled = False
             Else ' Se está guardando un documento de pago
                 SwalUtils.ShowSwalError(Me, "Atención", $"No se logró guardar la factura. {errorMessage}")
             End If
@@ -216,7 +225,7 @@ Public Class CreacionDocumentos
 
             With modDocumentoPago
                 .IdProveedor = Convert.ToInt32(idProveedor)
-                .TipoDocumento = Convert.ToInt32(idTipoDocumeto)
+                .TipoDocumento = Convert.ToInt32(idTipoDocumento)
                 .NumeroDocumento = numDocumento.Trim()
                 .Observacion = observacion.Trim()
                 .FechaEmision = fechaEmision
@@ -233,12 +242,16 @@ Public Class CreacionDocumentos
                 btnGuardar.CssClass = "boton boton__guardar boton__ocultar"
                 btnModificar.CssClass = "boton boton__modificar"
                 btnAplicar.CssClass = "boton boton__aplicar"
+                ddlCategoria.Enabled = False
+                ddlTipoDocumento.Enabled = False
+                txtFiltProveedor.Enabled = False
+                ddlProveedor.Enabled = False
+                txtNumDocumento.Enabled = False
             Else ' Se está guardando un documento de pago
                 SwalUtils.ShowSwalError(Me, "Atención", $"No se logró guardar el documento de pago. {errorMessage}")
             End If
 
         End If
-
     End Sub
 
     Protected Sub txtNumDocumento_TextChanged(sender As Object, e As EventArgs)
@@ -250,9 +263,141 @@ Public Class CreacionDocumentos
         'End If
     End Sub
 
-
     Protected Sub btnModificar_Click(sender As Object, e As EventArgs)
         'Se trabaja con el documento que está en pantalla, el cual para este punto ya debe estar validado que NO haya sido eliminado
+
+        ' Variables y validaciones para ver si el documento existe o si alguien lo eliminó
+        Dim idCategoriaDocumento As String = ddlCategoria.SelectedValue, idTipoDocumento As String = ddlTipoDocumento.SelectedValue
+        Dim idProveedor As String = ddlProveedor.SelectedValue
+        Dim numDocumento As String = txtNumDocumento.Text.ToString().Trim()
+
+        Dim objHerramienta As New Herramientas
+
+        ' Si los datos para buscar el documento no son válidos, el proceso hasta aquí llega
+        If Not objHerramienta.ValidarNumeroEntero(idCategoriaDocumento, False) Or Not objHerramienta.ValidarNumeroEntero(idTipoDocumento, False) Or Not objHerramienta.ValidarNumeroEntero(idProveedor, False) Or Not objHerramienta.ValidarCadena(numDocumento) Then
+            SwalUtils.ShowSwal(Me, "Atención", "Los datos del documento no son válidos. Por favor revisar.", "warning")
+            Return
+        End If
+
+        ' Si los datos son válidos, procede a buscar el documento/factura
+        ' Agregar un botón de búsqueda de documentos pendientes de aplicar para que pueda seleccionar uno y cargarlo en pantalla
+
+        Dim idCategoriaDoc As Integer = Convert.ToInt32(ddlCategoria.SelectedValue)
+        Dim errorMessage As String = ""
+        Dim observacion As String = txtAreaObservacion.Value.ToString()
+        Dim fechaEmision As String = txtFechaEmision.Text
+        Dim moneda As String = ddlMoneda.SelectedValue.ToString(), montoTotal As String = txtMontoTotal.Text, saldoActual = txtMontoTotal.Text
+        Dim usuarioModifico As String = "andre"
+
+        'Validar los datos
+        If Not ValidarDatos(idCategoriaDocumento, idProveedor, idTipoDocumento, numDocumento, observacion, fechaEmision, moneda, montoTotal, saldoActual) Then
+            SwalUtils.ShowSwalError(Me, "Atención", "Los datos ingresados no son válidos. Por favor revisar")
+            Return
+        End If
+
+        If idCategoriaDoc = 1 Then ' Se quiere modificar una factura
+            Dim objFactura As New FacturaDB
+            Dim modFactura As New Models.Factura
+
+            With modFactura
+                .IdProveedor = Convert.ToInt32(idProveedor)
+                .TipoFactura = Convert.ToInt32(idTipoDocumento)
+                .NumeroFactura = numDocumento
+            End With
+
+            modFactura = objFactura.BuscarFactura_x_Numero(modFactura, errorMessage)
+
+            If modFactura Is Nothing Then ' No encontró el documento
+                SwalUtils.ShowSwal(Me, "Atención", "La factura que desea modificar no se encontró en el sistema. Por favor revisar.", "warning")
+                Return
+            End If
+
+            ' Sí encontró la factura, continua con la revisión
+            ' Revisa si el estado es aplicado, si lo es, hasta aquí llega el proceso
+            If modFactura.Estado = 2 Then ' La factura ya ha sido aplicada
+                SwalUtils.ShowSwal(Me, "Atención", "La factura que desea modificar ya ha sido aplicado en el sistema.", "info")
+                Return
+            End If
+
+            'Puede modificar el documento
+            modFactura = New Models.Factura
+            errorMessage = ""
+
+            With modFactura
+                .IdProveedor = Convert.ToInt32(idProveedor)
+                .TipoFactura = Convert.ToInt32(idTipoDocumento)
+                .NumeroFactura = numDocumento.Trim()
+                .Observacion = observacion.Trim()
+                .FechaEmision = fechaEmision
+                .Estado = 1
+                .Moneda = moneda.Trim()
+                .TipoCambio = 500
+                .Total = Convert.ToDouble(montoTotal)
+                .SaldoActual = Convert.ToDouble(saldoActual)
+            End With
+
+            If objFactura.ModificarFactura(modFactura, usuarioModifico, errorMessage) Then
+                SwalUtils.ShowSwal(Me, "¡Factura modificada exitosamente!", "La factura ya está lista para ser aplicada.")
+                ddlCategoria.Enabled = False
+                ddlTipoDocumento.Enabled = False
+                txtFiltProveedor.Enabled = False
+                ddlProveedor.Enabled = False
+                txtNumDocumento.Enabled = False
+            Else
+                SwalUtils.ShowSwalError(Me, "Atención", $"No se logró modificar la factura. {errorMessage}")
+            End If
+
+        Else
+            Dim objDocumentoPago As New DocumentoPagoDB
+            Dim modDocumentoPago As New Models.DocumentoPago
+
+            With modDocumentoPago
+                .IdProveedor = Convert.ToInt32(idProveedor)
+                .TipoDocumento = Convert.ToInt32(idTipoDocumento)
+                .NumeroDocumento = numDocumento
+            End With
+
+            modDocumentoPago = objDocumentoPago.BuscarDocumentoPago_x_Numero(modDocumentoPago, errorMessage)
+
+            If modDocumentoPago Is Nothing Then ' No encontró el documento
+                SwalUtils.ShowSwal(Me, "Atención", "El documento que desea modificar no se encontró en el sistema. Por favor revisar.", "warning")
+                Return
+            End If
+
+            ' Sí encontró el documento, continua con la revisión
+            ' Revisa si el estado es aplicado, si lo es, hasta aquí llega el proceso
+            If modDocumentoPago.Estado = 2 Then ' El documento ya ha sido aplicado
+                SwalUtils.ShowSwal(Me, "Atención", "El documento que desea modificar ya ha sido aplicado en el sistema.", "info")
+                Return
+            End If
+
+            'Puede modificar el documento
+            modDocumentoPago = New Models.DocumentoPago
+            errorMessage = ""
+            With modDocumentoPago
+                .IdProveedor = Convert.ToInt32(idProveedor)
+                .TipoDocumento = Convert.ToInt32(idTipoDocumento)
+                .NumeroDocumento = numDocumento.Trim()
+                .Observacion = observacion.Trim()
+                .FechaEmision = fechaEmision
+                .Estado = 1
+                .Moneda = moneda.Trim()
+                .TipoCambio = 500
+                .Total = Convert.ToDouble(montoTotal)
+                .SaldoActual = Convert.ToDouble(saldoActual)
+            End With
+
+            If objDocumentoPago.ModificarDocumentoPago(modDocumentoPago, usuarioModifico, errorMessage) Then
+                SwalUtils.ShowSwal(Me, "¡Documento de pago modificado exitosamente!", "El documento está listo para ser aplicado.")
+                ddlCategoria.Enabled = False
+                ddlTipoDocumento.Enabled = False
+                txtFiltProveedor.Enabled = False
+                ddlProveedor.Enabled = False
+                txtNumDocumento.Enabled = False
+            Else
+                SwalUtils.ShowSwalError(Me, "Atención", $"No se logró modificar el documento de pago. {errorMessage}")
+            End If
+        End If
     End Sub
 
 
@@ -322,6 +467,21 @@ Public Class CreacionDocumentos
 
             Return True
         End If
+    End Function
+
+    Private Function ConsultaDocumentoPago(idProveedor As Integer, idTipoDocumento As Integer, numDocumento As String, ByRef errorMessage As String) As Models.DocumentoPago
+
+
+        Dim modDocumentoPago As New Models.DocumentoPago
+        Dim objDocumentoPago As New DocumentoPagoDB
+
+        With modDocumentoPago
+            .IdProveedor = idProveedor
+            .TipoDocumento = idTipoDocumento
+            .NumeroDocumento = numDocumento
+        End With
+
+        Return objDocumentoPago.BuscarDocumentoPago_x_Numero(modDocumentoPago, errorMessage)
     End Function
 
     Private Function ContinuarProcesoGuardado() As Boolean

@@ -38,7 +38,7 @@ Public Class DocumentoPagoDB
                 New SqlParameter("@FechaEmision", objDocumentoPago.FechaEmision),
                 New SqlParameter("@Estado", objDocumentoPago.Estado),
                 New SqlParameter("@Moneda", objDocumentoPago.Moneda),
-                New SqlParameter("@TipoCambio", 500),
+                New SqlParameter("@TipoCambio", objDocumentoPago.TipoCambio),
                 New SqlParameter("@Total", objDocumentoPago.Total),
                 New SqlParameter("@SaldoActual", objDocumentoPago.SaldoActual),
                 New SqlParameter("@UsuarioModifico", usuarioModifica)
@@ -126,7 +126,7 @@ Public Class DocumentoPagoDB
                     .FechaEmision = Convert.ToDateTime(row("FechaEmision"))
                     .Estado = Convert.ToInt32(row("Estado"))
                     .Moneda = row("Moneda").ToString()
-                    .TipoCambio = Convert.ToDouble(row("Moneda").ToString())
+                    .TipoCambio = Convert.ToDouble(row("TipoCambio").ToString())
                     .Total = Convert.ToDouble(row("Total").ToString())
                     .SaldoActual = Convert.ToDouble(row("SaldoActual").ToString())
                 End With

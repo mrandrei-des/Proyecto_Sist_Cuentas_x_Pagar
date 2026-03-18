@@ -38,7 +38,7 @@ Public Class FacturaDB
                 New SqlParameter("@FechaEmision", objFactura.FechaEmision),
                 New SqlParameter("@Estado", objFactura.Estado),
                 New SqlParameter("@Moneda", objFactura.Moneda),
-                New SqlParameter("@TipoCambio", 500),
+                New SqlParameter("@TipoCambio", objFactura.TipoCambio),
                 New SqlParameter("@Total", objFactura.Total),
                 New SqlParameter("@SaldoActual", objFactura.SaldoActual),
                 New SqlParameter("@UsuarioModifico", usuarioModifica)
@@ -126,7 +126,7 @@ Public Class FacturaDB
                     .FechaEmision = Convert.ToDateTime(row("FechaEmision"))
                     .Estado = Convert.ToInt32(row("Estado"))
                     .Moneda = row("Moneda").ToString()
-                    .TipoCambio = Convert.ToDouble(row("Moneda").ToString())
+                    .TipoCambio = Convert.ToDouble(row("TipoCambio").ToString())
                     .Total = Convert.ToDouble(row("Total").ToString())
                     .SaldoActual = Convert.ToDouble(row("SaldoActual").ToString())
                 End With

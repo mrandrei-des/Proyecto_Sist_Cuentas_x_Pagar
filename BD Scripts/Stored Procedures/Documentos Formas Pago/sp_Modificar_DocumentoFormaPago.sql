@@ -1,6 +1,6 @@
 -- PROCEDIMIENTO ALMACENADO ACTUALIZACIÓN DEL DOCUMENTO DE FORMA DE PAGO INDICADO
 -- EXEC sp_Modificar_DocumentoFormaPago 
-CREATE PROC sp_Modificar_DocumentoFormaPago
+ALTER PROC sp_Modificar_DocumentoFormaPago
 (
 @ID_Proveedor int, 
 @TipoDocumento int,
@@ -21,7 +21,7 @@ BEGIN
 	/* VERIFICA QUÉ FUE LO QUE CAMBIÓ A NIVEL DE DATOS DEL DOCUMENTO DE FORMA DE PAGO */
 	IF @Observacion <> (SELECT Observacion FROM Documentos_Formas_Pago 
 					   WHERE ID_Proveedor = @ID_Proveedor and TipoDocumento = @TipoDocumento 
-					   and TipoDocumento = @NumeroDocumento
+					   and NumeroDocumento = @NumeroDocumento
 					   )
 		BEGIN
 			SET @DescripcionAccion = @DescripcionAccion + 'Observación, '
@@ -30,7 +30,7 @@ BEGIN
 
 	IF @FechaEmision <> (SELECT FechaEmision FROM Documentos_Formas_Pago 
 						WHERE ID_Proveedor = @ID_Proveedor and TipoDocumento = @TipoDocumento 
-						and TipoDocumento = @NumeroDocumento
+						and NumeroDocumento = @NumeroDocumento
 						)
 		BEGIN
 			SET @DescripcionAccion = @DescripcionAccion + 'Fecha de emisión, '
@@ -39,7 +39,7 @@ BEGIN
 
 	IF @Estado <> (SELECT Estado FROM Documentos_Formas_Pago 
 				  WHERE ID_Proveedor = @ID_Proveedor and TipoDocumento = @TipoDocumento 
-				  and TipoDocumento = @NumeroDocumento
+				  and NumeroDocumento = @NumeroDocumento
 				  )
 		BEGIN
 			SET @DescripcionAccion = @DescripcionAccion + 'Estado, '
@@ -48,7 +48,7 @@ BEGIN
 
 	IF @Moneda <> (SELECT Moneda FROM Documentos_Formas_Pago 
 				  WHERE ID_Proveedor = @ID_Proveedor and TipoDocumento = @TipoDocumento 
-				  and TipoDocumento = @NumeroDocumento
+				  and NumeroDocumento = @NumeroDocumento
 				  )
 		BEGIN
 			SET @DescripcionAccion = @DescripcionAccion + 'Moneda, '
@@ -57,7 +57,7 @@ BEGIN
 
 	IF @TipoCambio <> (SELECT TipoCambio FROM Documentos_Formas_Pago 
 				  WHERE ID_Proveedor = @ID_Proveedor and TipoDocumento = @TipoDocumento 
-				  and TipoDocumento = @NumeroDocumento
+				  and NumeroDocumento = @NumeroDocumento
 				  )
 		BEGIN
 			SET @DescripcionAccion = @DescripcionAccion + 'Tipo de Cambio, '
@@ -66,7 +66,7 @@ BEGIN
 
 	IF @Total <> (SELECT Total FROM Documentos_Formas_Pago 
 				  WHERE ID_Proveedor = @ID_Proveedor and TipoDocumento = @TipoDocumento 
-				  and TipoDocumento = @NumeroDocumento
+				  and NumeroDocumento = @NumeroDocumento
 				  )
 		BEGIN
 			SET @DescripcionAccion = @DescripcionAccion + 'Monto Total, '
@@ -75,7 +75,7 @@ BEGIN
 
 	IF @SaldoActual <> (SELECT SaldoActual FROM Documentos_Formas_Pago 
 				  WHERE ID_Proveedor = @ID_Proveedor and TipoDocumento = @TipoDocumento 
-				  and TipoDocumento = @NumeroDocumento
+				  and NumeroDocumento = @NumeroDocumento
 				  )
 		BEGIN
 			SET @DescripcionAccion = @DescripcionAccion + 'Saldo Actual, '
@@ -89,7 +89,7 @@ BEGIN
 				UPDATE Documentos_Formas_Pago
 				SET Observacion = @Observacion, FechaEmision = @FechaEmision, Estado = @Estado,
 				Moneda = @Moneda, TipoCambio = @TipoCambio, Total = @Total, SaldoActual = @SaldoActual
-				WHERE ID_Proveedor = @ID_Proveedor and TipoDocumento = @TipoDocumento and TipoDocumento = @NumeroDocumento
+				WHERE ID_Proveedor = @ID_Proveedor and TipoDocumento = @TipoDocumento and NumeroDocumento = @NumeroDocumento
 			END
 
 			/* SOLO SI REALMENTE HUBIERON CAMBIOS (DATOS DEL DOCUMENTO DE FORMA DE PAGO) INSERTA EL REGISTRO DE BITÁCOTA CON EL DETALLE DE LOS CAMBIOS */
