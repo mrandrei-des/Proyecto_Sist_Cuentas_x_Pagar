@@ -166,16 +166,50 @@ Public Class CreacionDocumentos
         txtNumDocumento.Enabled = True
     End Sub
 
+    Protected Sub txtNumDocumento_TextChanged(sender As Object, e As EventArgs)
+        ' Variables y validaciones para ver si el documento existe o si alguien lo eliminó
+        Dim idCategoriaDocumento As String = ddlCategoria.SelectedValue, idTipoDocumento As String = ddlTipoDocumento.SelectedValue
+        Dim idProveedor As String = ddlProveedor.SelectedValue
+        Dim numDocumento As String = txtNumDocumento.Text.ToString().Trim()
+        Dim errorMessage As String = ""
+
+        If TieneDatos_IdentificadoresDocumento(idCategoriaDocumento, idTipoDocumento, idProveedor, numDocumento) Then
+            If Not ValidaDatosExistencia(idCategoriaDocumento, idProveedor, idTipoDocumento, numDocumento) Then
+                SwalUtils.ShowSwalError(Me, "Atención", "Los datos ingresados no son válidos. Por favor revisar")
+                Return
+            End If
+
+            Dim nombreDocumento As String = IIf(Convert.ToInt32(idCategoriaDocumento) = 1, "la factura", "el documento de pago")
+
+            Try
+                Dim respuestaExistencia As Boolean = ExisteDocumento(Convert.ToInt32(idCategoriaDocumento), Convert.ToInt32(idProveedor), Convert.ToInt32(idTipoDocumento), numDocumento, errorMessage)
+
+                If respuestaExistencia Then
+                    SwalUtils.ShowSwalMessage(Me, "Consulta", $"Ya existe {nombreDocumento} con el número {numDocumento} para este proveedor.", "warning")
+                    txtNumDocumento.Focus()
+                End If
+
+                'Si no la encontró no hay problema, puede guardarla
+
+            Catch ex As Exception
+                SwalUtils.ShowSwalError(Me, "Atención", $"No se logró encontrar {nombreDocumento}. {errorMessage}.")
+                Return
+            End Try
+        End If
+    End Sub
+
     Protected Sub btnGuardar_Click(sender As Object, e As EventArgs)
+        Dim idCategoriaDocumento As String = ddlCategoria.SelectedValue, idTipoDocumento As String = ddlTipoDocumento.SelectedValue
+        Dim idProveedor As String = ddlProveedor.SelectedValue
+        Dim numDocumento As String = txtNumDocumento.Text.ToString()
+
         'Valida que el documento no haya sido registrado previamente, aquí revisa hasta dentro de los que fueron eliminados
-        If Not ContinuarProcesoGuardado() Then
+        If Not ContinuarProcesoGuardado(idCategoriaDocumento, idTipoDocumento, idProveedor, numDocumento) Then
             Return
         End If
 
         ' Variables para las validaciones y proceso de guardado
-        Dim idCategoriaDocumento As String = ddlCategoria.SelectedValue, idTipoDocumento As String = ddlTipoDocumento.SelectedValue
-        Dim idProveedor As String = ddlProveedor.SelectedValue
-        Dim numDocumento As String = txtNumDocumento.Text.ToString(), observacion As String = txtAreaObservacion.Value.ToString()
+        Dim observacion As String = txtAreaObservacion.Value.ToString()
         Dim fechaEmision As String = txtFechaEmision.Text
         Dim moneda As String = ddlMoneda.SelectedValue.ToString(), montoTotal As String = txtMontoTotal.Text, saldoActual = txtMontoTotal.Text
 
@@ -186,11 +220,13 @@ Public Class CreacionDocumentos
         End If
 
         Dim categoriaDocumento As Integer = Convert.ToInt32(idCategoriaDocumento)
-        Dim usuarioInserta As String = "andre", errorMessage As String = ""
+        Dim usuarioInserta As String = "andre", errorMessage As String = "", nombreDocumento As String = ""
+        Dim respuestaCreacion As Boolean
 
         If categoriaDocumento = 1 Then ' Se está guardando una factura
             Dim modFactura As New Models.Factura
             Dim objFactura As New FacturaDB
+            nombreDocumento = "Factura guardada"
 
             With modFactura
                 .IdProveedor = Convert.ToInt32(idProveedor)
@@ -205,23 +241,12 @@ Public Class CreacionDocumentos
                 .SaldoActual = Convert.ToDouble(saldoActual)
             End With
 
-            If objFactura.CrearFactura(modFactura, usuarioInserta, errorMessage) Then
-                SwalUtils.ShowSwal(Me, "¡Factura guardada exitosamente!", "El documento está listo para ser aplicado.")
+            respuestaCreacion = objFactura.CrearFactura(modFactura, usuarioInserta, errorMessage)
 
-                btnGuardar.CssClass = "boton boton__guardar boton__ocultar"
-                btnModificar.CssClass = "boton boton__modificar"
-                btnAplicar.CssClass = "boton boton__aplicar"
-                ddlCategoria.Enabled = False
-                ddlTipoDocumento.Enabled = False
-                txtFiltProveedor.Enabled = False
-                ddlProveedor.Enabled = False
-                txtNumDocumento.Enabled = False
-            Else ' Se está guardando un documento de pago
-                SwalUtils.ShowSwalError(Me, "Atención", $"No se logró guardar la factura. {errorMessage}")
-            End If
         Else ' Se está guardando un documento de pago
             Dim modDocumentoPago As New Models.DocumentoPago
             Dim objDocumentoPagoDB As New DocumentoPagoDB
+            nombreDocumento = "Documento de pago guardado"
 
             With modDocumentoPago
                 .IdProveedor = Convert.ToInt32(idProveedor)
@@ -236,31 +261,24 @@ Public Class CreacionDocumentos
                 .SaldoActual = Convert.ToDouble(saldoActual)
             End With
 
-            If objDocumentoPagoDB.CrearDocumentoPago(modDocumentoPago, usuarioInserta, errorMessage) Then
-                SwalUtils.ShowSwal(Me, "¡Documento de pago guardado exitosamente!", "El documento está listo para ser aplicado.")
-
-                btnGuardar.CssClass = "boton boton__guardar boton__ocultar"
-                btnModificar.CssClass = "boton boton__modificar"
-                btnAplicar.CssClass = "boton boton__aplicar"
-                ddlCategoria.Enabled = False
-                ddlTipoDocumento.Enabled = False
-                txtFiltProveedor.Enabled = False
-                ddlProveedor.Enabled = False
-                txtNumDocumento.Enabled = False
-            Else ' Se está guardando un documento de pago
-                SwalUtils.ShowSwalError(Me, "Atención", $"No se logró guardar el documento de pago. {errorMessage}")
-            End If
-
+            respuestaCreacion = objDocumentoPagoDB.CrearDocumentoPago(modDocumentoPago, usuarioInserta, errorMessage)
         End If
-    End Sub
 
-    Protected Sub txtNumDocumento_TextChanged(sender As Object, e As EventArgs)
-        ' Para buscar un document, debe tener al menos el número de proveedor y un número de documento. Aquí se debe buscar solo las que están pendientes, aplicadas y canceladas, NO SE DEBE buscar entre las eliminadas, para qué, al cargar la información solo cargue las que el usuario indicó deben existir.
+        If respuestaCreacion Then
+            SwalUtils.ShowSwal(Me, $"¡{nombreDocumento} exitosamente!", "El documento está listo para ser aplicado.")
 
-        'If ExisteDocumento() Then
-        '    ' Tomar el modelo del documento y valorar el estado, para ver si puede modificarlo, aplicarlo o si está eliminado
-        '    SwalUtils.ShowSwalError(Me, "Ya existe una factura de este tipo para el proveedor.")
-        'End If
+            btnGuardar.CssClass = "boton boton__guardar boton__ocultar"
+            btnModificar.CssClass = "boton boton__modificar"
+            btnAplicar.CssClass = "boton boton__aplicar"
+            ddlCategoria.Enabled = False
+            ddlTipoDocumento.Enabled = False
+            txtFiltProveedor.Enabled = False
+            ddlProveedor.Enabled = False
+            txtNumDocumento.Enabled = False
+        Else
+            nombreDocumento = IIf(idCategoriaDocumento = 1, "la factura", "el documento de pago")
+            SwalUtils.ShowSwalError(Me, "Atención", $"No se logró guardar {nombreDocumento}. {errorMessage}")
+        End If
     End Sub
 
     Protected Sub btnModificar_Click(sender As Object, e As EventArgs)
@@ -400,78 +418,73 @@ Public Class CreacionDocumentos
         End If
     End Sub
 
-
     Protected Sub btnAplicar_Click(sender As Object, e As EventArgs)
         'Lo que hace es hacer un update a los datos y al final cambia el estado de la factura para que aparezca para ser cancelada
-    End Sub
 
+
+    End Sub
 
     Protected Sub btnCancelar_Click(sender As Object, e As EventArgs)
         prcLimpiarCampos()
     End Sub
 
-    Private Function ExisteDocumento(idCategoriaDocumento As String, idProveedor As String, idTipoDocumento As String, numDocumento As String, ByRef errorMessage As String) As Boolean
+    Private Function TieneDatos_IdentificadoresDocumento(idCategoriaDocumento As String, idTipoDocumento As String, idProveedor As String, numDocumento As String) As Boolean
+        Dim objHerramientas As New Herramientas
+        If objHerramientas.ValidarCadena(idCategoriaDocumento) And objHerramientas.ValidarCadena(idTipoDocumento) And objHerramientas.ValidarCadena(idProveedor) And objHerramientas.ValidarCadena(numDocumento) Then
+            Return True
+        End If
+        Return False
+    End Function
+
+    Private Function ValidaDatosExistencia(idCategoriaDocumento As String, idProveedor As String, idTipoDocumento As String, numDocumento As String) As Boolean
         Dim objHerramienta As New Herramientas
 
         If Not objHerramienta.ValidarNumeroEntero(idCategoriaDocumento, False) Or Not objHerramienta.ValidarNumeroEntero(idTipoDocumento, False) Or Not objHerramienta.ValidarNumeroEntero(idProveedor, False) Or Not objHerramienta.ValidarCadena(numDocumento) Then
             Return False
         End If
 
-        Dim categoriaDocumento As Integer = Convert.ToInt32(idCategoriaDocumento)
-        Dim tipoDocumento As Integer = Convert.ToInt32(idTipoDocumento)
-        Dim numProveedor As Integer = Convert.ToInt32(idProveedor)
-        Dim numeroDocumento As String = numDocumento
+        Return True
 
-        If categoriaDocumento = 1 Then ' Revisa si existe la factura
+    End Function
+
+    Private Function ExisteDocumento(idCategoriaDocumento As Integer, idProveedor As Integer, idTipoDocumento As Integer, numDocumento As String, ByRef errorMessage As String) As Boolean
+        Dim modDocumento As Object
+
+        If idCategoriaDocumento = 1 Then ' Revisa si existe la factura
             Dim modFactura As New Models.Factura
             Dim objFactura As New FacturaDB
 
             With modFactura
-                .IdProveedor = numProveedor
-                .TipoFactura = tipoDocumento
-                .NumeroFactura = numeroDocumento
+                .IdProveedor = idProveedor
+                .TipoFactura = idTipoDocumento
+                .NumeroFactura = numDocumento
             End With
 
-            modFactura = objFactura.ConsultarExistenciaFactura(modFactura, errorMessage)
-
-            If modFactura Is Nothing Then
-                Return True ' No se pudo completar el proceso
-            End If
-
-            If modFactura.NumeroFactura Is Nothing Then
-                Return False ' No existe la factura
-            Else
-                Return True ' Sí existe la factura
-            End If
+            modDocumento = objFactura.ConsultarExistenciaFactura(modFactura, errorMessage)
         Else ' Revisa si existe el documento de pago
             Dim modDocumentoPago As New Models.DocumentoPago
             Dim objDocumentoPago As New DocumentoPagoDB
 
             With modDocumentoPago
-                .IdProveedor = numProveedor
-                .TipoDocumento = tipoDocumento
-                .NumeroDocumento = numeroDocumento
+                .IdProveedor = idProveedor
+                .TipoDocumento = idTipoDocumento
+                .NumeroDocumento = numDocumento
             End With
 
-            modDocumentoPago = objDocumentoPago.ConsultarExistenciaDocumentoPago(modDocumentoPago, errorMessage)
+            modDocumento = objDocumentoPago.ConsultarExistenciaDocumentoPago(modDocumentoPago, errorMessage)
+        End If
 
-            If modDocumentoPago Is Nothing Then
-                Return True ' No se pudo completar el proceso
-            End If
+        If modDocumento Is Nothing Then
+            Throw New Exception($"Error al consultar la existencia del documento de categoría [{idCategoriaDocumento}]")
+        End If
 
-            If modDocumentoPago.NumeroDocumento Is Nothing Then
-                Return False ' No existe la factura
-            Else
-                Return True ' Sí existe la factura
-            End If
-
-            Return True
+        If modDocumento.Estado = 0 AndAlso modDocumento.Observacion Is Nothing Then
+            Return False ' No existe el documento
+        Else
+            Return True ' Sí existe el documento
         End If
     End Function
-
     Private Function ConsultaDocumentoPago(idProveedor As Integer, idTipoDocumento As Integer, numDocumento As String, ByRef errorMessage As String) As Models.DocumentoPago
-
-
         Dim modDocumentoPago As New Models.DocumentoPago
         Dim objDocumentoPago As New DocumentoPagoDB
 
@@ -484,25 +497,33 @@ Public Class CreacionDocumentos
         Return objDocumentoPago.BuscarDocumentoPago_x_Numero(modDocumentoPago, errorMessage)
     End Function
 
-    Private Function ContinuarProcesoGuardado() As Boolean
+    Private Function ContinuarProcesoGuardado(idCategoriaDocumento As String, idTipoDocumento As String, idProveedor As String, numDocumento As String) As Boolean
         Dim errorMessage As String = ""
-        Dim idCategoriaDocumento As String = ddlCategoria.SelectedValue, idTipoDocumeto As String = ddlTipoDocumento.SelectedValue
-        Dim idProveedor As String = ddlProveedor.SelectedValue
-        Dim numDocumento As String = txtNumDocumento.Text.ToString()
 
-        Dim respuestaExistencia = ExisteDocumento(idCategoriaDocumento, idProveedor, idTipoDocumeto, numDocumento, errorMessage)
-
-        If respuestaExistencia And errorMessage <> "" Then
-            SwalUtils.ShowSwalError(Me, errorMessage)
+        ' Valida los datos para la búsqueda
+        If Not ValidaDatosExistencia(idCategoriaDocumento, idProveedor, idTipoDocumento, numDocumento) Then
+            SwalUtils.ShowSwalError(Me, "Atención", "Los datos ingresados no son válidos. Por favor revisar")
             Return False
         End If
 
-        If respuestaExistencia Then
-            SwalUtils.ShowSwalMessage(Me, "Consulta", "Ya existe una factura de este tipo para el proveedor.", "warning")
-            Return False
-        End If
+        Dim nombreDocumento As String = IIf(Convert.ToInt32(idCategoriaDocumento) = 1, "la factura", "el documento de pago")
 
-        Return True
+        Try
+            Dim respuestaExistencia As Boolean = ExisteDocumento(Convert.ToInt32(idCategoriaDocumento), Convert.ToInt32(idProveedor), Convert.ToInt32(idTipoDocumento), numDocumento, errorMessage)
+
+            If respuestaExistencia Then
+                SwalUtils.ShowSwalMessage(Me, "Consulta", $"Ya existe {nombreDocumento} con el número {numDocumento} para este proveedor.", "warning")
+                Return False
+            End If
+
+            'Si no la encontró no hay problema, puede guardarla
+            Return True
+
+        Catch ex As Exception
+            SwalUtils.ShowSwalError(Me, "Atención", $"No se logró encontrar {nombreDocumento}. {errorMessage}.")
+            Return False
+        End Try
+
     End Function
 
     Private Function ValidarDatos(idCategoriaDocumento As String, idProveedor As String, tipoDocumento As String, numDocumento As String, observacion As String, fechaEmision As String, moneda As String, montoTotal As String, saldoActual As String) As Boolean
