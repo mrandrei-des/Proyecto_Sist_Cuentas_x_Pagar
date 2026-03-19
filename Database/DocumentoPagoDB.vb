@@ -136,4 +136,20 @@ Public Class DocumentoPagoDB
             Return Nothing
         End Try
     End Function
+
+    Public Function AplicarDocumentoPago(objDocumentoPago As Models.DocumentoPago, usuarioAplica As String, ByRef errorMessage As String) As Boolean
+        Try
+            Dim query As String = "sp_Aplicar_DocumentoFormaPago"
+            Dim parameters As New List(Of SqlParameter) From {
+                New SqlParameter("@ID_Proveedor", objDocumentoPago.IdProveedor),
+                New SqlParameter("@TipoDocumento", objDocumentoPago.TipoDocumento),
+                New SqlParameter("@NumeroDocumento", objDocumentoPago.NumeroDocumento),
+                New SqlParameter("@UsuarioAplico", usuarioAplica)
+            }
+            Return db.ExecuteNonQuery(query, parameters, errorMessage)
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
 End Class

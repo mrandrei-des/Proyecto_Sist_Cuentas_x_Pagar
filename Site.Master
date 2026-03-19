@@ -23,6 +23,7 @@
     <link href="~/styles/styles_main.css" rel="stylesheet" type="text/css" />
     <link href="~/styles/styles_footer.css" rel="stylesheet" type="text/css" />
     <link href="~/styles/styles_dialog.css" rel="stylesheet" type="text/css" /> 
+    <link href="~/styles/styles_dialog_confirm.css" rel="stylesheet" type="text/css" /> 
     <link href="~/styles/styles_login.css" rel="stylesheet" type="text/css" /> 
     <link href="~/styles/styles_registro.css" rel="stylesheet" type="text/css" />
     <link href="~/styles/styles_formulario.css" rel="stylesheet" type="text/css" />    

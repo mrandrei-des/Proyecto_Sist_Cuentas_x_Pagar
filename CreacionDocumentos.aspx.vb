@@ -1,10 +1,13 @@
-﻿Imports Antlr.Runtime.Tree
+﻿Imports System.Threading.Tasks
+Imports Antlr.Runtime.Tree
 Imports Microsoft.Ajax.Utilities
 Imports Proyecto_Sist_Cuentas_x_Pagar.Models
 Imports Proyecto_Sist_Cuentas_x_Pagar.Utils
 
 Public Class CreacionDocumentos
     Inherits System.Web.UI.Page
+
+    ' PENDIENTE IMPLEMENTAR UNA TABLA O ALGO PARA LISTAR LAS FACTURAS/DOCUMENTOS DE PAGO PENDIENTES
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         ' Busca al elemento HTML que se le indique y se le dan estilos de línea
@@ -419,15 +422,114 @@ Public Class CreacionDocumentos
     End Sub
 
     Protected Sub btnAplicar_Click(sender As Object, e As EventArgs)
-        'Lo que hace es hacer un update a los datos y al final cambia el estado de la factura para que aparezca para ser cancelada
+        'Despliega el modal donde el usuario autoriza la aplicación del documento
+        contenedor__dialogConfirm.Style.Add("display", "block")
+        dialogConfirm.Style.Add("animation-play-state", "running")
+    End Sub
 
+    Protected Sub btnCancelarAplicacion_Click(sender As Object, e As EventArgs)
+        contenedor__dialogConfirm.Style.Add("display", "none")
+    End Sub
 
+    Protected Sub btnContinuarAplicacion_Click(sender As Object, e As EventArgs)
+        ' Procede a ejecutar la aplicación, pero antes oculta el modal
+        contenedor__dialogConfirm.Style.Add("display", "none")
+
+        ' Variables y validaciones para ver si el documento existe y si ya fue aplicado
+        Dim idCategoriaDocumento As String = ddlCategoria.SelectedValue, idTipoDocumento As String = ddlTipoDocumento.SelectedValue
+        Dim idProveedor As String = ddlProveedor.SelectedValue
+        Dim numDocumento As String = txtNumDocumento.Text.ToString().Trim()
+
+        Dim objHerramienta As New Herramientas
+
+        ' Si los datos para buscar el documento no son válidos, el proceso hasta aquí llega
+        If Not objHerramienta.ValidarNumeroEntero(idCategoriaDocumento, False) Or Not objHerramienta.ValidarNumeroEntero(idTipoDocumento, False) Or Not objHerramienta.ValidarNumeroEntero(idProveedor, False) Or Not objHerramienta.ValidarCadena(numDocumento) Then
+            SwalUtils.ShowSwal(Me, "Atención", "Los datos del documento no son válidos. Por favor revisar.", "warning")
+            Return
+        End If
+
+        Dim idCategoriaDoc As Integer = Convert.ToInt32(ddlCategoria.SelectedValue)
+        Dim modObjeto As Object
+        Dim errorMessage As String = "", nombreDocumento As String = ""
+
+        If idCategoriaDoc = 1 Then
+            Dim objFactura As New FacturaDB
+            Dim modFactura As New Models.Factura
+            nombreDocumento = "La factura"
+
+            With modFactura
+                .IdProveedor = Convert.ToInt32(idProveedor)
+                .TipoFactura = Convert.ToInt32(idTipoDocumento)
+                .NumeroFactura = numDocumento
+            End With
+
+            modObjeto = objFactura.BuscarFactura_x_Numero(modFactura, errorMessage)
+        Else
+            Dim objDocumentoPago As New DocumentoPagoDB
+            Dim modDocumentoPago As New Models.DocumentoPago
+            nombreDocumento = "El documento de pago"
+
+            With modDocumentoPago
+                .IdProveedor = Convert.ToInt32(idProveedor)
+                .TipoDocumento = Convert.ToInt32(idTipoDocumento)
+                .NumeroDocumento = numDocumento
+            End With
+
+            modObjeto = objDocumentoPago.BuscarDocumentoPago_x_Numero(modDocumentoPago, errorMessage)
+        End If
+
+        If modObjeto Is Nothing Then ' No encontró el documento
+            SwalUtils.ShowSwal(Me, "Atención", $"{nombreDocumento} que desea aplicar no ha sido encontrado en el sistema. Por favor revisar.", "warning")
+            Return
+        End If
+
+        ' Revisa si el estado es aplicado, si lo es, hasta aquí llega el proceso
+        If modObjeto.Estado = 2 Then ' El documento ya ha sido aplicada
+            SwalUtils.ShowSwal(Me, "Atención", $"{nombreDocumento} ya ha sido aplicado en el sistema.", "info")
+            Return
+        End If
+
+        errorMessage = ""
+        Dim usuarioAplica As String = "andre"
+        Dim respuestaAplicacion As Boolean
+
+        If idCategoriaDoc = 1 Then
+            Dim objFactura As New FacturaDB
+            Dim modFactura As New Models.Factura
+            nombreDocumento = "Factura aplicada"
+            With modFactura
+                .IdProveedor = Convert.ToInt32(idProveedor)
+                .TipoFactura = Convert.ToInt32(idTipoDocumento)
+                .NumeroFactura = numDocumento
+            End With
+
+            respuestaAplicacion = objFactura.AplicarFactura(modFactura, usuarioAplica, errorMessage)
+        Else
+            Dim objDocumentoPago As New DocumentoPagoDB
+            Dim modDocumentoPago As New Models.DocumentoPago
+            nombreDocumento = "Documento de pago aplicado"
+
+            With modDocumentoPago
+                .IdProveedor = Convert.ToInt32(idProveedor)
+                .TipoDocumento = Convert.ToInt32(idTipoDocumento)
+                .NumeroDocumento = numDocumento
+            End With
+
+            respuestaAplicacion = objDocumentoPago.AplicarDocumentoPago(modDocumentoPago, usuarioAplica, errorMessage)
+        End If
+
+        If respuestaAplicacion Then
+            SwalUtils.ShowSwal(Me, $"¡{nombreDocumento} exitosamente!", "El documento está listo para ser asociado.")
+            prcLimpiarCampos()
+        Else
+            nombreDocumento = IIf(idCategoriaDoc = 1, "la factura", "el documento de pago")
+            SwalUtils.ShowSwalError(Me, "Atención", $"No se logró aplicar {nombreDocumento}. {errorMessage}")
+        End If
     End Sub
 
     Protected Sub btnCancelar_Click(sender As Object, e As EventArgs)
         prcLimpiarCampos()
     End Sub
-
     Private Function TieneDatos_IdentificadoresDocumento(idCategoriaDocumento As String, idTipoDocumento As String, idProveedor As String, numDocumento As String) As Boolean
         Dim objHerramientas As New Herramientas
         If objHerramientas.ValidarCadena(idCategoriaDocumento) And objHerramientas.ValidarCadena(idTipoDocumento) And objHerramientas.ValidarCadena(idProveedor) And objHerramientas.ValidarCadena(numDocumento) Then

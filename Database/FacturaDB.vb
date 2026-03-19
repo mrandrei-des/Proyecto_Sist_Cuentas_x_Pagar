@@ -136,4 +136,19 @@ Public Class FacturaDB
             Return Nothing
         End Try
     End Function
+
+    Public Function AplicarFactura(objFactura As Models.Factura, usuarioModifica As String, ByRef errorMessage As String) As Boolean
+        Try
+            Dim query As String = "sp_Aplicar_Factura"
+            Dim parameters As New List(Of SqlParameter) From {
+                New SqlParameter("@ID_Proveedor", objFactura.IdProveedor),
+                New SqlParameter("@TipoFactura", objFactura.TipoFactura),
+                New SqlParameter("@NumeroFactura", objFactura.NumeroFactura),
+                New SqlParameter("@UsuarioAplico", usuarioModifica)
+            }
+            Return db.ExecuteNonQuery(query, parameters, errorMessage)
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
 End Class

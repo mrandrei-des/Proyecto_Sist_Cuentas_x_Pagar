@@ -162,6 +162,7 @@
     <Content Include="ListadoUsuarios.aspx" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\cxp_Scripts\cambioContrasenna.js" />
+    <Content Include="Scripts\cxp_Scripts\DialogConfirm.js" />
     <Content Include="Scripts\cxp_Scripts\toggleButton.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -193,6 +194,7 @@
     <Content Include="styles\styles_botones.css" />
     <Content Include="styles\styles_colores.css" />
     <Content Include="styles\styles_dialog.css" />
+    <Content Include="styles\styles_dialog_confirm.css" />
     <Content Include="styles\styles_footer.css" />
     <Content Include="styles\styles_formulario.css" />
     <Content Include="styles\styles_header.css" />

@@ -3,7 +3,7 @@ CREATE PROC sp_Aplicar_Factura
 @ID_Proveedor int, 
 @TipoFactura int, 
 @NumeroFactura varchar(10),
-@UsuarioModifico varchar(25)
+@UsuarioAplico varchar(25)
 )
 AS
 BEGIN
@@ -13,5 +13,5 @@ BEGIN
 
 	-- INSERTAR UN REGISTRO DE BITÁCORA DEL UPDATE AL DOCUMENTO DE FORMA DE PAGO
 	-- ID_Accion = 2 es modificado. Cualquier duda revisar tabla TipoAcciones
-	EXECUTE sp_Inserta_Registro_Bitacora_Cambio_Facturas 2, @ID_Proveedor, @TipoFactura, @NumeroFactura,  'La factura ha sido aplicada.', @UsuarioModifico
+	EXECUTE sp_Inserta_Registro_Bitacora_Cambio_Facturas 2, @ID_Proveedor, @TipoFactura, @NumeroFactura,  'La factura ha sido aplicada.', @UsuarioAplico
 END
