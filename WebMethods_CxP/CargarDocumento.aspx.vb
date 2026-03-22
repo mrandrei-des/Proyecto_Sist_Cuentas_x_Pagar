@@ -9,6 +9,18 @@
         Public Property numDocumento As String
     End Class
 
+    Public Class RespuestaDocumento
+        Public Property CategoriaDoc As Integer
+        Public Property NumProveedor As Integer
+        Public Property NombreProveedor As String
+        Public Property TipoDocumento As String
+        Public Property NumDocumento As String
+        Public Property Observacion As String
+        Public Property FechaDoc As String
+        Public Property MonedaDoc As String
+        Public Property MontoTotal As Decimal
+    End Class
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         ' Se lee el POST recibido
         Dim body As String
@@ -41,9 +53,11 @@
             }
         Else
             If datosDocumento.idProveedor > 0 AndAlso datosDocumento.Moneda IsNot Nothing Then
+
+                Dim nombreProveedor = obtenerNombreProveedor(datosDocumento.idProveedor)
                 respuesta = New With {
                 .estado = True,
-                .lista = datosDocumento,
+                .lista = formatearRespuestaDocumento(idCategoriaDocumento, nombreProveedor, datosDocumento),
                 .mensaje = ""
             }
             Else
@@ -82,6 +96,44 @@
         End With
 
         Return objDocumentoPago.BuscarDocumentoPago_x_Numero(modDocumentoPago, errorMessage)
+    End Function
+
+    Private Function obtenerNombreProveedor(idProveedor As Integer) As String
+        Dim errorMessage As String = ""
+        Dim objProveedor As New ProveedorDB
+        Dim modProveedor As New Models.Proveedor
+
+        modProveedor = objProveedor.BuscarProveedor_x_ID(idProveedor, errorMessage)
+        Return modProveedor.Nombre
+    End Function
+
+    Private Function formatearRespuestaDocumento(idCategoria As Integer, nombreProveedor As String, documento As Object) As RespuestaDocumento
+
+        Dim datosDocumento As New RespuestaDocumento()
+        If idCategoria = 1 Then
+            datosDocumento.CategoriaDoc = idCategoria
+            datosDocumento.NumProveedor = documento.IdProveedor
+            datosDocumento.NombreProveedor = nombreProveedor
+            datosDocumento.TipoDocumento = documento.TipoFactura
+            datosDocumento.NumDocumento = documento.NumeroFactura
+            datosDocumento.Observacion = documento.Observacion
+            datosDocumento.FechaDoc = CDate(documento.FechaEmision).ToString("yyyy-MM-dd")
+            datosDocumento.MonedaDoc = documento.Moneda
+            datosDocumento.MontoTotal = documento.Total
+            Return datosDocumento
+        End If
+
+        datosDocumento.CategoriaDoc = idCategoria
+        datosDocumento.NumProveedor = documento.IdProveedor
+        datosDocumento.NombreProveedor = nombreProveedor
+        datosDocumento.TipoDocumento = documento.TipoDocumento
+        datosDocumento.NumDocumento = documento.NumeroDocumento
+        datosDocumento.Observacion = documento.Observacion
+        datosDocumento.FechaDoc = CDate(documento.FechaEmision).ToString("yyyy-MM-dd")
+        datosDocumento.MonedaDoc = documento.Moneda
+        datosDocumento.MontoTotal = documento.Total
+
+        Return datosDocumento
     End Function
 
 End Class

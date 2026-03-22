@@ -35,7 +35,7 @@
 <body>
     <%-- Este form es indispensable, hace de contenedor principal al mismo nivel que body, cualquier estilo debe considerarse a él --%>
     <form id="form1" runat="server">
-        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true">
+        <asp:ScriptManager runat="server">
             <Scripts>
                 <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
                 <%--Framework Scripts--%>

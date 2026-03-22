@@ -1,7 +1,6 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="CreacionDocumentos.aspx.vb" Inherits="Proyecto_Sist_Cuentas_x_Pagar.CreacionDocumentos" %>
+﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="CreacionDocumentos.aspx.vb" EnableEventValidation="false" Inherits="Proyecto_Sist_Cuentas_x_Pagar.CreacionDocumentos" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <asp:ScriptManagerProxy ID="ScriptManagerProxy1" runat="server" />
 
     <%-- INICIO DEL MODAL --%>
     <div class="contenedor__dialog" runat="server" id="contenedor__dialogConfirm">

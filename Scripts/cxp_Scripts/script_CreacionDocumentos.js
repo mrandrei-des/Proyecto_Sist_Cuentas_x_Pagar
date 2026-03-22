@@ -165,29 +165,92 @@ function cargarDocumento(documento) {
             alert('Error de conexión con el servidor');
         });
 }
+
+function obtenerTiposDocumento(idCategoria) {
+    fetch(API_ENDPOINT + 'ObtenerTiposDocumento', {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json; charset=utf-8',
+            'X-Requested-With': 'XMLHttpRequest'
+        },
+        body: JSON.stringify({ categoriaDocumento: idCategoria })
+    })
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+            if (data.estado) {
+                renderizarOptionsTipoDocumento(data.lista);
+            } else {
+                alert(data.mensaje)
+            }
+        })
+        .catch(function (err) {
+            console.error('Ha ocurrido un error al ejecutar la petición: ', err)
+            alert('Error de conexión con el servidor');
+        });
+}
+
+function renderizarOptionsTipoDocumento(listaTipoDocumento) {
+    var selectElement = document.getElementById('MainContent_ddlTipoDocumento')
+
+    selectElement.innerHTML = ''
+    listaTipoDocumento.forEach(function (tipoDocumento) {
+        var optionElement = document.createElement('option')
+        optionElement.setAttribute('value', tipoDocumento.IdTipoDocumento)
+        optionElement.innerHTML = tipoDocumento.Descripcion
+
+        selectElement.appendChild(optionElement)
+    })
+}
+
 function llenarCamposDocumentoCargado(documento) {
     // Falta cargar en pantalla lo que viene en el objeto
     console.log(documento)
 
     //Actualizar, llenar, bloquear y mostrar elementos
-    MainContent_btnFiltFacturaForm
-    MainContent_btnFiltPagoForm
+    if (document.getElementById('MainContent_hfCategoria').value != documento.CategoriaDoc) {
+        document.getElementById('MainContent_hfCategoria').value = documento.CategoriaDoc
+        // Llenar
+        obtenerTiposDocumento(documento.CategoriaDoc);
+    }
 
-    MainContent_hfCategoria
+    document.getElementById('MainContent_txtProveedor').value = documento.NombreProveedor
+    document.getElementById('MainContent_hfNumProveedor').value = documento.NumProveedor
+    document.getElementById('MainContent_txtNumDocumento').value = documento.NumDocumento
+    document.getElementById('MainContent_txtFechaEmision').value = documento.FechaDoc
+    document.getElementById('MainContent_txtMontoTotal').value = documento.MontoTotal
+    document.getElementById('MainContent_txtObservacion').value = documento.Observacion
 
-    MainContent_ddlTipoDocumento
-    MainContent_hfNumProveedor
+    moverSelectOption(document.getElementById('MainContent_ddlTipoDocumento'), documento.TipoDocumento)
+    moverSelectOption(document.getElementById('MainContent_ddlMoneda'), documento.MonedaDoc)
 
-    MainContent_txtProveedor
-    MainContent_txtNumDocumento
-    MainContent_txtFechaEmision
-    MainContent_ddlMoneda
-    MainContent_txtMontoTotal
-    MainContent_txtObservacion
-    document.getElementById('btnFacturaFiltPend').setAttribute('diabled', 'true');
-    MainContent_btnGuardar
-    MainContent_btnModificar
-    MainContent_btnAplicar
+    //        .tipoDocumento = documento.TipoDocumento,
+    //        .monedaDoc = documento.MonedaDoc,
+
+    //MainContent_btnFiltFacturaForm
+    //MainContent_btnFiltPagoForm
+
+    //MainContent_ddlTipoDocumento
+    //MainContent_ddlMoneda
+
+    //document.getElementById('btnFacturaFiltPend').setAttribute('diabled', 'true');
+    //
+    //MainContent_btnModificar
+    //MainContent_btnAplicar
+
+    document.getElementById('MainContent_btnGuardar').classList.add('boton__ocultar')
+    document.getElementById('MainContent_btnModificar').classList.remove('boton__ocultar')
+    document.getElementById('MainContent_btnAplicar').classList.remove('boton__ocultar')    
 }
+
+function moverSelectOption(selectElement, valorBuscar) {
+    for (let i = 0; i < selectElement.options.length; i++) {
+        if (selectElement.options[i].value == valorBuscar) {
+            selectElement.options[i].selected = true;
+            break;
+        }
+    }
+}
+
 
 //DocumentoExisteYEstaPendiente

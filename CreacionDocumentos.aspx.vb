@@ -367,6 +367,9 @@ Public Class CreacionDocumentos
                 ddlTipoDocumento.Enabled = False
                 txtProveedor.Enabled = False
                 txtNumDocumento.Enabled = False
+                btnGuardar.CssClass = "boton boton__guardar boton__ocultar"
+                btnModificar.CssClass = "boton boton__modificar"
+                btnAplicar.CssClass = "boton boton__aplicar"
             Else
                 SwalUtils.ShowSwalError(Me, "Atención", $"No se logró modificar el documento de pago. {errorMessage}")
             End If

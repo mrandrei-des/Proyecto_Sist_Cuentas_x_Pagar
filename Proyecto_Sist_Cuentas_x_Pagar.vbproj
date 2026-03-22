@@ -163,6 +163,7 @@
     <Content Include="ListadoUsuarios.aspx" />
     <Content Include="WebMethods_CxP\CargarDocumento.aspx" />
     <Content Include="WebMethods_CxP\ObtenerPendientes.aspx" />
+    <Content Include="WebMethods_CxP\ObtenerTiposDocumento.aspx" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\cxp_Scripts\cambioContrasenna.js" />
     <Content Include="Scripts\cxp_Scripts\DialogConfirm.js" />
@@ -354,6 +355,13 @@
     </Compile>
     <Compile Include="WebMethods_CxP\ObtenerPendientes.aspx.vb">
       <DependentUpon>ObtenerPendientes.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="WebMethods_CxP\ObtenerTiposDocumento.aspx.designer.vb">
+      <DependentUpon>ObtenerTiposDocumento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMethods_CxP\ObtenerTiposDocumento.aspx.vb">
+      <DependentUpon>ObtenerTiposDocumento.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
   </ItemGroup>

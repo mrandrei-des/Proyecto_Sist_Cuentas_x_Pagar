@@ -4,7 +4,7 @@
         Private _tipoDocumento As Integer
         Private _numeroDocumento As String
         Private _observacion As String
-        Private _fechaEmision As Date
+        Private _fechaEmision As DateTime
         Private _estado As Integer
         Private _moneda As String
         Private _tipoCambio As Double
@@ -14,7 +14,7 @@
         Public Sub New()
         End Sub
 
-        Public Sub New(idProveedor As Integer, tipoDocumento As Integer, numeroDocumento As String, observacion As String, fechaEmision As Date, estado As Integer, moneda As String, tipoCambio As Double, total As Double, saldoActual As Double)
+        Public Sub New(idProveedor As Integer, tipoDocumento As Integer, numeroDocumento As String, observacion As String, fechaEmision As DateTime, estado As Integer, moneda As String, tipoCambio As Double, total As Double, saldoActual As Double)
             Me.IdProveedor = idProveedor
             Me.TipoDocumento = tipoDocumento
             Me.NumeroDocumento = numeroDocumento
@@ -63,11 +63,11 @@
             End Set
         End Property
 
-        Public Property FechaEmision As Date
+        Public Property FechaEmision As DateTime
             Get
                 Return _fechaEmision
             End Get
-            Set(value As Date)
+            Set(value As DateTime)
                 _fechaEmision = value
             End Set
         End Property
