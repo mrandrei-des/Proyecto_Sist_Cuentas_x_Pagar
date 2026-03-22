@@ -1,4 +1,5 @@
 ﻿Imports System.Data.SqlClient
+Imports Microsoft.Ajax.Utilities
 Imports Proyecto_Sist_Cuentas_x_Pagar.Utils
 
 Public Class DocumentoPagoDB
@@ -149,6 +150,60 @@ Public Class DocumentoPagoDB
             Return db.ExecuteNonQuery(query, parameters, errorMessage)
         Catch ex As Exception
             Return False
+        End Try
+    End Function
+
+    Public Function FiltrarDocumentosPendientes(filtNumProveedor As Integer, filtFechaInicio As String, filtFechaFin As String, ByRef errorMessage As String) As List(Of Object)
+        Try
+            Dim query As String = "sp_Filtrar_DocumentosFormasPago_Pendientes"
+
+            ' Se agregan los parámetros del procedimiento almacenado a una lista de SqlParameter
+            Dim parameters As New List(Of SqlParameter)
+
+            If filtNumProveedor = 0 Then
+                parameters.Add(New SqlParameter("@FiltID_Proveedor", DBNull.Value))
+            Else
+                parameters.Add(New SqlParameter("@FiltID_Proveedor", filtNumProveedor))
+            End If
+
+            If filtFechaInicio.IsNullOrWhiteSpace() Then
+                parameters.Add(New SqlParameter("@FiltFechaEmisionDesde", DBNull.Value))
+            Else
+                parameters.Add(New SqlParameter("@FiltFechaEmisionDesde", Date.Parse(filtFechaInicio)))
+            End If
+
+            If filtFechaFin.IsNullOrWhiteSpace() Then
+                parameters.Add(New SqlParameter("@FiltFechaEmisionHasta", DBNull.Value))
+            Else
+                parameters.Add(New SqlParameter("@FiltFechaEmisionHasta", Date.Parse(filtFechaFin)))
+            End If
+
+            Dim dt As DataTable = db.ExecuteQuery(errorMessage, query, True, parameters)
+
+            If dt Is Nothing AndAlso errorMessage <> "" Then
+                Return Nothing
+            End If
+
+            Dim listaDocumentos As New List(Of Object)
+            If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
+                For Each documento As DataRow In dt.Rows
+                    Dim modObjeto As Object = New With {
+                        .idCategoriaDoc = 2,
+                        .idProveedor = Convert.ToInt32(documento("IdProveedor").ToString()),
+                        .nombreProveedor = documento("NombreProveedor").ToString(),
+                        .tipoDocumento = documento("TipoDocumento").ToString(),
+                        .numDocumento = documento("NumeroDocumento").ToString(),
+                        .fecha = documento("FechaFormateada").ToString(),
+                        .montoTotal = Double.Parse(documento("Total").ToString()),
+                        .simboloMoneda = documento("SimboloMoneda").ToString()
+                    }
+                    listaDocumentos.Add(modObjeto)
+                Next
+            End If
+
+            Return listaDocumentos
+        Catch ex As Exception
+            Return Nothing
         End Try
     End Function
 

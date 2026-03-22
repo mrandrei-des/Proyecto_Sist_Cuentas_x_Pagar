@@ -1,4 +1,7 @@
 ﻿Imports System.Data.SqlClient
+Imports System.Web.WebSockets
+Imports Microsoft.Ajax.Utilities
+Imports Proyecto_Sist_Cuentas_x_Pagar.Models
 Imports Proyecto_Sist_Cuentas_x_Pagar.Utils
 
 Public Class FacturaDB
@@ -151,4 +154,59 @@ Public Class FacturaDB
             Return False
         End Try
     End Function
+
+    Public Function FiltrarFacturasPendientes(filtNumProveedor As Integer, filtFechaInicio As String, filtFechaFin As String, ByRef errorMessage As String) As List(Of Object)
+        Try
+            Dim query As String = "sp_Filtrar_Facturas_Pendientes"
+
+            ' Se agregan los parámetros del procedimiento almacenado a una lista de SqlParameter
+            Dim parameters As New List(Of SqlParameter)
+
+            If filtNumProveedor = 0 Then
+                parameters.Add(New SqlParameter("@FiltID_Proveedor", DBNull.Value))
+            Else
+                parameters.Add(New SqlParameter("@FiltID_Proveedor", filtNumProveedor))
+            End If
+
+            If filtFechaInicio.IsNullOrWhiteSpace() Then
+                parameters.Add(New SqlParameter("@FiltFechaEmisionDesde", DBNull.Value))
+            Else
+                parameters.Add(New SqlParameter("@FiltFechaEmisionDesde", Date.Parse(filtFechaInicio)))
+            End If
+
+            If filtFechaFin.IsNullOrWhiteSpace() Then
+                parameters.Add(New SqlParameter("@FiltFechaEmisionHasta", DBNull.Value))
+            Else
+                parameters.Add(New SqlParameter("@FiltFechaEmisionHasta", Date.Parse(filtFechaFin)))
+            End If
+
+            Dim dt As DataTable = db.ExecuteQuery(errorMessage, query, True, parameters)
+
+            If dt Is Nothing AndAlso errorMessage <> "" Then
+                Return Nothing
+            End If
+
+            Dim listaFacturas As New List(Of Object)
+            If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
+                For Each factura As DataRow In dt.Rows
+                    Dim modObjeto As Object = New With {
+                        .idCategoriaDoc = 1,
+                        .idProveedor = Convert.ToInt32(factura("IdProveedor").ToString()),
+                        .nombreProveedor = factura("NombreProveedor").ToString(),
+                        .tipoDocumento = factura("TipoFactura").ToString(),
+                        .numDocumento = factura("NumeroFactura").ToString(),
+                        .fecha = factura("FechaFormateada").ToString(),
+                        .montoTotal = Double.Parse(factura("Total").ToString()),
+                        .simboloMoneda = factura("SimboloMoneda").ToString()
+                    }
+                    listaFacturas.Add(modObjeto)
+                Next
+            End If
+
+            Return listaFacturas
+        Catch ex As Exception
+            Return Nothing
+        End Try
+    End Function
+
 End Class

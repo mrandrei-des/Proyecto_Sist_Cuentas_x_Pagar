@@ -50,6 +50,7 @@
 } */
 
 .aside__contenedor__pendientes {
+    padding: 0 6px;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -61,14 +62,19 @@
     background-color: #dadada;
     padding: 3px 5px;
     border-radius: 6px;
+    border: 2px solid transparent;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    cursor: pointer;
+    transition: box-shadow .35s;
 }
 
     .aside__pendientes__item:nth-child(even) {
         background-color: #f8f8f8;
         box-shadow: 0 0 10px 0 #0003;
+    }
+
+    .aside__pendientes__item:hover {
+        box-shadow: 0 0 10px 0 #0005;
     }

@@ -243,9 +243,9 @@
                     <fieldset class="aside__fieldset">
                         <legend>
                             Quiero ver:                            
-                        </legend>                                
+                        </legend>                     
                         <button type="button" class="boton boton__opcion" id="btnFacturaFiltPend">Factura</button>
-                        <button type="button"class="boton boton__opcion boton__opcion--active" id="btnPagoFiltPend">Pago</button>
+                        <button type="button"class="boton boton__opcion" id="btnPagoFiltPend">Pago</button>
                     </fieldset>
                 </div>
             </section>
@@ -261,22 +261,8 @@
                 </fieldset>                
             </section>
 
-            <section class="aside__contenedor__pendientes">
+            <section class="aside__contenedor__pendientes" id="contenedorPendientes">
                 <%-- Estos item se generar por JavaScript --%>
-
-                <div class="aside__pendientes__item">
-                    <div class="aside__item__info">
-                        <p class="aside__info">
-                            FAC-001 - Proveedor A - 24/06/2025 - $1500.10
-                        </p>                        
-                    </div>
-                    <div class="aside__item__actions">
-                        <button class="boton boton__opcion boton__opcion--active" id="btnCargaDocPend">Cargar</button>
-                    </div>
-                </div>
-
-
-
             </section>
         </aside>
     </div>

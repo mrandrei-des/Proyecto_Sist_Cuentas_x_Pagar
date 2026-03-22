@@ -1,0 +1,1 @@
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="CargarDocumento.aspx.vb" Inherits="Proyecto_Sist_Cuentas_x_Pagar.CargarDocumento" %>
