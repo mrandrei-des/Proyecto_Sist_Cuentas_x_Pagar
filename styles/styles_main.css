@@ -1,15 +1,22 @@
 ﻿/* ----- MAIN ----- */
 .main__wrapper {
-    max-width: 1300px;
+    max-width: 1500px;
     width: 100%;
     position: relative;
     justify-self: center;
-    align-self: center;
+    align-self: flex-start;
+    margin: 25px 0;
+}
+
+.main__wrapper__flex {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
 }
 
 .page__main {
     background-color: var(--colorLetraClaro);
-    border-radius: 5px;
+    border-radius: 6px;
     box-shadow: 0 0 15px 0 #0002;
 }
 

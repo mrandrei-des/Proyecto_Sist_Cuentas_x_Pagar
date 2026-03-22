@@ -29,11 +29,13 @@
     <link href="~/styles/styles_formulario.css" rel="stylesheet" type="text/css" />    
     <link href="~/styles/styles_listado.css" rel="stylesheet" type="text/css" />
     <link href="~/styles/styles_tablas.css" rel="stylesheet" type="text/css" />
+    <link href="styles/styles__aside__docs_pendientes.css" rel="stylesheet" />
+
 </head>
 <body>
     <%-- Este form es indispensable, hace de contenedor principal al mismo nivel que body, cualquier estilo debe considerarse a él --%>
     <form id="form1" runat="server">
-        <asp:ScriptManager runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true">
             <Scripts>
                 <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
                 <%--Framework Scripts--%>

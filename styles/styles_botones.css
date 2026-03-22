@@ -10,29 +10,43 @@
     gap: 10px;
     font-family: 'InterTight';
     font-size: 1em;
-    font-weight: 800;
+    font-weight: 700;
     letter-spacing: 2px;
     cursor: pointer;
-    transition: background-color .35s, outline-color .35s;
     flex-grow: 1;
+    max-width: 200px;
+    color: #fff;
+    transition: background-color .35s, outline-color .35s, color .35s;
 }
 
     .boton:hover {
-        transition-duration: .25s;
+        outline-color: var(--colorNegroLetra);
     }
 
-.boton__guardar,
-.boton__modificar,
-.boton__aplicar {
-/*    width: 100%;*/
-    padding: 10px 15px;
+.boton__opcion {
+    padding: 5px 10px;
+    background-color: #dadada;
+    color: #fff;
+    margin: 5px;
+}
+
+.boton__dis_inline {
+    display: inline;
+}
+
+.boton__opcion--active {
+    background-color: #2C2C2A;
+    outline-color: var(--colorNegroLetra);
+}
+
+.boton:hover {
+    transition-duration: .25s;
 }
 
 /* --- BOTÓN PARA GUARDAR --- */
 .boton__guardar {
-    color: var(--colorLetraClaro);
     letter-spacing: 1px;
-    background-color: var(--colorLetraOscuroSecundario);
+    background-color: #185FA5;
 }
 
     .boton__guardar:hover {
@@ -70,23 +84,22 @@
 }
 
 .boton__aplicar {
-    background-color: var(--colorLetraOscuro);
-    color: var(--colorLetraOscuroSecundario);
+    background-color: var(--colorPrincipal);
 }
 
     .boton__aplicar:hover {
-        outline-color: var(--colorLetraOscuro);
+        outline-color: var(--colorPrincipal);
     }
 
-    .boton__refrescar {
-        background-color: var(--colorSecundario);
-        padding: 10px 15px;
-        color: var(--colorPrincipal);
-    }
+.boton__refrescar {
+    background-color: transparent;
+    padding: 5px 10px;
+    color: #9C9A92;
+}
 
     .boton__refrescar:hover {
-        background-color: #88d6c0;
-        outline-color: var(--colorPrincipal);
+        outline-color: #2C2C2A;
+        color: #2C2C2A;
     }
 
 .boton--filtro {

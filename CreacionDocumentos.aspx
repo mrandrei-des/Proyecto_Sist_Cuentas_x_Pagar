@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="CreacionDocumentos.aspx.vb" Inherits="Proyecto_Sist_Cuentas_x_Pagar.CreacionDocumentos" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <asp:ScriptManagerProxy ID="ScriptManagerProxy1" runat="server" />
+
     <%-- INICIO DEL MODAL --%>
     <div class="contenedor__dialog" runat="server" id="contenedor__dialogConfirm">
         <div class="dialog__container" runat="server" id="dialogConfirm">
@@ -31,12 +33,11 @@
             </div>
         </div>
     </div>
-
     <%-- FIN DEL MODAL --%>
 
-    <div class="main__wrapper">
-        <main class="page__main page__main--registro" runat="server">
+    <div class="main__wrapper main__wrapper__flex">
 
+        <main class="page__main page__main--registro" runat="server">
             <section class="contenedor__section--titulo">
                 <h1 class="titulo">
                     <span class="contenedor__icono--titulo">
@@ -49,7 +50,7 @@
 
             <section class="contenedor__section--subtitulo">
                 <div class="contenedor__subtitulo">
-                    <h2 class="formulario__subtitulo">Formulario Creación Facturas o Documentos Pago</h2>
+                    <%--<h2 class="formulario__subtitulo">Formulario Creación Facturas o Documentos Pago</h2>--%>
                     <p class="formulario__parrafo parrafo">Complete cada uno de los campos para registrar un nuevo documento</p>
                 </div>
 
@@ -67,69 +68,67 @@
                 <div class="formulario formulario--gr4" role="form">
 
                     <div class="formulario__contenedor">
-                        <fieldset class="formulario__fieldset formulario__fieldset--gc1">
-                            <legend>Categoría Documento:</legend>
+                        <fieldset class="formulario__fieldset formulario__fieldset--gc2">
+                            <legend>Documento</legend>
 
-                            <!-- Factura/Documento Pago -->
                             <div class="formulario__contenedor-input">
-                                <asp:Label ID="lblCategoria" runat="server" Text="Categoría:" CssClass="formulario__label">Categoría:
-                                    <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="formulario__input" OnSelectedIndexChanged="ddlCategoria_SelectedIndexChanged" AutoPostBack="true">
-                                    </asp:DropDownList>
-                                </asp:Label>
+                                <p class="formulario__label">Categoría</p>
+                                <div class="formulario__contenedor__categorias">
+
+                                    <asp:LinkButton ID="btnFiltFacturaForm" runat ="server" CssClass="boton boton__opcion" OnClick="btnFiltFacturaForm_Click" ToolTip="Cargar Tipos de Factura" CausesValidation="false">
+                                        <span>Factura</span>
+                                    </asp:LinkButton>
+
+                                    <asp:LinkButton ID="btnFiltPagoForm" runat ="server" CssClass="boton boton__opcion" OnClick="btnFiltPagoForm_Click" ToolTip="Cargar Tipos de Documento Pago" CausesValidation="false">
+                                        <span>Pago</span>
+                                    </asp:LinkButton>
+
+                                    <asp:HiddenField ID="hfCategoria" runat="server" />
+                                </div>
                             </div>
+
+                            <div class="formulario__contenedor-input">
+                                <asp:Label ID="lblTipoDocumento" class="formulario__label" for="ddlTipoDocumento" runat="server">
+                                    Tipo de Documento
+                                </asp:Label>
+                                <asp:DropDownList ID="ddlTipoDocumento" runat="server" CssClass="formulario__input" required="true">
+                                </asp:DropDownList>
+                                <div class="formulario__contenedor-mensajes">
+                                    <p class="formulario__mensaje">
+                                        Es necesario seleccionar el tipo de documento.
+                                    </p>
+                                </div>
+                            </div>
+                            
                         </fieldset>
                     </div>
 
                     <div class="formulario__contenedor">
                         <fieldset class="formulario__fieldset formulario__fieldset--gc2">
-                            <legend>Datos Proveedor:</legend>
-
-                            <%-- Buscar Proveedor --%>
-                            <div class="formulario__contenedor-input">
-                                <asp:Label ID="lblFiltProveedor" runat="server" Text="Buscar Nombre:" CssClass="formulario__label">
-                                    <asp:TextBox ID="txtFiltProveedor" runat="server" CssClass="formulario__input" placeholder="Los Patitos SA" OnTextChanged="txtFiltProveedor_TextChanged" AutoPostBack="true"></asp:TextBox>
-                                </asp:Label>
-                            </div>
+                            <legend>Identificación</legend>
 
                             <%-- Proveedor --%>
-                            <div class="formulario__contenedor-input">
-                                <asp:Label ID="lblProveedor" runat="server" Text="Proveedor:" CssClass="formulario__label">Proveedor:
-                                    <asp:DropDownList ID="ddlProveedor" runat="server" CssClass="formulario__input" required="true">
-                                    </asp:DropDownList>
-                                </asp:Label>
-                                <%-- Validación del tipo de identificación --%>
+                            <div class="formulario__contenedor-input formulario__contenedor-input-sp2">
+                                <asp:Label ID="lblProveedor" runat="server" CssClass="formulario__label" AssociatedControlID="txtProveedor">Proveedor</asp:Label>
+
+                                <asp:TextBox ID="txtProveedor" runat="server" CssClass="formulario__input" placeholder="Escriba nombre o código..." autocomplete="off" required="true"></asp:TextBox>
+                                <asp:HiddenField ID="hfNumProveedor" runat="server" />
+
+                                <!-- CONFORME EL USUARIO ESCRIBA, SE AGREGARÁN SUGERENCIAS -->
+                                <div class="contenedor__sugerencias" id="ddProveedores">
+                                </div>
+
                                 <div class="formulario__contenedor-mensajes">
                                     <p class="formulario__mensaje">
-                                        <asp:RequiredFieldValidator ID="rfvProveedor" runat="server" ErrorMessage="Es necesario seleccionar el proveedor del documento." ControlToValidate="ddlProveedor" Display="Dynamic"></asp:RequiredFieldValidator>
+                                        <asp:RequiredFieldValidator ID="rfvProveedor" runat="server" ErrorMessage="Es necesario seleccionar el proveedor del documento." ControlToValidate="txtProveedor" Display="Dynamic"></asp:RequiredFieldValidator>
                                     </p>
                                 </div>
                             </div>
-                        </fieldset>
-                    </div>
 
-                    <div class="formulario__contenedor">
-                        <fieldset class="formulario__fieldset formulario__fieldset--gc2 formulario--gr4">
-                            <legend>Datos Documento:</legend>
-
-                            <%-- Tipo Documento --%>
-                            <div class="formulario__contenedor-input">
-                                <asp:Label ID="lblTipoDocumento" runat="server" Text="Tipo Documento:" CssClass="formulario__label" AssociatedControlID="ddlTipoDocumento">Tipo Documento:
-                                </asp:Label>
-                                <asp:DropDownList ID="ddlTipoDocumento" runat="server" CssClass="formulario__input" required="true">
-                                </asp:DropDownList>
-
-                                <%-- Validación del tipo de documento --%>
-                                <div class="formulario__contenedor-mensajes">
-                                    <p class="formulario__mensaje">
-                                        <asp:RequiredFieldValidator ID="rfvTipoDocumento" runat="server" ErrorMessage="Es necesario seleccionar el tipo de documento." ControlToValidate="ddlTipoDocumento" Display="Dynamic"></asp:RequiredFieldValidator>
-                                    </p>
-                                </div>
-                            </div>
                             <%-- Número Documento --%>
                             <div class="formulario__contenedor-input">
-                                <asp:Label ID="lblNumeroDocumento" runat="server" Text="Número Documento:" CssClass="formulario__label" AssociatedControlID="txtNumDocumento">
-                                </asp:Label>
-                                <asp:TextBox ID="txtNumDocumento" runat="server" CssClass="formulario__input" placeholder="17056312" required="true" OnTextChanged="txtNumDocumento_TextChanged" AutoPostBack="true"></asp:TextBox>
+                                <asp:Label ID="lblNumeroDocumento" runat="server" CssClass="formulario__label" AssociatedControlID="txtNumDocumento">Número Documento</asp:Label>
+                                <asp:TextBox ID="txtNumDocumento" runat="server" CssClass="formulario__input" placeholder="17056312" required="true"></asp:TextBox>
 
                                 <%-- Validación Número Documento --%>
                                 <div class="formulario__contenedor-mensajes">
@@ -140,8 +139,8 @@
                             </div>
 
                             <%-- Fecha Documento --%>
-                            <div class="formulario__contenedor-input formulario__contenedor-input-sp2">
-                                <asp:Label ID="lblFechaEmision" runat="server" Text="Fecha de Emisión:" CssClass="formulario__label" AssociatedControlID="txtFechaEmision">
+                            <div class="formulario__contenedor-input">
+                                <asp:Label ID="lblFechaEmision" runat="server" CssClass="formulario__label" AssociatedControlID="txtFechaEmision">Fecha
                                 </asp:Label>
                                 <asp:TextBox ID="txtFechaEmision" runat="server" CssClass="formulario__input" TextMode="Date" required="true"></asp:TextBox>
                                 <%-- Validación Fecha Documento --%>
@@ -152,35 +151,16 @@
                                 </div>
                             </div>
 
-                            <%-- Estado Documento --%>
-<%--                            <div class="formulario__contenedor-input formulario__contenedor-input__toggle">
-                                <asp:Label ID="lblEstado" runat="server" Text="Estado Documento:" CssClass="formulario__label label__toggle">
-                                    <span>Estado: </span>
-                                    <div class="contenedor__toggleButton">
-                                        <div class="contenedor__barra"></div>
-                                        <asp:LinkButton runat="server" class="contenedor__btnCircle" id="btnChkInput" name="btnChkInput" CausesValidation="false">
-                                            <asp:CheckBox runat="server" CssClass="contenedor__txtCheck" ID="chkInput"/>
-                                        </asp:LinkButton>
-                                    </div>
-                                </asp:Label>
-                            </div>--%>
+                        </fieldset>
+                    </div>
 
-                            <%-- Observacion Documento --%>
-                            <div class="formulario__contenedor-input formulario__contenedor-input-sp2">
-                                <asp:Label ID="lblObservacion" runat="server" Text="Observación:" CssClass="formulario__label">
-                                    <textarea id="txtAreaObservacion" runat="server" class="formulario__input formulario__textarea" placeholder="Compra de insumos" required></textarea>
-                                </asp:Label>
-                                <%-- Validación Observación Documento --%>
-                                <div class="formulario__contenedor-mensajes">
-                                    <p class="formulario__mensaje">
-                                        <asp:RequiredFieldValidator ID="rfvObservacion" runat="server" ErrorMessage="Es necesario indicar una observación para el documento." ControlToValidate="txtAreaObservacion" Display="Dynamic"></asp:RequiredFieldValidator>
-                                    </p>
-                                </div>
-                            </div>
+                    <div class="formulario__contenedor">
+                        <fieldset class="formulario__fieldset formulario__fieldset--gc--aufr">
+                            <legend>Valor</legend>
 
                             <%-- Moneda Documento --%>
                             <div class="formulario__contenedor-input">
-                                <asp:Label ID="lblMoneda" runat="server" Text="Moneda:" CssClass="formulario__label">Moneda:
+                                <asp:Label ID="lblMoneda" runat="server" CssClass="formulario__label">Moneda
                                     <asp:DropDownList ID="ddlMoneda" runat="server" CssClass="formulario__input" required="true">
                                     </asp:DropDownList>
                                 </asp:Label>
@@ -194,9 +174,8 @@
 
                             <%-- Monto Documento --%>
                             <div class="formulario__contenedor-input">
-                                <asp:Label ID="lblMonto" runat="server" Text="Monto Total:" CssClass="formulario__label">
-                                </asp:Label>
-                                <asp:TextBox ID="txtMontoTotal" runat="server" CssClass="formulario__input" required="true" placeholder="50000"></asp:TextBox>
+                                <asp:Label ID="lblMonto" runat="server" CssClass="formulario__label">Monto Total</asp:Label>
+                                <asp:TextBox ID="txtMontoTotal" runat="server" CssClass="formulario__input" required="true" placeholder="₡0.00"></asp:TextBox>
                                 <%-- Validación Monto Documento --%>
                                 <div class="formulario__contenedor-mensajes">
                                     <p class="formulario__mensaje">
@@ -204,26 +183,40 @@
                                     </p>
                                 </div>
                             </div>
+
+                            <%-- Observación Documento --%>
+                            <div class="formulario__contenedor-input formulario__contenedor-input-sp2">
+                                <asp:Label ID="lblObservacion" runat="server" CssClass="formulario__label">Observación
+                                    <asp:TextBox ID="txtObservacion" runat="server" class="formulario__input" placeholder="Compra de insumos" required="true"></asp:TextBox>
+                                </asp:Label>
+                                <%-- Validación Observación Documento --%>
+                                <div class="formulario__contenedor-mensajes">
+                                    <p class="formulario__mensaje">
+                                        <asp:RequiredFieldValidator ID="rfvObservacion" runat="server" ErrorMessage="Es necesario indicar una observación para el documento." ControlToValidate="txtObservacion" Display="Dynamic"></asp:RequiredFieldValidator>
+                                    </p>
+                                </div>
+                            </div>
+                            
                         </fieldset>
                     </div>
 
                     <footer class="formulario__contenedor formulario__footer">
 
-                        <asp:LinkButton ID="btnGuardar" runat ="server" Text="Guardar" CssClass="boton boton__guardar" OnClick="btnGuardar_Click" ToolTip="Guardar Borrador de Documento">
+                        <asp:LinkButton ID="btnGuardar" runat ="server" CssClass="boton boton__guardar" OnClick="btnGuardar_Click" ToolTip="Guardar Borrador de Documento">
                             <span>Guardar</span>
                             <span class="contenedor__icono">
                                <i class="fa-solid fa-floppy-disk"></i>
                             </span>  
                         </asp:LinkButton>
 
-                        <asp:LinkButton ID="btnModificar" runat ="server" Text="Modificar" CssClass="boton boton__modificar" OnClick="btnModificar_Click" ToolTip="Modificar Documento">
+                        <asp:LinkButton ID="btnModificar" runat ="server" CssClass="boton boton__modificar" OnClick="btnModificar_Click" ToolTip="Modificar Documento">
                             <span>Modificar</span>
                             <span class="contenedor__icono">
                                <i class="fa-solid fa-file-pen"></i>
                             </span>  
                         </asp:LinkButton>
 
-                        <asp:LinkButton ID="btnAplicar" runat ="server" Text="Cancelar" CssClass="boton boton__aplicar" OnClick="btnAplicar_Click" ToolTip="Aplicar Documento">
+                        <asp:LinkButton ID="btnAplicar" runat ="server" CssClass="boton boton__aplicar" OnClick="btnAplicar_Click" ToolTip="Aplicar Documento">
                             <span>Aplicar</span>
                             <span class="contenedor__icono">
                                <i class="fa-solid fa-file-circle-check"></i>
@@ -240,6 +233,53 @@
                 </div>
             </section>
         </main>
+
+        <aside class="contenedor__aside">
+            <section class="aside__contenedor__titulo">
+                <h3 class="aside__titulo">Documentos Pendientes de Aplicar</h3>
+            </section>
+            <section class="aside__contenedor__verTipoDocumento">
+                <div class="contenedor__verTipoDocumento">
+                    <fieldset class="aside__fieldset">
+                        <legend>
+                            Quiero ver:                            
+                        </legend>                                
+                        <button type="button" class="boton boton__opcion" id="btnFacturaFiltPend">Factura</button>
+                        <button type="button"class="boton boton__opcion boton__opcion--active" id="btnPagoFiltPend">Pago</button>
+                    </fieldset>
+                </div>
+            </section>
+
+            <section class="aside__contenedor__filtros">
+                <fieldset class="aside__fieldset aside__fieldset--filtros">
+                    <legend>
+                        Ordenar documentos por: 
+                    </legend>
+                    <button type="button" class="boton boton__dis_inline boton__opcion" id="btnFiltPendReciente">Más Recientes</button>
+                    <button type="button" class="boton boton__dis_inline boton__opcion boton__opcion--active" id="btnFiltPendAntiguo">Más Antiguas</button>
+                    <button type="button" class="boton boton__dis_inline boton__opcion" id="btnFiltPendTodo">Todos</button>                    
+                </fieldset>                
+            </section>
+
+            <section class="aside__contenedor__pendientes">
+                <%-- Estos item se generar por JavaScript --%>
+
+                <div class="aside__pendientes__item">
+                    <div class="aside__item__info">
+                        <p class="aside__info">
+                            FAC-001 - Proveedor A - 24/06/2025 - $1500.10
+                        </p>                        
+                    </div>
+                    <div class="aside__item__actions">
+                        <button class="boton boton__opcion boton__opcion--active" id="btnCargaDocPend">Cargar</button>
+                    </div>
+                </div>
+
+
+
+            </section>
+        </aside>
     </div>
-    <%--<script src="Scripts/cxp_Scripts/dialogConfirm.js"></script>--%>
+
+    <script src="Scripts/cxp_Scripts/script_CreacionDocumentos.js"></script>
 </asp:Content>

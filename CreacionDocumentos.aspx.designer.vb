@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class CreacionDocumentos
 
     '''<summary>
+    '''Control ScriptManagerProxy1.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents ScriptManagerProxy1 As Global.System.Web.UI.ScriptManagerProxy
+
+    '''<summary>
     '''Control contenedor__dialogConfirm.
     '''</summary>
     '''<remarks>
@@ -50,67 +59,31 @@ Partial Public Class CreacionDocumentos
     Protected WithEvents btnContinuarAplicacion As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
-    '''Control lblCategoria.
+    '''Control btnFiltFacturaForm.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lblCategoria As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents btnFiltFacturaForm As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
-    '''Control ddlCategoria.
+    '''Control btnFiltPagoForm.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents ddlCategoria As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents btnFiltPagoForm As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
-    '''Control lblFiltProveedor.
+    '''Control hfCategoria.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lblFiltProveedor As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''Control txtFiltProveedor.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents txtFiltProveedor As Global.System.Web.UI.WebControls.TextBox
-
-    '''<summary>
-    '''Control lblProveedor.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents lblProveedor As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''Control ddlProveedor.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents ddlProveedor As Global.System.Web.UI.WebControls.DropDownList
-
-    '''<summary>
-    '''Control rfvProveedor.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents rfvProveedor As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    Protected WithEvents hfCategoria As Global.System.Web.UI.WebControls.HiddenField
 
     '''<summary>
     '''Control lblTipoDocumento.
@@ -131,13 +104,40 @@ Partial Public Class CreacionDocumentos
     Protected WithEvents ddlTipoDocumento As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''Control rfvTipoDocumento.
+    '''Control lblProveedor.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents rfvTipoDocumento As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    Protected WithEvents lblProveedor As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control txtProveedor.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtProveedor As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control hfNumProveedor.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents hfNumProveedor As Global.System.Web.UI.WebControls.HiddenField
+
+    '''<summary>
+    '''Control rfvProveedor.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents rfvProveedor As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
     '''<summary>
     '''Control lblNumeroDocumento.
@@ -194,33 +194,6 @@ Partial Public Class CreacionDocumentos
     Protected WithEvents rfvFechaEmision As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
     '''<summary>
-    '''Control lblObservacion.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents lblObservacion As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''Control txtAreaObservacion.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents txtAreaObservacion As Global.System.Web.UI.HtmlControls.HtmlTextArea
-
-    '''<summary>
-    '''Control rfvObservacion.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents rfvObservacion As Global.System.Web.UI.WebControls.RequiredFieldValidator
-
-    '''<summary>
     '''Control lblMoneda.
     '''</summary>
     '''<remarks>
@@ -273,6 +246,33 @@ Partial Public Class CreacionDocumentos
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents rfvMontoTotal As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+    '''<summary>
+    '''Control lblObservacion.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblObservacion As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control txtObservacion.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtObservacion As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control rfvObservacion.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents rfvObservacion As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
     '''<summary>
     '''Control btnGuardar.

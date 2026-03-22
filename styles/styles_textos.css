@@ -1,6 +1,6 @@
 ﻿/* --- ESTILOS PARA TÍTULOS, SUBTÍTULOS Y PÁRRAFOS --- */
 h1 {
-    font-size: 1.5em;
+    font-size: 1.2rem;
 }
 
 .titulo {
@@ -11,7 +11,7 @@ h1 {
 }
 
 .parrafo {
-    font-size: .9em;
+    font-size: .9rem;
 }
 
     .parrafo span {

@@ -1,4 +1,6 @@
 ﻿Imports System.Threading.Tasks
+Imports System.Web.Services
+Imports System.Web.Script.Services
 Imports Antlr.Runtime.Tree
 Imports Microsoft.Ajax.Utilities
 Imports Proyecto_Sist_Cuentas_x_Pagar.Models
@@ -14,67 +16,28 @@ Public Class CreacionDocumentos
         Dim enlace As HtmlAnchor = Master.FindControl("enlaceRegistroDocumentos")
         enlace.Style.Add("background-color", "var(--colorLetraOscuroSecundario)")
         If Not IsPostBack Then
+            hfCategoria.Value = 1
             prcLlena_ddls()
+            btnFiltFacturaForm.CssClass = "boton boton__opcion boton__opcion--active"
+            btnFiltPagoForm.CssClass = "boton boton__opcion"
+
+            Dim strCategoria As String = "Factura"
+            prcCambiaTextoEtiquetas(strCategoria.ToLower())
+
             btnModificar.CssClass = "boton boton__modificar boton__ocultar"
             btnAplicar.CssClass = "boton boton__aplicar boton__ocultar"
+
         End If
     End Sub
 
     Private Sub prcLlena_ddls()
-        prcLlena__ddlCategoria()
-        Dim idCategoria As Integer = Convert.ToInt32(ddlCategoria.SelectedValue)
+        ' /***********/ ESTO CAMBIA POR ALGUNO DE LOS DOS BOTONES
+        'prcLlena__ddlCategoria()
+        'Dim idCategoria As Integer = Convert.ToInt32(ddlCategoria.SelectedValue)
+
+        Dim idCategoria As Integer = Convert.ToInt32(hfCategoria.Value)
         prcLlena__ddlTipoDocumento(idCategoria)
-        prcLlena__ddlProveedores()
         prcLlena_ddlMoneda()
-    End Sub
-
-    Private Sub prcLlena__ddlCategoria()
-        Dim listCatDocumentos As List(Of Models.CategoriaDocumento)
-        Dim objCatDocumentosDB As New CategoriaDocumentoDB
-        Dim errorMessage As String = ""
-
-        listCatDocumentos = objCatDocumentosDB.ConsultarCategoriaDocumento(errorMessage)
-
-        If listCatDocumentos Is Nothing Then
-            SwalUtils.ShowSwalError(Me, errorMessage)
-            Return
-        End If
-
-        If listCatDocumentos.Count > 0 Then
-            ddlCategoria.Items.Clear()
-
-            For Each modCatDocumento As Models.CategoriaDocumento In listCatDocumentos
-                ddlCategoria.Items.Add(New ListItem(modCatDocumento.Descripcion.ToString(), modCatDocumento.IdCategoria))
-            Next
-
-            ddlCategoria.SelectedIndex = 0
-        Else
-            SwalUtils.ShowSwalError(Me, "No se han encontrado Categorías de Documentos en el sistema. Revise la configuración correspondiente.")
-        End If
-    End Sub
-
-    Private Sub prcLlena__ddlProveedores(Optional filtNombre As String = "")
-        Dim listProveedores As List(Of Models.Proveedor)
-        Dim objProveedorDB As New ProveedorDB
-        Dim errorMessage As String = ""
-
-        listProveedores = objProveedorDB.FiltrarProveedores_Nombre(filtNombre, errorMessage)
-        If listProveedores Is Nothing Then
-            SwalUtils.ShowSwalError(Me, errorMessage)
-            Return
-        End If
-
-        If listProveedores.Count > 0 Then
-            ddlProveedor.Items.Clear()
-
-            For Each modProveedor As Models.Proveedor In listProveedores
-                ddlProveedor.Items.Add(New ListItem($"{modProveedor.NumeroProveedor} - {modProveedor.Nombre.ToString()}", modProveedor.NumeroProveedor))
-            Next
-
-            ddlProveedor.SelectedIndex = 0
-        Else
-            SwalUtils.ShowSwalMessage(Me, "Consulta", "No se encontraron proveedores con los filtros utilizados.", "")
-        End If
     End Sub
 
     Private Sub prcLlena__ddlTipoDocumento(idCategoria As Integer)
@@ -92,10 +55,8 @@ Public Class CreacionDocumentos
         If listTipoDocumento.Count > 0 Then
             ddlTipoDocumento.Items.Clear()
 
-            ddlTipoDocumento.Items.Add(New ListItem("Seleccione una opción", ""))
-
             For Each modTipoDocumento As Models.TipoDocumento In listTipoDocumento
-                ddlTipoDocumento.Items.Add(New ListItem(modTipoDocumento.Descripcion.ToString(), modTipoDocumento.IdCategoria))
+                ddlTipoDocumento.Items.Add(New ListItem(modTipoDocumento.Descripcion.ToString(), modTipoDocumento.IdTipoDocumento))
             Next
 
             ddlTipoDocumento.SelectedIndex = 0
@@ -119,10 +80,9 @@ Public Class CreacionDocumentos
 
         If listMonedas.Count > 0 Then
             ddlMoneda.Items.Clear()
-            ddlMoneda.Items.Add(New ListItem("Seleccione una opción", ""))
 
             For Each modMoneda As Models.Moneda In listMonedas
-                Dim textoMoneda As String = $"{modMoneda.Descripcion} - {modMoneda.Simbolo}"
+                Dim textoMoneda As String = $"{modMoneda.Descripcion}"
                 ddlMoneda.Items.Add(New ListItem(textoMoneda, modMoneda.CodigoMoneda.ToString()))
             Next
 
@@ -132,47 +92,42 @@ Public Class CreacionDocumentos
         End If
     End Sub
 
-    Protected Sub ddlCategoria_SelectedIndexChanged(sender As Object, e As EventArgs)
-        Dim idCategoria As Integer = Convert.ToInt32(ddlCategoria.SelectedValue)
-        Dim strCategoria As String = ddlCategoria.SelectedItem.Text
-        prcLlena__ddlTipoDocumento(idCategoria)
-
-        prcCambiaTextoEtiquetas(strCategoria.ToLower())
-    End Sub
-
-    Protected Sub txtFiltProveedor_TextChanged(sender As Object, e As EventArgs)
-        Dim filtNombre As String = txtFiltProveedor.Text.Trim()
-        prcLlena__ddlProveedores(filtNombre)
-    End Sub
-
     Private Sub prcCambiaTextoEtiquetas(tipoDocumento As String)
         lblTipoDocumento.Text = $"Tipo de {tipoDocumento}:"
         lblNumeroDocumento.Text = $"Número de {tipoDocumento}:"
-        lblFechaEmision.Text = $"Fecha de emisión {tipoDocumento}:"
+        lblFechaEmision.Text = $"Fecha {tipoDocumento}:"
         lblMonto.Text = $"Monto total {tipoDocumento}:"
     End Sub
 
     Private Sub prcLimpiarCampos()
+        hfCategoria.Value = 1
         prcLlena_ddls()
-        txtFiltProveedor.Text = ""
+        btnFiltFacturaForm.CssClass = "boton boton__opcion boton__opcion--active"
+        btnFiltPagoForm.CssClass = "boton boton__opcion"
+
+        txtProveedor.Text = ""
         txtNumDocumento.Text = ""
         txtFechaEmision.Text = ""
-        txtAreaObservacion.InnerText = ""
+        txtObservacion.Text = ""
         txtMontoTotal.Text = ""
         btnGuardar.CssClass = "boton boton__guardar"
         btnModificar.CssClass = "boton boton__modificar boton__ocultar"
         btnAplicar.CssClass = "boton boton__aplicar boton__ocultar"
-        ddlCategoria.Enabled = True
+
+        btnFiltFacturaForm.Enabled = True
+        btnFiltPagoForm.Enabled = True
         ddlTipoDocumento.Enabled = True
-        txtFiltProveedor.Enabled = True
-        ddlProveedor.Enabled = True
+        txtProveedor.Enabled = True
         txtNumDocumento.Enabled = True
     End Sub
 
     Protected Sub txtNumDocumento_TextChanged(sender As Object, e As EventArgs)
         ' Variables y validaciones para ver si el documento existe o si alguien lo eliminó
-        Dim idCategoriaDocumento As String = ddlCategoria.SelectedValue, idTipoDocumento As String = ddlTipoDocumento.SelectedValue
-        Dim idProveedor As String = ddlProveedor.SelectedValue
+        'Dim idCategoriaDocumento As String = ddlCategoria.SelectedValue, idTipoDocumento As String = ddlTipoDocumento.SelectedValue
+        ' /***********/ ESTO CAMBIA POR LOS BOTONES DE CATEGORÍA
+        Dim idCategoriaDocumento As String = hfCategoria.Value, idTipoDocumento As String = ddlTipoDocumento.SelectedValue
+
+        Dim idProveedor As String = hfNumProveedor.Value.ToString()
         Dim numDocumento As String = txtNumDocumento.Text.ToString().Trim()
         Dim errorMessage As String = ""
 
@@ -202,8 +157,8 @@ Public Class CreacionDocumentos
     End Sub
 
     Protected Sub btnGuardar_Click(sender As Object, e As EventArgs)
-        Dim idCategoriaDocumento As String = ddlCategoria.SelectedValue, idTipoDocumento As String = ddlTipoDocumento.SelectedValue
-        Dim idProveedor As String = ddlProveedor.SelectedValue
+        Dim idCategoriaDocumento As String = hfCategoria.Value, idTipoDocumento As String = ddlTipoDocumento.SelectedValue
+        Dim idProveedor As String = hfNumProveedor.Value.ToString()
         Dim numDocumento As String = txtNumDocumento.Text.ToString()
 
         'Valida que el documento no haya sido registrado previamente, aquí revisa hasta dentro de los que fueron eliminados
@@ -212,7 +167,7 @@ Public Class CreacionDocumentos
         End If
 
         ' Variables para las validaciones y proceso de guardado
-        Dim observacion As String = txtAreaObservacion.Value.ToString()
+        Dim observacion As String = txtObservacion.Text
         Dim fechaEmision As String = txtFechaEmision.Text
         Dim moneda As String = ddlMoneda.SelectedValue.ToString(), montoTotal As String = txtMontoTotal.Text, saldoActual = txtMontoTotal.Text
 
@@ -273,10 +228,10 @@ Public Class CreacionDocumentos
             btnGuardar.CssClass = "boton boton__guardar boton__ocultar"
             btnModificar.CssClass = "boton boton__modificar"
             btnAplicar.CssClass = "boton boton__aplicar"
-            ddlCategoria.Enabled = False
+            btnFiltFacturaForm.Enabled = False
+            btnFiltPagoForm.Enabled = False
             ddlTipoDocumento.Enabled = False
-            txtFiltProveedor.Enabled = False
-            ddlProveedor.Enabled = False
+            txtProveedor.Enabled = False
             txtNumDocumento.Enabled = False
         Else
             nombreDocumento = IIf(idCategoriaDocumento = 1, "la factura", "el documento de pago")
@@ -288,8 +243,9 @@ Public Class CreacionDocumentos
         'Se trabaja con el documento que está en pantalla, el cual para este punto ya debe estar validado que NO haya sido eliminado
 
         ' Variables y validaciones para ver si el documento existe o si alguien lo eliminó
-        Dim idCategoriaDocumento As String = ddlCategoria.SelectedValue, idTipoDocumento As String = ddlTipoDocumento.SelectedValue
-        Dim idProveedor As String = ddlProveedor.SelectedValue
+        ' /***********/ ESTO CAMBIA POR EL INPUT CON OPCIONES SUGERIDAS
+        Dim idCategoriaDocumento As String = hfCategoria.Value, idTipoDocumento As String = ddlTipoDocumento.SelectedValue
+        Dim idProveedor As String = hfNumProveedor.Value.ToString()
         Dim numDocumento As String = txtNumDocumento.Text.ToString().Trim()
 
         Dim objHerramienta As New Herramientas
@@ -303,9 +259,9 @@ Public Class CreacionDocumentos
         ' Si los datos son válidos, procede a buscar el documento/factura
         ' Agregar un botón de búsqueda de documentos pendientes de aplicar para que pueda seleccionar uno y cargarlo en pantalla
 
-        Dim idCategoriaDoc As Integer = Convert.ToInt32(ddlCategoria.SelectedValue)
+        Dim idCategoriaDoc As Integer = Convert.ToInt32(idCategoriaDocumento)
         Dim errorMessage As String = ""
-        Dim observacion As String = txtAreaObservacion.Value.ToString()
+        Dim observacion As String = txtObservacion.ToString()
         Dim fechaEmision As String = txtFechaEmision.Text
         Dim moneda As String = ddlMoneda.SelectedValue.ToString(), montoTotal As String = txtMontoTotal.Text, saldoActual = txtMontoTotal.Text
         Dim usuarioModifico As String = "andre"
@@ -359,10 +315,8 @@ Public Class CreacionDocumentos
 
             If objFactura.ModificarFactura(modFactura, usuarioModifico, errorMessage) Then
                 SwalUtils.ShowSwal(Me, "¡Factura modificada exitosamente!", "La factura ya está lista para ser aplicada.")
-                ddlCategoria.Enabled = False
                 ddlTipoDocumento.Enabled = False
-                txtFiltProveedor.Enabled = False
-                ddlProveedor.Enabled = False
+                txtProveedor.Enabled = False
                 txtNumDocumento.Enabled = False
             Else
                 SwalUtils.ShowSwalError(Me, "Atención", $"No se logró modificar la factura. {errorMessage}")
@@ -410,10 +364,8 @@ Public Class CreacionDocumentos
 
             If objDocumentoPago.ModificarDocumentoPago(modDocumentoPago, usuarioModifico, errorMessage) Then
                 SwalUtils.ShowSwal(Me, "¡Documento de pago modificado exitosamente!", "El documento está listo para ser aplicado.")
-                ddlCategoria.Enabled = False
                 ddlTipoDocumento.Enabled = False
-                txtFiltProveedor.Enabled = False
-                ddlProveedor.Enabled = False
+                txtProveedor.Enabled = False
                 txtNumDocumento.Enabled = False
             Else
                 SwalUtils.ShowSwalError(Me, "Atención", $"No se logró modificar el documento de pago. {errorMessage}")
@@ -436,8 +388,9 @@ Public Class CreacionDocumentos
         contenedor__dialogConfirm.Style.Add("display", "none")
 
         ' Variables y validaciones para ver si el documento existe y si ya fue aplicado
-        Dim idCategoriaDocumento As String = ddlCategoria.SelectedValue, idTipoDocumento As String = ddlTipoDocumento.SelectedValue
-        Dim idProveedor As String = ddlProveedor.SelectedValue
+        ' /***********/ ESTO CAMBIA POR EL INPUT CON OPCIONES SUGERIDAS
+        Dim idCategoriaDocumento As String = hfCategoria.Value, idTipoDocumento As String = ddlTipoDocumento.SelectedValue
+        Dim idProveedor As String = hfNumProveedor.Value.ToString()
         Dim numDocumento As String = txtNumDocumento.Text.ToString().Trim()
 
         Dim objHerramienta As New Herramientas
@@ -448,7 +401,7 @@ Public Class CreacionDocumentos
             Return
         End If
 
-        Dim idCategoriaDoc As Integer = Convert.ToInt32(ddlCategoria.SelectedValue)
+        Dim idCategoriaDoc As Integer = Convert.ToInt32(idCategoriaDocumento)
         Dim modObjeto As Object
         Dim errorMessage As String = "", nombreDocumento As String = ""
 
@@ -537,18 +490,14 @@ Public Class CreacionDocumentos
         End If
         Return False
     End Function
-
     Private Function ValidaDatosExistencia(idCategoriaDocumento As String, idProveedor As String, idTipoDocumento As String, numDocumento As String) As Boolean
         Dim objHerramienta As New Herramientas
 
         If Not objHerramienta.ValidarNumeroEntero(idCategoriaDocumento, False) Or Not objHerramienta.ValidarNumeroEntero(idTipoDocumento, False) Or Not objHerramienta.ValidarNumeroEntero(idProveedor, False) Or Not objHerramienta.ValidarCadena(numDocumento) Then
             Return False
         End If
-
         Return True
-
     End Function
-
     Private Function ExisteDocumento(idCategoriaDocumento As Integer, idProveedor As Integer, idTipoDocumento As Integer, numDocumento As String, ByRef errorMessage As String) As Boolean
         Dim modDocumento As Object
 
@@ -595,10 +544,8 @@ Public Class CreacionDocumentos
             .TipoDocumento = idTipoDocumento
             .NumeroDocumento = numDocumento
         End With
-
         Return objDocumentoPago.BuscarDocumentoPago_x_Numero(modDocumentoPago, errorMessage)
     End Function
-
     Private Function ContinuarProcesoGuardado(idCategoriaDocumento As String, idTipoDocumento As String, idProveedor As String, numDocumento As String) As Boolean
         Dim errorMessage As String = ""
 
@@ -625,9 +572,7 @@ Public Class CreacionDocumentos
             SwalUtils.ShowSwalError(Me, "Atención", $"No se logró encontrar {nombreDocumento}. {errorMessage}.")
             Return False
         End Try
-
     End Function
-
     Private Function ValidarDatos(idCategoriaDocumento As String, idProveedor As String, tipoDocumento As String, numDocumento As String, observacion As String, fechaEmision As String, moneda As String, montoTotal As String, saldoActual As String) As Boolean
         Dim objHerramienta As New Herramientas
 
@@ -666,7 +611,29 @@ Public Class CreacionDocumentos
         If Not objHerramienta.ValidarNumeroDecimales(saldoActual, False) Then
             Return False
         End If
-
         Return True
     End Function
+    Protected Sub btnFiltFacturaForm_Click(sender As Object, e As EventArgs)
+        hfCategoria.Value = 1
+        Dim idCategoria As Integer = Convert.ToInt32(hfCategoria.Value)
+        prcLlena__ddlTipoDocumento(idCategoria)
+        btnFiltFacturaForm.CssClass = "boton boton__opcion boton__opcion--active"
+        btnFiltPagoForm.CssClass = "boton boton__opcion"
+
+        Dim strCategoria As String = "Factura"
+        prcCambiaTextoEtiquetas(strCategoria.ToLower())
+    End Sub
+
+    Protected Sub btnFiltPagoForm_Click(sender As Object, e As EventArgs)
+        hfCategoria.Value = 2
+        Dim idCategoria As Integer = Convert.ToInt32(hfCategoria.Value)
+        prcLlena__ddlTipoDocumento(idCategoria)
+        btnFiltPagoForm.CssClass = "boton boton__opcion boton__opcion--active"
+        btnFiltFacturaForm.CssClass = "boton boton__opcion"
+
+        Dim strCategoria As String = "Documento de Pago"
+
+        prcCambiaTextoEtiquetas(strCategoria.ToLower())
+    End Sub
+
 End Class
