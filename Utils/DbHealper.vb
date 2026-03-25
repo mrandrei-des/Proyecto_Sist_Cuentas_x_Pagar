@@ -2,8 +2,7 @@
 
 Namespace Utils
     Public Class DbHealper
-        Private connectionString As String = ConfigurationManager.ConnectionStrings("Sist_Cuentas_x_PagarConnectionString").ConnectionString
-
+        Private connectionString As String = ConfigurationManager.ConnectionStrings("ConexionDB").ConnectionString
         'Método para crear y abrir una conexión a la base de datos
         Public Function GetConnection() As SqlConnection
             Dim conn As New SqlConnection(connectionString)
@@ -12,6 +11,9 @@ Namespace Utils
             Catch ex As Exception
                 ' Si la conexión no se realiza, libera los recursos para evitar conexiones fantasmas/fallidas
                 conn.Dispose()
+                ' Guarda un registro del error en la BD y en un TXT de respaldo
+                Dim objErrorLoggerDB As New ErrorLoggerDB
+                objErrorLoggerDB.SaveDBError(ex)
                 Throw New Exception("Error al abrir la conexión: " + ex.Message)
             End Try
             Return conn
@@ -38,6 +40,9 @@ Namespace Utils
                         Return True
                     Catch ex As Exception
                         errorMessage = "Error al ejecutar la consulta: [" & ex.Message & "]"
+                        ' Guarda un registro del error en la BD y en un TXT de respaldo
+                        Dim objErrorLoggerDB As New ErrorLoggerDB
+                        objErrorLoggerDB.SaveDBError(ex)
                         Return False
                     End Try
                 End Using
@@ -76,6 +81,9 @@ Namespace Utils
                         Return dt
                     Catch ex As Exception
                         errorMessage = "Error al ejecutar la consulta: [" & ex.Message & "]"
+                        ' Guarda un registro del error en la BD y en un TXT de respaldo
+                        Dim objErrorLoggerDB As New ErrorLoggerDB
+                        objErrorLoggerDB.SaveDBError(ex)
                         Return Nothing
                     End Try
                 End Using

@@ -240,10 +240,7 @@ Public Class CreacionDocumentos
     End Sub
 
     Protected Sub btnModificar_Click(sender As Object, e As EventArgs)
-        'Se trabaja con el documento que está en pantalla, el cual para este punto ya debe estar validado que NO haya sido eliminado
-
         ' Variables y validaciones para ver si el documento existe o si alguien lo eliminó
-        ' /***********/ ESTO CAMBIA POR EL INPUT CON OPCIONES SUGERIDAS
         Dim idCategoriaDocumento As String = hfCategoria.Value, idTipoDocumento As String = ddlTipoDocumento.SelectedValue
         Dim idProveedor As String = hfNumProveedor.Value.ToString()
         Dim numDocumento As String = txtNumDocumento.Text.ToString().Trim()
@@ -257,8 +254,6 @@ Public Class CreacionDocumentos
         End If
 
         ' Si los datos son válidos, procede a buscar el documento/factura
-        ' Agregar un botón de búsqueda de documentos pendientes de aplicar para que pueda seleccionar uno y cargarlo en pantalla
-
         Dim idCategoriaDoc As Integer = Convert.ToInt32(idCategoriaDocumento)
         Dim errorMessage As String = ""
         Dim observacion As String = txtObservacion.ToString()

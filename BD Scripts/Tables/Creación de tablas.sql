@@ -299,3 +299,14 @@ FOREIGN KEY (ID_Proveedor, TipoDocumento, NumeroDocumento) References Documentos
 FOREIGN KEY (Moneda) References Monedas(CodigoMoneda),
 FOREIGN KEY (UsuarioCreacion) References Usuarios(NombreUsuario)
 )
+
+-- TABLA PARA GUARDAR ERRORES QUE CAIGAN EN EL CATCH DE LOS TRY
+CREATE TABLE ErrorLog (
+Id INT IDENTITY(1,1) PRIMARY KEY,
+ErrorMessage NVARCHAR(MAX),
+ErrorSeverity INT,
+ErrorState INT,
+ErrorProcedure NVARCHAR(200),
+ErrorLine INT,
+ErrorDateTime DATETIME DEFAULT GETDATE()
+)
