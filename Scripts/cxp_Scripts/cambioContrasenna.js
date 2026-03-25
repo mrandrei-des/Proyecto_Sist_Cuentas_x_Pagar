@@ -12,4 +12,6 @@
     //    txtNuevaPassword.classList.remove('formulario__input--invalid');
     //    txtConfirmPassword.classList.remove('formulario__input--invalid');
     //}
+
+    // Aquí se deben aplicar las validaciones de la contraseña y confirmar constraseña, se puede utilizar expresiones regulares
 })

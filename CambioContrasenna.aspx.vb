@@ -7,8 +7,9 @@ Public Class CambioContrasenna
     End Sub
 
     Protected Sub btnCambioContrasenna_Click(sender As Object, e As EventArgs)
-        Dim nuevaContrasenna As String = txtContrasenna.Text
-        Dim confirmarContrasenna As String = txtConfirmarContrasenna.Text
+        Dim encryptor As New Simple3Des("def_.phas7401{}pinna??¿")
+        Dim nuevaContrasenna As String = encryptor.EncryptData(txtContrasenna.Text.Trim())
+        Dim confirmarContrasenna As String = encryptor.EncryptData(txtConfirmarContrasenna.Text.Trim())
 
         contenedorMensajesConfirmContrasenna.InnerHtml = ""
         If nuevaContrasenna = confirmarContrasenna Then

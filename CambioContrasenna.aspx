@@ -14,7 +14,6 @@
             </section>
             <section class="contenedor__section--subtitulo">
                 <div class="contenedor__subtitulo">
-                    <h2 class="formulario__subtitulo">Formulario Cambio Contraseña</h2>
                     <p class="formulario__parrafo parrafo">Complete cada uno de los campos para realizar el cambio de contraseña</p>
                 </div>
             </section>
@@ -59,5 +58,5 @@
             </section>
         </main>
     </div>
-    <script src="Scripts/cxp_Scripts/cambioContrasenna.js"></script>
+    <%--<script src="Scripts/cxp_Scripts/cambioContrasenna.js"></script>--%>
 </asp:Content>
