@@ -17,6 +17,7 @@ Public Class CreacionDocumentos
         enlace.Style.Add("background-color", "var(--colorLetraOscuroSecundario)")
         If Not IsPostBack Then
             hfCategoria.Value = 1
+            hfFiltCategoria.Value = 1
             prcLlena_ddls()
             btnFiltFacturaForm.CssClass = "boton boton__opcion boton__opcion--active"
             btnFiltPagoForm.CssClass = "boton boton__opcion"
@@ -31,10 +32,6 @@ Public Class CreacionDocumentos
     End Sub
 
     Private Sub prcLlena_ddls()
-        ' /***********/ ESTO CAMBIA POR ALGUNO DE LOS DOS BOTONES
-        'prcLlena__ddlCategoria()
-        'Dim idCategoria As Integer = Convert.ToInt32(ddlCategoria.SelectedValue)
-
         Dim idCategoria As Integer = Convert.ToInt32(hfCategoria.Value)
         prcLlena__ddlTipoDocumento(idCategoria)
         prcLlena_ddlMoneda()
@@ -105,11 +102,11 @@ Public Class CreacionDocumentos
         btnFiltFacturaForm.CssClass = "boton boton__opcion boton__opcion--active"
         btnFiltPagoForm.CssClass = "boton boton__opcion"
 
-        txtProveedor.Text = ""
-        txtNumDocumento.Text = ""
-        txtFechaEmision.Text = ""
-        txtObservacion.Text = ""
-        txtMontoTotal.Text = ""
+        txtProveedor.Text = String.Empty
+        txtNumDocumento.Text = String.Empty
+        txtFechaEmision.Text = String.Empty
+        txtObservacion.Text = String.Empty
+        txtMontoTotal.Text = String.Empty
         btnGuardar.CssClass = "boton boton__guardar"
         btnModificar.CssClass = "boton boton__modificar boton__ocultar"
         btnAplicar.CssClass = "boton boton__aplicar boton__ocultar"
@@ -256,7 +253,7 @@ Public Class CreacionDocumentos
         ' Si los datos son válidos, procede a buscar el documento/factura
         Dim idCategoriaDoc As Integer = Convert.ToInt32(idCategoriaDocumento)
         Dim errorMessage As String = ""
-        Dim observacion As String = txtObservacion.ToString()
+        Dim observacion As String = txtObservacion.Text.ToString()
         Dim fechaEmision As String = txtFechaEmision.Text
         Dim moneda As String = ddlMoneda.SelectedValue.ToString(), montoTotal As String = txtMontoTotal.Text, saldoActual = txtMontoTotal.Text
         Dim usuarioModifico As String = "andre"
@@ -612,6 +609,7 @@ Public Class CreacionDocumentos
         Return True
     End Function
     Protected Sub btnFiltFacturaForm_Click(sender As Object, e As EventArgs)
+        prcLimpiarCampos()
         hfCategoria.Value = 1
         Dim idCategoria As Integer = Convert.ToInt32(hfCategoria.Value)
         prcLlena__ddlTipoDocumento(idCategoria)
@@ -623,6 +621,7 @@ Public Class CreacionDocumentos
     End Sub
 
     Protected Sub btnFiltPagoForm_Click(sender As Object, e As EventArgs)
+        prcLimpiarCampos()
         hfCategoria.Value = 2
         Dim idCategoria As Integer = Convert.ToInt32(hfCategoria.Value)
         prcLlena__ddlTipoDocumento(idCategoria)

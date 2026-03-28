@@ -54,12 +54,12 @@
                 </div>
 
                 <div class="contenedor__accion--externa">
-                    <a href="#" class="enlace__accion--externa">
+<%--                    <a href="#" class="enlace__accion--externa">
                         <span class="span__flotante__accion--externa">Listar</span>
                         <span class="contenedor__icono__accion--externa">
                             <i class="fa-solid fa-file-lines"></i>
                         </span>
-                    </a>
+                    </a>--%>
                 </div>
             </section>
 
@@ -245,6 +245,7 @@
                         </legend>                     
                         <button type="button" class="boton boton__opcion" id="btnFacturaFiltPend">Factura</button>
                         <button type="button"class="boton boton__opcion" id="btnPagoFiltPend">Pago</button>
+                        <asp:HiddenField ID="hfFiltCategoria" runat="server" />
                     </fieldset>
                 </div>
             </section>
@@ -255,8 +256,8 @@
                         Ordenar documentos por: 
                     </legend>
                     <button type="button" class="boton boton__dis_inline boton__opcion" id="btnFiltPendReciente">Más Recientes</button>
-                    <button type="button" class="boton boton__dis_inline boton__opcion boton__opcion--active" id="btnFiltPendAntiguo">Más Antiguas</button>
-                    <button type="button" class="boton boton__dis_inline boton__opcion" id="btnFiltPendTodo">Todos</button>                    
+                    <button type="button" class="boton boton__dis_inline boton__opcion" id="btnFiltPendAntiguo">Más Antiguas</button>
+                    <button type="button" class="boton boton__dis_inline boton__opcion boton__opcion--active" id="btnFiltPendTodo">Todos</button>                    
                 </fieldset>                
             </section>
 

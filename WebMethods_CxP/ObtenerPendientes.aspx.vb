@@ -1,9 +1,12 @@
-﻿Public Class ObtenerPendientes
+﻿Imports System.Drawing.Imaging
+
+Public Class ObtenerPendientes
     Inherits System.Web.UI.Page
 
     ' Las propiedades deben corresponder en cantidad y nombres a las que requiere el web method
     Public Class BusquedaRequest
         Public Property categoriaDocumento As Integer
+        Public Property orderByClause As String
     End Class
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -17,15 +20,16 @@
         Dim datos = Newtonsoft.Json.JsonConvert.DeserializeObject(Of BusquedaRequest)(body)
 
         Dim idCategoriaDocumento As Integer = datos.categoriaDocumento
+        Dim orderByClause As String = datos.orderByClause
         Dim respuesta As Object, listaPendientes As Object
         Dim errorMessage As String = ""
 
         If idCategoriaDocumento = 1 Then
             Dim objFactura As New FacturaDB
-            listaPendientes = objFactura.FiltrarFacturasPendientes(0, "", "", errorMessage)
+            listaPendientes = objFactura.FiltrarFacturasPendientes(0, "", "", orderByClause, errorMessage)
         Else
             Dim objDocumentoPago As New DocumentoPagoDB
-            listaPendientes = objDocumentoPago.FiltrarDocumentosPendientes(0, "", "", errorMessage)
+            listaPendientes = objDocumentoPago.FiltrarDocumentosPendientes(0, "", "", orderByClause, errorMessage)
         End If
 
         If listaPendientes Is Nothing Then

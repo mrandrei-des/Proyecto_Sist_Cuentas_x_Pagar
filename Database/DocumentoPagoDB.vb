@@ -153,7 +153,7 @@ Public Class DocumentoPagoDB
         End Try
     End Function
 
-    Public Function FiltrarDocumentosPendientes(filtNumProveedor As Integer, filtFechaInicio As String, filtFechaFin As String, ByRef errorMessage As String) As List(Of Object)
+    Public Function FiltrarDocumentosPendientes(filtNumProveedor As Integer, filtFechaInicio As String, filtFechaFin As String, orderByClause As String, ByRef errorMessage As String) As List(Of Object)
         Try
             Dim query As String = "sp_Filtrar_DocumentosFormasPago_Pendientes"
 
@@ -177,6 +177,8 @@ Public Class DocumentoPagoDB
             Else
                 parameters.Add(New SqlParameter("@FiltFechaEmisionHasta", Date.Parse(filtFechaFin)))
             End If
+
+            parameters.Add(New SqlParameter("@OrderByCondition", orderByClause))
 
             Dim dt As DataTable = db.ExecuteQuery(errorMessage, query, True, parameters)
 

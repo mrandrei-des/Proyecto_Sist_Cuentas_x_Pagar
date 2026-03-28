@@ -28,9 +28,12 @@ Public Class Usuario
         End If
 
         If modUsuario.NombreUsuario Is Nothing Then ' Si el resultado de la consulta vuelve vacío, significa que no existe un usuario con ese nombre de usuario, por lo tanto se puede crear
+            Dim encryptor As New Simple3Des("def_.phas7401{}pinna??¿")
+            Dim contrasenna As String = encryptor.EncryptData(txtContrasenna.Text.Trim())
+
             modUsuario = New Models.Usuario
             modUsuario.NombreUsuario = txtUsuario.Text
-            modUsuario.Contrasenna = txtContrasenna.Text
+            modUsuario.Contrasenna = contrasenna
             modUsuario.Nombre = txtNombre.Text
             modUsuario.Apellido1 = txtApellidoUno.Text
             modUsuario.Apellido2 = txtApellidoDos.Text

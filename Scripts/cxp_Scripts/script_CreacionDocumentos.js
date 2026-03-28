@@ -65,19 +65,58 @@ document.getElementById('btnFacturaFiltPend').addEventListener('click', function
     cargarDocumentosPendientes(1);
     this.classList.add('boton__opcion--active');
     document.getElementById('btnPagoFiltPend').classList.remove('boton__opcion--active');
+    document.getElementById('MainContent_hfFiltCategoria').value = 1
 });
 
 document.getElementById('btnPagoFiltPend').addEventListener('click', function () {
     cargarDocumentosPendientes(2);
     this.classList.add('boton__opcion--active');
     document.getElementById('btnFacturaFiltPend').classList.remove('boton__opcion--active');
+    document.getElementById('MainContent_hfFiltCategoria').value = 2
 });
 
+document.getElementById('btnFiltPendTodo').addEventListener('click', function () {
+    var idCategoria = document.getElementById('MainContent_hfFiltCategoria').value
+    this.classList.add('boton__opcion--active');
+    document.getElementById('btnFiltPendReciente').classList.remove('boton__opcion--active');
+    document.getElementById('btnFiltPendAntiguo').classList.remove('boton__opcion--active');
+    cargarDocumentosPendientes(idCategoria);
+});
+
+document.getElementById('btnFiltPendReciente').addEventListener('click', function () {
+    var idCategoria = document.getElementById('MainContent_hfFiltCategoria').value
+    this.classList.add('boton__opcion--active');
+    document.getElementById('btnFiltPendTodo').classList.remove('boton__opcion--active');
+    document.getElementById('btnFiltPendAntiguo').classList.remove('boton__opcion--active');
+    cargarDocumentosPendientes(idCategoria);
+});
+
+document.getElementById('btnFiltPendAntiguo').addEventListener('click', function () {
+    var idCategoria = document.getElementById('MainContent_hfFiltCategoria').value
+    this.classList.add('boton__opcion--active');
+    document.getElementById('btnFiltPendTodo').classList.remove('boton__opcion--active');
+    document.getElementById('btnFiltPendReciente').classList.remove('boton__opcion--active');
+    cargarDocumentosPendientes(idCategoria);
+});
+
+function obtenerFiltroOrder() {
+    // Validar cual de los 3 botones tiene la clase active y retornar el orderByClause correspondiente
+    var btnTodas = document.getElementById('btnFiltPendTodo');
+    var btnReciente = document.getElementById('btnFiltPendReciente');
+    var btnAntiguas = document.getElementById('btnFiltPendAntiguo');
+
+    if (btnTodas.classList.contains('boton__opcion--active')) return 'TODAS';
+    if (btnReciente.classList.contains('boton__opcion--active')) return 'RECIENTES';
+    if (btnAntiguas.classList.contains('boton__opcion--active')) return 'ANTIGUAS';
+}
+
 function cargarDocumentosPendientes(idCategoria) {
-    obtenerPendientes(idCategoria);    
+    obtenerPendientes(idCategoria);
 }
 
 function obtenerPendientes(idCategoria) {
+    var orderByClause = obtenerFiltroOrder();
+
     fetch(API_ENDPOINT + 'ObtenerPendientes', {
         method: 'POST',
         credentials: 'include',
@@ -85,7 +124,10 @@ function obtenerPendientes(idCategoria) {
             'Content-Type': 'application/json; charset=utf-8',
             'X-Requested-With': 'XMLHttpRequest'
         },
-        body: JSON.stringify({ categoriaDocumento: idCategoria })
+        body: JSON.stringify({
+            categoriaDocumento: idCategoria,
+            orderByClause: orderByClause
+           })
     })
     .then(function (r) { return r.json(); })
     .then(function (data) {
@@ -103,7 +145,7 @@ function obtenerPendientes(idCategoria) {
 
 function desplegarPendientes(listaDocsPendientes) {
     var contenedorPendientes = document.getElementById('contenedorPendientes');
-    var idCategoria = document.getElementById('MainContent_hfNumProveedor').value
+    var idCategoria = document.getElementById('MainContent_hfFiltCategoria').value
 
     contenedorPendientes.innerHTML = '';
 
@@ -120,10 +162,12 @@ function desplegarPendientes(listaDocsPendientes) {
             numDocumento: documento.numDocumento
         });
 
+        var tipoDocumento = idCategoria == 1 ? 'Num Factura: ' : 'Num Pago: ';
+
         itemInfo.className = 'aside__item__info'
         itemActions.className = 'aside__item__actions'
 
-        itemInfo.innerHTML = '<p class="aside__info">' + documento.numDocumento + ' - ' + documento.nombreProveedor + ' - ' + documento.fecha + ' - ' + documento.simboloMoneda + documento.montoTotal + '</p >'
+        itemInfo.innerHTML = '<p class="aside__info">' + tipoDocumento + documento.numDocumento + ' - ' + documento.nombreProveedor + ' - ' + documento.fecha + ' - ' + documento.simboloMoneda + documento.montoTotal + '</p >'
 
         itemActions.innerHTML = `<button type="button" class="boton boton__opcion boton__opcion--active" id="btnCargaDocPend">Cargar</button>`
         //onclick="cargarDocumento('${key}')" al key.replace(/"/g, '&quot;')
@@ -140,8 +184,6 @@ function desplegarPendientes(listaDocsPendientes) {
 
 function cargarDocumento(documento) {
     var key = JSON.parse(documento)
-    console.log(documento);
-    console.log(key);
 
     fetch(API_ENDPOINT + 'CargarDocumento', {
         method: 'POST',
@@ -204,14 +246,22 @@ function renderizarOptionsTipoDocumento(listaTipoDocumento) {
 }
 
 function llenarCamposDocumentoCargado(documento) {
-    // Falta cargar en pantalla lo que viene en el objeto
-    console.log(documento)
 
     //Actualizar, llenar, bloquear y mostrar elementos
     if (document.getElementById('MainContent_hfCategoria').value != documento.CategoriaDoc) {
         document.getElementById('MainContent_hfCategoria').value = documento.CategoriaDoc
         // Llenar
         obtenerTiposDocumento(documento.CategoriaDoc);
+    }
+
+    if (documento.CategoriaDoc == 1) {
+        document.getElementById('MainContent_btnFiltFacturaForm').classList.remove('boton__opcion--active')
+        document.getElementById('MainContent_btnFiltFacturaForm').classList.add('boton__opcion--active')
+        document.getElementById('MainContent_btnFiltPagoForm').classList.remove('boton__opcion--active')
+    } else {
+        document.getElementById('MainContent_btnFiltPagoForm').classList.remove('boton__opcion--active')
+        document.getElementById('MainContent_btnFiltPagoForm').classList.add('boton__opcion--active')
+        document.getElementById('MainContent_btnFiltFacturaForm').classList.remove('boton__opcion--active')
     }
 
     document.getElementById('MainContent_txtProveedor').value = documento.NombreProveedor
@@ -223,20 +273,6 @@ function llenarCamposDocumentoCargado(documento) {
 
     moverSelectOption(document.getElementById('MainContent_ddlTipoDocumento'), documento.TipoDocumento)
     moverSelectOption(document.getElementById('MainContent_ddlMoneda'), documento.MonedaDoc)
-
-    //        .tipoDocumento = documento.TipoDocumento,
-    //        .monedaDoc = documento.MonedaDoc,
-
-    //MainContent_btnFiltFacturaForm
-    //MainContent_btnFiltPagoForm
-
-    //MainContent_ddlTipoDocumento
-    //MainContent_ddlMoneda
-
-    //document.getElementById('btnFacturaFiltPend').setAttribute('diabled', 'true');
-    //
-    //MainContent_btnModificar
-    //MainContent_btnAplicar
 
     document.getElementById('MainContent_btnGuardar').classList.add('boton__ocultar')
     document.getElementById('MainContent_btnModificar').classList.remove('boton__ocultar')

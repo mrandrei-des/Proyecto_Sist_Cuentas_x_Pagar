@@ -4,7 +4,8 @@ alter PROC sp_Filtrar_Facturas_Pendientes
 (
 @FiltID_Proveedor int,
 @FiltFechaEmisionDesde date,
-@FiltFechaEmisionHasta date
+@FiltFechaEmisionHasta date,
+@OrderByCondition varchar(10)
 )
 AS
 BEGIN
@@ -18,7 +19,13 @@ BEGIN
 	AND (@FiltID_Proveedor IS NULL OR f.ID_Proveedor = @FiltID_Proveedor)
 	AND (@FiltFechaEmisionDesde IS NULL OR f.FechaEmision <= @FiltFechaEmisionDesde)
 	AND (@FiltFechaEmisionHasta IS NULL OR f.FechaEmision >= @FiltFechaEmisionHasta)
-	ORDER BY f.ID_Proveedor ASC, f.FechaEmision ASC
+	ORDER BY 
+		CASE @OrderByCondition 
+			WHEN 'TODAS' THEN f.ID_Proveedor END ASC,
+		CASE @OrderByCondition
+			WHEN 'ANTIGUAS' THEN f.FechaEmision END ASC,
+		CASE @OrderByCondition
+			WHEN 'RECIENTES' THEN f.FechaEmision END DESC
 END
 
 -- exec sp_Filtrar_Facturas_Pendientes NULL, NULL, NULL

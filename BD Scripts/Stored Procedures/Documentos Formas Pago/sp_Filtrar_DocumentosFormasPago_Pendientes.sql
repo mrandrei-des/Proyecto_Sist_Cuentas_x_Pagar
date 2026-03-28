@@ -1,10 +1,11 @@
 -- PROCEDIMIENTO ALMACENADO QUE CONSULTA A LOS DOCUMENTOS DE FORMA DE PAGO QUE NO HAYAN SIDO APLICADOS SINO, SOLO GUARDADOS EN GENERAL O POR PROVEEDOR
--- sp_Filtrar_DocumentosFormasPago_Pendientes 0
+-- exec  sp_Filtrar_DocumentosFormasPago_Pendientes NULL, NULL, NULL, 'TODAS'
 alter PROC sp_Filtrar_DocumentosFormasPago_Pendientes
 (
 @FiltID_Proveedor int,
 @FiltFechaEmisionDesde date,
-@FiltFechaEmisionHasta date
+@FiltFechaEmisionHasta date,
+@OrderByCondition varchar(10)
 )
 AS
 BEGIN
@@ -18,5 +19,11 @@ BEGIN
 	AND (@FiltID_Proveedor IS NULL OR d.ID_Proveedor = @FiltID_Proveedor)
 	AND (@FiltFechaEmisionDesde IS NULL OR d.FechaEmision <= @FiltFechaEmisionDesde)
 	AND (@FiltFechaEmisionHasta IS NULL OR d.FechaEmision >= @FiltFechaEmisionHasta)
-	ORDER BY d.ID_Proveedor ASC, d.FechaEmision ASC
+	ORDER BY 
+		CASE @OrderByCondition 
+			WHEN 'TODAS' THEN d.ID_Proveedor END ASC,
+		CASE @OrderByCondition
+			WHEN 'ANTIGUAS' THEN d.FechaEmision END ASC,
+		CASE @OrderByCondition
+			WHEN 'RECIENTES' THEN d.FechaEmision END DESC
 END
