@@ -23,24 +23,6 @@ Partial Public Class CreacionDocumentos
     Protected WithEvents contenedor__dialogConfirm As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
-    '''Control dialogConfirm.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents dialogConfirm As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-
-    '''<summary>
-    '''Control btnCancelarAplicacion.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents btnCancelarAplicacion As Global.System.Web.UI.WebControls.LinkButton
-
-    '''<summary>
     '''Control btnContinuarAplicacion.
     '''</summary>
     '''<remarks>
@@ -93,6 +75,15 @@ Partial Public Class CreacionDocumentos
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents ddlTipoDocumento As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''Control hfTipoDocumento.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents hfTipoDocumento As Global.System.Web.UI.WebControls.HiddenField
 
     '''<summary>
     '''Control lblProveedor.
@@ -284,13 +275,13 @@ Partial Public Class CreacionDocumentos
     Protected WithEvents btnModificar As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
-    '''Control btnAplicar.
+    '''Control btnEliminar.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents btnAplicar As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents btnEliminar As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
     '''Control btnCancelar.

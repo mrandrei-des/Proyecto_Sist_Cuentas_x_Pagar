@@ -29,7 +29,7 @@ function BuscarProveedores(query) {
         })
         .catch(function (err) {
             console.error('Ha ocurrido un error al ejecutar la petición: ', err)
-            alert('Error de conexión con el servidor');
+            alert('Error de conexión con el servidor [001]');
         });
 }
 
@@ -59,6 +59,8 @@ function cerrarSugerencias() {
 document.addEventListener('DOMContentLoaded', function () {
     cargarDocumentosPendientes(1);
     document.getElementById('btnFacturaFiltPend').classList.add('boton__opcion--active');
+    //document.getElementById('btnAplicar').classList.add('boton__ocultar');
+
 });
 
 document.getElementById('btnFacturaFiltPend').addEventListener('click', function () {
@@ -98,6 +100,16 @@ document.getElementById('btnFiltPendAntiguo').addEventListener('click', function
     document.getElementById('btnFiltPendReciente').classList.remove('boton__opcion--active');
     cargarDocumentosPendientes(idCategoria);
 });
+
+document.getElementById('btnAplicar').addEventListener('click', function () {
+    document.getElementById('MainContent_contenedor__dialogConfirm').style.display = 'block';
+    document.getElementById('dialogConfirm').style.animationPlayState = 'running';
+});
+
+document.getElementById('btnCancelarAplicacion').addEventListener('click', function () {
+    document.getElementById('MainContent_contenedor__dialogConfirm').style.display = 'none';
+});
+
 
 function obtenerFiltroOrder() {
     // Validar cual de los 3 botones tiene la clase active y retornar el orderByClause correspondiente
@@ -139,7 +151,7 @@ function obtenerPendientes(idCategoria) {
     })
     .catch(function (err) {
         console.error('Ha ocurrido un error al ejecutar la petición: ', err)
-        alert('Error de conexión con el servidor');
+        alert('Error de conexión con el servidor [002]');
     });
 }
 
@@ -204,11 +216,11 @@ function cargarDocumento(documento) {
         })
         .catch(function (err) {
             console.error('Ha ocurrido un error al ejecutar la petición: ', err)
-            alert('Error de conexión con el servidor');
+            alert('Error de conexión con el servidor [003]');
         });
 }
 
-function obtenerTiposDocumento(idCategoria) {
+function obtenerTiposDocumento(idCategoria, tipoDocumento) {
     fetch(API_ENDPOINT + 'ObtenerTiposDocumento', {
         method: 'POST',
         credentials: 'include',
@@ -221,18 +233,18 @@ function obtenerTiposDocumento(idCategoria) {
         .then(function (r) { return r.json(); })
         .then(function (data) {
             if (data.estado) {
-                renderizarOptionsTipoDocumento(data.lista);
+                renderizarOptionsTipoDocumento(data.lista, tipoDocumento);
             } else {
                 alert(data.mensaje)
             }
         })
         .catch(function (err) {
             console.error('Ha ocurrido un error al ejecutar la petición: ', err)
-            alert('Error de conexión con el servidor');
+            alert('Error de conexión con el servidor [004]');
         });
 }
 
-function renderizarOptionsTipoDocumento(listaTipoDocumento) {
+function renderizarOptionsTipoDocumento(listaTipoDocumento, tipoDocumentoSelected) {
     var selectElement = document.getElementById('MainContent_ddlTipoDocumento')
 
     selectElement.innerHTML = ''
@@ -241,18 +253,25 @@ function renderizarOptionsTipoDocumento(listaTipoDocumento) {
         optionElement.setAttribute('value', tipoDocumento.IdTipoDocumento)
         optionElement.innerHTML = tipoDocumento.Descripcion
 
+        if (tipoDocumento.IdTipoDocumento == parseInt(tipoDocumentoSelected)) optionElement.setAttribute('selected', 'true');
+
         selectElement.appendChild(optionElement)
     })
+
+    //moverSelectOption(document.getElementById('MainContent_ddlTipoDocumento'), tipoDocumento)
+
 }
 
 function llenarCamposDocumentoCargado(documento) {
 
     //Actualizar, llenar, bloquear y mostrar elementos
-    if (document.getElementById('MainContent_hfCategoria').value != documento.CategoriaDoc) {
-        document.getElementById('MainContent_hfCategoria').value = documento.CategoriaDoc
-        // Llenar
-        obtenerTiposDocumento(documento.CategoriaDoc);
-    }
+    document.getElementById('MainContent_hfCategoria').value = documento.CategoriaDoc
+    // Llenar
+    obtenerTiposDocumento(documento.CategoriaDoc, documento.TipoDocumento);
+    document.getElementById('MainContent_hfTipoDocumento').value = parseInt(documento.TipoDocumento)
+   
+    //if (document.getElementById('MainContent_hfCategoria').value != documento.CategoriaDoc) {
+    //}
 
     if (documento.CategoriaDoc == 1) {
         document.getElementById('MainContent_btnFiltFacturaForm').classList.remove('boton__opcion--active')
@@ -271,12 +290,12 @@ function llenarCamposDocumentoCargado(documento) {
     document.getElementById('MainContent_txtMontoTotal').value = documento.MontoTotal
     document.getElementById('MainContent_txtObservacion').value = documento.Observacion
 
-    moverSelectOption(document.getElementById('MainContent_ddlTipoDocumento'), documento.TipoDocumento)
     moverSelectOption(document.getElementById('MainContent_ddlMoneda'), documento.MonedaDoc)
 
     document.getElementById('MainContent_btnGuardar').classList.add('boton__ocultar')
     document.getElementById('MainContent_btnModificar').classList.remove('boton__ocultar')
-    document.getElementById('MainContent_btnAplicar').classList.remove('boton__ocultar')    
+    document.getElementById('MainContent_btnEliminar').classList.remove('boton__ocultar')
+    document.getElementById('btnAplicar').classList.remove('boton__ocultar')
 }
 
 function moverSelectOption(selectElement, valorBuscar) {

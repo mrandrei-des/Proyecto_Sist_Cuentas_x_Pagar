@@ -3,9 +3,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
     <%-- INICIO DEL MODAL --%>
-    <div class="contenedor__dialog" runat="server" id="contenedor__dialogConfirm">
-        <div class="dialog__container" runat="server" id="dialogConfirm">
-            <div class="dialog__confirm">
+    <div class="contenedor__dialog" id="contenedor__dialogConfirm" runat="server">
+        <div class="dialog__container" id="dialogConfirm">
+            <div class="dialog__confirm" id="dialog__confirm" >
                 <div class="dialog__icon__container">
                     <span><i class="fa-solid fa-exclamation"></i></span>
                 </div>
@@ -15,12 +15,12 @@
                     </p>
                 </div>
                 <div class="dialog__buttons__container">
-                    <asp:LinkButton ID="btnCancelarAplicacion" runat="server" Text="No, Cancelar" CssClass="boton dialog__button--cancel" ToolTip="Regresar" OnClick="btnCancelarAplicacion_Click" CausesValidation="false">
-                                <span>No, Cancelar</span>
-                                <span class="contenedor__icono">
-                                   <i class="fa-solid fa-circle-arrow-left"></i>
-                                </span>  
-                    </asp:LinkButton>
+                    <button type="button" ID="btnCancelarAplicacion" class="boton dialog__button--cancel" title="Regresar">
+                        <span>No, Cancelar</span>
+                        <span class="contenedor__icono">
+                            <i class="fa-solid fa-circle-arrow-left"></i>
+                        </span>  
+                    </button>
 
                     <asp:LinkButton ID="btnContinuarAplicacion" runat="server" Text="Sí, Continuar" CssClass="boton dialog__button--continue" ToolTip="Aplicar" OnClick="btnContinuarAplicacion_Click" CausesValidation="false">
                         <span>Sí, Continuar</span>
@@ -92,13 +92,13 @@
                                 </asp:Label>
                                 <asp:DropDownList ID="ddlTipoDocumento" runat="server" CssClass="formulario__input" required="true">
                                 </asp:DropDownList>
+                                <asp:HiddenField ID="hfTipoDocumento" runat="server" />
                                 <div class="formulario__contenedor-mensajes">
                                     <p class="formulario__mensaje">
                                         Es necesario seleccionar el tipo de documento.
                                     </p>
                                 </div>
-                            </div>
-                            
+                            </div>                            
                         </fieldset>
                     </div>
 
@@ -208,17 +208,24 @@
                             </span>  
                         </asp:LinkButton>
 
-                        <asp:LinkButton ID="btnModificar" runat ="server" CssClass="boton boton__modificar" OnClick="btnModificar_Click" ToolTip="Modificar Documento">
+                        <asp:LinkButton ID="btnModificar" runat ="server" CssClass="boton boton__modificar boton__ocultar" OnClick="btnModificar_Click" ToolTip="Modificar Documento">
                             <span>Modificar</span>
                             <span class="contenedor__icono">
                                <i class="fa-solid fa-file-pen"></i>
                             </span>  
                         </asp:LinkButton>
 
-                        <asp:LinkButton ID="btnAplicar" runat ="server" CssClass="boton boton__aplicar" OnClick="btnAplicar_Click" ToolTip="Aplicar Documento">
+                        <button type="button" class="boton boton__aplicar boton__ocultar" ID="btnAplicar">
                             <span>Aplicar</span>
                             <span class="contenedor__icono">
                                <i class="fa-solid fa-file-circle-check"></i>
+                            </span>  
+                        </button>
+
+                        <asp:LinkButton ID="btnEliminar" runat ="server" CssClass="boton boton__eliminar boton__ocultar" OnClick="btnEliminar_Click" ToolTip="Eliminar Documento">
+                            <span>Eliminar</span>
+                            <span class="contenedor__icono">
+                               <i class="fa-solid fa-trash"></i>
                             </span>  
                         </asp:LinkButton>
 

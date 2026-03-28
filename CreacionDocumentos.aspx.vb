@@ -26,8 +26,7 @@ Public Class CreacionDocumentos
             prcCambiaTextoEtiquetas(strCategoria.ToLower())
 
             btnModificar.CssClass = "boton boton__modificar boton__ocultar"
-            btnAplicar.CssClass = "boton boton__aplicar boton__ocultar"
-
+            btnEliminar.CssClass = "boton boton__eliminar boton__ocultar"
         End If
     End Sub
 
@@ -57,6 +56,7 @@ Public Class CreacionDocumentos
             Next
 
             ddlTipoDocumento.SelectedIndex = 0
+            hfTipoDocumento.Value = ddlTipoDocumento.SelectedValue
         Else
             SwalUtils.ShowSwalError(Me, "No se encontraron tipos de documento en el sistema. Revise la configuración correspondiente.")
         End If
@@ -109,7 +109,7 @@ Public Class CreacionDocumentos
         txtMontoTotal.Text = String.Empty
         btnGuardar.CssClass = "boton boton__guardar"
         btnModificar.CssClass = "boton boton__modificar boton__ocultar"
-        btnAplicar.CssClass = "boton boton__aplicar boton__ocultar"
+        btnEliminar.CssClass = "boton boton__eliminar boton__ocultar"
 
         btnFiltFacturaForm.Enabled = True
         btnFiltPagoForm.Enabled = True
@@ -221,15 +221,15 @@ Public Class CreacionDocumentos
 
         If respuestaCreacion Then
             SwalUtils.ShowSwal(Me, $"¡{nombreDocumento} exitosamente!", "El documento está listo para ser aplicado.")
+            prcLimpiarCampos()
 
-            btnGuardar.CssClass = "boton boton__guardar boton__ocultar"
-            btnModificar.CssClass = "boton boton__modificar"
-            btnAplicar.CssClass = "boton boton__aplicar"
-            btnFiltFacturaForm.Enabled = False
-            btnFiltPagoForm.Enabled = False
-            ddlTipoDocumento.Enabled = False
-            txtProveedor.Enabled = False
-            txtNumDocumento.Enabled = False
+            'btnGuardar.CssClass = "boton boton__guardar boton__ocultar"
+            'btnAplicar.CssClass = "boton boton__aplicar"
+            'btnFiltFacturaForm.Enabled = False
+            'btnFiltPagoForm.Enabled = False
+            'ddlTipoDocumento.Enabled = False
+            'txtProveedor.Enabled = False
+            'txtNumDocumento.Enabled = False
         Else
             nombreDocumento = IIf(idCategoriaDocumento = 1, "la factura", "el documento de pago")
             SwalUtils.ShowSwalError(Me, "Atención", $"No se logró guardar {nombreDocumento}. {errorMessage}")
@@ -239,6 +239,7 @@ Public Class CreacionDocumentos
     Protected Sub btnModificar_Click(sender As Object, e As EventArgs)
         ' Variables y validaciones para ver si el documento existe o si alguien lo eliminó
         Dim idCategoriaDocumento As String = hfCategoria.Value, idTipoDocumento As String = ddlTipoDocumento.SelectedValue
+        idTipoDocumento = hfTipoDocumento.Value
         Dim idProveedor As String = hfNumProveedor.Value.ToString()
         Dim numDocumento As String = txtNumDocumento.Text.ToString().Trim()
 
@@ -307,9 +308,7 @@ Public Class CreacionDocumentos
 
             If objFactura.ModificarFactura(modFactura, usuarioModifico, errorMessage) Then
                 SwalUtils.ShowSwal(Me, "¡Factura modificada exitosamente!", "La factura ya está lista para ser aplicada.")
-                ddlTipoDocumento.Enabled = False
-                txtProveedor.Enabled = False
-                txtNumDocumento.Enabled = False
+                prcLimpiarCampos()
             Else
                 SwalUtils.ShowSwalError(Me, "Atención", $"No se logró modificar la factura. {errorMessage}")
             End If
@@ -356,26 +355,124 @@ Public Class CreacionDocumentos
 
             If objDocumentoPago.ModificarDocumentoPago(modDocumentoPago, usuarioModifico, errorMessage) Then
                 SwalUtils.ShowSwal(Me, "¡Documento de pago modificado exitosamente!", "El documento está listo para ser aplicado.")
-                ddlTipoDocumento.Enabled = False
-                txtProveedor.Enabled = False
-                txtNumDocumento.Enabled = False
-                btnGuardar.CssClass = "boton boton__guardar boton__ocultar"
-                btnModificar.CssClass = "boton boton__modificar"
-                btnAplicar.CssClass = "boton boton__aplicar"
+                prcLimpiarCampos()
             Else
                 SwalUtils.ShowSwalError(Me, "Atención", $"No se logró modificar el documento de pago. {errorMessage}")
             End If
         End If
     End Sub
 
-    Protected Sub btnAplicar_Click(sender As Object, e As EventArgs)
-        'Despliega el modal donde el usuario autoriza la aplicación del documento
-        contenedor__dialogConfirm.Style.Add("display", "block")
-        dialogConfirm.Style.Add("animation-play-state", "running")
-    End Sub
+    Protected Sub btnEliminar_Click(sender As Object, e As EventArgs)
+        ' Variables y validaciones para ver si el documento existe o si alguien lo eliminó
+        Dim idCategoriaDocumento As String = hfCategoria.Value, idTipoDocumento As String = ddlTipoDocumento.SelectedValue
+        idTipoDocumento = hfTipoDocumento.Value
+        Dim idProveedor As String = hfNumProveedor.Value.ToString()
+        Dim numDocumento As String = txtNumDocumento.Text.ToString().Trim()
+        Dim errorMessage As String = ""
+        Dim objHerramienta As New Herramientas
 
-    Protected Sub btnCancelarAplicacion_Click(sender As Object, e As EventArgs)
-        contenedor__dialogConfirm.Style.Add("display", "none")
+        ' Si los datos para buscar el documento no son válidos, el proceso hasta aquí llega
+        If Not objHerramienta.ValidarNumeroEntero(idCategoriaDocumento, False) Or Not objHerramienta.ValidarNumeroEntero(idTipoDocumento, False) Or Not objHerramienta.ValidarNumeroEntero(idProveedor, False) Or Not objHerramienta.ValidarCadena(numDocumento) Then
+            SwalUtils.ShowSwal(Me, "Atención", "Los datos del documento no son válidos. Por favor revisar.", "warning")
+            Return
+        End If
+
+        Dim idCategoriaDoc As Integer = Convert.ToInt32(idCategoriaDocumento)
+        Dim usuarioElimino As String = "andre"
+
+        If idCategoriaDoc = 1 Then
+
+            Dim objFactura As New FacturaDB
+            Dim modFactura As New Models.Factura
+
+            With modFactura
+                .IdProveedor = Convert.ToInt32(idProveedor)
+                .TipoFactura = Convert.ToInt32(idTipoDocumento)
+                .NumeroFactura = numDocumento
+            End With
+
+            modFactura = objFactura.BuscarFactura_x_Numero(modFactura, errorMessage)
+
+            If modFactura Is Nothing Then ' No encontró el documento
+                SwalUtils.ShowSwal(Me, "Atención", "La factura que desea eliminar no se encontró en el sistema. Por favor revisar.", "warning")
+                Return
+            End If
+
+            ' Sí encontró la factura, continua con la revisión
+            ' Revisa si el estado es eliminado o aplicado, si lo es, hasta aquí llega el proceso
+            If modFactura.Estado = 2 Then ' La factura ya ha sido aplicada
+                SwalUtils.ShowSwal(Me, "Atención", "La factura que desea eliminar ya ha sido aplicado en el sistema.", "info")
+                Return
+            End If
+
+            If modFactura.Estado = 6 Then ' La factura ya ha sido eliminada
+                SwalUtils.ShowSwal(Me, "Atención", "La factura que desea eliminar ya ha sido eliminada en el sistema.", "info")
+                Return
+            End If
+
+            'Puede eliminar el documento
+            modFactura = New Models.Factura
+            errorMessage = ""
+
+            With modFactura
+                .IdProveedor = Convert.ToInt32(idProveedor)
+                .TipoFactura = Convert.ToInt32(idTipoDocumento)
+                .NumeroFactura = numDocumento.Trim()
+            End With
+
+            If objFactura.EliminarFactura(modFactura, usuarioElimino, errorMessage) Then
+                SwalUtils.ShowSwal(Me, "¡Factura eliminada exitosamente!", "La factura ya no se encuentra en el sistema.")
+                prcLimpiarCampos()
+            Else
+                SwalUtils.ShowSwalError(Me, "Atención", $"No se logró eliminar la factura. {errorMessage}")
+            End If
+        Else
+            Dim objDocumentoPago As New DocumentoPagoDB
+            Dim modDocumentoPago As New Models.DocumentoPago
+
+            With modDocumentoPago
+                .IdProveedor = Convert.ToInt32(idProveedor)
+                .TipoDocumento = Convert.ToInt32(idTipoDocumento)
+                .NumeroDocumento = numDocumento
+            End With
+
+            modDocumentoPago = objDocumentoPago.BuscarDocumentoPago_x_Numero(modDocumentoPago, errorMessage)
+
+            If modDocumentoPago Is Nothing Then ' No encontró el documento
+                SwalUtils.ShowSwal(Me, "Atención", "El documento de Pago que desea eliminar no se encontró en el sistema. Por favor revisar.", "warning")
+                Return
+            End If
+
+            ' Sí encontró el DocumentoPago, continua con la revisión
+            ' Revisa si el estado es eliminado o aplicado, si lo es, hasta aquí llega el proceso
+            If modDocumentoPago.Estado = 2 Then ' El Documento Pago ya ha sido aplicado
+                SwalUtils.ShowSwal(Me, "Atención", "El documento de pago que desea eliminar ya ha sido aplicado en el sistema.", "info")
+                Return
+            End If
+
+            If modDocumentoPago.Estado = 6 Then ' La Documento Pago ya ha sido eliminado
+                SwalUtils.ShowSwal(Me, "Atención", "El documento de pago que desea eliminar ya ha sido eliminado en el sistema.", "info")
+                Return
+            End If
+
+            'Puede eliminar el documento
+            modDocumentoPago = New Models.DocumentoPago
+            errorMessage = ""
+
+            With modDocumentoPago
+                .IdProveedor = Convert.ToInt32(idProveedor)
+                .TipoDocumento = Convert.ToInt32(idTipoDocumento)
+                .NumeroDocumento = numDocumento.Trim()
+            End With
+
+            If objDocumentoPago.EliminarDocumentoPago(modDocumentoPago, usuarioElimino, errorMessage) Then
+                SwalUtils.ShowSwal(Me, "¡Documento de pago eliminado exitosamente!", "El documento de pago ya no se encuentra en el sistema.")
+                prcLimpiarCampos()
+            Else
+                SwalUtils.ShowSwalError(Me, "Atención", $"No se logró eliminar el documento de pago. {errorMessage}")
+            End If
+        End If
+
     End Sub
 
     Protected Sub btnContinuarAplicacion_Click(sender As Object, e As EventArgs)
@@ -383,8 +480,9 @@ Public Class CreacionDocumentos
         contenedor__dialogConfirm.Style.Add("display", "none")
 
         ' Variables y validaciones para ver si el documento existe y si ya fue aplicado
-        ' /***********/ ESTO CAMBIA POR EL INPUT CON OPCIONES SUGERIDAS
         Dim idCategoriaDocumento As String = hfCategoria.Value, idTipoDocumento As String = ddlTipoDocumento.SelectedValue
+        idTipoDocumento = hfTipoDocumento.Value
+
         Dim idProveedor As String = hfNumProveedor.Value.ToString()
         Dim numDocumento As String = txtNumDocumento.Text.ToString().Trim()
 
@@ -467,7 +565,7 @@ Public Class CreacionDocumentos
         End If
 
         If respuestaAplicacion Then
-            SwalUtils.ShowSwal(Me, $"¡{nombreDocumento} exitosamente!", "El documento está listo para ser asociado.")
+            SwalUtils.ShowSwal(Me, $"¡{nombreDocumento} exitosamente!", "El documento se encuentra listo en el proveedor correspondiente.")
             prcLimpiarCampos()
         Else
             nombreDocumento = IIf(idCategoriaDoc = 1, "la factura", "el documento de pago")
@@ -632,5 +730,6 @@ Public Class CreacionDocumentos
 
         prcCambiaTextoEtiquetas(strCategoria.ToLower())
     End Sub
+
 
 End Class
