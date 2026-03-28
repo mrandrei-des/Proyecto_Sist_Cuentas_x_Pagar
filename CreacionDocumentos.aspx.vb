@@ -731,5 +731,20 @@ Public Class CreacionDocumentos
         prcCambiaTextoEtiquetas(strCategoria.ToLower())
     End Sub
 
+    Private Function validarNombre(textValidar As String) As Boolean
+        Dim regex As New Regex("^[a-zA-Z\s]+$")
+        'EXPRESION PARA VALIDAR UNA CONTRASEÑA
+        Dim REGEX_CONTRASENA As New Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$") 'Mínimo 8 caracteres, al menos una letra mayúscula, una letra minúscula, un número y un carácter especial
+
+
+        '# NOMBRE = '^[a-zA-Z\s]+$'
+        '# NUMERO_FACTURA = '^[0-9]+[-]?[0-9]+$'
+        '# USUARIOS = '^[\w]+$'
+        '# MONTOS = '^[0-9]+[,]?[0-9]{1,3}$'
+        '# CORREO = '^[\w._-]+@[\w.]+.[a-zA-Z]{2,4}$'
+        '# CONTRASEÑA = ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,15}$
+
+        Return regex.IsMatch(textValidar)
+    End Function
 
 End Class
