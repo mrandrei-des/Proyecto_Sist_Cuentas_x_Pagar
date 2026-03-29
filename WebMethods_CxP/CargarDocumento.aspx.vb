@@ -18,7 +18,7 @@
         Public Property Observacion As String
         Public Property FechaDoc As String
         Public Property MonedaDoc As String
-        Public Property MontoTotal As Decimal
+        Public Property MontoTotal As Double
     End Class
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load

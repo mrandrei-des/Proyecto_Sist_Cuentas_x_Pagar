@@ -130,7 +130,7 @@ Public Class FacturaDB
                     .Estado = Convert.ToInt32(row("Estado"))
                     .Moneda = row("Moneda").ToString()
                     .TipoCambio = Convert.ToDouble(row("TipoCambio").ToString())
-                    .Total = Convert.ToDouble(row("Total").ToString())
+                    .Total = Convert.ToDouble(row("Total"))
                     .SaldoActual = Convert.ToDouble(row("SaldoActual").ToString())
                 End With
             End If

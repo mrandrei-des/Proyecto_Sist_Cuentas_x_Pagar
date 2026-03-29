@@ -154,19 +154,14 @@ Public Class CreacionDocumentos
     End Sub
 
     Protected Sub btnGuardar_Click(sender As Object, e As EventArgs)
+        ' Variables para las validaciones y proceso de guardado
         Dim idCategoriaDocumento As String = hfCategoria.Value, idTipoDocumento As String = ddlTipoDocumento.SelectedValue
         Dim idProveedor As String = hfNumProveedor.Value.ToString()
         Dim numDocumento As String = txtNumDocumento.Text.ToString()
-
-        'Valida que el documento no haya sido registrado previamente, aquí revisa hasta dentro de los que fueron eliminados
-        If Not ContinuarProcesoGuardado(idCategoriaDocumento, idTipoDocumento, idProveedor, numDocumento) Then
-            Return
-        End If
-
-        ' Variables para las validaciones y proceso de guardado
         Dim observacion As String = txtObservacion.Text
         Dim fechaEmision As String = txtFechaEmision.Text
         Dim moneda As String = ddlMoneda.SelectedValue.ToString(), montoTotal As String = txtMontoTotal.Text, saldoActual = txtMontoTotal.Text
+        Dim errorMessage As String = ""
 
         ' Valida que los datos estén correctos, para el momento de hacer la conversión
         If Not ValidarDatos(idCategoriaDocumento, idProveedor, idTipoDocumento, numDocumento, observacion, fechaEmision, moneda, montoTotal, saldoActual) Then
@@ -174,8 +169,18 @@ Public Class CreacionDocumentos
             Return
         End If
 
+        'Valida que el documento no haya sido registrado previamente, aquí revisa hasta dentro de los que fueron eliminados
+        Dim nombreDocumento As String = IIf(Convert.ToInt32(idCategoriaDocumento) = 1, "la factura", "el documento de pago")
+
+        If ExisteDocumento(Convert.ToInt32(idCategoriaDocumento), Convert.ToInt32(idProveedor), Convert.ToInt32(idTipoDocumento), numDocumento, errorMessage) Then
+            SwalUtils.ShowSwalMessage(Me, "Consulta", $"Ya existe {nombreDocumento} con el número {numDocumento} para este proveedor.", "warning")
+            Return
+        End If
+
         Dim categoriaDocumento As Integer = Convert.ToInt32(idCategoriaDocumento)
-        Dim usuarioInserta As String = "andre", errorMessage As String = "", nombreDocumento As String = ""
+        Dim usuarioInserta As String = "andre"
+        errorMessage = ""
+        nombreDocumento = ""
         Dim respuestaCreacion As Boolean
 
         If categoriaDocumento = 1 Then ' Se está guardando una factura
@@ -244,12 +249,6 @@ Public Class CreacionDocumentos
         Dim numDocumento As String = txtNumDocumento.Text.ToString().Trim()
 
         Dim objHerramienta As New Herramientas
-
-        ' Si los datos para buscar el documento no son válidos, el proceso hasta aquí llega
-        If Not objHerramienta.ValidarNumeroEntero(idCategoriaDocumento, False) Or Not objHerramienta.ValidarNumeroEntero(idTipoDocumento, False) Or Not objHerramienta.ValidarNumeroEntero(idProveedor, False) Or Not objHerramienta.ValidarCadena(numDocumento) Then
-            SwalUtils.ShowSwal(Me, "Atención", "Los datos del documento no son válidos. Por favor revisar.", "warning")
-            Return
-        End If
 
         ' Si los datos son válidos, procede a buscar el documento/factura
         Dim idCategoriaDoc As Integer = Convert.ToInt32(idCategoriaDocumento)
@@ -372,7 +371,7 @@ Public Class CreacionDocumentos
         Dim objHerramienta As New Herramientas
 
         ' Si los datos para buscar el documento no son válidos, el proceso hasta aquí llega
-        If Not objHerramienta.ValidarNumeroEntero(idCategoriaDocumento, False) Or Not objHerramienta.ValidarNumeroEntero(idTipoDocumento, False) Or Not objHerramienta.ValidarNumeroEntero(idProveedor, False) Or Not objHerramienta.ValidarCadena(numDocumento) Then
+        If Not objHerramienta.ValidarNumeroEntero(idCategoriaDocumento, False) Or Not objHerramienta.ValidarNumeroEntero(idTipoDocumento, False) Or Not objHerramienta.ValidarNumeroEntero(idProveedor, False) Or Not ValidarNumDocumento(numDocumento) Then
             SwalUtils.ShowSwal(Me, "Atención", "Los datos del documento no son válidos. Por favor revisar.", "warning")
             Return
         End If
@@ -628,46 +627,10 @@ Public Class CreacionDocumentos
             Return True ' Sí existe el documento
         End If
     End Function
-    Private Function ConsultaDocumentoPago(idProveedor As Integer, idTipoDocumento As Integer, numDocumento As String, ByRef errorMessage As String) As Models.DocumentoPago
-        Dim modDocumentoPago As New Models.DocumentoPago
-        Dim objDocumentoPago As New DocumentoPagoDB
-
-        With modDocumentoPago
-            .IdProveedor = idProveedor
-            .TipoDocumento = idTipoDocumento
-            .NumeroDocumento = numDocumento
-        End With
-        Return objDocumentoPago.BuscarDocumentoPago_x_Numero(modDocumentoPago, errorMessage)
-    End Function
-    Private Function ContinuarProcesoGuardado(idCategoriaDocumento As String, idTipoDocumento As String, idProveedor As String, numDocumento As String) As Boolean
-        Dim errorMessage As String = ""
-
-        ' Valida los datos para la búsqueda
-        If Not ValidaDatosExistencia(idCategoriaDocumento, idProveedor, idTipoDocumento, numDocumento) Then
-            SwalUtils.ShowSwalError(Me, "Atención", "Los datos ingresados no son válidos. Por favor revisar")
-            Return False
-        End If
-
-        Dim nombreDocumento As String = IIf(Convert.ToInt32(idCategoriaDocumento) = 1, "la factura", "el documento de pago")
-
-        Try
-            Dim respuestaExistencia As Boolean = ExisteDocumento(Convert.ToInt32(idCategoriaDocumento), Convert.ToInt32(idProveedor), Convert.ToInt32(idTipoDocumento), numDocumento, errorMessage)
-
-            If respuestaExistencia Then
-                SwalUtils.ShowSwalMessage(Me, "Consulta", $"Ya existe {nombreDocumento} con el número {numDocumento} para este proveedor.", "warning")
-                Return False
-            End If
-
-            'Si no la encontró no hay problema, puede guardarla
-            Return True
-
-        Catch ex As Exception
-            SwalUtils.ShowSwalError(Me, "Atención", $"No se logró encontrar {nombreDocumento}. {errorMessage}.")
-            Return False
-        End Try
-    End Function
     Private Function ValidarDatos(idCategoriaDocumento As String, idProveedor As String, tipoDocumento As String, numDocumento As String, observacion As String, fechaEmision As String, moneda As String, montoTotal As String, saldoActual As String) As Boolean
         Dim objHerramienta As New Herramientas
+        Dim objListaReglas As New ListaReglas()
+        Dim modRegla As ValidacionRegex
 
         If Not objHerramienta.ValidarNumeroEntero(idCategoriaDocumento, False) Then
             Return False
@@ -681,12 +644,19 @@ Public Class CreacionDocumentos
             Return False
         End If
 
-        If Not objHerramienta.ValidarCadena(numDocumento) Then
+        If Not ValidarNumDocumento(numDocumento) Then
             Return False
         End If
 
-        If Not objHerramienta.ValidarCadena(observacion) Then
-            Return False
+        modRegla = objListaReglas.ObtenerReglaPorCampo("observacion")
+        If Not modRegla Is Nothing Then
+            If Not modRegla.Regla.IsMatch(observacion) Then
+                contenedorMensajesObservacion.InnerHtml = $"<p class='formulario__mensaje'>{modRegla.Mensaje}</p>"
+                contenedorMensajesObservacion.Style.Add("display", "block")
+                Return False
+            Else
+                contenedorMensajesObservacion.Style.Remove("display")
+            End If
         End If
 
         If Not objHerramienta.ValidarFecha(fechaEmision) Then
@@ -697,15 +667,38 @@ Public Class CreacionDocumentos
             Return False
         End If
 
-        If Not objHerramienta.ValidarNumeroDecimales(montoTotal, False) Then
-            Return False
+        modRegla = objListaReglas.ObtenerReglaPorCampo("montoDocumento")
+        If Not modRegla Is Nothing Then
+            If Not modRegla.Regla.IsMatch(montoTotal) Then
+                contenedorMensajesMonto.InnerHtml = $"<p class='formulario__mensaje'>{modRegla.Mensaje}</p>"
+                contenedorMensajesMonto.Style.Add("display", "block")
+                Return False
+            Else
+                contenedorMensajesMonto.Style.Remove("display")
+            End If
         End If
 
-        If Not objHerramienta.ValidarNumeroDecimales(saldoActual, False) Then
-            Return False
-        End If
         Return True
     End Function
+
+    Private Function ValidarNumDocumento(numDocumento As String) As Boolean
+        Dim modRegla As ValidacionRegex
+        Dim objListaReglas As New ListaReglas()
+
+        modRegla = objListaReglas.ObtenerReglaPorCampo("numDocumento")
+        If Not modRegla Is Nothing Then
+            If Not modRegla.Regla.IsMatch(numDocumento) Then
+                contenedorMensajesNumDoc.InnerHtml = $"<p class='formulario__mensaje'>{modRegla.Mensaje}</p>"
+                contenedorMensajesNumDoc.Style.Add("display", "block")
+                Return False
+            Else
+                contenedorMensajesNumDoc.Style.Remove("display")
+            End If
+        End If
+
+        Return True
+    End Function
+
     Protected Sub btnFiltFacturaForm_Click(sender As Object, e As EventArgs)
         prcLimpiarCampos()
         hfCategoria.Value = 1
@@ -730,21 +723,5 @@ Public Class CreacionDocumentos
 
         prcCambiaTextoEtiquetas(strCategoria.ToLower())
     End Sub
-
-    Private Function validarNombre(textValidar As String) As Boolean
-        Dim regex As New Regex("^[a-zA-Z\s]+$")
-        'EXPRESION PARA VALIDAR UNA CONTRASEÑA
-        Dim REGEX_CONTRASENA As New Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$") 'Mínimo 8 caracteres, al menos una letra mayúscula, una letra minúscula, un número y un carácter especial
-
-
-        '# NOMBRE = '^[a-zA-Z\s]+$'
-        '# NUMERO_FACTURA = '^[0-9]+[-]?[0-9]+$'
-        '# USUARIOS = '^[\w]+$'
-        '# MONTOS = '^[0-9]+[,]?[0-9]{1,3}$'
-        '# CORREO = '^[\w._-]+@[\w.]+.[a-zA-Z]{2,4}$'
-        '# CONTRASEÑA = ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,15}$
-
-        Return regex.IsMatch(textValidar)
-    End Function
 
 End Class

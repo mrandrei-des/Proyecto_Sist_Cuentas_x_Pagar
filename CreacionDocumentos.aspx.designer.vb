@@ -86,6 +86,15 @@ Partial Public Class CreacionDocumentos
     Protected WithEvents hfTipoDocumento As Global.System.Web.UI.WebControls.HiddenField
 
     '''<summary>
+    '''Control contenedorMensajesTipoDoc.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents contenedorMensajesTipoDoc As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+    '''<summary>
     '''Control lblProveedor.
     '''</summary>
     '''<remarks>
@@ -111,6 +120,15 @@ Partial Public Class CreacionDocumentos
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents hfNumProveedor As Global.System.Web.UI.WebControls.HiddenField
+
+    '''<summary>
+    '''Control contenedorMensajesProveedor.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents contenedorMensajesProveedor As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
     '''Control rfvProveedor.
@@ -140,6 +158,15 @@ Partial Public Class CreacionDocumentos
     Protected WithEvents txtNumDocumento As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
+    '''Control contenedorMensajesNumDoc.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents contenedorMensajesNumDoc As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+    '''<summary>
     '''Control rfvNumDocumento.
     '''</summary>
     '''<remarks>
@@ -165,6 +192,15 @@ Partial Public Class CreacionDocumentos
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents txtFechaEmision As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control contenedorMensajesFecha.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents contenedorMensajesFecha As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
     '''Control rfvFechaEmision.
@@ -194,6 +230,15 @@ Partial Public Class CreacionDocumentos
     Protected WithEvents ddlMoneda As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
+    '''Control contenedorMensajesMoneda.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents contenedorMensajesMoneda As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+    '''<summary>
     '''Control rfvMoneda.
     '''</summary>
     '''<remarks>
@@ -221,6 +266,15 @@ Partial Public Class CreacionDocumentos
     Protected WithEvents txtMontoTotal As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
+    '''Control contenedorMensajesMonto.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents contenedorMensajesMonto As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+    '''<summary>
     '''Control rfvMontoTotal.
     '''</summary>
     '''<remarks>
@@ -246,6 +300,15 @@ Partial Public Class CreacionDocumentos
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents txtObservacion As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control contenedorMensajesObservacion.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents contenedorMensajesObservacion As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
     '''Control rfvObservacion.

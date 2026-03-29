@@ -222,6 +222,8 @@
     <Compile Include="App_Start\RouteConfig.vb" />
     <Compile Include="Database\ErrorLoggerDB.vb" />
     <Compile Include="Models\ErrorLogger.vb" />
+    <Compile Include="Models\ListaReglas.vb" />
+    <Compile Include="Models\ValidacionRegex.vb" />
     <Compile Include="Utils\Simple3Des.vb" />
     <Compile Include="WebMethods_CxP\BuscarProveedor.aspx.designer.vb">
       <DependentUpon>BuscarProveedor.aspx</DependentUpon>

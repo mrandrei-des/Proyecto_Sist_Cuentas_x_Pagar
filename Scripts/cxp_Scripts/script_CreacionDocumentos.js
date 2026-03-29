@@ -1,5 +1,79 @@
 ﻿var API_ENDPOINT = 'http://localhost:59338/WebMethods_CxP/'
+var reglasValidacion = {
+    nombreProveedor: {
+        regex: /^[\wáéíóúÁÉÍÓÚ\s]+$/,
+        mensaje: "Solo se permiten letras y números."
+    },
+    numDocumento: {
+        regex: /^[0-9]+[-]?[0-9]+$/,
+        mensaje: "Solo se permiten números y un guión medio."
+    },
+    montoDocumento: {
+        regex: /^[0-9]+[,]?[0-9]{1,3}$/,
+        mensaje: "Ingrese un monto válido con 3 decimales máximo."
+    },
+    observacion: {
+        regex: /^[\wáéíóúÁÉÍÓÚ.\s]+$/,
+        mensaje: "Solo se permite números, letras, punto y espacios."
+    }
+};
 
+function validarCampo(nombreElemento, valorValidar) {
+    var regla = reglasValidacion[nombreElemento];
+    if (!regla) return true;
+    return regla.regex.test(valorValidar)
+}
+
+document.getElementById('MainContent_txtProveedor').addEventListener('blur', function () {
+    if (!validarCampo('nombreProveedor', this.value)) {
+        mostrarMensajeError(this, 'nombreProveedor');
+    } else {
+        limpiarMensajesError(this);
+    }
+});
+
+document.getElementById('MainContent_txtNumDocumento').addEventListener('blur', function () {
+    if (!validarCampo('numDocumento', this.value)) {
+        mostrarMensajeError(this, 'numDocumento');
+    } else {
+        limpiarMensajesError(this);
+    }
+});
+
+document.getElementById('MainContent_txtObservacion').addEventListener('blur', function () {
+    if (!validarCampo('observacion', this.value)) {
+        mostrarMensajeError(this, 'observacion');
+    } else {
+        limpiarMensajesError(this);
+    }
+});
+
+document.getElementById('MainContent_txtMontoTotal').addEventListener('blur', function () {
+    if (!validarCampo('montoDocumento', this.value)) {
+        mostrarMensajeError(this, 'montoDocumento');
+    } else {
+        limpiarMensajesError(this);
+    }
+});
+
+function mostrarMensajeError(elementoValidado, nombreElemento) {
+    var contenedorMensajes = elementoValidado.parentElement.querySelector('.formulario__contenedor-mensajes');
+    contenedorMensajes.innerHTML = '';
+
+    var itemMensaje = document.createElement('p');
+    itemMensaje.className = 'formulario__mensaje';
+    itemMensaje.innerHTML = reglasValidacion[nombreElemento].mensaje;
+
+    contenedorMensajes.appendChild(itemMensaje);
+    contenedorMensajes.style.display = 'block';
+}
+
+function limpiarMensajesError(elementoValidado) {
+    var contenedorMensajes = elementoValidado.parentElement.querySelector('.formulario__contenedor-mensajes');
+    contenedorMensajes.innerHTML = '';
+}
+
+// Eventos de la página
 document.getElementById('MainContent_txtProveedor').addEventListener('input', function () {
     var query = this.value.trim();
     if (query.length < 2) {
@@ -8,53 +82,6 @@ document.getElementById('MainContent_txtProveedor').addEventListener('input', fu
     }
     BuscarProveedores(query);
 });
-
-function BuscarProveedores(query) {
-    fetch(API_ENDPOINT +'BuscarProveedor', {        
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-            'Content-Type': 'application/json; charset=utf-8',
-            'X-Requested-With': 'XMLHttpRequest'
-        },
-        body: JSON.stringify({ datoBuscar: query })
-    })
-        .then(function (r) { return r.json(); })
-        .then(function (data) {
-            if (data.estado) {
-                mostrarSugerencias(data.lista);
-            } else {
-                alert(data.mensaje)
-            }
-        })
-        .catch(function (err) {
-            console.error('Ha ocurrido un error al ejecutar la petición: ', err)
-            alert('Error de conexión con el servidor [001]');
-        });
-}
-
-function mostrarSugerencias(lista) {
-    var dd = document.getElementById('ddProveedores');
-    dd.innerHTML = '';
-    lista.forEach(function (proveedor) {
-        var item = document.createElement('div');
-        item.className = 'contenedor__sugerencias__item';
-        item.innerHTML = '<strong>' + proveedor.Nombre + '</strong><br><span>Proveedor: ' + proveedor.NumeroProveedor + '</span>';
-        item.onclick = function () { seleccionarProveedor(proveedor.NumeroProveedor, proveedor.Nombre); };
-        dd.appendChild(item);
-    });
-    dd.style.display = 'flex';
-}
-
-function seleccionarProveedor(id, nombre) {
-    document.getElementById('MainContent_txtProveedor').value = nombre;
-    document.getElementById('MainContent_hfNumProveedor').value = id;
-    cerrarSugerencias();
-}
-
-function cerrarSugerencias() {
-    document.getElementById('ddProveedores').style.display = 'none';
-}
 
 document.addEventListener('DOMContentLoaded', function () {
     cargarDocumentosPendientes(1);
@@ -110,6 +137,55 @@ document.getElementById('btnCancelarAplicacion').addEventListener('click', funct
     document.getElementById('MainContent_contenedor__dialogConfirm').style.display = 'none';
 });
 
+
+
+// Funciones para ejecutar en los eventos
+function BuscarProveedores(query) {
+    fetch(API_ENDPOINT + 'BuscarProveedor', {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json; charset=utf-8',
+            'X-Requested-With': 'XMLHttpRequest'
+        },
+        body: JSON.stringify({ datoBuscar: query })
+    })
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+            if (data.estado) {
+                mostrarSugerencias(data.lista);
+            } else {
+                alert(data.mensaje)
+            }
+        })
+        .catch(function (err) {
+            console.error('Ha ocurrido un error al ejecutar la petición: ', err)
+            alert('Error de conexión con el servidor [001]');
+        });
+}
+
+function mostrarSugerencias(lista) {
+    var dd = document.getElementById('ddProveedores');
+    dd.innerHTML = '';
+    lista.forEach(function (proveedor) {
+        var item = document.createElement('div');
+        item.className = 'contenedor__sugerencias__item';
+        item.innerHTML = '<strong>' + proveedor.Nombre + '</strong><br><span>Proveedor: ' + proveedor.NumeroProveedor + '</span>';
+        item.onclick = function () { seleccionarProveedor(proveedor.NumeroProveedor, proveedor.Nombre); };
+        dd.appendChild(item);
+    });
+    dd.style.display = 'flex';
+}
+
+function seleccionarProveedor(id, nombre) {
+    document.getElementById('MainContent_txtProveedor').value = nombre;
+    document.getElementById('MainContent_hfNumProveedor').value = id;
+    cerrarSugerencias();
+}
+
+function cerrarSugerencias() {
+    document.getElementById('ddProveedores').style.display = 'none';
+}
 
 function obtenerFiltroOrder() {
     // Validar cual de los 3 botones tiene la clase active y retornar el orderByClause correspondiente
@@ -306,6 +382,5 @@ function moverSelectOption(selectElement, valorBuscar) {
         }
     }
 }
-
 
 //DocumentoExisteYEstaPendiente
