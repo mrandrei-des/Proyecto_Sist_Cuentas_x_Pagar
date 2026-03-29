@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="MantenimientoProveedor.aspx.vb" Inherits="Proyecto_Sist_Cuentas_x_Pagar.MantenimientoProveedor" %>
+﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="MantenimientoProveedor.aspx.vb" Inherits="Proyecto_Sist_Cuentas_x_Pagar.MantenimientoProveedor" EnableEventValidation="false" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="main__wrapper">
@@ -36,54 +36,54 @@
                             <legend>Datos del proveedor:</legend>
                             <!-- Nombre Completo-->
                             <div class="formulario__contenedor-input formulario__contenedor-input-sp2">
-                                <asp:Label ID="lblNombre" runat="server" Text="Nombre Completo:" CssClass="formulario__label">
-                                    <asp:TextBox ID="txtNombre" runat="server" CssClass="formulario__input" placeholder="John Doe" required="true"></asp:TextBox>
+                                <asp:Label ID="lblNombre" runat="server" Text="Nombre Completo:" CssClass="formulario__label" AssociatedControlID="txtNombre">
                                 </asp:Label>
+                                <asp:TextBox ID="txtNombre" runat="server" CssClass="formulario__input" placeholder="John Doe" required="true"></asp:TextBox>
                                 <%-- Validación del nombre --%>
-                                <div class="formulario__contenedor-mensajes">
-                                    <p class="formulario__mensaje">
+                                <div class="formulario__contenedor-mensajes" runat="server" id="contenedorMensajesNombre">
+<%--                                    <p class="formulario__mensaje">
                                         <asp:RequiredFieldValidator ID="rfvNombre" runat="server" ErrorMessage="Es necesario ingresar el nombre completo del proveedor." ControlToValidate="txtNombre" Display="Dynamic"></asp:RequiredFieldValidator>
-                                    </p>
+                                    </p>--%>
                                 </div>
                             </div>
 
                             <!-- Tipo Identificación -->
                             <div class="formulario__contenedor-input">
-                                <asp:Label ID="lblTipoIdentificacion" runat="server" Text="Tipo Identificación:" CssClass="formulario__label">Tipo Identificación:
-                                    <asp:DropDownList ID="ddlTipoIdentificacion" runat="server" CssClass="formulario__input" required="true">
-                                    </asp:DropDownList>
+                                <asp:Label ID="lblTipoIdentificacion" runat="server" Text="Tipo Identificación:" CssClass="formulario__label" AssociatedControlID="ddlTipoIdentificacion">Tipo Identificación:
                                 </asp:Label>
+                                <asp:DropDownList ID="ddlTipoIdentificacion" runat="server" CssClass="formulario__input" required="true">
+                                </asp:DropDownList>
                                 <%-- Validación del tipo de identificación --%>
-                                <div class="formulario__contenedor-mensajes">
-                                    <p class="formulario__mensaje">
+                                <div class="formulario__contenedor-mensajes" runat="server" id="contenedorMensajesTipoIdentificacion">
+  <%--                                  <p class="formulario__mensaje">
                                         <asp:RequiredFieldValidator ID="rfvTipoIdentificacion" runat="server" ErrorMessage="Es necesario seleccionar el tipo de identificación del proveedor." ControlToValidate="ddlTipoIdentificacion" Display="Dynamic"></asp:RequiredFieldValidator>
-                                    </p>
+                                    </p>--%>
                                 </div>
                             </div>
 
                             <!-- Identificación -->
                             <div class="formulario__contenedor-input">
-                                <asp:Label ID="lblIdentificacion" runat="server" Text="Identificación:" CssClass="formulario__label">
-                                    <asp:TextBox ID="txtIdentificacion" runat="server" CssClass="formulario__input" placeholder="101110111" required="true"></asp:TextBox>
+                                <asp:Label ID="lblIdentificacion" runat="server" Text="Identificación:" CssClass="formulario__label" AssociatedControlID="txtIdentificacion">
                                 </asp:Label>
+                                <asp:TextBox ID="txtIdentificacion" runat="server" CssClass="formulario__input" placeholder="101110111" required="true"></asp:TextBox>
                                 <%-- Validación de la Identificación --%>
-                                <div class="formulario__contenedor-mensajes">
-                                    <p class="formulario__mensaje">
+                                <div class="formulario__contenedor-mensajes" runat="server" id="contenedorMensajesIdentificacion">
+<%--                                    <p class="formulario__mensaje">
                                         <asp:RequiredFieldValidator ID="rfvIdentificacion" runat="server" ErrorMessage="Es necesario ingresar la identificación del proveedor." ControlToValidate="txtIdentificacion" Display="Dynamic"></asp:RequiredFieldValidator>
-                                    </p>
+                                    </p>--%>
                                 </div>
                             </div>
 
                             <!-- Correo electrónico -->
                             <div class="formulario__contenedor-input formulario__contenedor-input-sp2">
-                                <asp:Label ID="lblCorreo" runat="server" Text="Correo Electrónico:" CssClass="formulario__label">
-                                    <asp:TextBox ID="txtCorreo" runat="server" CssClass="formulario__input" TextMode="Email" placeholder="correo@correo.com" required="true"></asp:TextBox>
+                                <asp:Label ID="lblCorreo" runat="server" Text="Correo Electrónico:" CssClass="formulario__label" AssociatedControlID="txtCorreo">
                                 </asp:Label>
+                                <asp:TextBox ID="txtCorreo" runat="server" CssClass="formulario__input" TextMode="Email" placeholder="correo@correo.com" required="true"></asp:TextBox>
                                 <%-- Validación del correo electrónico --%>
-                                <div class="formulario__contenedor-mensajes">
-                                    <p class="formulario__mensaje">
+                                <div class="formulario__contenedor-mensajes" runat="server" id="contenedorMensajesCorreo">
+<%--                                    <p class="formulario__mensaje">
                                         <asp:RequiredFieldValidator ID="rfvCorreo" runat="server" ErrorMessage="Es necesario ingresar un correo electrónico." ControlToValidate="txtCorreo" Display="Dynamic"></asp:RequiredFieldValidator>
-                                    </p>
+                                    </p>--%>
                                 </div>
                             </div>
                         </fieldset>
@@ -94,15 +94,15 @@
                             <legend>Atributos del proveedor:</legend>
                             <div class="formulario__contenedor-input">
                                 <!-- Estado del proveedor -->
-                                <asp:Label ID="lblEstado" runat="server" Text="El proveedor se encuentra:" CssClass="formulario__label">Estado:
-                                    <asp:DropDownList ID="ddlEstado" runat="server" CssClass="formulario__input" required="true">
-                                    </asp:DropDownList>
+                                <asp:Label ID="lblEstado" runat="server" Text="El proveedor se encuentra:" CssClass="formulario__label" AssociatedControlID="ddlEstado">Estado:
                                 </asp:Label>
+                                <asp:DropDownList ID="ddlEstado" runat="server" CssClass="formulario__input" required="true">
+                                    </asp:DropDownList>
                                 <%-- Validación del estado del proveedor --%>
-                                <div class="formulario__contenedor-mensajes">
-                                    <p class="formulario__mensaje">
+                                <div class="formulario__contenedor-mensajes" runat="server" id="contenedorMensajesEstado">
+<%--                                    <p class="formulario__mensaje">
                                         <asp:RequiredFieldValidator ID="rfvEstadoUsuario" runat="server" ErrorMessage="Es necesario seleccionar el estado del proveedor." ControlToValidate="ddlEstado" Display="Dynamic"></asp:RequiredFieldValidator>
-                                    </p>
+                                    </p>--%>
                                 </div>
                             </div>
 
@@ -116,9 +116,18 @@
                                <i class="fa-solid fa-building-circle-check"></i>
                             </span>  
                         </asp:LinkButton>
+
+                        <asp:LinkButton ID="btnCancelar" runat ="server" CssClass="boton boton__refrescar" OnClick="btnCancelar_Click" CausesValidation="false" ToolTip="Limpiar campos">
+                            <span>Limpiar</span>
+                            <span class="contenedor__icono">
+                                <i class="fa-solid fa-eraser"></i>                               
+                            </span>  
+                        </asp:LinkButton>
                     </footer>
                 </div>
             </section>
         </main>
     </div>
+
+    <script src="Scripts/cxp_Scripts/script_MantProveedores.js"></script>
 </asp:Content>

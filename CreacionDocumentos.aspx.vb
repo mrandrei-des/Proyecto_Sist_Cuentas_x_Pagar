@@ -631,54 +631,63 @@ Public Class CreacionDocumentos
         Dim objHerramienta As New Herramientas
         Dim objListaReglas As New ListaReglas()
         Dim modRegla As ValidacionRegex
+        Dim respuestaValidacion As Boolean = True
 
         If Not objHerramienta.ValidarNumeroEntero(idCategoriaDocumento, False) Then
-            Return False
+            respuestaValidacion = False
         End If
 
         If Not objHerramienta.ValidarNumeroEntero(idProveedor, False) Then
-            Return False
+            respuestaValidacion = False
         End If
 
         If Not objHerramienta.ValidarNumeroEntero(tipoDocumento, False) Then
-            Return False
+            contenedorMensajesTipoDoc.InnerHtml = $"<p class='formulario__mensaje'>El tipo de documento no tiene un valor válido.</p>"
+            contenedorMensajesTipoDoc.Style.Add("display", "block")
+            respuestaValidacion = False
+        Else
+            contenedorMensajesTipoDoc.Style.Remove("display")
         End If
 
         If Not ValidarNumDocumento(numDocumento) Then
-            Return False
+            respuestaValidacion = False
         End If
 
         modRegla = objListaReglas.ObtenerReglaPorCampo("observacion")
         If Not modRegla Is Nothing Then
-            If Not modRegla.Regla.IsMatch(observacion) Then
+            If Not objListaReglas.ValidarCampo(modRegla, observacion) Then
                 contenedorMensajesObservacion.InnerHtml = $"<p class='formulario__mensaje'>{modRegla.Mensaje}</p>"
                 contenedorMensajesObservacion.Style.Add("display", "block")
-                Return False
+                respuestaValidacion = False
             Else
                 contenedorMensajesObservacion.Style.Remove("display")
             End If
         End If
 
         If Not objHerramienta.ValidarFecha(fechaEmision) Then
-            Return False
+            contenedorMensajesFecha.InnerHtml = $"<p class='formulario__mensaje'>La fecha no tiene un valor válido.</p>"
+            contenedorMensajesFecha.Style.Add("display", "block")
+            respuestaValidacion = False
+        Else
+            contenedorMensajesFecha.Style.Remove("display")
         End If
 
         If Not objHerramienta.ValidarCadena(moneda) Then
-            Return False
+            respuestaValidacion = False
         End If
 
         modRegla = objListaReglas.ObtenerReglaPorCampo("montoDocumento")
         If Not modRegla Is Nothing Then
-            If Not modRegla.Regla.IsMatch(montoTotal) Then
+            If Not objListaReglas.ValidarCampo(modRegla, montoTotal) Then
                 contenedorMensajesMonto.InnerHtml = $"<p class='formulario__mensaje'>{modRegla.Mensaje}</p>"
                 contenedorMensajesMonto.Style.Add("display", "block")
-                Return False
+                respuestaValidacion = False
             Else
                 contenedorMensajesMonto.Style.Remove("display")
             End If
         End If
 
-        Return True
+        Return respuestaValidacion
     End Function
 
     Private Function ValidarNumDocumento(numDocumento As String) As Boolean

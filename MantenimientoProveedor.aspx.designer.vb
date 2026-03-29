@@ -41,13 +41,13 @@ Partial Public Class MantenimientoProveedor
     Protected WithEvents txtNombre As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control rfvNombre.
+    '''Control contenedorMensajesNombre.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents rfvNombre As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    Protected WithEvents contenedorMensajesNombre As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
     '''Control lblTipoIdentificacion.
@@ -68,13 +68,13 @@ Partial Public Class MantenimientoProveedor
     Protected WithEvents ddlTipoIdentificacion As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''Control rfvTipoIdentificacion.
+    '''Control contenedorMensajesTipoIdentificacion.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents rfvTipoIdentificacion As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    Protected WithEvents contenedorMensajesTipoIdentificacion As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
     '''Control lblIdentificacion.
@@ -95,13 +95,13 @@ Partial Public Class MantenimientoProveedor
     Protected WithEvents txtIdentificacion As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control rfvIdentificacion.
+    '''Control contenedorMensajesIdentificacion.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents rfvIdentificacion As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    Protected WithEvents contenedorMensajesIdentificacion As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
     '''Control lblCorreo.
@@ -122,13 +122,13 @@ Partial Public Class MantenimientoProveedor
     Protected WithEvents txtCorreo As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control rfvCorreo.
+    '''Control contenedorMensajesCorreo.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents rfvCorreo As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    Protected WithEvents contenedorMensajesCorreo As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
     '''Control lblEstado.
@@ -149,13 +149,13 @@ Partial Public Class MantenimientoProveedor
     Protected WithEvents ddlEstado As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''Control rfvEstadoUsuario.
+    '''Control contenedorMensajesEstado.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents rfvEstadoUsuario As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    Protected WithEvents contenedorMensajesEstado As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
     '''Control btnGuardar.
@@ -165,4 +165,13 @@ Partial Public Class MantenimientoProveedor
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents btnGuardar As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''Control btnCancelar.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnCancelar As Global.System.Web.UI.WebControls.LinkButton
 End Class

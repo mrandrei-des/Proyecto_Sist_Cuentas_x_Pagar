@@ -94,9 +94,6 @@
                                 </asp:DropDownList>
                                 <asp:HiddenField ID="hfTipoDocumento" runat="server" />
                                 <div class="formulario__contenedor-mensajes" runat="server" id="contenedorMensajesTipoDoc">
-                                    <p class="formulario__mensaje">
-                                        Es necesario seleccionar el tipo de documento.
-                                    </p>
                                 </div>
                             </div>                            
                         </fieldset>
@@ -118,9 +115,9 @@
                                 </div>
 
                                 <div class="formulario__contenedor-mensajes" runat="server" id="contenedorMensajesProveedor">
-                                    <p class="formulario__mensaje">
+<%--                                    <p class="formulario__mensaje">
                                         <asp:RequiredFieldValidator ID="rfvProveedor" runat="server" ErrorMessage="Es necesario seleccionar el proveedor del documento." ControlToValidate="txtProveedor" Display="Dynamic"></asp:RequiredFieldValidator>
-                                    </p>
+                                    </p>--%>
                                 </div>
                             </div>
 
@@ -131,9 +128,9 @@
 
                                 <%-- Validación Número Documento --%>
                                 <div class="formulario__contenedor-mensajes" runat="server" id="contenedorMensajesNumDoc">
-                                    <p class="formulario__mensaje">
+<%--                                    <p class="formulario__mensaje">
                                         <asp:RequiredFieldValidator ID="rfvNumDocumento" runat="server" ErrorMessage="Es necesario indicar el número del documento." ControlToValidate="txtNumDocumento" Display="Dynamic"></asp:RequiredFieldValidator>
-                                    </p>
+                                    </p>--%>
                                 </div>
                             </div>
 
@@ -144,9 +141,9 @@
                                 <asp:TextBox ID="txtFechaEmision" runat="server" CssClass="formulario__input" TextMode="Date" required="true"></asp:TextBox>
                                 <%-- Validación Fecha Documento --%>
                                 <div class="formulario__contenedor-mensajes" runat="server" id="contenedorMensajesFecha">
-                                    <p class="formulario__mensaje">
+<%--                                    <p class="formulario__mensaje">
                                         <asp:RequiredFieldValidator ID="rfvFechaEmision" runat="server" ErrorMessage="Es necesario seleccionar la fecha de emisión del documento." ControlToValidate="txtFechaEmision" Display="Dynamic"></asp:RequiredFieldValidator>
-                                    </p>
+                                    </p>--%>
                                 </div>
                             </div>
                         </fieldset>
@@ -164,9 +161,9 @@
                                 </asp:Label>
                                 <%-- Validación Moneda Documento --%>
                                 <div class="formulario__contenedor-mensajes" runat="server" id="contenedorMensajesMoneda">
-                                    <p class="formulario__mensaje">
+<%--                                    <p class="formulario__mensaje">
                                         <asp:RequiredFieldValidator ID="rfvMoneda" runat="server" ErrorMessage="Es necesario seleccionar la moneda del documento." ControlToValidate="ddlMoneda" Display="Dynamic"></asp:RequiredFieldValidator>
-                                    </p>
+                                    </p>--%>
                                 </div>
                             </div>
 
@@ -176,9 +173,9 @@
                                 <asp:TextBox ID="txtMontoTotal" runat="server" CssClass="formulario__input" required="true" placeholder="₡0.00"></asp:TextBox>
                                 <%-- Validación Monto Documento --%>
                                 <div class="formulario__contenedor-mensajes" runat="server" id="contenedorMensajesMonto">
-                                    <p class="formulario__mensaje">
+<%--                                    <p class="formulario__mensaje">
                                         <asp:RequiredFieldValidator ID="rfvMontoTotal" runat="server" ErrorMessage="Es necesario indicar el monto total del documento." ControlToValidate="txtMontoTotal" Display="Dynamic"></asp:RequiredFieldValidator>
-                                    </p>
+                                    </p>--%>
                                 </div>
                             </div>
 
@@ -189,9 +186,9 @@
                                 <asp:TextBox ID="txtObservacion" runat="server" class="formulario__input" placeholder="Compra de insumos" required="true"></asp:TextBox>
                                 <%-- Validación Observación Documento --%>
                                 <div class="formulario__contenedor-mensajes" runat="server" id="contenedorMensajesObservacion">
-                                    <p class="formulario__mensaje">
+<%--                                    <p class="formulario__mensaje">
                                         <asp:RequiredFieldValidator ID="rfvObservacion" runat="server" ErrorMessage="Es necesario indicar una observación para el documento." ControlToValidate="txtObservacion" Display="Dynamic"></asp:RequiredFieldValidator>
-                                    </p>
+                                    </p>--%>
                                 </div>
                             </div>
                             

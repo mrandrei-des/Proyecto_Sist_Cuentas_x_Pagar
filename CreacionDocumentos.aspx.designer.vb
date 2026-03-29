@@ -131,15 +131,6 @@ Partial Public Class CreacionDocumentos
     Protected WithEvents contenedorMensajesProveedor As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
-    '''Control rfvProveedor.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents rfvProveedor As Global.System.Web.UI.WebControls.RequiredFieldValidator
-
-    '''<summary>
     '''Control lblNumeroDocumento.
     '''</summary>
     '''<remarks>
@@ -165,15 +156,6 @@ Partial Public Class CreacionDocumentos
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents contenedorMensajesNumDoc As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-
-    '''<summary>
-    '''Control rfvNumDocumento.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents rfvNumDocumento As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
     '''<summary>
     '''Control lblFechaEmision.
@@ -203,15 +185,6 @@ Partial Public Class CreacionDocumentos
     Protected WithEvents contenedorMensajesFecha As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
-    '''Control rfvFechaEmision.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents rfvFechaEmision As Global.System.Web.UI.WebControls.RequiredFieldValidator
-
-    '''<summary>
     '''Control lblMoneda.
     '''</summary>
     '''<remarks>
@@ -237,15 +210,6 @@ Partial Public Class CreacionDocumentos
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents contenedorMensajesMoneda As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-
-    '''<summary>
-    '''Control rfvMoneda.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents rfvMoneda As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
     '''<summary>
     '''Control lblMonto.
@@ -275,15 +239,6 @@ Partial Public Class CreacionDocumentos
     Protected WithEvents contenedorMensajesMonto As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
-    '''Control rfvMontoTotal.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents rfvMontoTotal As Global.System.Web.UI.WebControls.RequiredFieldValidator
-
-    '''<summary>
     '''Control lblObservacion.
     '''</summary>
     '''<remarks>
@@ -309,15 +264,6 @@ Partial Public Class CreacionDocumentos
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents contenedorMensajesObservacion As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-
-    '''<summary>
-    '''Control rfvObservacion.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents rfvObservacion As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
     '''<summary>
     '''Control btnGuardar.

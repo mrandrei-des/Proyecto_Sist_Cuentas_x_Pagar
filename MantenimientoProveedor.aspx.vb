@@ -1,4 +1,5 @@
-﻿Imports Proyecto_Sist_Cuentas_x_Pagar.Utils
+﻿Imports Proyecto_Sist_Cuentas_x_Pagar.Models
+Imports Proyecto_Sist_Cuentas_x_Pagar.Utils
 
 Public Class MantenimientoProveedor
     Inherits System.Web.UI.Page
@@ -14,7 +15,7 @@ Public Class MantenimientoProveedor
         End If
     End Sub
 
-    Private Sub limpiarCampos()
+    Private Sub LimpiarCampos()
         ddlTipoIdentificacion.SelectedIndex = 0
         txtIdentificacion.Text = ""
         txtNombre.Text = ""
@@ -78,8 +79,13 @@ Public Class MantenimientoProveedor
         Dim modProveedor As New Models.Proveedor
         Dim objProveedorDB As New ProveedorDB
         Dim errorMessage As String = "", usuarioCreacion As String = "andre"
-        Dim tipoIdentificacion As Integer = CInt(ddlTipoIdentificacion.SelectedItem.Value)
-        Dim numeroIdentificacion As String = txtIdentificacion.Text
+        Dim tipoIdentificacion As String = ddlTipoIdentificacion.SelectedItem.Value
+        Dim numeroIdentificacion As String = txtIdentificacion.Text, nombre As String = txtNombre.Text, correo As String = txtCorreo.Text, estado As String = ddlEstado.SelectedItem.Value
+
+        If (Not ValidarDatos(tipoIdentificacion, numeroIdentificacion, nombre, correo, estado)) Then
+            SwalUtils.ShowSwalError(Me, "Atención", "Los datos ingresados no son válidos. Por favor revisar")
+            Return
+        End If
 
         modProveedor = objProveedorDB.ConsultarExistenciaProveedor(tipoIdentificacion, numeroIdentificacion, errorMessage)
 
@@ -90,16 +96,16 @@ Public Class MantenimientoProveedor
 
         If modProveedor.NumeroIdentificacion Is Nothing Then
             modProveedor = New Models.Proveedor With {
-                .TipoIdentificacion = CInt(ddlTipoIdentificacion.SelectedItem.Value),
-                .NumeroIdentificacion = txtIdentificacion.Text,
-                .Nombre = txtNombre.Text,
-                .Correo = txtCorreo.Text,
-                .Estado = CInt(ddlEstado.SelectedItem.Value)
+                .TipoIdentificacion = CInt(tipoIdentificacion),
+                .NumeroIdentificacion = numeroIdentificacion,
+                .Nombre = nombre,
+                .Correo = correo,
+                .Estado = CInt(estado)
             }
 
             If objProveedorDB.CrearProveedor(modProveedor, usuarioCreacion, errorMessage) Then
                 SwalUtils.ShowSwal(Me, "¡Proveedor creado exitosamente!")
-                limpiarCampos()
+                LimpiarCampos()
             Else
                 SwalUtils.ShowSwalError(Me, errorMessage)
             End If
@@ -107,4 +113,66 @@ Public Class MantenimientoProveedor
             SwalUtils.ShowSwalError(Me, "Ya existe un proveedor con ese tipo y número de identificación.")
         End If
     End Sub
+
+    Protected Sub btnCancelar_Click(sender As Object, e As EventArgs)
+        LimpiarCampos()
+    End Sub
+
+    Private Function ValidarDatos(tipoIdentificacion As String, numeroIdentificacion As String, nombre As String, correo As String, estado As String) As Boolean
+        Dim objHerramienta As New Herramientas
+        Dim objListaReglas As New ListaReglas()
+        Dim modRegla As ValidacionRegex
+        Dim respuestaValidacion As Boolean = True
+
+        If Not objHerramienta.ValidarNumeroEntero(tipoIdentificacion, False) Then
+            contenedorMensajesTipoIdentificacion.InnerHtml = $"<p class='formulario__mensaje'>Debe seleccionar una opción de tipo identificación.</p>"
+            contenedorMensajesTipoIdentificacion.Style.Add("display", "block")
+            respuestaValidacion = False
+        Else
+            contenedorMensajesTipoIdentificacion.Style.Remove("display")
+        End If
+
+        modRegla = objListaReglas.ObtenerReglaPorCampo("identificacion")
+        If Not modRegla Is Nothing Then
+            If Not objListaReglas.ValidarCampo(modRegla, numeroIdentificacion) Then
+                contenedorMensajesIdentificacion.InnerHtml = $"<p class='formulario__mensaje'>{modRegla.Mensaje}</p>"
+                contenedorMensajesIdentificacion.Style.Add("display", "block")
+                respuestaValidacion = False
+            Else
+                contenedorMensajesIdentificacion.Style.Remove("display")
+            End If
+        End If
+
+        modRegla = objListaReglas.ObtenerReglaPorCampo("nombreProveedor")
+        If Not modRegla Is Nothing Then
+            If Not objListaReglas.ValidarCampo(modRegla, nombre) Then
+                contenedorMensajesNombre.InnerHtml = $"<p class='formulario__mensaje'>{modRegla.Mensaje}</p>"
+                contenedorMensajesNombre.Style.Add("display", "block")
+                respuestaValidacion = False
+            Else
+                contenedorMensajesNombre.Style.Remove("display")
+            End If
+        End If
+
+        modRegla = objListaReglas.ObtenerReglaPorCampo("correo")
+        If Not modRegla Is Nothing Then
+            If Not objListaReglas.ValidarCampo(modRegla, correo) Then
+                contenedorMensajesCorreo.InnerHtml = $"<p class='formulario__mensaje'>{modRegla.Mensaje}</p>"
+                contenedorMensajesCorreo.Style.Add("display", "block")
+                respuestaValidacion = False
+            Else
+                contenedorMensajesCorreo.Style.Remove("display")
+            End If
+        End If
+
+        If Not objHerramienta.ValidarNumeroEntero(estado, False) Then
+            contenedorMensajesEstado.InnerHtml = $"<p class='formulario__mensaje'>Debe seleccionar una opción de estado.</p>"
+            contenedorMensajesEstado.Style.Add("display", "block")
+            respuestaValidacion = False
+        Else
+            contenedorMensajesEstado.Style.Remove("display")
+        End If
+
+        Return respuestaValidacion
+    End Function
 End Class

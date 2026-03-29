@@ -92,6 +92,8 @@ Public Class UsuarioDB
             If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
                 Dim row As DataRow = dt.Rows(0)
                 With modUsuario
+                    .NombreUsuario = row("NombreUsuario").ToString()
+                    .Contrasenna = row("Contrasenna").ToString()
                     .Nombre = row("Nombre").ToString()
                     .Apellido1 = row("Apellido1").ToString()
                     .Apellido2 = row("Apellido1").ToString()

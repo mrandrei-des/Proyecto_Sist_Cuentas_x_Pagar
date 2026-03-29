@@ -139,6 +139,9 @@
     <Content Include="BD Scripts\Stored Procedures\Usuarios\sp_Modificar_Usuario.sql" />
     <Content Include="BD Scripts\Tables\Cargar valores tablas iniciales.sql" />
     <Content Include="BD Scripts\Tables\Creación de tablas.sql" />
+    <Content Include="Scripts\cxp_Scripts\script_ListadoUsuariosModal.js" />
+    <Content Include="Scripts\cxp_Scripts\script_MantProveedores.js" />
+    <Content Include="Scripts\cxp_Scripts\script_MantUsuarios.js" />
     <Content Include="WebMethods_CxP\BuscarProveedor.aspx" />
     <Content Include="CambioContrasenna.aspx" />
     <Content Include="Content\Site.css" />

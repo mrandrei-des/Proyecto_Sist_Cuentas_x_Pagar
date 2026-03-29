@@ -41,13 +41,13 @@ Partial Public Class Usuario
     Protected WithEvents txtUsuario As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control rfvUsuario.
+    '''Control contenedorMensajesNombreUsuario.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents rfvUsuario As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    Protected WithEvents contenedorMensajesNombreUsuario As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
     '''Control lblContrasenna.
@@ -68,13 +68,13 @@ Partial Public Class Usuario
     Protected WithEvents txtContrasenna As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control rfvContrasenna.
+    '''Control contenedorMensajesContrasenna.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents rfvContrasenna As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    Protected WithEvents contenedorMensajesContrasenna As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
     '''Control lblNombre.
@@ -95,13 +95,13 @@ Partial Public Class Usuario
     Protected WithEvents txtNombre As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control rfvNombre.
+    '''Control contenedorMensajesNombre.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents rfvNombre As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    Protected WithEvents contenedorMensajesNombre As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
     '''Control lblApellidoUno.
@@ -122,13 +122,13 @@ Partial Public Class Usuario
     Protected WithEvents txtApellidoUno As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control rfvApellido.
+    '''Control contenedorMensajesApellido1.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents rfvApellido As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    Protected WithEvents contenedorMensajesApellido1 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
     '''Control lblApellidoDos.
@@ -149,6 +149,15 @@ Partial Public Class Usuario
     Protected WithEvents txtApellidoDos As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
+    '''Control contenedorMensajesApellido2.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents contenedorMensajesApellido2 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+    '''<summary>
     '''Control lblCorreoUsuario.
     '''</summary>
     '''<remarks>
@@ -167,13 +176,13 @@ Partial Public Class Usuario
     Protected WithEvents txtCorreoUsuario As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control rfvCorreoUsuario.
+    '''Control contenedorMensajesCorreo.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents rfvCorreoUsuario As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    Protected WithEvents contenedorMensajesCorreo As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
     '''Control lblEstadoUsuario.
@@ -194,13 +203,13 @@ Partial Public Class Usuario
     Protected WithEvents ddlEstadoUsuario As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''Control rfvEstadoUsuario.
+    '''Control contenedorMensajesEstado.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents rfvEstadoUsuario As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    Protected WithEvents contenedorMensajesEstado As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
     '''Control lblRol.
@@ -221,13 +230,13 @@ Partial Public Class Usuario
     Protected WithEvents ddlRoles As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''Control rfvRolUsuario.
+    '''Control contenedorMensajesRol.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents rfvRolUsuario As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    Protected WithEvents contenedorMensajesRol As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
     '''Control btnGuardar.
@@ -237,4 +246,13 @@ Partial Public Class Usuario
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents btnGuardar As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''Control btnCancelar.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnCancelar As Global.System.Web.UI.WebControls.LinkButton
 End Class
