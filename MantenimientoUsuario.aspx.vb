@@ -120,6 +120,8 @@ Public Class Usuario
                     contenedorMensajesApellido2.Style.Remove("display")
                 End If
             End If
+        Else
+            contenedorMensajesApellido2.InnerHtml = ""
         End If
 
 

@@ -50,13 +50,13 @@ Partial Public Class ListadoProveedores
     Protected WithEvents txtNombre As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control rfvNombre.
+    '''Control contenedorMensajesModalNombre.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents rfvNombre As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    Protected WithEvents contenedorMensajesModalNombre As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
     '''Control lblCorreo.
@@ -77,13 +77,13 @@ Partial Public Class ListadoProveedores
     Protected WithEvents txtCorreo As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control rfvCorreo.
+    '''Control contenedorMensajesModalCorreo.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents rfvCorreo As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    Protected WithEvents contenedorMensajesModalCorreo As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
     '''Control lblEstado.
@@ -104,13 +104,13 @@ Partial Public Class ListadoProveedores
     Protected WithEvents ddlEstado As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''Control rfvEstadoUsuario.
+    '''Control contenedorMensajesModalEstado.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents rfvEstadoUsuario As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    Protected WithEvents contenedorMensajesModalEstado As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
     '''Control btnModificarProveedor.

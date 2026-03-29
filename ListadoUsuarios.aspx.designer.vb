@@ -50,13 +50,13 @@ Partial Public Class WebForm1
     Protected WithEvents txtNombre As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control rfvNombre.
+    '''Control contenedorMensajesModalNombre.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents rfvNombre As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    Protected WithEvents contenedorMensajesModalNombre As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
     '''Control lblApellidoUno.
@@ -77,13 +77,13 @@ Partial Public Class WebForm1
     Protected WithEvents txtApellidoUno As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control rfvApellido.
+    '''Control contenedorMensajesModalApellido1.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents rfvApellido As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    Protected WithEvents contenedorMensajesModalApellido1 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
     '''Control lblApellidoDos.
@@ -104,6 +104,15 @@ Partial Public Class WebForm1
     Protected WithEvents txtApellidoDos As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
+    '''Control contenedorMensajesModalApellido2.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents contenedorMensajesModalApellido2 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+    '''<summary>
     '''Control lblCorreoUsuario.
     '''</summary>
     '''<remarks>
@@ -122,13 +131,13 @@ Partial Public Class WebForm1
     Protected WithEvents txtCorreoUsuario As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control rfvCorreoUsuario.
+    '''Control contenedorMensajesModalCorreo.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents rfvCorreoUsuario As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    Protected WithEvents contenedorMensajesModalCorreo As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
     '''Control lblEstadoUsuario.
@@ -149,13 +158,13 @@ Partial Public Class WebForm1
     Protected WithEvents ddlEstadoUsuario As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''Control rfvEstadoUsuario.
+    '''Control contenedorMensajesModalEstado.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents rfvEstadoUsuario As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    Protected WithEvents contenedorMensajesModalEstado As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
     '''Control lblRol.
@@ -176,13 +185,13 @@ Partial Public Class WebForm1
     Protected WithEvents ddlRoles As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''Control rfvRolUsuario.
+    '''Control contenedorMensajesModalRol.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents rfvRolUsuario As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    Protected WithEvents contenedorMensajesModalRol As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
     '''Control btnModificarUsuario.

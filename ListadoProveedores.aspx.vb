@@ -49,19 +49,21 @@ Public Class ListadoProveedores
     Protected Sub btnModificarProveedor_Click(sender As Object, e As EventArgs)
         Dim modProveedor As New Models.Proveedor
         Dim objProveedorDB As New ProveedorDB
-
         Dim errorMessage As String = ""
         Dim nombreUsuarioEjecutaAccion = "andre"
-
         Dim idProveedorAfectado As Integer = Convert.ToInt32(hfIdProveedor.Value)
+        Dim nombre As String = txtNombre.Text, correo As String = txtCorreo.Text, estado As String = ddlEstado.SelectedValue
+
+        If (Not ValidarDatos(nombre, correo, estado)) Then
+            SwalUtils.ShowSwalError(Me, "Atención", "Los datos ingresados no son válidos. Por favor revisar")
+            Return
+        End If
 
         ' modProveedor.NumeroProveedor En el evento de rowCommand se le asigna el id del proveedor afectado, por lo que aquí ya se tiene el id del proveedor a modificar
         modProveedor.NumeroProveedor = idProveedorAfectado
-        modProveedor.Nombre = txtNombre.Text
-        modProveedor.Correo = txtCorreo.Text
-
-        ' Validar porque no está tomando el valor del ddlEstado que se cargó previamente 
-        modProveedor.Estado = CInt(ddlEstado.SelectedItem.Value)
+        modProveedor.Nombre = nombre
+        modProveedor.Correo = correo
+        modProveedor.Estado = CInt(estado)
 
         If objProveedorDB.ModificarProveedor(modProveedor, nombreUsuarioEjecutaAccion, errorMessage) Then
             prcLimpiarModal()
@@ -109,6 +111,10 @@ Public Class ListadoProveedores
             txtNombre.Text = modProveedor.Nombre
             txtCorreo.Text = modProveedor.Correo
             ddlEstado.SelectedValue = modProveedor.Estado
+
+            contenedorMensajesModalNombre.InnerHtml = ""
+            contenedorMensajesModalCorreo.InnerHtml = ""
+            contenedorMensajesModalEstado.InnerHtml = ""
 
             pSubtituloModal.InnerHtml = "Proveedor: <span>" + proveedor + "<span>"
             modalModify.Style.Add("display", "flex")
@@ -224,5 +230,43 @@ Public Class ListadoProveedores
         End If
     End Sub
 
+    Private Function ValidarDatos(nombre As String, correo As String, estado As String) As Boolean
+        Dim objHerramienta As New Herramientas
+        Dim objListaReglas As New ListaReglas()
+        Dim modRegla As ValidacionRegex
+        Dim respuestaValidacion As Boolean = True
+
+        modRegla = objListaReglas.ObtenerReglaPorCampo("nombreProveedor")
+        If Not modRegla Is Nothing Then
+            If Not objListaReglas.ValidarCampo(modRegla, nombre) Then
+                contenedorMensajesModalNombre.InnerHtml = $"<p class='formulario__mensaje'>{modRegla.Mensaje}</p>"
+                contenedorMensajesModalNombre.Style.Add("display", "block")
+                respuestaValidacion = False
+            Else
+                contenedorMensajesModalNombre.Style.Remove("display")
+            End If
+        End If
+
+        modRegla = objListaReglas.ObtenerReglaPorCampo("correo")
+        If Not modRegla Is Nothing Then
+            If Not objListaReglas.ValidarCampo(modRegla, correo) Then
+                contenedorMensajesModalCorreo.InnerHtml = $"<p class='formulario__mensaje'>{modRegla.Mensaje}</p>"
+                contenedorMensajesModalCorreo.Style.Add("display", "block")
+                respuestaValidacion = False
+            Else
+                contenedorMensajesModalCorreo.Style.Remove("display")
+            End If
+        End If
+
+        If Not objHerramienta.ValidarNumeroEntero(estado, False) Then
+            contenedorMensajesModalEstado.InnerHtml = $"<p class='formulario__mensaje'>Debe seleccionar una opción de estado.</p>"
+            contenedorMensajesModalEstado.Style.Add("display", "block")
+            respuestaValidacion = False
+        Else
+            contenedorMensajesModalEstado.Style.Remove("display")
+        End If
+
+        Return respuestaValidacion
+    End Function
     '' FIN DE FUNCIONES Y MÉTODOS DE LA PÁGINA
 End Class

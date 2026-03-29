@@ -66,6 +66,8 @@ document.getElementById('MainContent_txtApellidoDos').addEventListener('blur', f
         } else {
             limpiarMensajesError(this);
         }
+    } else {
+        limpiarMensajesError(this);
     }
 });
 

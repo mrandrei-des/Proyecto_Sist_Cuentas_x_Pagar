@@ -22,47 +22,46 @@
                         <legend>Datos del usuario:</legend>
                         <!-- Nombre -->
                         <div class="formulario__contenedor-input">
-                            <asp:Label ID="lblNombre" runat="server" Text="Nombre:" CssClass="formulario__label">
-                                <asp:TextBox ID="txtNombre" runat="server" CssClass="formulario__input" placeholder="John"></asp:TextBox>
+                            <asp:Label ID="lblNombre" runat="server" Text="Nombre:" CssClass="formulario__label" AssociatedControlID="txtNombre">
                             </asp:Label>
+                            <asp:TextBox ID="txtNombre" runat="server" CssClass="formulario__input" placeholder="John"></asp:TextBox>
                             <%-- Validación del nombre --%>
-                            <div class="formulario__contenedor-mensajes">
-                                <p class="formulario__mensaje">
+                            <div class="formulario__contenedor-mensajes" runat="server" id="contenedorMensajesModalNombre">
+<%--                                <p class="formulario__mensaje">
                                     <asp:RequiredFieldValidator ID="rfvNombre" runat="server" ErrorMessage="Es necesario ingresar el nombre." ControlToValidate="txtNombre" Display="Dynamic"></asp:RequiredFieldValidator>
-                                </p>
+                                </p>--%>
                             </div>
                         </div>
                         <!-- Primer Apellido -->
                         <div class="formulario__contenedor-input">
-                            <asp:Label ID="lblApellidoUno" runat="server" Text="Primer Apellido:" CssClass="formulario__label">
-                                <asp:TextBox ID="txtApellidoUno" runat="server" CssClass="formulario__input" placeholder="Doe"></asp:TextBox>
+                            <asp:Label ID="lblApellidoUno" runat="server" Text="Primer Apellido:" CssClass="formulario__label" AssociatedControlID="txtApellidoUno">
                             </asp:Label>
+                            <asp:TextBox ID="txtApellidoUno" runat="server" CssClass="formulario__input" placeholder="Doe"></asp:TextBox>
                             <%-- Validación del primer apellido --%>
-                            <div class="formulario__contenedor-mensajes">
-                                <p class="formulario__mensaje">
+                            <div class="formulario__contenedor-mensajes" runat="server" id="contenedorMensajesModalApellido1">
+<%--                                <p class="formulario__mensaje">
                                     <asp:RequiredFieldValidator ID="rfvApellido" runat="server" ErrorMessage="Es necesario ingresar su primer apellido." ControlToValidate="txtApellidoUno" Display="Dynamic"></asp:RequiredFieldValidator>
-                                </p>
+                                </p>--%>
                             </div>
                         </div>
                         <!-- Segundo Apellido (Opcional)-->
                         <div class="formulario__contenedor-input">
-                            <asp:Label ID="lblApellidoDos" runat="server" Text="Segundo Apellido:" CssClass="formulario__label">Segundo Apellido: <span class="formulario__opcional" title="Opcional">(?)</span>
-                                <asp:TextBox ID="txtApellidoDos" runat="server" CssClass="formulario__input" placeholder="Ingrese el segundo apellido"></asp:TextBox>
+                            <asp:Label ID="lblApellidoDos" runat="server" Text="Segundo Apellido:" CssClass="formulario__label" AssociatedControlID="txtApellidoDos">Segundo Apellido: <span class="formulario__opcional" title="Opcional">(?)</span>
                             </asp:Label>
-                            <div class="formulario__contenedor-mensajes">
-                                <p class="formulario__mensaje"></p>
+                            <asp:TextBox ID="txtApellidoDos" runat="server" CssClass="formulario__input" placeholder="Ingrese el segundo apellido"></asp:TextBox>
+                            <div class="formulario__contenedor-mensajes" runat="server" id="contenedorMensajesModalApellido2">
                             </div>
                         </div>
                         <!-- Correo electrónico -->
                         <div class="formulario__contenedor-input formulario__contenedor-input-sp3">
-                            <asp:Label ID="lblCorreoUsuario" runat="server" Text="Correo Electrónico:" CssClass="formulario__label">
-                                <asp:TextBox ID="txtCorreoUsuario" runat="server" CssClass="formulario__input" TextMode="Email" placeholder="correo@correo.com"></asp:TextBox>
+                            <asp:Label ID="lblCorreoUsuario" runat="server" Text="Correo Electrónico:" CssClass="formulario__label" AssociatedControlID="txtCorreoUsuario">
                             </asp:Label>
+                            <asp:TextBox ID="txtCorreoUsuario" runat="server" CssClass="formulario__input" TextMode="Email" placeholder="correo@correo.com"></asp:TextBox>
                             <%-- Validación del correo electrónico --%>
-                            <div class="formulario__contenedor-mensajes">
-                                <p class="formulario__mensaje">
+                            <div class="formulario__contenedor-mensajes" runat="server" id="contenedorMensajesModalCorreo">
+<%--                                <p class="formulario__mensaje">
                                     <asp:RequiredFieldValidator ID="rfvCorreoUsuario" runat="server" ErrorMessage="Es necesario ingresar un correo electrónico." ControlToValidate="txtCorreoUsuario" Display="Dynamic"></asp:RequiredFieldValidator>
-                                </p>
+                                </p>--%>
                             </div>
                         </div>
                     </fieldset>
@@ -73,28 +72,29 @@
                         <legend>Atributos del usuario:</legend>
                         <div class="formulario__contenedor-input">
                             <!-- Estado del usuario -->
-                            <asp:Label ID="lblEstadoUsuario" runat="server" Text="El usuario se encuentra:" CssClass="formulario__label">Estado:
+                            <asp:Label ID="lblEstadoUsuario" runat="server" Text="El usuario se encuentra:" CssClass="formulario__label" AssociatedControlID="ddlEstadoUsuario">Estado:
+                            </asp:Label>
                             <asp:DropDownList ID="ddlEstadoUsuario" runat="server" CssClass="formulario__input">
                             </asp:DropDownList>
-                            </asp:Label>
                             <%-- Validación del estado del usuario --%>
-                            <div class="formulario__contenedor-mensajes">
-                                <p class="formulario__mensaje">
+                            <div class="formulario__contenedor-mensajes" runat="server" id="contenedorMensajesModalEstado">
+<%--                                <p class="formulario__mensaje">
                                     <asp:RequiredFieldValidator ID="rfvEstadoUsuario" runat="server" ErrorMessage="Es necesario seleccionar el estado del usuario." ControlToValidate="ddlEstadoUsuario" Display="Dynamic"></asp:RequiredFieldValidator>
-                                </p>
+                                </p>--%>
                             </div>
                         </div>
+
                         <!-- Rol del usuario -->
                         <div class="formulario__contenedor-input">
-                            <asp:Label ID="lblRol" runat="server" Text="Rol del usuario:" CssClass="formulario__label">Rol en el sistema:
+                            <asp:Label ID="lblRol" runat="server" Text="Rol del usuario:" CssClass="formulario__label" AssociatedControlID="ddlRoles">Rol en el sistema:
+                            </asp:Label>
                             <asp:DropDownList ID="ddlRoles" runat="server" CssClass="formulario__input">
                             </asp:DropDownList>
-                            </asp:Label>
                             <%-- Validación del rol del usuario --%>
-                            <div class="formulario__contenedor-mensajes">
-                                <p class="formulario__mensaje">
+                            <div class="formulario__contenedor-mensajes" runat="server" id="contenedorMensajesModalRol">
+<%--                                <p class="formulario__mensaje">
                                     <asp:RequiredFieldValidator ID="rfvRolUsuario" runat="server" ErrorMessage="Es necesario seleccionar el rol del usuario." ControlToValidate="ddlRoles" Display="Dynamic"></asp:RequiredFieldValidator>
-                                </p>
+                                </p>--%>
                             </div>
                         </div>
                     </fieldset>

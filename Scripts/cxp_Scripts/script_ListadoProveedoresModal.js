@@ -1,7 +1,7 @@
-﻿var reglasValidacion = {      
-    nombre: {
-        regex: /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/,
-        mensaje: "Solo se permiten letras y espacios."
+﻿var reglasValidacion = {
+    nombreProveedor: {
+        regex: /^[\w\s]+$/,
+        mensaje: "Solo se permiten letras, números y espacios."
     },
     correo: {
         regex: /^[\w._-]+@[\w.]+.[a-zA-Z]{2,4}$/,
@@ -20,34 +20,14 @@ function validarCampo(nombreElemento, valorValidar) {
 }
 
 document.getElementById('MainContent_txtNombre').addEventListener('blur', function () {
-    if (!validarCampo('nombre', this.value)) {
-        mostrarMensajeError(this, 'nombre');
+    if (!validarCampo('nombreProveedor', this.value)) {
+        mostrarMensajeError(this, 'nombreProveedor');
     } else {
         limpiarMensajesError(this);
     }
 });
 
-document.getElementById('MainContent_txtApellidoUno').addEventListener('blur', function () {
-    if (!validarCampo('nombre', this.value)) {
-        mostrarMensajeError(this, 'nombre');
-    } else {
-        limpiarMensajesError(this);
-    }
-});
-
-document.getElementById('MainContent_txtApellidoDos').addEventListener('blur', function () {
-    if (this.value.trim() != '') {
-        if (!validarCampo('nombre', this.value)) {
-            mostrarMensajeError(this, 'nombre');
-        } else {
-            limpiarMensajesError(this);
-        }
-    } else {
-        limpiarMensajesError(this);
-    }
-});
-
-document.getElementById('MainContent_txtCorreoUsuario').addEventListener('blur', function () {
+document.getElementById('MainContent_txtCorreo').addEventListener('blur', function () {
     if (!validarCampo('correo', this.value)) {
         mostrarMensajeError(this, 'correo');
     } else {
@@ -55,15 +35,7 @@ document.getElementById('MainContent_txtCorreoUsuario').addEventListener('blur',
     }
 });
 
-document.getElementById('MainContent_ddlEstadoUsuario').addEventListener('change', function () {
-    if (!validarCampo('entero', this.value)) {
-        mostrarMensajeError(this, 'entero');
-    } else {
-        limpiarMensajesError(this);
-    }
-});
-
-document.getElementById('MainContent_ddlRoles').addEventListener('change', function () {
+document.getElementById('MainContent_ddlEstado').addEventListener('change', function () {
     if (!validarCampo('entero', this.value)) {
         mostrarMensajeError(this, 'entero');
     } else {

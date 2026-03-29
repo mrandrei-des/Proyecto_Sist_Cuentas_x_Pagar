@@ -1,5 +1,6 @@
 ﻿Imports System.Drawing
 Imports System.Security.Policy
+Imports Proyecto_Sist_Cuentas_x_Pagar.Models
 Imports Proyecto_Sist_Cuentas_x_Pagar.Utils
 
 Public Class WebForm1
@@ -47,14 +48,20 @@ Public Class WebForm1
         Dim objUsuarioDB As New UsuarioDB
         Dim errorMessage As String = ""
         Dim nombreUsuarioEjecutaAccion = "andre"
+        Dim nombre As String = txtNombre.Text.Trim(), apellido1 As String = txtApellidoUno.Text.Trim(), apellido2 As String = txtApellidoDos.Text.Trim(), correo As String = txtCorreoUsuario.Text.Trim(), estado As String = ddlEstadoUsuario.SelectedItem.Value, rol As String = ddlRoles.SelectedItem.Value
+
+        If (Not ValidarDatos(nombre, apellido1, apellido2, correo, estado, Rol)) Then
+            SwalUtils.ShowSwalError(Me, "Atención", "Los datos ingresados no son válidos. Por favor revisar")
+            Return
+        End If
 
         modUsuario.NombreUsuario = hfUsuario.Value
-        modUsuario.Nombre = txtNombre.Text
-        modUsuario.Apellido1 = txtApellidoUno.Text
-        modUsuario.Apellido2 = txtApellidoDos.Text
-        modUsuario.Correo = txtCorreoUsuario.Text
-        modUsuario.Estado = CInt(ddlEstadoUsuario.SelectedItem.Value)
-        modUsuario.Rol = CInt(ddlRoles.SelectedItem.Value)
+        modUsuario.Nombre = nombre
+        modUsuario.Apellido1 = apellido1
+        modUsuario.Apellido2 = apellido2
+        modUsuario.Correo = correo
+        modUsuario.Estado = CInt(estado)
+        modUsuario.Rol = CInt(rol)
 
         If objUsuarioDB.ModificarUsuario(modUsuario, nombreUsuarioEjecutaAccion, errorMessage) Then
             prcLimpiarModal()
@@ -101,6 +108,13 @@ Public Class WebForm1
             txtCorreoUsuario.Text = modUsuario.Correo
             ddlEstadoUsuario.SelectedValue = modUsuario.Estado
             ddlRoles.SelectedValue = modUsuario.Rol
+            contenedorMensajesModalNombre.InnerHtml = ""
+            contenedorMensajesModalApellido1.InnerHtml = ""
+            contenedorMensajesModalApellido2.InnerHtml = ""
+            contenedorMensajesModalCorreo.InnerHtml = ""
+            contenedorMensajesModalEstado.InnerHtml = ""
+            contenedorMensajesModalRol.InnerHtml = ""
+
             pSubtituloModal.InnerHtml = "Usuario: <span>" + nombreUsuarioAfectado + "<span>"
             modalModify.Style.Add("display", "flex")
         Else
@@ -226,6 +240,80 @@ Public Class WebForm1
             gvUsuarios.DataBind()
         End If
     End Sub
+
+    Private Function ValidarDatos(nombre As String, apellido1 As String, apellido2 As String, correo As String, estado As String, rol As String) As Boolean
+        Dim objHerramienta As New Herramientas
+        Dim objListaReglas As New ListaReglas()
+        Dim modRegla As ValidacionRegex
+        Dim respuestaValidacion As Boolean = True
+
+        modRegla = objListaReglas.ObtenerReglaPorCampo("nombres")
+        If Not modRegla Is Nothing Then
+            If Not objListaReglas.ValidarCampo(modRegla, nombre) Then
+                contenedorMensajesModalNombre.InnerHtml = $"<p class='formulario__mensaje'>{modRegla.Mensaje}</p>"
+                contenedorMensajesModalNombre.Style.Add("display", "block")
+                respuestaValidacion = False
+            Else
+                contenedorMensajesModalNombre.Style.Remove("display")
+            End If
+        End If
+
+        modRegla = objListaReglas.ObtenerReglaPorCampo("nombres")
+        If Not modRegla Is Nothing Then
+            If Not objListaReglas.ValidarCampo(modRegla, apellido1) Then
+                contenedorMensajesModalApellido1.InnerHtml = $"<p class='formulario__mensaje'>{modRegla.Mensaje}</p>"
+                contenedorMensajesModalApellido1.Style.Add("display", "block")
+                respuestaValidacion = False
+            Else
+                contenedorMensajesModalApellido1.Style.Remove("display")
+            End If
+        End If
+
+        If Not String.IsNullOrWhiteSpace(apellido2) Then
+            modRegla = objListaReglas.ObtenerReglaPorCampo("nombres")
+            If Not modRegla Is Nothing Then
+                If Not objListaReglas.ValidarCampo(modRegla, apellido2) Then
+                    contenedorMensajesModalApellido2.InnerHtml = $"<p class='formulario__mensaje'>{modRegla.Mensaje}</p>"
+                    contenedorMensajesModalApellido2.Style.Add("display", "block")
+                    respuestaValidacion = False
+                Else
+                    contenedorMensajesModalApellido2.Style.Remove("display")
+                End If
+            End If
+        Else
+            contenedorMensajesModalApellido2.InnerHtml = ""
+        End If
+
+
+        modRegla = objListaReglas.ObtenerReglaPorCampo("correo")
+        If Not modRegla Is Nothing Then
+            If Not objListaReglas.ValidarCampo(modRegla, correo) Then
+                contenedorMensajesModalCorreo.InnerHtml = $"<p class='formulario__mensaje'>{modRegla.Mensaje}</p>"
+                contenedorMensajesModalCorreo.Style.Add("display", "block")
+                respuestaValidacion = False
+            Else
+                contenedorMensajesModalCorreo.Style.Remove("display")
+            End If
+        End If
+
+        If Not objHerramienta.ValidarNumeroEntero(estado, False) Then
+            contenedorMensajesModalEstado.InnerHtml = $"<p class='formulario__mensaje'>Debe seleccionar una opción de estado.</p>"
+            contenedorMensajesModalEstado.Style.Add("display", "block")
+            respuestaValidacion = False
+        Else
+            contenedorMensajesModalEstado.Style.Remove("display")
+        End If
+
+        If Not objHerramienta.ValidarNumeroEntero(rol, False) Then
+            contenedorMensajesModalRol.InnerHtml = $"<p class='formulario__mensaje'>Debe seleccionar una opción de rol.</p>"
+            contenedorMensajesModalRol.Style.Add("display", "block")
+            respuestaValidacion = False
+        Else
+            contenedorMensajesModalRol.Style.Remove("display")
+        End If
+
+        Return respuestaValidacion
+    End Function
 
     '' FIN FUNCIONES Y MÉTODOS DE LA PÁGINA
 End Class
