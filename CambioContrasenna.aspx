@@ -25,27 +25,27 @@
                             <legend>Datos para acceso:</legend>
                             <!-- Contraseña Nueva-->
                             <div class="formulario__contenedor-input">
-                                <asp:Label ID="lblContrasenna" runat="server" Text="Contraseña Nueva:" CssClass="formulario__label">
-                                    <asp:TextBox ID="txtContrasenna" runat="server" CssClass="formulario__input" TextMode="Password" required="true"></asp:TextBox>
+                                <asp:Label ID="lblContrasenna" runat="server" Text="Contraseña Nueva:" CssClass="formulario__label" AssociatedControlID="txtContrasenna">
                                 </asp:Label>
+                                <asp:TextBox ID="txtContrasenna" runat="server" CssClass="formulario__input" TextMode="Password" required="true"></asp:TextBox>
                                 <%-- Validación de la nueva contraseña --%>
-                                <div class="formulario__contenedor-mensajes">
-                                    <p class="formulario__mensaje">
+                                <div class="formulario__contenedor-mensajes" runat="server" id="contenedorMensajesContrasenna">
+<%--                                    <p class="formulario__mensaje">
                                         <asp:RequiredFieldValidator ID="rfvContraseña" runat="server" ErrorMessage="Es necesario ingresar la contraseña nueva" ControlToValidate="txtContrasenna" Display="Dynamic"></asp:RequiredFieldValidator>
-                                    </p>
+                                    </p>--%>
                                 </div>
                             </div>
 
                             <!-- Confirmar Contraseña -->
                             <div class="formulario__contenedor-input">
-                                <asp:Label ID="lblConfirmarContrasenna" runat="server" Text="Confirmar Contraseña:" CssClass="formulario__label">
-                                    <asp:TextBox ID="txtConfirmarContrasenna" runat="server" CssClass="formulario__input" TextMode="Password" required="true"></asp:TextBox>
+                                <asp:Label ID="lblConfirmarContrasenna" runat="server" Text="Confirmar Contraseña:" CssClass="formulario__label" AssociatedControlID="txtConfirmarContrasenna">
                                 </asp:Label>
+                                <asp:TextBox ID="txtConfirmarContrasenna" runat="server" CssClass="formulario__input" TextMode="Password" required="true"></asp:TextBox>
                                 <%-- Validación de Confirmar Contraseña --%>
-                                <div class="formulario__contenedor-mensajes" id="contenedorMensajesConfirmContrasenna" runat="server">
-                                    <p class="formulario__mensaje">
+                                <div class="formulario__contenedor-mensajes" runat="server" id="contenedorMensajesConfirmContrasenna">
+<%--                                    <p class="formulario__mensaje">
                                         <asp:RequiredFieldValidator ID="rfvConfirmarContrasenna" runat="server" ErrorMessage="Es necesario ingresar nuevamente la contraseña" ControlToValidate="txtConfirmarContrasenna" Display="Dynamic"></asp:RequiredFieldValidator>
-                                    </p>
+                                    </p>--%>
                                 </div>
                             </div>
                         </fieldset>
@@ -58,5 +58,6 @@
             </section>
         </main>
     </div>
-    <%--<script src="Scripts/cxp_Scripts/cambioContrasenna.js"></script>--%>
+
+    <script src="Scripts/cxp_Scripts/script_CambioContrasenna.js"></script>
 </asp:Content>

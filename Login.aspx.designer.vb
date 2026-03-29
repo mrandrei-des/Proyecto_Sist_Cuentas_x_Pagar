@@ -11,7 +11,7 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class SiteMaster
+Partial Public Class Login
 
     '''<summary>
     '''Control form1.
@@ -23,65 +23,74 @@ Partial Public Class SiteMaster
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
 
     '''<summary>
-    '''Control enlaceHome.
+    '''Control divMain.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents enlaceHome As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    Protected WithEvents divMain As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
-    '''Control enlaceDocumentos.
+    '''Control lblUsuario.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents enlaceDocumentos As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    Protected WithEvents lblUsuario As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control enlaceRegistroDocumentos.
+    '''Control txtUsuario.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents enlaceRegistroDocumentos As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    Protected WithEvents txtUsuario As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control enlaceProveedores.
+    '''Control contenedorMensajesUsuario.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents enlaceProveedores As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    Protected WithEvents contenedorMensajesUsuario As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
-    '''Control enlaceUsuarios.
+    '''Control lblContrasenna.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents enlaceUsuarios As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    Protected WithEvents lblContrasenna As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control btnCerrarSesion.
+    '''Control txtContrasenna.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents btnCerrarSesion As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents txtContrasenna As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control MainContent.
+    '''Control contenedorMensajesContrasenna.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents MainContent As Global.System.Web.UI.WebControls.ContentPlaceHolder
+    Protected WithEvents contenedorMensajesContrasenna As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+    '''<summary>
+    '''Control btnInicioSesion.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnInicioSesion As Global.System.Web.UI.WebControls.Button
 End Class

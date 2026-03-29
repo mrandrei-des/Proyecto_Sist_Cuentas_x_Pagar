@@ -74,7 +74,6 @@ Public Class UsuarioDB
         End Try
     End Function
 
-
     ' Cargar el usuario indicado según el nombre de usuario que se le pase a la función
     Public Function ConsultarUsuario_x_Username(nombreUsuario As String, errorMessage As String) As Models.Usuario
         Try
@@ -142,6 +141,37 @@ Public Class UsuarioDB
             End If
 
             Return New DataTable()
+        Catch ex As Exception
+            Return Nothing
+        End Try
+    End Function
+
+    Public Function Login(nombreUsuario As String, passContra As String, errorMessage As String) As Models.Usuario
+        Try
+            Dim query As String = "sp_IniciarSesion"
+            Dim parameters As New List(Of SqlParameter) From {
+                 New SqlParameter("@Username", nombreUsuario),
+                 New SqlParameter("@PassContra", passContra)
+            }
+            Dim modUsuario As New Models.Usuario
+            Dim dt As DataTable = db.ExecuteQuery(errorMessage, query, True, parameters)
+
+            If dt Is Nothing AndAlso errorMessage <> "" Then
+                Return Nothing
+            End If
+
+            If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
+                Dim row As DataRow = dt.Rows(0)
+                With modUsuario
+                    .NombreUsuario = row("NombreUsuario").ToString()
+                    .Nombre = row("Nombre").ToString()
+                    .Apellido1 = row("Apellido1").ToString()
+                    .Apellido2 = row("Apellido1").ToString()
+                    .Correo = row("CorreoElectronico").ToString()
+                    .Rol = Convert.ToInt32(row("Rol"))
+                End With
+            End If
+            Return modUsuario
         Catch ex As Exception
             Return Nothing
         End Try

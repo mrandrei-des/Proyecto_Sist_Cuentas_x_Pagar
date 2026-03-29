@@ -139,8 +139,10 @@
     <Content Include="BD Scripts\Stored Procedures\Usuarios\sp_Modificar_Usuario.sql" />
     <Content Include="BD Scripts\Tables\Cargar valores tablas iniciales.sql" />
     <Content Include="BD Scripts\Tables\Creación de tablas.sql" />
+    <Content Include="Login.aspx" />
     <Content Include="Scripts\cxp_Scripts\script_ListadoProveedoresModal.js" />
     <Content Include="Scripts\cxp_Scripts\script_ListadoUsuariosModal.js" />
+    <Content Include="Scripts\cxp_Scripts\script_Login.js" />
     <Content Include="Scripts\cxp_Scripts\script_MantProveedores.js" />
     <Content Include="Scripts\cxp_Scripts\script_MantUsuarios.js" />
     <Content Include="WebMethods_CxP\BuscarProveedor.aspx" />
@@ -169,7 +171,7 @@
     <Content Include="WebMethods_CxP\ObtenerPendientes.aspx" />
     <Content Include="WebMethods_CxP\ObtenerTiposDocumento.aspx" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
-    <Content Include="Scripts\cxp_Scripts\cambioContrasenna.js" />
+    <Content Include="Scripts\cxp_Scripts\script_CambioContrasenna.js" />
     <Content Include="Scripts\cxp_Scripts\DialogConfirm.js" />
     <Content Include="Scripts\cxp_Scripts\script_CreacionDocumentos.js" />
     <Content Include="Scripts\cxp_Scripts\toggleButton.js" />
@@ -225,6 +227,13 @@
     <Compile Include="App_Start\BundleConfig.vb" />
     <Compile Include="App_Start\RouteConfig.vb" />
     <Compile Include="Database\ErrorLoggerDB.vb" />
+    <Compile Include="Login.aspx.designer.vb">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.vb">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Models\ErrorLogger.vb" />
     <Compile Include="Models\ListaReglas.vb" />
     <Compile Include="Models\ValidacionRegex.vb" />

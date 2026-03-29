@@ -41,13 +41,13 @@ Partial Public Class CambioContrasenna
     Protected WithEvents txtContrasenna As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control rfvContraseña.
+    '''Control contenedorMensajesContrasenna.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents rfvContraseña As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    Protected WithEvents contenedorMensajesContrasenna As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
     '''Control lblConfirmarContrasenna.
@@ -75,15 +75,6 @@ Partial Public Class CambioContrasenna
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents contenedorMensajesConfirmContrasenna As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-
-    '''<summary>
-    '''Control rfvConfirmarContrasenna.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents rfvConfirmarContrasenna As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
     '''<summary>
     '''Control btnCambioContrasenna.

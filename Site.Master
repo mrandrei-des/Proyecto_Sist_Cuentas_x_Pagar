@@ -112,14 +112,14 @@
                         </ul>
                     </li>
                     <li class="menu__item">
-                        <button class="menu__boton--sesion" title="">
+                        <asp:LinkButton id="btnCerrarSesion" runat="server" class="menu__boton--sesion" title="Salir del sistema" onclick="btnCerrarSesion_Click" CausesValidation="false">
                             <span>
                                 <i class="fa-solid fa-arrow-right-from-bracket"></i>
                             </span>
                             <span>
                                 Cerrar Sesión
                             </span>
-                        </button>
+                        </asp:LinkButton>
                     </li>
                 </ul>
             </nav>
