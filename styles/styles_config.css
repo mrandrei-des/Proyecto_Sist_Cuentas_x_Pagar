@@ -1,0 +1,175 @@
+﻿.page__config {
+    max-width: 900px;
+    min-width: 900px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    margin: 0 auto;
+    gap: 24px;
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.contenedor__section--create {
+    padding: 25px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 15px 0 #0002;
+    border-radius: 6px;
+}
+
+/* SECTION CREAR ROL*/
+.section__config--titulo {
+    text-align: center;
+}
+
+.contenedor__create__list {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}
+
+.create__list__select {
+    flex-grow: 2;
+}
+
+.create__list__new {
+    flex-grow: 0;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*Input y botones para crear, modificar o eliminar*/
+
+.create__new__input {
+    flex-grow: 1;
+}
+
+.contenedor__create__new {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.create__list__toolbox {
+    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 12px;
+}
+
+/* SECTION PARA CONFIGURAR LOS PERMISOS A CADA ROL*/
+.contenedor__section--config {
+    padding: 25px;
+    padding-left: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    gap: 12px;
+    box-shadow: 0 0 15px 0 #0002;
+    border-radius: 6px;
+}
+
+.contenedor__config__permisos {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 24px;
+}
+
+/* LISTA DE ROLES*/
+
+.roles__list {
+    display: flex;
+    flex-direction: column;
+}
+
+.rol {
+    padding: 8px 12px;
+    padding-left: 37px;
+    cursor: pointer;
+    border-radius: 0 12px 12px 0;
+    transition: background-color .25s, color .25s;
+}
+
+    .rol:hover {
+        text-decoration: underline;
+    }
+
+.rol__active {
+    background-color: #000;
+    color: #fff;
+}
+
+/*LISTA DE PERMISOS*/
+
+.contenedor__permiso__item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 12px;
+    padding: 12px;
+}
+
+.permiso__item__button {
+    display: grid;
+    place-content: center;
+}
+
+/*TOGGLE BUTTON*/
+.contenedor__toggle__button {
+    cursor: pointer;
+    padding: 10px 15px;
+    position: relative;
+    display: inline-block;
+}
+
+.input__chk__hidden {
+    display: none;
+}
+
+.barra {
+    position: relative;
+    width: 50px;
+    height: 8px;
+    background-color: #ccc;
+    border-radius: 12px;
+}
+
+.circle {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background-color: #ccc;
+    border-radius: 50%;
+    top: 2px;
+    left: 0;
+    translate: 0;
+    border: none;
+    cursor: pointer;
+    transition: background-color .25s, transform .25s;
+}
+
+input:checked ~ .circle {
+    background-color: #1D9E75;
+    transform: translateX(205%);
+}
+
+input:checked ~ .barra {
+    background-color: #1D9E75;
+}
+
+.permiso__item__title {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.permiso__item__description {
+    font-size: .9rem;
+}
+
+.contenedor__config__acciones {
+    margin: 0 auto;
+}

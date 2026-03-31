@@ -140,11 +140,14 @@
     <Content Include="BD Scripts\Tables\Cargar valores tablas iniciales.sql" />
     <Content Include="BD Scripts\Tables\Creación de tablas.sql" />
     <Content Include="Login.aspx" />
+    <Content Include="MantRolesPermisos.aspx" />
     <Content Include="Scripts\cxp_Scripts\script_ListadoProveedoresModal.js" />
     <Content Include="Scripts\cxp_Scripts\script_ListadoUsuariosModal.js" />
     <Content Include="Scripts\cxp_Scripts\script_Login.js" />
     <Content Include="Scripts\cxp_Scripts\script_MantProveedores.js" />
+    <Content Include="Scripts\cxp_Scripts\script_MantRolesPermisos.js" />
     <Content Include="Scripts\cxp_Scripts\script_MantUsuarios.js" />
+    <Content Include="styles\styles_config.css" />
     <Content Include="WebMethods_CxP\BuscarProveedor.aspx" />
     <Content Include="CambioContrasenna.aspx" />
     <Content Include="Content\Site.css" />
@@ -232,6 +235,13 @@
     </Compile>
     <Compile Include="Login.aspx.vb">
       <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="MantRolesPermisos.aspx.designer.vb">
+      <DependentUpon>MantRolesPermisos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MantRolesPermisos.aspx.vb">
+      <DependentUpon>MantRolesPermisos.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Models\ErrorLogger.vb" />
