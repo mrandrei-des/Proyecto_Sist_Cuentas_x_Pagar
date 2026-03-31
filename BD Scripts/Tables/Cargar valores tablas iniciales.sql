@@ -51,3 +51,15 @@
 		   (5, 'Reportes', 4, 'andre', GETDATE()),
 		   (6, 'Creador Proveedores', 4, 'andre', GETDATE())
 */
+
+/* Grupos de Permisos
+	INSERT INTO GruposPermisos(Descripcion, Estado)
+	VALUES ('Usuarios', 4), ('Proveedores', 4), ('Documentos', 4), ('Reportes', 4)
+*/
+
+/* Permisos
+	INSERT INTO Permisos(Descripcion, Estado, ID_Grupo, UsuarioCreacion, FechaCreacion)
+	VALUES ('Mantenimiento', 4, 1, 'andre', GETDATE()), ('Listado', 4, 1, 'andre', GETDATE()), ('CambioContrasenna', 4, 1, 'andre', GETDATE()),
+	('Mantenimiento', 4, 2, 'andre', GETDATE()), ('Listado', 4, 2, 'andre', GETDATE()),
+	('Creacion', 4, 3, 'andre', GETDATE()), ('Listado', 4, 3, 'andre', GETDATE())
+*/

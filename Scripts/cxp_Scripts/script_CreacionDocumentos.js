@@ -372,6 +372,14 @@ function llenarCamposDocumentoCargado(documento) {
     document.getElementById('MainContent_btnModificar').classList.remove('boton__ocultar')
     document.getElementById('MainContent_btnEliminar').classList.remove('boton__ocultar')
     document.getElementById('btnAplicar').classList.remove('boton__ocultar')
+
+    document.getElementById('MainContent_contenedorMensajesTipoDoc').innerHTML = ''
+    document.getElementById('MainContent_contenedorMensajesProveedor').innerHTML = ''
+    document.getElementById('MainContent_contenedorMensajesNumDoc').innerHTML = ''
+    document.getElementById('MainContent_contenedorMensajesFecha').innerHTML = ''
+    document.getElementById('MainContent_contenedorMensajesMoneda').innerHTML = ''
+    document.getElementById('MainContent_contenedorMensajesMonto').innerHTML = ''
+    document.getElementById('MainContent_contenedorMensajesObservacion').innerHTML = ''
 }
 
 function moverSelectOption(selectElement, valorBuscar) {
