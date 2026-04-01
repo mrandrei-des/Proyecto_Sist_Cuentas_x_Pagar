@@ -8,13 +8,17 @@ Public Class MantRolesPermisos
         enlace.Style.Add("background-color", "var(--colorLetraOscuroSecundario)")
 
         If Not IsPostBack Then
+            contenedorSectionConfig.Style.Add("display", "none")
             prcLlena_ddlRoles()
+            hdfRolSeleccionado.Value = 0
         End If
     End Sub
 
     Protected Sub btnNuevo_Click(sender As Object, e As EventArgs)
         txtNombreRol.Text = String.Empty
-        txtNombreRol.Focus()
+        hdfRolSeleccionado.Value = 0
+        contenedorSectionConfig.Style.Add("display", "none")
+        contenedorMensajesNombreRolNuevo.InnerHtml = ""
         mostrarBotonesRolNuevo()
     End Sub
 
@@ -158,25 +162,34 @@ Public Class MantRolesPermisos
         txtNombreRol.Text = String.Empty
         ocultarBotonesRoles()
         prcLlena_ddlRoles()
+        hdfRolSeleccionado.Value = 0
+        contenedorSectionConfig.Style.Add("display", "none")
     End Sub
 
     Protected Sub ddlRolesCreados_SelectedIndexChanged(sender As Object, e As EventArgs)
-        hdfRolSeleccionado.Value = Convert.ToInt32(ddlRolesCreados.SelectedValue)
-        Dim rolSeleccionado As Integer = Convert.ToInt32(ddlRolesCreados.SelectedValue)
-        Dim errorMessage As String = ""
+        Dim rolSeleccionado As String = ddlRolesCreados.SelectedValue
 
-        Dim modRol As New Models.Rol()
-        Dim objRolDB As New RolDB()
+        If Not String.IsNullOrEmpty(rolSeleccionado) Then
+            hdfRolSeleccionado.Value = Convert.ToInt32(ddlRolesCreados.SelectedValue)
+            Dim idRolSeleccionado As Integer = Convert.ToInt32(ddlRolesCreados.SelectedValue)
+            Dim errorMessage As String = ""
 
-        modRol = objRolDB.ConsultarRoles_x_ID(rolSeleccionado, errorMessage)
+            Dim modRol As New Models.Rol()
+            Dim objRolDB As New RolDB()
 
-        If modRol Is Nothing Then
-            SwalUtils.ShowSwalError(Me, $"No se logró encontrar información sobre el rol seleccionado. [{errorMessage}]")
-            Return
+            modRol = objRolDB.ConsultarRoles_x_ID(idRolSeleccionado, errorMessage)
+
+            If modRol Is Nothing Then
+                SwalUtils.ShowSwalError(Me, $"No se logró encontrar información sobre el rol seleccionado. [{errorMessage}]")
+                Return
+            End If
+
+            txtNombreRol.Text = modRol.Descripcion
+            mostrarBotonesRolSeleccionado()
+            contenedorSectionConfig.Style.Add("display", "grid")
+        Else
+            LimpiarCampos()
         End If
-
-        txtNombreRol.Text = modRol.Descripcion
-        mostrarBotonesRolSeleccionado()
     End Sub
 
     Private Sub mostrarBotonesRolSeleccionado()

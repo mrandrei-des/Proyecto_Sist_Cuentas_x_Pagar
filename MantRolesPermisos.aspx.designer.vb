@@ -122,11 +122,11 @@ Partial Public Class MantRolesPermisos
     Protected WithEvents btnLimpiar As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
-    '''Control btnGuardarCambios.
+    '''Control contenedorSectionConfig.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents btnGuardarCambios As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents contenedorSectionConfig As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 End Class

@@ -1,0 +1,9 @@
+-- PROCEDIMIENTO ALMACENADO QUE CONSULTA LOS GRUPOS A LOS QUE PERTENECE CADA UNO DE LOS PERMISOS
+-- EXEC sp_Consulta_GruposPermisos
+CREATE PROC sp_Consulta_GruposPermisos
+AS
+BEGIN
+	SELECT ID_Grupo AS IDGrupo, Descripcion
+	FROM GruposPermisos
+	ORDER BY ID_Grupo ASC
+END

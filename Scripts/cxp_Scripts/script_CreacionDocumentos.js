@@ -86,8 +86,6 @@ document.getElementById('MainContent_txtProveedor').addEventListener('input', fu
 document.addEventListener('DOMContentLoaded', function () {
     cargarDocumentosPendientes(1);
     document.getElementById('btnFacturaFiltPend').classList.add('boton__opcion--active');
-    //document.getElementById('btnAplicar').classList.add('boton__ocultar');
-
 });
 
 document.getElementById('btnFacturaFiltPend').addEventListener('click', function () {

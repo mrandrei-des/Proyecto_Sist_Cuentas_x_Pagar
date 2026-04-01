@@ -1,0 +1,1 @@
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="ObtenerPermisos.aspx.vb" Inherits="Proyecto_Sist_Cuentas_x_Pagar.ObtenerPermisos" %>

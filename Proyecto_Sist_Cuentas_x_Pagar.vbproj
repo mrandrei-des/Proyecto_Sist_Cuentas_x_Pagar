@@ -148,6 +148,7 @@
     <Content Include="Scripts\cxp_Scripts\script_MantRolesPermisos.js" />
     <Content Include="Scripts\cxp_Scripts\script_MantUsuarios.js" />
     <Content Include="styles\styles_config.css" />
+    <Content Include="WebMethods_CxP\ActualizarPermisos.aspx" />
     <Content Include="WebMethods_CxP\BuscarProveedor.aspx" />
     <Content Include="CambioContrasenna.aspx" />
     <Content Include="Content\Site.css" />
@@ -171,7 +172,9 @@
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="ListadoUsuarios.aspx" />
     <Content Include="WebMethods_CxP\CargarDocumento.aspx" />
+    <Content Include="WebMethods_CxP\ObtenerGruposPermisos.aspx" />
     <Content Include="WebMethods_CxP\ObtenerPendientes.aspx" />
+    <Content Include="WebMethods_CxP\ObtenerPermisos.aspx" />
     <Content Include="WebMethods_CxP\ObtenerTiposDocumento.aspx" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\cxp_Scripts\script_CambioContrasenna.js" />
@@ -230,6 +233,8 @@
     <Compile Include="App_Start\BundleConfig.vb" />
     <Compile Include="App_Start\RouteConfig.vb" />
     <Compile Include="Database\ErrorLoggerDB.vb" />
+    <Compile Include="Database\GrupoPermisoDB.vb" />
+    <Compile Include="Database\PermisoDB.vb" />
     <Compile Include="Login.aspx.designer.vb">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
@@ -245,9 +250,18 @@
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Models\ErrorLogger.vb" />
+    <Compile Include="Models\GrupoPermiso.vb" />
     <Compile Include="Models\ListaReglas.vb" />
+    <Compile Include="Models\Permiso.vb" />
     <Compile Include="Models\ValidacionRegex.vb" />
     <Compile Include="Utils\Simple3Des.vb" />
+    <Compile Include="WebMethods_CxP\ActualizarPermisos.aspx.designer.vb">
+      <DependentUpon>ActualizarPermisos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMethods_CxP\ActualizarPermisos.aspx.vb">
+      <DependentUpon>ActualizarPermisos.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="WebMethods_CxP\BuscarProveedor.aspx.designer.vb">
       <DependentUpon>BuscarProveedor.aspx</DependentUpon>
     </Compile>
@@ -378,11 +392,25 @@
       <DependentUpon>CargarDocumento.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="WebMethods_CxP\ObtenerGruposPermisos.aspx.designer.vb">
+      <DependentUpon>ObtenerGruposPermisos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMethods_CxP\ObtenerGruposPermisos.aspx.vb">
+      <DependentUpon>ObtenerGruposPermisos.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="WebMethods_CxP\ObtenerPendientes.aspx.designer.vb">
       <DependentUpon>ObtenerPendientes.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebMethods_CxP\ObtenerPendientes.aspx.vb">
       <DependentUpon>ObtenerPendientes.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="WebMethods_CxP\ObtenerPermisos.aspx.designer.vb">
+      <DependentUpon>ObtenerPermisos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMethods_CxP\ObtenerPermisos.aspx.vb">
+      <DependentUpon>ObtenerPermisos.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="WebMethods_CxP\ObtenerTiposDocumento.aspx.designer.vb">

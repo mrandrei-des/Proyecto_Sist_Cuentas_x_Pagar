@@ -27,24 +27,28 @@ Namespace Utils
 
             'Se crea una variable connection de la clase DBHelper por medio de la función GetConnection()
             Using conn As SqlConnection = GetConnection()
-                'Se crea una variable de SqlCommand con el query a ejecutar y la conexión donde debe ejecutarlo
-                Using cmd As New SqlCommand(query, conn)
-                    If parameters IsNot Nothing Then
-                        cmd.Parameters.AddRange(parameters.ToArray())
-                    End If
+                Using trans = conn.BeginTransaction()
+                    'Se crea una variable de SqlCommand con el query a ejecutar y la conexión donde debe ejecutarlo
+                    Using cmd As New SqlCommand(query, conn, trans)
+                        If parameters IsNot Nothing Then
+                            cmd.Parameters.AddRange(parameters.ToArray())
+                        End If
 
-                    cmd.CommandType = CommandType.StoredProcedure
+                        cmd.CommandType = CommandType.StoredProcedure
 
-                    Try
-                        cmd.ExecuteNonQuery()
-                        Return True
-                    Catch ex As Exception
-                        errorMessage = "Error al ejecutar la consulta: [" & ex.Message & "]"
-                        ' Guarda un registro del error en la BD y en un TXT de respaldo
-                        Dim objErrorLoggerDB As New ErrorLoggerDB
-                        objErrorLoggerDB.SaveDBError(ex)
-                        Return False
-                    End Try
+                        Try
+                            cmd.ExecuteNonQuery()
+                            trans.Commit()
+                            Return True
+                        Catch ex As Exception
+                            errorMessage = "Error al ejecutar la consulta: [" & ex.Message & "]"
+                            ' Guarda un registro del error en la BD y en un TXT de respaldo
+                            Dim objErrorLoggerDB As New ErrorLoggerDB
+                            objErrorLoggerDB.SaveDBError(ex)
+                            trans.Rollback()
+                            Return False
+                        End Try
+                    End Using
                 End Using
             End Using
         End Function

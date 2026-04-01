@@ -65,7 +65,7 @@
                 </div>
             </section>
 
-            <section class="contenedor__section--config">
+            <section class="contenedor__section--config" runat="server" id="contenedorSectionConfig">
                 <div class="section__config--titulo">
                     <h2 class="formulario__subtitulo">
                         <span>
@@ -89,12 +89,12 @@
                     </div>
                 </div>
                 <div class="contenedor__config__acciones">
-                    <asp:LinkButton ID="btnGuardarCambios" runat ="server" CssClass="boton boton__guardar" ToolTip="Guardar cambios Rol" CausesValidation="false">
+                    <button type="button" class="boton boton__guardar" ID="btnGuardarCambios" title="Guardar cambios permisos asignados">
                         <span>Guardar cambios</span>
                         <span class="contenedor__icono">
                             <i class="fa-solid fa-lock"></i>
                         </span>  
-                    </asp:LinkButton>
+                    </button>
                 </div>
             </section>
         </main>

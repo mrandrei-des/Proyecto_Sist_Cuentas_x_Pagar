@@ -64,6 +64,7 @@
 
 /* SECTION PARA CONFIGURAR LOS PERMISOS A CADA ROL*/
 .contenedor__section--config {
+    min-height: 450px;
     padding: 25px;
     padding-left: 0;
     display: grid;

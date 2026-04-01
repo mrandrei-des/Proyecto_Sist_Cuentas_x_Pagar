@@ -1,0 +1,12 @@
+-- PROCEDIMIENTO ALMACENADO QUE ELIMINAR TODOS LOS PERMISOS QUE ESTÉN ASOCIADOS A UN ROL, HECHO PARA CUANDO SE ASIGNAN NUEVOS PERMISOS
+-- EXEC sp_Eliminar_Permisos_x_Rol 0
+CREATE PROC sp_Eliminar_Permisos_x_Rol
+(
+@ID_Rol int,
+@ID_GrupoPermiso int
+)
+AS
+BEGIN
+	DELETE FROM Permisos_x_Rol
+	WHERE ID_Rol = @ID_Rol and ID_GrupoPermiso = @ID_GrupoPermiso
+END

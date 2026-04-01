@@ -145,7 +145,8 @@ FOREIGN KEY (Estado) References Estados (ID_Estado)
 CREATE TABLE Permisos
 (
 ID_Permiso int identity(1,1) not null,
-Descripcion varchar(50) not null,
+Titulo varchar(50) not null,
+Descripcion varchar(400) not null,
 Estado int not null,
 ID_Grupo int not null,
 UsuarioCreacion varchar(25) not null,
@@ -160,14 +161,14 @@ FOREIGN KEY (UsuarioCreacion) References Usuarios(NombreUsuario)
 CREATE TABLE Permisos_x_Rol
 (
 ID_Rol int not null,
+ID_GrupoPermiso int not null,
 ID_Permiso int not null,
-Estado int not null,
 UsuarioCreacion varchar(25) not null,
 FechaCreacion datetime not null default GETDATE(),
-PRIMARY KEY (ID_Rol, ID_Permiso),
+PRIMARY KEY (ID_Rol, ID_GrupoPermiso, ID_Permiso),
 FOREIGN KEY (ID_Rol) References Roles(ID_Rol),
+FOREIGN KEY (ID_GrupoPermiso) References GruposPermisos(ID_Grupo),
 FOREIGN KEY (ID_Permiso) References Permisos(ID_Permiso),
-FOREIGN KEY (Estado) References Estados(ID_Estado),
 FOREIGN KEY (UsuarioCreacion) References Usuarios(NombreUsuario)
 )
 
