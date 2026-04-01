@@ -88,14 +88,18 @@
         color: var(--colorLetraClaro);
     }
 
-.menu__submenu {
-    min-width: 230px;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    display: none;
-    z-index: 10;
-}
+    .menu__boton--sesion:visited {
+        color: var(--colorLetraClaro);
+    }
+
+    .menu__submenu {
+        min-width: 230px;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        display: none;
+        z-index: 10;
+    }
 
 .submenu__item {
     display: block;

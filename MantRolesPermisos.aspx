@@ -15,12 +15,7 @@
                     <div class="create__list__select">
 
                         <asp:Label ID="lblRolesCreados" runat="server" CssClass="formulario__label" Text="Rol" AssociatedControlID="ddlRolesCreados"></asp:Label>
-                        <asp:DropDownList ID="ddlRolesCreados" runat="server" CssClass="formulario__input" OnSelectedIndexChanged="ddlRolesCreados_SelectedIndexChanged">                            
-                            <%--Estos se cargan de la base de datos--%>
-                            <asp:ListItem Value="" Text="Seleccione una opción" />
-                            <asp:ListItem Value="1" Text="Creador de facturas" />
-                            <asp:ListItem Value="2" Text="Administrador" />
-                            <asp:ListItem Value="3" Text="Reportes" />
+                        <asp:DropDownList ID="ddlRolesCreados" runat="server" CssClass="formulario__input" AutoPostBack="true" OnSelectedIndexChanged="ddlRolesCreados_SelectedIndexChanged">                                                        
                         </asp:DropDownList>
                         <asp:HiddenField ID="hdfRolSeleccionado" runat="server" />
                     </div>
@@ -37,7 +32,7 @@
                         <asp:Label ID="lblNuevoRol" runat="server" CssClass="formulario__label" Text="Nombre Rol" AssociatedControlID="txtNombreRol"></asp:Label>
                         <asp:TextBox ID="txtNombreRol" runat="server" CssClass="formulario__input" placeholder="Ingrese el nombre del Rol"></asp:TextBox>
                         <asp:HiddenField ID="hfIDRolSelected" runat="server" />
-                        <div class="formulario__contenedor-mensajes">
+                        <div class="formulario__contenedor-mensajes" id="contenedorMensajesNombreRolNuevo" runat="server">
                         </div>
                     </div>
                     <div class="create__list__toolbox">
