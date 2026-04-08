@@ -65,7 +65,7 @@
                         <a href="index" class="menu__enlace" id="enlaceHome" runat="server">Home</a>
                     </li>
                     <li class="menu__item">
-                        <a href="#" class="menu__enlace" id="enlaceDocumentos" runat="server">
+                        <a href="ListadoDocumentos" class="menu__enlace" id="enlaceDocumentos" runat="server">
                             <span>Documentos
                             </span>
                             <span class="contenedor__icono">
@@ -75,9 +75,6 @@
                         <ul class="menu__submenu">
                             <li class="submenu__item">
                                 <a href="CreacionDocumentos" class="submenu__enlace" id="enlaceRegistroDocumentos" runat="server">Registrar Documentos</a>
-                            </li>
-                            <li class="submenu__item" id="aplicarDocumentosPago">
-                                <a href="#" class="submenu__enlace">Aplicar Pago</a>
                             </li>
                         </ul>
                     </li>

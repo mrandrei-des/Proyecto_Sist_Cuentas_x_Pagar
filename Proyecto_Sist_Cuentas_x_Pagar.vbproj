@@ -124,6 +124,8 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".gitattributes" />
+    <Content Include=".gitignore" />
     <Content Include="BD Scripts\Stored Procedures\Proveedores\sp_Consultar_Proveedor.sql" />
     <Content Include="BD Scripts\Stored Procedures\Proveedores\sp_Consultar_Proveedores_Registrados.sql" />
     <Content Include="BD Scripts\Stored Procedures\Proveedores\sp_Eliminar_Proveedor.sql" />
@@ -139,6 +141,7 @@
     <Content Include="BD Scripts\Stored Procedures\Usuarios\sp_Modificar_Usuario.sql" />
     <Content Include="BD Scripts\Tables\Cargar valores tablas iniciales.sql" />
     <Content Include="BD Scripts\Tables\Creación de tablas.sql" />
+    <Content Include="ListadoDocumentos.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="MantRolesPermisos.aspx" />
     <Content Include="Scripts\cxp_Scripts\script_ListadoProveedoresModal.js" />
@@ -235,6 +238,13 @@
     <Compile Include="Database\ErrorLoggerDB.vb" />
     <Compile Include="Database\GrupoPermisoDB.vb" />
     <Compile Include="Database\PermisoDB.vb" />
+    <Compile Include="ListadoDocumentos.aspx.designer.vb">
+      <DependentUpon>ListadoDocumentos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ListadoDocumentos.aspx.vb">
+      <DependentUpon>ListadoDocumentos.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Login.aspx.designer.vb">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
