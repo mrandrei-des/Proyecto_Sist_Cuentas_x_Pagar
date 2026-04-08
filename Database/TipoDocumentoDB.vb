@@ -33,4 +33,31 @@ Public Class TipoDocumentoDB
             Return Nothing
         End Try
     End Function
+
+    Public Function ConsultarTipoDocumento_Todos(ByRef errorMessage As String) As List(Of Models.TipoDocumento)
+        Try
+            Dim query As String = "sp_Cargar_Tipo_Documentos"
+
+            Dim dt As DataTable = db.ExecuteQuery(errorMessage, query, True)
+            Dim listaTipoDocumentos As New List(Of Models.TipoDocumento)()
+
+            If dt Is Nothing AndAlso errorMessage <> "" Then
+                Return Nothing
+            End If
+
+            If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
+                For x As Integer = 0 To dt.Rows.Count - 1
+                    Dim tipoDocumento As New Models.TipoDocumento() With {
+                        .IdTipoDocumento = Convert.ToInt32(dt.Rows(x)("Valor").ToString()),
+                        .Descripcion = dt.Rows(x)("Texto").ToString()
+                    }
+                    listaTipoDocumentos.Add(tipoDocumento)
+                Next
+            End If
+            Return listaTipoDocumentos
+        Catch ex As Exception
+            Return Nothing
+        End Try
+    End Function
+
 End Class

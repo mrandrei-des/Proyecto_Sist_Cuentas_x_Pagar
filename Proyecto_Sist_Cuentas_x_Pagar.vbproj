@@ -144,6 +144,7 @@
     <Content Include="ListadoDocumentos.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="MantRolesPermisos.aspx" />
+    <Content Include="Scripts\cxp_Scripts\script_ListadoDocumentos.js" />
     <Content Include="Scripts\cxp_Scripts\script_ListadoProveedoresModal.js" />
     <Content Include="Scripts\cxp_Scripts\script_ListadoUsuariosModal.js" />
     <Content Include="Scripts\cxp_Scripts\script_Login.js" />
@@ -151,6 +152,7 @@
     <Content Include="Scripts\cxp_Scripts\script_MantRolesPermisos.js" />
     <Content Include="Scripts\cxp_Scripts\script_MantUsuarios.js" />
     <Content Include="styles\styles_config.css" />
+    <Content Include="styles\styles_listDocumentos.css" />
     <Content Include="WebMethods_CxP\ActualizarPermisos.aspx" />
     <Content Include="WebMethods_CxP\BuscarProveedor.aspx" />
     <Content Include="CambioContrasenna.aspx" />
@@ -237,6 +239,7 @@
     <Compile Include="App_Start\RouteConfig.vb" />
     <Compile Include="Database\ErrorLoggerDB.vb" />
     <Compile Include="Database\GrupoPermisoDB.vb" />
+    <Compile Include="Database\MontosTotalesDB.vb" />
     <Compile Include="Database\PermisoDB.vb" />
     <Compile Include="ListadoDocumentos.aspx.designer.vb">
       <DependentUpon>ListadoDocumentos.aspx</DependentUpon>
@@ -262,6 +265,7 @@
     <Compile Include="Models\ErrorLogger.vb" />
     <Compile Include="Models\GrupoPermiso.vb" />
     <Compile Include="Models\ListaReglas.vb" />
+    <Compile Include="Models\MontosTotales.vb" />
     <Compile Include="Models\Permiso.vb" />
     <Compile Include="Models\ValidacionRegex.vb" />
     <Compile Include="Utils\Simple3Des.vb" />

@@ -25,6 +25,7 @@
     <link href="~/styles/styles_dialog.css" rel="stylesheet" type="text/css" /> 
     <link href="~/styles/styles_dialog_confirm.css" rel="stylesheet" type="text/css" /> 
     <link href="~/styles/styles_login.css" rel="stylesheet" type="text/css" /> 
+    <link href="~/styles/styles_listDocumentos.css" rel="stylesheet" type="text/css" />
     <link href="~/styles/styles_registro.css" rel="stylesheet" type="text/css" />
     <link href="~/styles/styles_formulario.css" rel="stylesheet" type="text/css" />
     <link href="~/styles/styles_config.css" rel="stylesheet" type="text/css" />

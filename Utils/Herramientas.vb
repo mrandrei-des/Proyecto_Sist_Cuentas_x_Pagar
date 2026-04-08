@@ -61,6 +61,13 @@ Public Class Herramientas
 
         Return True
     End Function
+
+    Public Function FormatearMonto(montoFormatear As Double) As String
+        If montoFormatear = 0 Then
+            Return "0,00"
+        End If
+        Return Format(montoFormatear, "#,###,###,###.00")
+    End Function
 End Class
 
 

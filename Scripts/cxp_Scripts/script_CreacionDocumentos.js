@@ -135,8 +135,6 @@ document.getElementById('btnCancelarAplicacion').addEventListener('click', funct
     document.getElementById('MainContent_contenedor__dialogConfirm').style.display = 'none';
 });
 
-
-
 // Funciones para ejecutar en los eventos
 function BuscarProveedores(query) {
     fetch(API_ENDPOINT + 'BuscarProveedor', {
@@ -331,9 +329,6 @@ function renderizarOptionsTipoDocumento(listaTipoDocumento, tipoDocumentoSelecte
 
         selectElement.appendChild(optionElement)
     })
-
-    //moverSelectOption(document.getElementById('MainContent_ddlTipoDocumento'), tipoDocumento)
-
 }
 
 function llenarCamposDocumentoCargado(documento) {
