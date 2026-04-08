@@ -97,13 +97,13 @@
                 <div class="resumen__container__filtros__inputs resumen__container__filtros__inputs--hidden" id="contenedorFiltrosInput">
                     <div class="resumen__container__input resumen__container__input--hidden" id="contenedorFiltroTipoDoc">
                         <label for="ddlTipoDocumento" class="formulario__label"><span><i class="fa-solid fa-shapes"></i></span> Tipo Documento</label>
-                        <asp:DropDownList ID="ddlTipoDocumento" runat="server" CssClass="formulario__input" required="true">
+                        <asp:DropDownList ID="ddlTipoDocumento" runat="server" CssClass="formulario__input">
                         </asp:DropDownList>                        
                     </div>
 
                     <div class="resumen__container__input resumen__container__input--hidden" id="contenedorFiltroMoneda">
                         <label for="ddlMonedas" class="formulario__label"><span><i class="fa-solid fa-colon-sign"></i></span> Moneda</label>
-                        <asp:DropDownList ID="ddlMonedas" runat="server" CssClass="formulario__input" required="true">
+                        <asp:DropDownList ID="ddlMonedas" runat="server" CssClass="formulario__input">
                         </asp:DropDownList>
                     </div>
 
