@@ -1,8 +1,6 @@
--- PROCEDIMIENTO ALMACENADO QUE CONSULTA A LOS DOCUMENTOS DE FORMA DE PAGO APLICADOS EN GENERAL O POR PROVEEDOR
--- EXEC sp_Filtrar_DocumentosFormasPago_Aplicadas NULL, 'COL', NULL, '2026-03-01'
-ALTER PROC sp_Filtrar_DocumentosFormasPago_Aplicadas
+-- EXEC sp_Filtrar_DocumentosAplicados NULL, NULL, NULL
+ALTER PROC sp_Filtrar_DocumentosAplicados
 (
-@FiltTipoDocumento int,
 @FiltMoneda varchar(3),
 @FiltFechaInicio date,
 @FiltFechaFin date
@@ -18,17 +16,26 @@ BEGIN
 	--AND (@FiltFechaEmisionHasta IS NULL OR d.FechaEmision >= @FiltFechaEmisionHasta)
 	--ORDER BY d.ID_Proveedor ASC, d.FechaEmision ASC
 	
-	SELECT c.ID_Categoria as idCategoria, d.TipoDocumento as TipoDoc, d.NumeroDocumento as NumDoc, m.Simbolo, d.SaldoActual as Monto, p.Nombre as NombrProveedor, d.FechaEmision
+	
+	SELECT c.ID_Categoria as idCategoria, f.TipoFactura as TipoDoc, f.NumeroFactura as NumDoc, m.Simbolo, f.SaldoActual as Monto, p.Nombre as NombreProveedor, f.FechaEmision
+	FROM Facturas f 
+	JOIN TipoDocumentos c on f.TipoFactura = c.ID_TipoDocumento
+	JOIN Proveedores p on f.ID_Proveedor = p.ID_Proveedor
+	JOIN Monedas m on f.Moneda = m.CodigoMoneda
+	WHERE 1 = 1 AND f.Estado = 2
+	AND (@FiltMoneda IS NULL OR f.Moneda = @FiltMoneda)
+	AND (@FiltFechaInicio IS NULL OR f.FechaEmision >= @FiltFechaInicio)
+	AND (@FiltFechaFin IS NULL OR f.FechaEmision <= @FiltFechaFin)
+		UNION
+	SELECT c.ID_Categoria as idCategoria, d.TipoDocumento as TipoDoc, d.NumeroDocumento as NumDoc, m.Simbolo, d.SaldoActual as Monto, p.Nombre as NombreProveedor, d.FechaEmision
 	FROM Documentos_Formas_Pago d 
 	JOIN TipoDocumentos c on d.TipoDocumento = c.ID_TipoDocumento
 	JOIN Proveedores p on d.ID_Proveedor = p.ID_Proveedor
 	JOIN Monedas m on d.Moneda = m.CodigoMoneda
 	WHERE 1 = 1 AND d.Estado = 2
-	AND (@FiltTipoDocumento IS NULL OR d.TipoDocumento = @FiltTipoDocumento)
 	AND (@FiltMoneda IS NULL OR d.Moneda = @FiltMoneda)
 	AND (@FiltFechaInicio IS NULL OR d.FechaEmision >= @FiltFechaInicio)
 	AND (@FiltFechaFin IS NULL OR d.FechaEmision <= @FiltFechaFin)
-	-- AND d.FechaEmision >= '2026-03-04' -- FECHA INICIO, DE LA FECHA HACIA EL PRESENTE
-	-- AND d.FechaEmision <= '2026-03-05' -- FECHA FIN, DE LA FECHA HACIA ATRÁS
-	ORDER BY d.FechaEmision ASC
+	ORDER BY FechaEmision ASC
+
 END

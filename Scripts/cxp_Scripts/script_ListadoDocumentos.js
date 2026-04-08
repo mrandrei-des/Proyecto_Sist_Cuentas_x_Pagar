@@ -98,6 +98,12 @@ function consultarDocumentosFiltros() {
         filtFechaFin: filtFechaFin
     }
 
+    /**
+     sp_Filtrar_DocumentosAplicados SIN FILTRO TIPO DOCUMENTO
+     sp_Filtrar_DocumentosFormasPago_Aplicadas
+     sp_Filtrar_Facturas_Aplicadas
+     */
+
     fetch(API_ENDPOINT + '', {
         method: 'POST',
         credentials: 'include',
