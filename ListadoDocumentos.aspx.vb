@@ -151,7 +151,7 @@ Public Class ListadoDocumentos
         Dim objMonedaDB As New MonedaDB
         Dim errorMessage As String = ""
 
-        listMonedas = objMonedaDB.ConsultarMonedas(errorMessage)
+        listMonedas = objMonedaDB.ConsultaCantTotalDocs_x_Monedas(errorMessage)
 
         If listMonedas Is Nothing Then
             SwalUtils.ShowSwalError(Me, errorMessage)
