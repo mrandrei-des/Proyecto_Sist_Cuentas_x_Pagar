@@ -7,6 +7,7 @@
         Private _fechaEmision As DateTime
         Private _estado As Integer
         Private _moneda As String
+        Private _simbolo As String
         Private _tipoCambio As Double
         Private _total As Double
         Private _saldoActual As Double
@@ -14,7 +15,7 @@
         Public Sub New()
         End Sub
 
-        Public Sub New(idProveedor As Integer, tipoDocumento As Integer, numeroDocumento As String, observacion As String, fechaEmision As DateTime, estado As Integer, moneda As String, tipoCambio As Double, total As Double, saldoActual As Double)
+        Public Sub New(idProveedor As Integer, tipoDocumento As Integer, numeroDocumento As String, observacion As String, fechaEmision As DateTime, estado As Integer, moneda As String, simbolo As String, tipoCambio As Double, total As Double, saldoActual As Double)
             Me.IdProveedor = idProveedor
             Me.TipoDocumento = tipoDocumento
             Me.NumeroDocumento = numeroDocumento
@@ -22,6 +23,7 @@
             Me.FechaEmision = fechaEmision
             Me.Estado = estado
             Me.Moneda = moneda
+            Me.Simbolo = simbolo
             Me.TipoCambio = tipoCambio
             Me.Total = total
             Me.SaldoActual = saldoActual
@@ -87,6 +89,15 @@
             End Get
             Set(value As String)
                 _moneda = value
+            End Set
+        End Property
+
+        Public Property Simbolo As String
+            Get
+                Return _simbolo
+            End Get
+            Set(value As String)
+                _simbolo = value
             End Set
         End Property
 

@@ -127,6 +127,7 @@ Public Class DocumentoPagoDB
                     .FechaEmision = CDate(row("FechaEmision"))
                     .Estado = Convert.ToInt32(row("Estado"))
                     .Moneda = row("Moneda").ToString()
+                    .Simbolo = row("Simbolo").ToString()
                     .TipoCambio = Convert.ToDouble(row("TipoCambio").ToString())
                     .Total = Convert.ToDouble(row("Total").ToString())
                     .SaldoActual = Convert.ToDouble(row("SaldoActual").ToString())

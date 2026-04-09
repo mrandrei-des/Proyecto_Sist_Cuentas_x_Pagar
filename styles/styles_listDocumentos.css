@@ -290,6 +290,10 @@
     background-color: var(--colorLetraOscuro);
 }
 
+.resumen__container__info__doc__hidden {
+    display: none;
+}
+
 .info__doc__container__numDoc {
     font-size: .95rem;
     color: var(--colorNegroLetra);

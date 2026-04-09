@@ -173,6 +173,7 @@
     <Content Include="styles\styles_config.css" />
     <Content Include="styles\styles_listDocumentos.css" />
     <Content Include="WebMethods_CxP\ActualizarPermisos.aspx" />
+    <Content Include="WebMethods_CxP\BuscarDocumentoAplicado.aspx" />
     <Content Include="WebMethods_CxP\BuscarProveedor.aspx" />
     <Content Include="CambioContrasenna.aspx" />
     <Content Include="Content\Site.css" />
@@ -203,7 +204,6 @@
     <Content Include="WebMethods_CxP\ObtenerTiposDocumento.aspx" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\cxp_Scripts\script_CambioContrasenna.js" />
-    <Content Include="Scripts\cxp_Scripts\DialogConfirm.js" />
     <Content Include="Scripts\cxp_Scripts\script_CreacionDocumentos.js" />
     <Content Include="Scripts\cxp_Scripts\toggleButton.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
@@ -296,6 +296,13 @@
     </Compile>
     <Compile Include="WebMethods_CxP\ActualizarPermisos.aspx.vb">
       <DependentUpon>ActualizarPermisos.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="WebMethods_CxP\BuscarDocumentoAplicado.aspx.designer.vb">
+      <DependentUpon>BuscarDocumentoAplicado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMethods_CxP\BuscarDocumentoAplicado.aspx.vb">
+      <DependentUpon>BuscarDocumentoAplicado.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="WebMethods_CxP\BuscarProveedor.aspx.designer.vb">

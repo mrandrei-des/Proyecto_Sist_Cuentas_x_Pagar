@@ -1,4 +1,4 @@
--- EXEC sp_Filtrar_DocumentosAplicados NULL, NULL, NULL
+-- EXEC sp_Filtrar_DocumentosAplicados NULL, NULL, NULL, NULL
 ALTER PROC sp_Filtrar_DocumentosAplicados
 (
 @FiltTipoDocumento int,

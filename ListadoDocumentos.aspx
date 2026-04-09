@@ -129,77 +129,35 @@
                     <p>Listado de documentos aplicados en el sistema</p>
                 </div>
                 <div class="resumen__container__listado">
-                    <div class="resumen__container__docs" id="resumenContainerDocs">
-                        <div class="resumen__doc resumen__doc--active" id="resumenDoc">
-                            <div class="doc__info">
-                                <span>FAC-001</span>
-                                <span>$120,00</span>
-                            </div>
-                            <p class="doc__name__proveedor">Productora Dos Pinos</p>
-                        </div>
-                        <div class="resumen__doc">
-                            <div class="doc__info">
-                                <span>FAC-001</span>
-                                <span>$120,00</span>
-                            </div>
-                            <p class="doc__name__proveedor">Productora Dos Pinos</p>
-                        </div>
-                        <div class="resumen__doc">
-                            <div class="doc__info">
-                                <span>FAC-001</span>
-                                <span>$120,00</span>
-                            </div>
-                            <p class="doc__name__proveedor">Productora Dos Pinos</p>
-                        </div>
-                        <div class="resumen__doc">
-                            <div class="doc__info">
-                                <span>FAC-001</span>
-                                <span>$120,00</span>
-                            </div>
-                            <p class="doc__name__proveedor">Productora Dos Pinos</p>
-                        </div>
-                        <div class="resumen__doc">
-                            <div class="doc__info">
-                                <span>FAC-001</span>
-                                <span>$120,00</span>
-                            </div>
-                            <p class="doc__name__proveedor">Productora Dos Pinos</p>
-                        </div>
-                        <div class="resumen__doc">
-                            <div class="doc__info">
-                                <span>FAC-001</span>
-                                <span>$120,00</span>
-                            </div>
-                            <p class="doc__name__proveedor">Productora Dos Pinos</p>
-                        </div>                        
+                    <div class="resumen__container__docs" id="resumenContainerDocs">                        
                     </div>
 
-                    <div class="resumen__container__info__doc" id="containerInfoDoc">
+                    <div class="resumen__container__info__doc resumen__container__info__doc__hidden" id="containerInfoDoc">
                         <div class="info__doc__container__numDoc">
-                            <p id="docTitle">FAC-001 - Compra de insumos para el mes de marzo</p>
+                            <p id="docTitle"></p>
                         </div>
                         
                         <div class="info__doc__container__monto">
                             <p>Monto Total</p>
-                            <span class="info__doc__monto"><strong id="docMonto">$120.000</strong></span>
+                            <span class="info__doc__monto"><strong id="docMonto"></strong></span>
                         </div>
 
                         <div class="info__doc__container__details">
                             <div class="container__details">
                                 <p class="details__title">Proveedor</p>
-                                <p class="details__info" id="docNombreProveedor">Productora Dos Pinos</p>
+                                <p class="details__info" id="docNombreProveedor"></p>
                             </div>
                             <div class="container__details">
                                 <p class="details__title">Tipo</p>
-                                <p class="details__info" id="docTipoDoc">Factura de crédito</p>
+                                <p class="details__info" id="docTipoDoc"></p>
                             </div>
                             <div class="container__details">
                                 <p class="details__title">Fecha documento</p>
-                                <p class="details__info" id="docFecha">12/01/2024</p>
+                                <p class="details__info" id="docFecha"></p>
                             </div>                                                        
                             <div class="container__details">
                                 <p class="details__title">Moneda</p>
-                                <p class="details__info" id="docMoneda">USD $</p>
+                                <p class="details__info" id="docMoneda"></p>
                             </div>                            
                         </div>
                     </div>

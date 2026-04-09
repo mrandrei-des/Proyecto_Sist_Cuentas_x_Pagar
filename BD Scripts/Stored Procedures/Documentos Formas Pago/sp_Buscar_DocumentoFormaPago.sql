@@ -1,6 +1,6 @@
 -- PROCEDIMIENTO ALMACENADO QUE CONSULTA AL DOCUMENTO DE FORMA DE PAGO INDICADO QUE SE ENCUENTRE EN UN ESTADO DIFERENTE A ELIMINADO
 -- sp_Buscar_DocumentoFormaPago 0
-CREATE PROC sp_Buscar_DocumentoFormaPago
+ALTER PROC sp_Buscar_DocumentoFormaPago
 (
 @ID_Proveedor int, 
 @TipoDocumento int,
@@ -9,7 +9,8 @@ CREATE PROC sp_Buscar_DocumentoFormaPago
 AS
 BEGIN
 	SELECT d.ID_Proveedor as 'IdProveedor', d.TipoDocumento,d.NumeroDocumento, d.Observacion, d.FechaEmision,
-	d.Estado, d.Moneda, d.TipoCambio, d.Total, d.SaldoActual
+	d.Estado, d.Moneda, m.Simbolo, d.TipoCambio, d.Total, d.SaldoActual
 	FROM Documentos_Formas_Pago d
+	JOIN Monedas m on d.Moneda = m.CodigoMoneda
 	WHERE d.ID_Proveedor = @ID_Proveedor and d.TipoDocumento = @TipoDocumento and d.NumeroDocumento = @NumeroDocumento and d.Estado <> 6 
 END

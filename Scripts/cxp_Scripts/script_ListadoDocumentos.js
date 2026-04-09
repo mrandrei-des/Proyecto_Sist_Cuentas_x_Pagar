@@ -44,6 +44,7 @@ botonFiltroReset.addEventListener('click', () => {
     document.getElementById('contenedorFiltroTipoDoc').classList.add('resumen__container__input--hidden')
     document.getElementById('contenedorFiltroMoneda').classList.add('resumen__container__input--hidden')
     document.getElementById('contenedorFiltroFecha').classList.add('resumen__container__input--hidden')
+    document.getElementById('containerInfoDoc').classList.add('resumen__container__info__doc__hidden')
 
     moverSelectOption(selTipoDoc, '')
     moverSelectOption(selMoneda, '')
@@ -164,13 +165,13 @@ function quitarClaseActivaResumenDoc() {
 
 function cargarInformacionDocumento(idCategoria, idProveedor, idTipoDocumento, numDocumento) {
     var documentoSeleccionado = {
-        IDCategoria: idCategoria,
-        IDProveedor: idProveedor,
-        IDTipoDocumento: idTipoDocumento,
-        NumDocumento: numDocumento
+        idCategoriaDoc: idCategoria,
+        idProveedor: idProveedor,
+        tipoDoc: idTipoDocumento,
+        numDocumento: numDocumento
     }
 
-    fetch(API_ENDPOINT + '', {
+    fetch(API_ENDPOINT + 'BuscarDocumentoAplicado', {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -195,9 +196,8 @@ function cargarInformacionDocumento(idCategoria, idProveedor, idTipoDocumento, n
 }
 
 function cargarDocumento(documentoSeleccionado) {
-    var tipoDocumento = documentoSeleccionado.IdCategoria == 1 ? 'FAC - ' : 'PAG - ';
+    var tipoDocumento = documentoSeleccionado.IDCategoria == 1 ? 'FAC - ' : 'PAG - ';
 
-    // FALTA CREAR EL WEB METHOD DE CARGA, CONSUMIRLO Y RENDERIZAR LOS DATOS DEL DOCUMENTO
     const containerInfo = document.getElementById('containerInfoDoc')
     const pTitulo = document.getElementById('docTitle')
     const stMonto = document.getElementById('docMonto')
@@ -205,14 +205,13 @@ function cargarDocumento(documentoSeleccionado) {
     const pTipoDoc = document.getElementById('docTipoDoc')
     const pFecha = document.getElementById('docFecha')
     const pMoneda = document.getElementById('docMoneda')
-}
 
-/*
--- DOCUMENTO SELECCIONADO
-docTitle párrafo del número de documento y observación
-docMonto strong del monto del documento
-docNombreProveedor párrafo del nombre del proveedor
-docTipoDoc párrafo del tipo de documento
-docFecha párrafo de la fecha del documento
-docMoneda párrado de la moenda del documento
-*/
+    pTitulo.innerText = `${tipoDocumento}${documentoSeleccionado.NumDocumento} - ${documentoSeleccionado.Observacion}`
+    stMonto.innerText = documentoSeleccionado.MontoTotal
+    pNombreProveedor.innerText = documentoSeleccionado.NombreProveedor
+    pTipoDoc.innerText = documentoSeleccionado.TipoDocumento
+    pFecha.innerText = documentoSeleccionado.FechaDoc
+    pMoneda.innerText = documentoSeleccionado.MonedaDoc
+
+    containerInfo.classList.remove('resumen__container__info__doc__hidden')
+}
