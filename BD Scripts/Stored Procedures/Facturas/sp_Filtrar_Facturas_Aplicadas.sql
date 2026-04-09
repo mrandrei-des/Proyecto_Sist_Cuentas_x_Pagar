@@ -1,7 +1,7 @@
 -- PROCEDIMIENTO ALMACENADO QUE CONSULTA A LAS FACTURAS APLICADAS EN GENERAL O POR PROVEEDOR
--- EXEC sp_Filtrar_Facturas_Aplicadas NULL, 'DOL', '2026-01-01', NULL
+-- EXEC sp_Filtrar_Facturas_Aplicadas 1, NULL, NULL, NULL
 alter PROC sp_Filtrar_Facturas_Aplicadas
-(
+( 
 @FiltTipoDocumento int,
 @FiltMoneda varchar(3),
 @FiltFechaInicio date,
@@ -18,7 +18,7 @@ BEGIN
 	--AND (@FiltFechaEmisionHasta IS NULL OR f.FechaEmision >= @FiltFechaEmisionHasta)
 	--ORDER BY f.ID_Proveedor ASC, f.FechaEmision ASC
 
-	SELECT c.ID_Categoria as idCategoria, f.TipoFactura as TipoDoc, f.NumeroFactura as NumDoc, m.Simbolo, f.SaldoActual as Monto, p.Nombre as NombrProveedor, f.FechaEmision
+	SELECT c.ID_Categoria as idCategoria, f.ID_Proveedor as idProveedor, f.TipoFactura as TipoDoc, f.NumeroFactura as NumDoc, m.Simbolo, f.SaldoActual as Monto, p.Nombre as NombreProveedor, f.FechaEmision
 	FROM Facturas f 
 	JOIN TipoDocumentos c on f.TipoFactura = c.ID_TipoDocumento
 	JOIN Proveedores p on f.ID_Proveedor = p.ID_Proveedor

@@ -18,7 +18,7 @@ BEGIN
 	--AND (@FiltFechaEmisionHasta IS NULL OR d.FechaEmision >= @FiltFechaEmisionHasta)
 	--ORDER BY d.ID_Proveedor ASC, d.FechaEmision ASC
 	
-	SELECT c.ID_Categoria as idCategoria, d.TipoDocumento as TipoDoc, d.NumeroDocumento as NumDoc, m.Simbolo, d.SaldoActual as Monto, p.Nombre as NombrProveedor, d.FechaEmision
+	SELECT c.ID_Categoria as idCategoria, d.ID_Proveedor as idProveedor, d.TipoDocumento as TipoDoc, d.NumeroDocumento as NumDoc, m.Simbolo, d.SaldoActual as Monto, p.Nombre as NombreProveedor, d.FechaEmision
 	FROM Documentos_Formas_Pago d 
 	JOIN TipoDocumentos c on d.TipoDocumento = c.ID_TipoDocumento
 	JOIN Proveedores p on d.ID_Proveedor = p.ID_Proveedor

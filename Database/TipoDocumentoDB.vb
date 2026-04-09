@@ -60,4 +60,26 @@ Public Class TipoDocumentoDB
         End Try
     End Function
 
+    Public Function ConsultarIDCategoria_x_TipoDocumento(idTipoDocumento As Integer, ByRef errorMessage As String) As Integer
+        Try
+            Dim query As String = "sp_Consulta_Categoria_Tipo_Documento"
+            Dim parameters As New List(Of SqlParameter)
+
+            parameters.Add(New SqlParameter("@ID_TipoDocumento", idTipoDocumento))
+
+            Dim dt As DataTable = db.ExecuteQuery(errorMessage, query, True, parameters)
+
+            If dt Is Nothing AndAlso errorMessage <> "" Then
+                Return Nothing
+            End If
+
+            If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
+                Return Convert.ToInt32(dt.Rows(0)("IdCategoria").ToString())
+            End If
+
+            Return -1
+        Catch ex As Exception
+            Return Nothing
+        End Try
+    End Function
 End Class

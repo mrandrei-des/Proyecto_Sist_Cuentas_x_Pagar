@@ -15,6 +15,11 @@ var filtMoneda = '';
 var filtFechaInicio = '';
 var filtFechaFin = '';
 
+document.addEventListener('DOMContentLoaded', function () {
+    filtTipoDocumento = '', filtMoneda = '', filtFechaInicio = '', filtFechaFin = ''
+    consultarDocumentosFiltros()
+});
+
 botonFiltroTipoDoc.addEventListener('click', () => {
     moverSelectOption(selTipoDoc, '')
     document.getElementById('contenedorFiltrosInput').classList.remove('resumen__container__filtros__inputs--hidden')
@@ -46,6 +51,7 @@ botonFiltroReset.addEventListener('click', () => {
     inpFechaFin.value = ''
 
     filtTipoDocumento = '', filtMoneda = '', filtFechaInicio = '', filtFechaFin = ''
+    consultarDocumentosFiltros()
 })
 
 function moverSelectOption(selectElement, valorBuscar) {
@@ -69,28 +75,28 @@ function mostrarAlerta(titulo, mensaje, icon, textoBoton, tipo) {
 //mostrarAlerta('Atención', 'Mensaje de proceso fallido', 'error', 'Ok', false)
 //mostrarAlerta('Atención', 'Mensaje de proceso requiere cuidado', 'warning', 'Ok', false)
 
-selTipoDoc.addEventListener('blur', function () {
+selTipoDoc.addEventListener('change', function () {
     filtTipoDocumento = selTipoDoc.value
     consultarDocumentosFiltros()
 });
 
-selMoneda.addEventListener('blur', () => {
+selMoneda.addEventListener('change', () => {
     filtMoneda = selMoneda.value
     consultarDocumentosFiltros()
 });
 
-inpFechaInicio.addEventListener('input', () => {
+inpFechaInicio.addEventListener('change', () => {
     filtFechaInicio = inpFechaInicio.value
     consultarDocumentosFiltros()
 });
 
-inpFechaFin.addEventListener('input', () => {
+inpFechaFin.addEventListener('change', () => {
     filtFechaFin = inpFechaFin.value
     consultarDocumentosFiltros()
 });
 
 function consultarDocumentosFiltros() {
-
+    
     var filtros = {
         filtTipoDoc: filtTipoDocumento,
         filtMoneda: filtMoneda,
@@ -98,20 +104,14 @@ function consultarDocumentosFiltros() {
         filtFechaFin: filtFechaFin
     }
 
-    /**
-     sp_Filtrar_DocumentosAplicados SIN FILTRO TIPO DOCUMENTO
-     sp_Filtrar_DocumentosFormasPago_Aplicadas
-     sp_Filtrar_Facturas_Aplicadas
-     */
-
-    fetch(API_ENDPOINT + '', {
+    fetch(API_ENDPOINT + 'ConsultaReporteDocumentosAplicados', {
         method: 'POST',
         credentials: 'include',
         headers: {
             'Content-Type': 'application/json; charset=utf-8',
             'X-Requested-With': 'XMLHttpRequest'
         },
-        body: filtros
+        body: JSON.stringify(filtros)
     })
         .then(function (r) { return r.json(); })
         .then(function (data) {
@@ -119,7 +119,7 @@ function consultarDocumentosFiltros() {
                 renderizarDocumentos(data.lista)
 
             } else {
-                mostrarAlerta('Ocurrió un problema al consultar los documentos', data.mensaje, 'warning', 'Ok')
+                mostrarAlerta(data.mensaje, '', 'warning', 'Ok')
             }
         })
         .catch(function (err) {
@@ -133,42 +133,81 @@ function renderizarDocumentos(listaDocumentos) {
 
     contResumenDocs.innerHTML = ''
 
-    listaDocumentos.foreach(function (documento) {
+    listaDocumentos.forEach(documentoAplicado => {
         var divResumenDoc = document.createElement('div')
+        var tipoDocumento = documentoAplicado.IdCategoria == 1 ? 'FAC - ' : 'PAG - ';
         divResumenDoc.className = 'resumen__doc'
-        divResumenDoc.innerHTML =`
+        divResumenDoc.setAttribute('id', 'resumenDoc')
+        divResumenDoc.innerHTML = `
         <div class="doc__info">
-            <span>${documento.numDocumento}</span>
-            <span>${documento.monto}</span>
+            <span>${tipoDocumento + documentoAplicado.NumDocumento}</span>
+            <span>${documentoAplicado.Monto}</span>
         </div>
-        <p class="doc__name__proveedor">${documento.proveedor}</p>`
+        <p class="doc__name__proveedor">${documentoAplicado.NombreProveedor}</p>`
 
-        contResumenDocs.appendChild(divResumenDoc)
+        divResumenDoc.addEventListener('click', function () {
+            quitarClaseActivaResumenDoc()
+            this.classList.add('resumen__doc--active');            
+            cargarInformacionDocumento(documentoAplicado.IdCategoria, documentoAplicado.IdProveedor, documentoAplicado.IdTipoDoc, documentoAplicado.NumDocumento)
+        })
+
+        contResumenDocs.appendChild(divResumenDoc);        
     });
 }
 
+function quitarClaseActivaResumenDoc() {
+    var listaDocumentos = document.querySelectorAll('#resumenDoc');
+    listaDocumentos.forEach(documentoAplicado => {
+        documentoAplicado.classList.remove('resumen__doc--active')
+    });
+}
+
+function cargarInformacionDocumento(idCategoria, idProveedor, idTipoDocumento, numDocumento) {
+    var documentoSeleccionado = {
+        IDCategoria: idCategoria,
+        IDProveedor: idProveedor,
+        IDTipoDocumento: idTipoDocumento,
+        NumDocumento: numDocumento
+    }
+
+    fetch(API_ENDPOINT + '', {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json; charset=utf-8',
+            'X-Requested-With': 'XMLHttpRequest'
+        },
+        body: JSON.stringify(documentoSeleccionado)
+    })
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+            if (data.estado) {
+                cargarDocumento(data.documento)
+
+            } else {
+                mostrarAlerta(data.mensaje, '', 'warning', 'Ok')
+            }
+        })
+        .catch(function (err) {
+            console.error('Ha ocurrido un error al ejecutar la petición: ', err)
+            mostrarAlerta('Ocurrió un problema', 'Error de conexión con el servidor [001]', 'error', 'Ok')
+        });
+}
+
+function cargarDocumento(documentoSeleccionado) {
+    var tipoDocumento = documentoSeleccionado.IdCategoria == 1 ? 'FAC - ' : 'PAG - ';
+
+    // FALTA CREAR EL WEB METHOD DE CARGA, CONSUMIRLO Y RENDERIZAR LOS DATOS DEL DOCUMENTO
+    const containerInfo = document.getElementById('containerInfoDoc')
+    const pTitulo = document.getElementById('docTitle')
+    const stMonto = document.getElementById('docMonto')
+    const pNombreProveedor = document.getElementById('docNombreProveedor')
+    const pTipoDoc = document.getElementById('docTipoDoc')
+    const pFecha = document.getElementById('docFecha')
+    const pMoneda = document.getElementById('docMoneda')
+}
+
 /*
-select tipo doc= 
-select monedas = 
-
-input fecha inicio= 
-input fecha fin= 
-
-doc seleccionado
-
-
-contenedor de docs = resumenContainerDocs
-doc cargado = resumenDoc
-resumen__doc--active
-
-<div class="resumen__doc">
-    <div class="doc__info">
-        <span>FAC-001</span>
-        <span>$120,00</span>
-    </div>
-    <p class="doc__name__proveedor">Productora Dos Pinos</p>
-</div>
-
 -- DOCUMENTO SELECCIONADO
 docTitle párrafo del número de documento y observación
 docMonto strong del monto del documento

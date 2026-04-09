@@ -174,7 +174,7 @@
                         </div>                        
                     </div>
 
-                    <div class="resumen__container__info__doc">
+                    <div class="resumen__container__info__doc" id="containerInfoDoc">
                         <div class="info__doc__container__numDoc">
                             <p id="docTitle">FAC-001 - Compra de insumos para el mes de marzo</p>
                         </div>

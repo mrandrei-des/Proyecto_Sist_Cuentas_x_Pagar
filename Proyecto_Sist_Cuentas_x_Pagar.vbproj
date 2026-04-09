@@ -126,6 +126,21 @@
   <ItemGroup>
     <Content Include=".gitattributes" />
     <Content Include=".gitignore" />
+    <Content Include="BD Scripts\Stored Procedures\CategoriaDocumentos\sp_Cargar_Categoria_Documento_ddl.sql" />
+    <Content Include="BD Scripts\Stored Procedures\Documentos Formas Pago\sp_Aplicar_DocumentoFormaPago.sql" />
+    <Content Include="BD Scripts\Stored Procedures\Documentos Formas Pago\sp_Buscar_DocumentoFormaPago.sql" />
+    <Content Include="BD Scripts\Stored Procedures\Documentos Formas Pago\sp_Consulta_Existencia_DocumentoFormaPago.sql" />
+    <Content Include="BD Scripts\Stored Procedures\Documentos Formas Pago\sp_Eliminar_DocumentoFormaPago.sql" />
+    <Content Include="BD Scripts\Stored Procedures\Documentos Formas Pago\sp_Filtrar_DocumentosFormasPago_Aplicadas.sql" />
+    <Content Include="BD Scripts\Stored Procedures\Documentos Formas Pago\sp_Filtrar_DocumentosFormasPago_Pendientes.sql" />
+    <Content Include="BD Scripts\Stored Procedures\Documentos Formas Pago\sp_Filtrar_DocumentosFormasPago_SinSaldo.sql" />
+    <Content Include="BD Scripts\Stored Procedures\Documentos Formas Pago\sp_Inserta_DocumentoFormaPago_Nuevo.sql" />
+    <Content Include="BD Scripts\Stored Procedures\Documentos Formas Pago\sp_Inserta_Registro_Bitacora_Cambio_DocumentosFormasPago.sql" />
+    <Content Include="BD Scripts\Stored Procedures\Documentos Formas Pago\sp_Modificar_DocumentoFormaPago.sql" />
+    <Content Include="BD Scripts\Stored Procedures\ErrorLogger\sp_Inserta_ErrorLogger.sql" />
+    <Content Include="BD Scripts\Stored Procedures\Estados\sp_Cargar_Estados_Usuarios_Proveedores_ddl.sql" />
+    <Content Include="BD Scripts\Stored Procedures\Grupos de Permisos\sp_Consulta_GruposPermisos.sql" />
+    <Content Include="BD Scripts\Stored Procedures\Monedas\sp_Carga_Monedas_ddl.sql" />
     <Content Include="BD Scripts\Stored Procedures\Proveedores\sp_Consultar_Proveedor.sql" />
     <Content Include="BD Scripts\Stored Procedures\Proveedores\sp_Consultar_Proveedores_Registrados.sql" />
     <Content Include="BD Scripts\Stored Procedures\Proveedores\sp_Eliminar_Proveedor.sql" />
@@ -133,6 +148,10 @@
     <Content Include="BD Scripts\Stored Procedures\Proveedores\sp_Inserta_Registro_Bitacora_Cambio_Proveedores.sql" />
     <Content Include="BD Scripts\Stored Procedures\Proveedores\sp_Modificar_Proveedor.sql" />
     <Content Include="BD Scripts\Stored Procedures\Roles\sp_Inserta_Rol_Nuevo.sql" />
+    <Content Include="BD Scripts\Stored Procedures\TipoDocumentos\sp_Cargar_Tipo_Documentos.sql" />
+    <Content Include="BD Scripts\Stored Procedures\TipoDocumentos\sp_Cargar_Tipo_Documento_ddl.sql" />
+    <Content Include="BD Scripts\Stored Procedures\TipoDocumentos\sp_Consulta_Categoria_Tipo_Documento.sql" />
+    <Content Include="BD Scripts\Stored Procedures\TipoIdentificaciones\sp_Cargar_TipoIdentificaciones_ddl.sql" />
     <Content Include="BD Scripts\Stored Procedures\Usuarios\sp_Consultar_Usuario.sql" />
     <Content Include="BD Scripts\Stored Procedures\Usuarios\sp_Consultar_Usuarios_Sistema.sql" />
     <Content Include="BD Scripts\Stored Procedures\Usuarios\sp_Eliminar_Usuario.sql" />
@@ -177,6 +196,7 @@
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="ListadoUsuarios.aspx" />
     <Content Include="WebMethods_CxP\CargarDocumento.aspx" />
+    <Content Include="WebMethods_CxP\ConsultaReporteDocumentosAplicados.aspx" />
     <Content Include="WebMethods_CxP\ObtenerGruposPermisos.aspx" />
     <Content Include="WebMethods_CxP\ObtenerPendientes.aspx" />
     <Content Include="WebMethods_CxP\ObtenerPermisos.aspx" />
@@ -237,6 +257,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.vb" />
     <Compile Include="App_Start\RouteConfig.vb" />
+    <Compile Include="Database\DocumentoAplicadoDB.vb" />
     <Compile Include="Database\ErrorLoggerDB.vb" />
     <Compile Include="Database\GrupoPermisoDB.vb" />
     <Compile Include="Database\MontosTotalesDB.vb" />
@@ -262,6 +283,7 @@
       <DependentUpon>MantRolesPermisos.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="Models\DocumentoAplicado.vb" />
     <Compile Include="Models\ErrorLogger.vb" />
     <Compile Include="Models\GrupoPermiso.vb" />
     <Compile Include="Models\ListaReglas.vb" />
@@ -404,6 +426,13 @@
     </Compile>
     <Compile Include="WebMethods_CxP\CargarDocumento.aspx.vb">
       <DependentUpon>CargarDocumento.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="WebMethods_CxP\ConsultaReporteDocumentosAplicados.aspx.designer.vb">
+      <DependentUpon>ConsultaReporteDocumentosAplicados.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMethods_CxP\ConsultaReporteDocumentosAplicados.aspx.vb">
+      <DependentUpon>ConsultaReporteDocumentosAplicados.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="WebMethods_CxP\ObtenerGruposPermisos.aspx.designer.vb">
