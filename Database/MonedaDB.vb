@@ -1,4 +1,6 @@
-﻿Imports Proyecto_Sist_Cuentas_x_Pagar.Utils
+﻿Imports System.Data.SqlClient
+Imports Microsoft.Ajax.Utilities
+Imports Proyecto_Sist_Cuentas_x_Pagar.Utils
 
 Public Class MonedaDB
     Private db As New DbHealper
@@ -29,10 +31,38 @@ Public Class MonedaDB
         End Try
     End Function
 
-    Public Function ConsultaCantTotalDocs_x_Monedas(ByRef errorMessage) As List(Of Models.Moneda)
+    Public Function ConsultaCantTotalDocs_x_Monedas(filtTipoDocumento As String, filtMoneda As String, filtFechaInicio As String, filtFechaFin As String, ByRef errorMessage As String) As List(Of Models.Moneda)
         Try
             Dim query As String = "sp_Carga_Monedas_CantDocumentos_Aplicados"
-            Dim dt As DataTable = db.ExecuteQuery(errorMessage, query, True)
+
+            ' Se agregan los parámetros del procedimiento almacenado a una lista de SqlParameter
+            Dim parameters As New List(Of SqlParameter)
+
+            If filtTipoDocumento.IsNullOrWhiteSpace() Then
+                parameters.Add(New SqlParameter("@FiltTipoDocumento", DBNull.Value))
+            Else
+                parameters.Add(New SqlParameter("@FiltTipoDocumento", Convert.ToInt32(filtTipoDocumento)))
+            End If
+
+            If filtMoneda.IsNullOrWhiteSpace() Then
+                parameters.Add(New SqlParameter("@FiltMoneda", DBNull.Value))
+            Else
+                parameters.Add(New SqlParameter("@FiltMoneda", filtMoneda))
+            End If
+
+            If filtFechaInicio.IsNullOrWhiteSpace() Then
+                parameters.Add(New SqlParameter("@FiltFechaInicio", DBNull.Value))
+            Else
+                parameters.Add(New SqlParameter("@FiltFechaInicio", Date.Parse(filtFechaInicio)))
+            End If
+
+            If filtFechaFin.IsNullOrWhiteSpace() Then
+                parameters.Add(New SqlParameter("@FiltFechaFin", DBNull.Value))
+            Else
+                parameters.Add(New SqlParameter("@FiltFechaFin", Date.Parse(filtFechaFin)))
+            End If
+
+            Dim dt As DataTable = db.ExecuteQuery(errorMessage, query, True, parameters)
 
             If dt Is Nothing AndAlso errorMessage <> "" Then
                 Return Nothing

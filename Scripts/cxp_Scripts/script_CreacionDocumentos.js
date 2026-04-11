@@ -383,5 +383,3 @@ function moverSelectOption(selectElement, valorBuscar) {
         }
     }
 }
-
-//DocumentoExisteYEstaPendiente

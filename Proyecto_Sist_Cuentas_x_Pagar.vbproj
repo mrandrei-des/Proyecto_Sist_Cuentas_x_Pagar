@@ -198,6 +198,7 @@
     <Content Include="ListadoUsuarios.aspx" />
     <Content Include="WebMethods_CxP\CargarDocumento.aspx" />
     <Content Include="WebMethods_CxP\ConsultaReporteDocumentosAplicados.aspx" />
+    <Content Include="WebMethods_CxP\ConsultarFiltrosListDocumentos.aspx" />
     <Content Include="WebMethods_CxP\ObtenerGruposPermisos.aspx" />
     <Content Include="WebMethods_CxP\ObtenerPendientes.aspx" />
     <Content Include="WebMethods_CxP\ObtenerPermisos.aspx" />
@@ -440,6 +441,13 @@
     </Compile>
     <Compile Include="WebMethods_CxP\ConsultaReporteDocumentosAplicados.aspx.vb">
       <DependentUpon>ConsultaReporteDocumentosAplicados.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="WebMethods_CxP\ConsultarFiltrosListDocumentos.aspx.designer.vb">
+      <DependentUpon>ConsultarFiltrosListDocumentos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMethods_CxP\ConsultarFiltrosListDocumentos.aspx.vb">
+      <DependentUpon>ConsultarFiltrosListDocumentos.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="WebMethods_CxP\ObtenerGruposPermisos.aspx.designer.vb">

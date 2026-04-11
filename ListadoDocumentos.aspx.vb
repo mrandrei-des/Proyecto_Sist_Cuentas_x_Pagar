@@ -124,7 +124,7 @@ Public Class ListadoDocumentos
         Dim objTipoDocumentosDB As New TipoDocumentoDB
         Dim errorMessage As String = ""
 
-        listTipoDocumento = objTipoDocumentosDB.ConsultarTipoDocumento_Todos(errorMessage)
+        listTipoDocumento = objTipoDocumentosDB.ConsultarTipoDocumento_Todos("", "", "", "", errorMessage)
 
         If listTipoDocumento Is Nothing Then
             SwalUtils.ShowSwalError(Me, errorMessage)
@@ -151,7 +151,7 @@ Public Class ListadoDocumentos
         Dim objMonedaDB As New MonedaDB
         Dim errorMessage As String = ""
 
-        listMonedas = objMonedaDB.ConsultaCantTotalDocs_x_Monedas(errorMessage)
+        listMonedas = objMonedaDB.ConsultaCantTotalDocs_x_Monedas("", "", "", "", errorMessage)
 
         If listMonedas Is Nothing Then
             SwalUtils.ShowSwalError(Me, errorMessage)

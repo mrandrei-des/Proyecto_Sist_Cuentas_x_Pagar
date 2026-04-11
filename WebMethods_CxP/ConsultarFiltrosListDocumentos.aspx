@@ -1,0 +1,1 @@
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="ConsultarFiltrosListDocumentos.aspx.vb" Inherits="Proyecto_Sist_Cuentas_x_Pagar.ConsultarFiltrosListDocumentos" %>

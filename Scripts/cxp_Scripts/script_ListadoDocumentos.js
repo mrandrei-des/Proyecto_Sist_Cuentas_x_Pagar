@@ -52,6 +52,7 @@ botonFiltroReset.addEventListener('click', () => {
     inpFechaFin.value = ''
 
     filtTipoDocumento = '', filtMoneda = '', filtFechaInicio = '', filtFechaFin = ''
+    consultarOptionsFiltros()
     consultarDocumentosFiltros()
 })
 
@@ -79,21 +80,28 @@ function mostrarAlerta(titulo, mensaje, icon, textoBoton, tipo) {
 selTipoDoc.addEventListener('change', function () {
     filtTipoDocumento = selTipoDoc.value
     consultarDocumentosFiltros()
+    consultarOptionsFiltros('tipos')
 });
 
 selMoneda.addEventListener('change', () => {
     filtMoneda = selMoneda.value
+
+    console.log(selMoneda)
+    console.log(selMoneda.value)
     consultarDocumentosFiltros()
+    consultarOptionsFiltros('monedas')
 });
 
 inpFechaInicio.addEventListener('change', () => {
     filtFechaInicio = inpFechaInicio.value
     consultarDocumentosFiltros()
+    consultarOptionsFiltros('')
 });
 
 inpFechaFin.addEventListener('change', () => {
     filtFechaFin = inpFechaFin.value
     consultarDocumentosFiltros()
+    consultarOptionsFiltros('')
 });
 
 function consultarDocumentosFiltros() {
@@ -118,6 +126,47 @@ function consultarDocumentosFiltros() {
         .then(function (data) {
             if (data.estado) {
                 renderizarDocumentos(data.lista)
+
+            } else {
+                mostrarAlerta(data.mensaje, '', 'warning', 'Ok')
+            }
+        })
+        .catch(function (err) {
+            console.error('Ha ocurrido un error al ejecutar la petición: ', err)
+            mostrarAlerta('Ocurrió un problema', 'Error de conexión con el servidor [001]', 'error', 'Ok')
+        });
+}
+
+function consultarOptionsFiltros(origen) {
+
+    var filtros = {
+        filtTipoDoc: filtTipoDocumento,
+        filtMoneda: filtMoneda,
+        filtFechaInicio: filtFechaInicio,
+        filtFechaFin: filtFechaFin
+    }
+
+    fetch(API_ENDPOINT + 'ConsultarFiltrosListDocumentos', {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json; charset=utf-8',
+            'X-Requested-With': 'XMLHttpRequest'
+        },
+        body: JSON.stringify(filtros)
+    })
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+            if (data.estado) {
+
+                if (origen == 'monedas' && filtMoneda != '') {
+                    renderizarSelectTipoDoc(data.listaTipoDocs)
+                } else if (origen == 'tipos' && filtTipoDocumento != '') {
+                    renderizarSelectMonedas(data.listaMonedas)
+                } else {
+                    renderizarSelectTipoDoc(data.listaTipoDocs)
+                    renderizarSelectMonedas(data.listaMonedas)
+                }
 
             } else {
                 mostrarAlerta(data.mensaje, '', 'warning', 'Ok')
@@ -154,6 +203,50 @@ function renderizarDocumentos(listaDocumentos) {
 
         contResumenDocs.appendChild(divResumenDoc);        
     });
+}
+
+function renderizarSelectMonedas(listaMonedas) {
+    //selMoneda.innerHTML = ''
+
+    //var optElement = document.createElement('option')
+    //optElement.setAttribute('value', '')
+    //optElement.innerText = 'Seleccione una opción'
+    //selMoneda.appendChild(optElement);
+
+    //listaMonedas.forEach(moneda => {
+    //    var optElement = document.createElement('option')
+
+    //    optElement.setAttribute('value', moneda.CodigoMoneda)
+    //    optElement.innerText = moneda.Descripcion
+
+    //    selMoneda.appendChild(optElement);
+    //});
+
+    listaMonedas.forEach(moneda => {
+        cambiarTextOption(selMoneda, moneda.CodigoMoneda, moneda.Descripcion)
+    });
+}
+
+function renderizarSelectTipoDoc(listaTipoDoc) {
+    //selTipoDoc.innerHTML = ''
+
+    //var optElement = document.createElement('option')
+    //optElement.setAttribute('value', '')
+    //optElement.innerText = 'Seleccione una opción'
+    //selMoneda.appendChild(optElement);
+
+    //listaTipoDoc.forEach(tipo => {
+    //    var optElement = document.createElement('option')
+
+    //    optElement.setAttribute('value', tipo.IdTipoDocumento)
+    //    optElement.innerText = tipo.Descripcion
+
+    //    selTipoDoc.appendChild(optElement);
+    //});
+
+    listaTipoDoc.forEach(tipo => {
+        cambiarTextOption(selTipoDoc, tipo.IdTipoDocumento, tipo.Descripcion)
+    });   
 }
 
 function quitarClaseActivaResumenDoc() {
@@ -214,4 +307,13 @@ function cargarDocumento(documentoSeleccionado) {
     pMoneda.innerText = documentoSeleccionado.MonedaDoc
 
     containerInfo.classList.remove('resumen__container__info__doc__hidden')
+}
+
+function cambiarTextOption(selectElement, valorBuscar, valorNuevo) {
+    for (let i = 0; i < selectElement.options.length; i++) {
+        if (selectElement.options[i].value == valorBuscar) {
+            selectElement.options[i].innerText = valorNuevo;
+            break;
+        }
+    }
 }

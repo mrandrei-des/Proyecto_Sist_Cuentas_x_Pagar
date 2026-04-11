@@ -29,6 +29,7 @@ Public Class ConsultaReporteDocumentosAplicados
         filtFechaFin = datos.filtFechaFin
 
         Dim listaDocumentos = ObtenerDocumentos(filtTipoDoc, filtMoneda, filtFechaInicio, filtFechaFin, errorMessage)
+
         Dim respuesta As Object
 
         If listaDocumentos.Count > 0 Then
