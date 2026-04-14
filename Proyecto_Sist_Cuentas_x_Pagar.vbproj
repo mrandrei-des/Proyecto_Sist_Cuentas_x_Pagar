@@ -171,6 +171,7 @@
     <Content Include="Scripts\cxp_Scripts\script_MantRolesPermisos.js" />
     <Content Include="Scripts\cxp_Scripts\script_MantUsuarios.js" />
     <Content Include="styles\styles_config.css" />
+    <Content Include="styles\styles_home.css" />
     <Content Include="styles\styles_listDocumentos.css" />
     <Content Include="WebMethods_CxP\ActualizarPermisos.aspx" />
     <Content Include="WebMethods_CxP\BuscarDocumentoAplicado.aspx" />

@@ -31,7 +31,8 @@
     <link href="~/styles/styles_config.css" rel="stylesheet" type="text/css" />
     <link href="~/styles/styles_listado.css" rel="stylesheet" type="text/css" />
     <link href="~/styles/styles_tablas.css" rel="stylesheet" type="text/css" />
-    <link href="styles/styles__aside__docs_pendientes.css" rel="stylesheet" />
+    <link href="~/styles/styles__aside__docs_pendientes.css" rel="stylesheet" />
+    <link href="~/styles/styles_home.css" rel="stylesheet" type="text/css" />
 
 </head>
 <body>

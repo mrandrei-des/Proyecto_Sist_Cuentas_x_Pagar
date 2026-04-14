@@ -1,0 +1,324 @@
+﻿.page__home {
+    min-width: 1200px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, auto) 1fr;
+    gap: 12px;
+    box-shadow: none;
+    background-color: transparent;
+    position: relative;
+}
+
+
+.contenedor__saludo {
+    margin: 0 30px;
+}
+
+.contenedor__saludo, .contenedor__metricas, .contenedor__movimientos {
+    padding: 5px 30px;
+    border-radius: 6px;
+}
+/* SECCIÓN BIENVENIDA*/
+.contenedor__saludo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #dadada;
+}
+
+.saludo__contenedor__usuario h2 {
+    font-size: 1.2rem;
+}
+
+.saludo__contenedor__usuario p {
+    font-size: .9rem;
+    color: #9C9A92;
+}
+
+.sistema__nombre {
+    font-size: .9rem;
+    font-weight: 600;
+    color: #9C9A92;
+}
+
+/* SECCIÓN MÉTRICAS*/
+.contenedor__metricas {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+}
+
+.metricas__box {
+    padding: 12px;
+    border-radius: 6px;
+    box-shadow: 0 0 15px 0 #0002;
+    background-color: var(--colorLetraClaro);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.box__contador {
+    font-size: 1.7rem;
+    font-weight: 500;
+}
+
+.metricas__box:is(:first-child, :nth-child(2)) .box__contador {
+    color: var(--colorLetraOscuroSecundario);
+}
+
+.metricas__box:is(:nth-child(3), :nth-child(4)) .box__contador {
+    color: var(--colorPrincipal);
+}
+
+.metricas__box:is(:last-child) .box__contador {
+    color: var(--colorLetraOscuro);
+}
+
+.box__leyenda {
+    font-size: .9rem;
+    font-weight: 600;
+    color: #9C9A92;
+    text-wrap: pretty;
+}
+
+/* SECCIÓN COMPLEMENTOS*/
+.contenedor__movimientos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+/* SECCIÓN DE COMPLEMENTOS, DOCUMENTOS SIN APLICAR MÁS ANTIGUOS */
+.movimientos__pendientes {
+    padding: 12px 16px;
+    /* border: 2px solid #9C9A92; */
+    background-color: var(--colorLetraClaro);
+    border-radius: 6px;
+    box-shadow: 0 0 15px 0 #0002;
+}
+
+.movimientos__pendientes__titulo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 6px;
+}
+
+    .movimientos__pendientes__titulo h2 {
+        font-size: 1.2rem;
+    }
+
+    .movimientos__pendientes__titulo .pendientes__enlace {
+        color: var(--colorLetraOscuro);
+        font-weight: 700;
+        font-size: 1rem;
+        padding-inline: 6px;
+    }
+
+        .movimientos__pendientes__titulo .pendientes__enlace:hover {
+            color: var(--colorLetraOscuroSecundario);
+            border-bottom-color: var(--colorLetraOscuroSecundario);
+            text-decoration: underline;
+        }
+
+        .movimientos__pendientes__titulo .pendientes__enlace span i {
+            translate: 0;
+            transition: translate .25s;
+        }
+
+        .movimientos__pendientes__titulo .pendientes__enlace:hover span i {
+            translate: 6px;
+        }
+
+.movimientos__pendientes__listado {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.pendiente__doc {
+    padding: 6px;
+    padding-left: 10px;
+    border-left: 3px solid #9C9A92;
+    border-radius: 0 6px 6px 0;
+    cursor: pointer;
+    transition: background-color .25s, border-radius .25s;
+}
+
+    .pendiente__doc:hover {
+        background-color: var(--colorLetraOscuro);
+        border-left-color: var(--colorLetraOscuroSecundario);
+    }
+
+        .pendiente__doc:hover .doc__name__proveedor {
+            color: var(--colorLetraClaro);
+        }
+
+.doc__registro {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.doc__dias {
+    display: inline-block;
+    padding: 4px 6px;
+    border-radius: 6px;
+    font-size: .8rem;
+    font-weight: 700;
+    transition: background-color .25s, color .25s;
+}
+
+.doc__dias--Antiguo {
+    background-color: #f003;
+    color: #d00;
+}
+
+.pendiente__doc:hover .doc__dias--Antiguo {
+    background-color: #d00;
+    color: #fff;
+}
+
+.doc__dias--Intermedio {
+    background-color: #faa30722;
+    color: #fa7507;
+}
+
+.pendiente__doc:hover .doc__dias--Intermedio {
+    background-color: #fa7507;
+    color: #fff;
+}
+
+.doc__dias--Reciente {
+    background-color: var(--colorSecundario);
+    color: var(--colorPrincipal);
+}
+
+.pendiente__doc:hover .doc__dias--Reciente {
+    background-color: var(--colorPrincipal);
+    color: #fff;
+}
+
+/* SECCIÓN DE COMPLEMENTOS (ENLACES Y ÚLTIMAS ACCIONES) */
+.movimientos__complementos {
+    display: grid;
+    grid-template-rows: repeat(2, min-content);
+    gap: 12px;
+}
+
+/* SECCIÓN DE COMPLEMENTOS - ENLACES */
+.complementos__accesos__titulo h2 {
+    padding-left: 12px;
+    font-size: 1.2rem;
+}
+
+.complementos__accesos__enlaces {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    min-height: fit-content;
+    max-height: fit-content;
+    margin-top: 6px;
+}
+
+.enlace__box {
+    padding: 12px;
+    background-color: #dadada;
+    background-color: var(--colorLetraOscuroSecundario);
+    border-radius: 6px;
+}
+
+    .enlace__box h3 .enlace__box__link {
+        padding: 6px 0;
+        font-size: 1rem;
+        color: var(--colorLetraClaro);
+        letter-spacing: 1px;
+        transition: color .25s;
+    }
+
+        .enlace__box h3 .enlace__box__link:hover {
+            color: var(--colorLetraOscuro);
+            text-decoration: underline;
+        }
+
+        .enlace__box h3 .enlace__box__link i {
+            translate: 0;
+            transition: translate .25s;
+        }
+
+        .enlace__box h3 .enlace__box__link:hover i {
+            translate: 6px;
+        }
+
+
+.enlace__box__descripcion {
+    font-size: .9rem;
+    color: #bbb;
+    text-wrap: pretty;
+}
+
+
+/* SECCIÓN DE COMPLEMENTOS - ÚLTIMAS ACCIONES */
+
+.complementos__actividad__titulo h2 {
+    font-size: 1.2rem;
+    padding-left: 12px;
+}
+
+.complementos__actividad__listado {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 6px;
+}
+
+.actividad__cambio {
+    padding: 12px;
+    background-color: var(--colorLetraClaro);
+    background-color: var(--colorLetraClaro);
+    box-shadow: 0 0 10px 0 #0002;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transparent .25s, box-shadow .25s;
+    position: relative;
+}
+
+    .actividad__cambio:hover {
+        background-color: #ededed;
+        box-shadow: none;
+    }
+
+.cambio__info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: start;
+}
+
+.cambio__info__dia {
+    font-size: .85rem;
+    font-weight: 700;
+    color: #9C9A92;
+}
+
+.cambio__referencia {
+    font-size: .85rem;
+    color: #9C9A92;
+    font-weight: 600;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.cambio__referencia__usuario {
+    color: #3C4A42;
+}
+
+.cambio__referencia span:nth-child(2) {
+    font-size: .3rem;
+    padding-inline: 5px;
+}

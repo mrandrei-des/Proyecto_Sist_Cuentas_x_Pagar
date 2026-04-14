@@ -13,5 +13,5 @@ BEGIN
 
 	-- INSERTAR UN REGISTRO DE BITÁCORA DEL UPDATE AL DOCUMENTO DE FORMA DE PAGO
 	-- ID_Accion = 2 es modificado. Cualquier duda revisar tabla TipoAcciones
-	EXECUTE sp_Inserta_Registro_Bitacora_Cambio_DocumentosFormasPago 2, @ID_Proveedor, @TipoDocumento, @NumeroDocumento,  'El documento de forma de pago ha sido aplicado.', @UsuarioAplico
+	EXECUTE sp_Inserta_Registro_Bitacora_Cambio_DocumentosFormasPago 7, @ID_Proveedor, @TipoDocumento, @NumeroDocumento,  'El documento de forma de pago ha sido aplicado.', @UsuarioAplico
 END

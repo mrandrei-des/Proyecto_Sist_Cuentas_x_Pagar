@@ -34,7 +34,7 @@
 
 	INSERT INTO TipoAcciones (ID_Accion, Accion, Descripcion)
 	VALUES (1, 'INSERTAR', 'Ha insertado al menos un nuevo registro'), (2, 'ACTUALIZAR', 'Ha actualizado al menos un registro'), (3, 'ELIMINAR', 'Ha eliminado al menos un registro'),
-	(4, 'ACTIVAR', 'Ha pasado un registro de Inactivo a Activo'), (5, 'INACTIVAR', 'Ha pasado un registro de Activo a Inactivo'), (6, 'CONSULTAR', 'Ha consultado por al menos un registro')
+	(4, 'ACTIVAR', 'Ha pasado un registro de Inactivo a Activo'), (5, 'INACTIVAR', 'Ha pasado un registro de Activo a Inactivo'), (6, 'CONSULTAR', 'Ha consultado por al menos un registro'), (7, 'APLICAR', 'Ha aplicado el documento.')
 */
 
 /*	Usuario admin propio

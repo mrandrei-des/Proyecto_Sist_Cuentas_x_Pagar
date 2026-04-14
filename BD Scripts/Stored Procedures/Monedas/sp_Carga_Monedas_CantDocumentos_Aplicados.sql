@@ -1,5 +1,6 @@
 -- CARGA TODOS LAS MONEDAS Y LA CANTIDAD DE DOCUMENTOS APLICADOS CON CADA MONEDA
-CREATE PROC sp_Carga_Monedas_CantDocumentos_Aplicados
+-- exec sp_Carga_Monedas_CantDocumentos_Aplicados null, 'COL', null, null
+ALTER PROC sp_Carga_Monedas_CantDocumentos_Aplicados
 (
 @FiltTipoDocumento int,
 @FiltMoneda varchar(3),
