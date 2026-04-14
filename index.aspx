@@ -270,5 +270,5 @@
             </article>
         </main>
     </div>
-
+    <script src="Scripts/cxp_Scripts/script_Index.js"></script>
 </asp:Content>

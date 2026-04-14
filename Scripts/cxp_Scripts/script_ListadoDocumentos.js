@@ -85,9 +85,6 @@ selTipoDoc.addEventListener('change', function () {
 
 selMoneda.addEventListener('change', () => {
     filtMoneda = selMoneda.value
-
-    console.log(selMoneda)
-    console.log(selMoneda.value)
     consultarDocumentosFiltros()
     consultarOptionsFiltros('monedas')
 });

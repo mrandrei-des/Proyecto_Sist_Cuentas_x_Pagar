@@ -163,6 +163,7 @@
     <Content Include="ListadoDocumentos.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="MantRolesPermisos.aspx" />
+    <Content Include="Scripts\cxp_Scripts\script_Index.js" />
     <Content Include="Scripts\cxp_Scripts\script_ListadoDocumentos.js" />
     <Content Include="Scripts\cxp_Scripts\script_ListadoProveedoresModal.js" />
     <Content Include="Scripts\cxp_Scripts\script_ListadoUsuariosModal.js" />
