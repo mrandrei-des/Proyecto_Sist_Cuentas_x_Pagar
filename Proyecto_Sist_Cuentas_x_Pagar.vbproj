@@ -259,6 +259,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.vb" />
     <Compile Include="App_Start\RouteConfig.vb" />
+    <Compile Include="Database\ContadorDB.vb" />
     <Compile Include="Database\DocumentoAplicadoDB.vb" />
     <Compile Include="Database\ErrorLoggerDB.vb" />
     <Compile Include="Database\GrupoPermisoDB.vb" />
@@ -289,6 +290,7 @@
     <Compile Include="Models\ErrorLogger.vb" />
     <Compile Include="Models\GrupoPermiso.vb" />
     <Compile Include="Models\ListaReglas.vb" />
+    <Compile Include="Models\Contador.vb" />
     <Compile Include="Models\MontosTotales.vb" />
     <Compile Include="Models\Permiso.vb" />
     <Compile Include="Models\ValidacionRegex.vb" />

@@ -68,6 +68,72 @@ Public Class Herramientas
         End If
         Return Format(montoFormatear, "#,###,###,###.00")
     End Function
+
+    Public Function prcDevuelveDiaSemanaTexto(dia As DayOfWeek) As String
+        Select Case dia
+
+            Case 0
+                Return "Domingo"
+
+            Case 1
+                Return "Lunes"
+
+            Case 2
+                Return "Martes"
+
+            Case 3
+                Return "Miércoles"
+
+            Case 4
+                Return "Jueves"
+
+            Case 5
+                Return "Viernes"
+
+            Case Else
+                Return "Sábado"
+        End Select
+    End Function
+
+    Public Function prcDevuelveMesAnnoTexto(mes As Integer) As String
+        Select Case mes
+            Case 1
+                Return "Enero"
+
+            Case 2
+                Return "Febrero"
+
+            Case 3
+                Return "Marzo"
+
+            Case 4
+                Return "Abril"
+
+            Case 5
+                Return "Mayo"
+
+            Case 6
+                Return "Junio"
+
+            Case 7
+                Return "Julio"
+
+            Case 8
+                Return "Agosto"
+
+            Case 9
+                Return "Setiembre"
+
+            Case 10
+                Return "Octubre"
+
+            Case 11
+                Return "Noviembre"
+
+            Case Else
+                Return "Diciembre"
+        End Select
+    End Function
 End Class
 
 

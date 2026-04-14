@@ -5,8 +5,8 @@
         <main class="page__main page__home">
             <article class="contenedor__saludo">
                 <div class="saludo__contenedor__usuario">
-                    <h2 runat="server" id="titleUser">Bienvenido, Andrei</h2>
-                    <p class="usuario__fecha" runat="server" id="fechaActual">Viernes 10 de abril, 2026</p>
+                    <h2 runat="server" id="titleUser"></h2>
+                    <p class="usuario__fecha" runat="server" id="fechaActual"></p>
                 </div>
                 <div class="saludo__contenedor__sistema">
                     <p class="sistema__nombre">Sistema de Cuentas por Pagar</p>
@@ -16,28 +16,28 @@
             <article class="contenedor__metricas">
                 <div class="metricas__box">
                     <p class="box__leyenda">Documentos ingresados</p>
-                    <span class="box__contador" runat="server" id="documentosIngresados"><strong>5</strong></span>
+                    <span class="box__contador" runat="server" id="documentosIngresados"></span>
                     <p class="box__leyenda">Hoy</p>
                 </div>
                 <div class="metricas__box">
                     <p class="box__leyenda">Proveedores registrados</p>
-                    <span class="box__contador" runat="server" id="proveedoresRegistrados"><strong>4</strong></span>
+                    <span class="box__contador" runat="server" id="proveedoresRegistrados"></span>
                     <p class="box__leyenda">Esta semana</p>
                 </div>
                 <div class="metricas__box">
                     <p class="box__leyenda">Facturas pendientes</p>
-                    <span class="box__contador" runat="server" id="facturasPendientes"><strong>12</strong></span>
+                    <span class="box__contador" runat="server" id="facturasPendientes"></span>
                     <p class="box__leyenda">Sin aplicar</p>
                 </div>
                 <div class="metricas__box">
                     <p class="box__leyenda">Pagos pendientes</p>
-                    <span class="box__contador" runat="server" id="pagosPendientes"><strong>7</strong></span>
+                    <span class="box__contador" runat="server" id="pagosPendientes"></span>
                     <p class="box__leyenda">Sin aplicar</p>
                 </div>
                 <div class="metricas__box">
                     <p class="box__leyenda">Aplicados este mes</p>
-                    <span class="box__contador" runat="server" id="aplicadosEsteMes"><strong>12</strong></span>
-                    <p class="box__leyenda">Abril 2026</p>
+                    <span class="box__contador" runat="server" id="aplicadosEsteMes"></span>
+                    <p class="box__leyenda" runat="server" id="mesActual"></p>
                 </div>
             </article>
 
@@ -54,7 +54,7 @@
                             </span>
                         </a>
                     </div>
-                    <div class="movimientos__pendientes__listado">
+                    <div class="movimientos__pendientes__listado" id="listadoDocumentosPendientes">
 
                         <div class="pendiente__doc">
                             <div class="doc__info">
@@ -216,7 +216,8 @@
                                 Actividad reciente
                             </h2>
                         </div>
-                        <div class="complementos__actividad__listado">
+
+                        <div class="complementos__actividad__listado" id="listadoActividadReciente">
 
                             <div class="actividad__cambio">
                                 <div class="cambio__info">
