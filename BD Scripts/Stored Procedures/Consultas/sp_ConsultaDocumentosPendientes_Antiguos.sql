@@ -1,6 +1,6 @@
 -- PROCEDIMIENTO ALMACENADO QUE CONSULTA POR LOS DOCUMENTOS PENDIENTES Y LOS ORDENA DE MÁS ANTIGUOS A MÁS RECIENTES
 -- EXEC sp_ConsultaDocumentosPendientes_Antiguos
-CREATE PROC sp_ConsultaDocumentosPendientes_Antiguos
+ALTER PROC sp_ConsultaDocumentosPendientes_Antiguos
 AS
 BEGIN
 	WITH cte_documentosPendientes AS (
