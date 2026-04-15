@@ -178,7 +178,7 @@ Public Class CreacionDocumentos
         End If
 
         Dim categoriaDocumento As Integer = Convert.ToInt32(idCategoriaDocumento)
-        Dim usuarioInserta As String = "andre"
+        Dim usuarioInserta As String = Session("UsuarioLoggeado")
         errorMessage = ""
         nombreDocumento = ""
         Dim respuestaCreacion As Boolean

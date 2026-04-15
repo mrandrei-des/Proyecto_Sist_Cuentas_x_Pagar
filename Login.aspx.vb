@@ -32,7 +32,16 @@ Public Class Login
 
         If modUsuario.NombreUsuario IsNot Nothing Then
             'Session("Usuario") = modUsuario
-            Response.Redirect("index.aspx", False)
+            Session("UsuarioLoggeado") = modUsuario.NombreUsuario
+            Session("RolUsuarioLoggeado") = modUsuario.Rol
+
+            ' DEPENDIENTO DEL USUARIO Y ROLES QUE TENGO LO DIRIGE A UNA PANTALLA EN ESPECIAL
+            If modUsuario.Rol = 1 Then
+                Response.Redirect("index.aspx", False)
+            Else
+                Response.Redirect("index.aspx", False)
+            End If
+
         Else
             SwalUtils.ShowSwalError(Me, "El usuario o la contraseña no coinciden.")
         End If

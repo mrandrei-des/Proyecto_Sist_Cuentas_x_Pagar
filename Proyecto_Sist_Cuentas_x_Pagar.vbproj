@@ -264,6 +264,7 @@
     <Compile Include="App_Start\RouteConfig.vb" />
     <Compile Include="Database\ContadorDB.vb" />
     <Compile Include="Database\DocumentoAplicadoDB.vb" />
+    <Compile Include="Database\DocumentosPendientesDB.vb" />
     <Compile Include="Database\ErrorLoggerDB.vb" />
     <Compile Include="Database\GrupoPermisoDB.vb" />
     <Compile Include="Database\MontosTotalesDB.vb" />
@@ -291,6 +292,7 @@
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Models\DocumentoAplicado.vb" />
+    <Compile Include="Models\DocumentosPendientes.vb" />
     <Compile Include="Models\ErrorLogger.vb" />
     <Compile Include="Models\GrupoPermiso.vb" />
     <Compile Include="Models\ListaReglas.vb" />

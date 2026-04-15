@@ -9,6 +9,13 @@ Public Class index
         enlace.Style.Add("background-color", "var(--colorLetraOscuroSecundario)")
         Dim nombreUsuario As String
 
+        If Session("RolUsuarioLoggeado") IsNot Nothing Then
+            If Convert.ToInt32(Session("RolUsuarioLoggeado").ToString()) <> 1 Then
+                ' SI UN USUARIO ESCRIBE LA URL DEBE REVISARSE SI REALMENTE PUEDE ENTRAR AHÍ
+                Response.Redirect("index.aspx", False)
+            End If
+        End If
+
         nombreUsuario = "andre"
 
         CargaSaludoUsuario(nombreUsuario)

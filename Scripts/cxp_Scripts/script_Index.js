@@ -10,7 +10,7 @@ function mostrarAlerta(titulo, mensaje, icon, textoBoton, tipo) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    //consultarDocumentosPendientesAntiguos()
+    consultarDocumentosPendientesAntiguos()
     consultarActividadReciente()
 });
 
@@ -45,26 +45,29 @@ function renderizarPendientes(listaDocumentos) {
 
     listaDocumentos.forEach(documento => {
         var pendienteDoc = document.createElement('div')
+        var tipoDocumento = document.IdCategoria == 1 ? 'FAC - ' : 'PAG - ';
+        var cantDias = documento.CantDias == 1 ? `1 día` : `${documento.CantDias} días`
+
         var claseDiasAntiguo = ''
 
-        if (documento.DiasAntiguo >= 15) {
+        if (documento.CantDias >= 15) {
             claseDiasAntiguo = 'doc__dias--Antiguo'
 
-        } else if (documento.DiasAntiguo >= 10) {
+        } else if (documento.CantDias >= 10) {
             claseDiasAntiguo = 'doc__dias--Intermedio'
 
         } else {
             claseDiasAntiguo = 'doc__dias--Reciente'
         }
 
-        pendienteDoc.className = 'pendienteDoc'
+        pendienteDoc.className = 'pendiente__doc'
         pendienteDoc.innerHTML =`<div class="doc__info">
-                                    <span>FAC-001</span>
-                                    <span>$120,00</span>
+                                    <span>${tipoDocumento} ${documento.NumDocumento}</span>
+                                    <span>${documento.SimboloMoneda}${documento.TotalDocumentoFormateado}</span>
                                 </div>
                                 <div class="doc__registro">
-                                    <p class="doc__name__proveedor">Productora Dos Pinos</p>
-                                    <span class="doc__dias ${claseDiasAntiguo}--Antiguo">45 días</span>
+                                    <p class="doc__name__proveedor">${documento.NombreProveedor}</p>
+                                    <span class="doc__dias ${claseDiasAntiguo}">${cantDias}</span>
                                 </div>
                                 `
         contenedorPendientes.appendChild(pendienteDoc)

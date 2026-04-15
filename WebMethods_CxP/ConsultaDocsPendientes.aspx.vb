@@ -13,15 +13,15 @@
 
         'Dim datos = Newtonsoft.Json.JsonConvert.DeserializeObject(Of BusquedaRequest)(body)
 
-        Dim listaAcciones As New List(Of Models.UltimosCambios)
-        listaAcciones = ObtenerDocsPendientes()
+        Dim listaDocsPendientes As New List(Of Models.DocumentosPendientes)
+        listaDocsPendientes = ObtenerDocsPendientes()
         Dim respuesta As Object
 
-        If listaAcciones IsNot Nothing Then
-            If listaAcciones.Count > 0 Then
+        If listaDocsPendientes IsNot Nothing Then
+            If listaDocsPendientes.Count > 0 Then
                 respuesta = New With {
                 .estado = True,
-                .lista = listaAcciones,
+                .listaDocumentos = listaDocsPendientes,
                 .mensaje = ""
             }
             Else
@@ -45,13 +45,13 @@
     End Sub
 
     Private Function ObtenerDocsPendientes()
-        Dim objUlimosCambiosBD As New UltimosCambiosDB
-        Dim listaCambios As New List(Of Models.UltimosCambios)
+        Dim objDocsPendientesDB As New DocumentosPendientesDB
+        Dim listaDocumentosPendientes As New List(Of Models.DocumentosPendientes)
         Dim errorMessage As String = ""
 
-        listaCambios = objUlimosCambiosBD.ObtenerUltimosCambios(errorMessage)
+        listaDocumentosPendientes = objDocsPendientesDB.ObtenerDocumentosPendientesAntiguos(errorMessage)
 
-        Return listaCambios
+        Return listaDocumentosPendientes
 
     End Function
 

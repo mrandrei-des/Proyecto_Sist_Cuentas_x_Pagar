@@ -1,6 +1,6 @@
 -- PROCEDIMIENTO ALMACENADO QUE CONSULTA POR LOS DOCUMENTOS PENDIENTES Y LOS ORDENA DE MÁS ANTIGUOS A MÁS RECIENTES
 -- EXEC sp_ConsultaDocumentosPendientes_Antiguos
-ALTER PROC sp_ConsultaDocumentosPendientes_Antiguos
+CREATE OR ALTER PROC sp_ConsultaDocumentosPendientes_Antiguos
 AS
 BEGIN
 	WITH cte_documentosPendientes AS (
@@ -14,7 +14,7 @@ BEGIN
 	)
 
 	SELECT b.Nombre as NombreProveedor, c.ID_Categoria as idCategoria, a.NumDoc, d.Simbolo, a.Total, 
-	DATEDIFF(DAY, a.FechaCreacion, GETDATE()) AS CANTDIAS
+	DATEDIFF(DAY, a.FechaCreacion, GETDATE()) AS CantDias
 	FROM cte_documentosPendientes a
 	JOIN Proveedores b on a.idProveedor = b.ID_Proveedor
 	JOIN TipoDocumentos c on a.TipoDoc = c.ID_TipoDocumento
