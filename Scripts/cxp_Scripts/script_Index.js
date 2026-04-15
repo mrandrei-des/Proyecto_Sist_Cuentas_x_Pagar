@@ -10,11 +10,12 @@ function mostrarAlerta(titulo, mensaje, icon, textoBoton, tipo) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    consultarDocumentosPendientesAntiguos()
+    //consultarDocumentosPendientesAntiguos()
+    consultarActividadReciente()
 });
 
 function consultarDocumentosPendientesAntiguos() {
-    fetch(API_ENDPOINT + '', {
+    fetch(API_ENDPOINT + 'ConsultaDocsPendientes', {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -71,7 +72,7 @@ function renderizarPendientes(listaDocumentos) {
 }
 
 function consultarActividadReciente() {
-    fetch(API_ENDPOINT + '', {
+    fetch(API_ENDPOINT + 'ConsultaUltimasAcciones', {
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -83,7 +84,7 @@ function consultarActividadReciente() {
         .then(function (r) { return r.json(); })
         .then(function (data) {
             if (data.estado) {
-                renderizarActividadReciente(data.listaAcciones)
+                renderizarActividadReciente(data.lista)
             } else {
                 mostrarAlerta(data.mensaje, '', 'warning', 'Ok')
             }
@@ -98,23 +99,22 @@ function renderizarActividadReciente(listaCambios) {
     const contenedorActividades = document.getElementById('listadoActividadReciente')
 
     contenedorActividades.innerHTML = ''
-
+    console.log(listaCambios)
     listaCambios.forEach(cambio => {
         var actividadReciente = document.createElement('div')        
+        var tipoDocumento = cambio.IdCategoria == 1 ? 'FAC - ' : 'PAG - ';
+        var numDocumento = tipoDocumento + cambio.NumDocumento
 
         actividadReciente.className = 'actividad__cambio'
         actividadReciente.innerHTML =
         `<div class="cambio__info">
-            <p class="cambio__info__documento">FAC-008 aplicada correctamente</p>
-            <span class="cambio__info__dia">Hace 2h
-            </span>
+            <p class="cambio__info__documento">${numDocumento} ${cambio.AccionRealizada}</p>
+            <span class="cambio__info__dia">${cambio.HaceTiempo}</span>
         </div>
         <p class="cambio__referencia">
-            <span class="cambio__referencia__usuario">Carlos</span>
-            <span>
-                <i class="fa-solid fa-circle"></i>
-            </span>
-            <span>Importaciones Norte</span>
+            <span class="cambio__referencia__usuario">${cambio.UsuarioAccion}</span>
+            <span><i class="fa-solid fa-circle"></i></span>
+            <span>${cambio.NombreProveedor}</span>
         </p>
         `
         contenedorActividades.appendChild(actividadReciente)

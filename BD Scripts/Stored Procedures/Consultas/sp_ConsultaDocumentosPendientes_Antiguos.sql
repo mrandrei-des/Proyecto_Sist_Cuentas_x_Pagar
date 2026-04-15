@@ -13,8 +13,8 @@ BEGIN
 		WHERE Estado = 1
 	)
 
-	SELECT a.idProveedor, b.Nombre as NombreProveedor, a.TipoDoc, c.Descripcion as NombreDocumento, a.NumDoc, 
-	a.Moneda, d.Simbolo, a.Total, a.FechaCreacion, DATEDIFF(DAY, a.FechaCreacion, GETDATE()) AS CANTDIAS
+	SELECT b.Nombre as NombreProveedor, c.ID_Categoria as idCategoria, a.NumDoc, d.Simbolo, a.Total, 
+	DATEDIFF(DAY, a.FechaCreacion, GETDATE()) AS CANTDIAS
 	FROM cte_documentosPendientes a
 	JOIN Proveedores b on a.idProveedor = b.ID_Proveedor
 	JOIN TipoDocumentos c on a.TipoDoc = c.ID_TipoDocumento

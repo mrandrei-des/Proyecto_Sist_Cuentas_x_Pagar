@@ -19,13 +19,13 @@ BEGIN
 		CONCAT('Hace ', DATEDIFF(MONTH, FechaHoraAccion, GETDATE()), ' meses')
 	ELSE
 		CASE WHEN DATEDIFF(DAY, FechaHoraAccion, GETDATE()) > 0 THEN
-			CONCAT('Hace ', DATEDIFF(DAY, FechaHoraAccion, GETDATE()), ' días')
+			CONCAT('Hace ', DATEDIFF(DAY, FechaHoraAccion, GETDATE()), CASE WHEN DATEDIFF(DAY, FechaHoraAccion, GETDATE()) = 1 THEN ' día' ELSE ' días' END)
 		ELSE
 			CASE WHEN DATEDIFF(HOUR, FechaHoraAccion, GETDATE()) > 0 THEN
-				CONCAT('Hace ', DATEDIFF(HOUR, FechaHoraAccion, GETDATE()), ' horas')
+				CONCAT('Hace ', DATEDIFF(HOUR, FechaHoraAccion, GETDATE()), 'h')
 			ELSE
 				CASE WHEN DATEDIFF(MINUTE, FechaHoraAccion, GETDATE()) > 0 THEN
-					CONCAT('Hace ', DATEDIFF(MINUTE, FechaHoraAccion, GETDATE()), ' minutos')
+					CONCAT('Hace ', DATEDIFF(MINUTE, FechaHoraAccion, GETDATE()), ' min')
 				END
 			END
 		END

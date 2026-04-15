@@ -199,8 +199,10 @@
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="ListadoUsuarios.aspx" />
     <Content Include="WebMethods_CxP\CargarDocumento.aspx" />
+    <Content Include="WebMethods_CxP\ConsultaDocsPendientes.aspx" />
     <Content Include="WebMethods_CxP\ConsultaReporteDocumentosAplicados.aspx" />
     <Content Include="WebMethods_CxP\ConsultarFiltrosListDocumentos.aspx" />
+    <Content Include="WebMethods_CxP\ConsultaUltimasAcciones.aspx" />
     <Content Include="WebMethods_CxP\ObtenerGruposPermisos.aspx" />
     <Content Include="WebMethods_CxP\ObtenerPendientes.aspx" />
     <Content Include="WebMethods_CxP\ObtenerPermisos.aspx" />
@@ -266,6 +268,7 @@
     <Compile Include="Database\GrupoPermisoDB.vb" />
     <Compile Include="Database\MontosTotalesDB.vb" />
     <Compile Include="Database\PermisoDB.vb" />
+    <Compile Include="Database\UltimosCambiosDB.vb" />
     <Compile Include="ListadoDocumentos.aspx.designer.vb">
       <DependentUpon>ListadoDocumentos.aspx</DependentUpon>
     </Compile>
@@ -294,6 +297,7 @@
     <Compile Include="Models\Contador.vb" />
     <Compile Include="Models\MontosTotales.vb" />
     <Compile Include="Models\Permiso.vb" />
+    <Compile Include="Models\UltimosCambios.vb" />
     <Compile Include="Models\ValidacionRegex.vb" />
     <Compile Include="Utils\Simple3Des.vb" />
     <Compile Include="WebMethods_CxP\ActualizarPermisos.aspx.designer.vb">
@@ -440,6 +444,13 @@
       <DependentUpon>CargarDocumento.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="WebMethods_CxP\ConsultaDocsPendientes.aspx.designer.vb">
+      <DependentUpon>ConsultaDocsPendientes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMethods_CxP\ConsultaDocsPendientes.aspx.vb">
+      <DependentUpon>ConsultaDocsPendientes.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="WebMethods_CxP\ConsultaReporteDocumentosAplicados.aspx.designer.vb">
       <DependentUpon>ConsultaReporteDocumentosAplicados.aspx</DependentUpon>
     </Compile>
@@ -452,6 +463,13 @@
     </Compile>
     <Compile Include="WebMethods_CxP\ConsultarFiltrosListDocumentos.aspx.vb">
       <DependentUpon>ConsultarFiltrosListDocumentos.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="WebMethods_CxP\ConsultaUltimasAcciones.aspx.designer.vb">
+      <DependentUpon>ConsultaUltimasAcciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebMethods_CxP\ConsultaUltimasAcciones.aspx.vb">
+      <DependentUpon>ConsultaUltimasAcciones.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="WebMethods_CxP\ObtenerGruposPermisos.aspx.designer.vb">

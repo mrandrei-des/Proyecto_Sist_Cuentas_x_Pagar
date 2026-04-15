@@ -134,6 +134,36 @@ Public Class Herramientas
                 Return "Diciembre"
         End Select
     End Function
+
+    Public Function prcDevuelveNombreAccion(idCategoria As Integer, accion As String) As String
+        Dim accionRealizada As String
+
+        If idCategoria = 1 Then
+            Select Case accion
+                Case "INSERTAR"
+                    accionRealizada = "registrada"
+                Case "APLICAR"
+                    accionRealizada = "aplicada"
+                Case "ELIMINAR"
+                    accionRealizada = "eliminada"
+                Case Else
+                    accionRealizada = "modificada"
+            End Select
+        Else
+            Select Case accion
+                Case "INSERTAR"
+                    accionRealizada = "registrado"
+                Case "APLICAR"
+                    accionRealizada = "aplicado"
+                Case "ELIMINAR"
+                    accionRealizada = "eliminado"
+                Case Else
+                    accionRealizada = "modificado"
+            End Select
+        End If
+
+        Return accionRealizada
+    End Function
 End Class
 
 

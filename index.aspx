@@ -213,57 +213,10 @@
                         <div class="complementos__actividad__titulo">
                             <h2>
                                 <span><i class="fa-regular fa-clock"></i></span>
-                                Actividad reciente
+                                Actividad reciente documentos
                             </h2>
-                        </div>
-
+                        </div>                        
                         <div class="complementos__actividad__listado" id="listadoActividadReciente">
-
-                            <div class="actividad__cambio">
-                                <div class="cambio__info">
-                                    <p class="cambio__info__documento">FAC-008 aplicada correctamente</p>
-                                    <span class="cambio__info__dia">Hace 2h
-                                    </span>
-                                </div>
-                                <p class="cambio__referencia">
-                                    <span class="cambio__referencia__usuario">Carlos</span>
-                                    <span>
-                                        <i class="fa-solid fa-circle"></i>
-                                    </span>
-                                    <span>Importaciones Norte</span>
-                                </p>
-                            </div>
-
-                            <div class="actividad__cambio">
-                                <div class="cambio__info">
-                                    <p class="cambio__info__documento">FAC-008 aplicada correctamente</p>
-                                    <span class="cambio__info__dia">Hace 2h
-                                    </span>
-                                </div>
-                                <p class="cambio__referencia">
-                                    <span class="cambio__referencia__usuario">Carlos</span>
-                                    <span>
-                                        <i class="fa-solid fa-circle"></i>
-                                    </span>
-                                    <span>Importaciones Norte</span>
-                                </p>
-                            </div>
-
-                            <div class="actividad__cambio">
-                                <div class="cambio__info">
-                                    <p class="cambio__info__documento">FAC-008 aplicada correctamente</p>
-                                    <span class="cambio__info__dia">Hace 2h
-                                    </span>
-                                </div>
-                                <p class="cambio__referencia">
-                                    <span class="cambio__referencia__usuario">Carlos</span>
-                                    <span>
-                                        <i class="fa-solid fa-circle"></i>
-                                    </span>
-                                    <span>Importaciones Norte</span>
-                                </p>
-                            </div>
-
                         </div>
                     </div>
                 </div>
