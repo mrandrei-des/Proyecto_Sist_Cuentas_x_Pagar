@@ -19,6 +19,8 @@
         Public Property FechaDoc As String
         Public Property MonedaDoc As String
         Public Property MontoTotal As Double
+
+        Public Property MontoTotalFormateado As String
     End Class
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -110,6 +112,7 @@
     Private Function formatearRespuestaDocumento(idCategoria As Integer, nombreProveedor As String, documento As Object) As RespuestaDocumento
 
         Dim datosDocumento As New RespuestaDocumento()
+        Dim objHerramientas As New Herramientas
         If idCategoria = 1 Then
             datosDocumento.CategoriaDoc = idCategoria
             datosDocumento.NumProveedor = documento.IdProveedor
@@ -120,6 +123,7 @@
             datosDocumento.FechaDoc = CDate(documento.FechaEmision).ToString("yyyy-MM-dd")
             datosDocumento.MonedaDoc = documento.Moneda
             datosDocumento.MontoTotal = documento.Total
+            datosDocumento.MontoTotalFormateado = objHerramientas.FormatearMonto(documento.Total)
             Return datosDocumento
         End If
 
@@ -132,6 +136,7 @@
         datosDocumento.FechaDoc = CDate(documento.FechaEmision).ToString("yyyy-MM-dd")
         datosDocumento.MonedaDoc = documento.Moneda
         datosDocumento.MontoTotal = documento.Total
+        datosDocumento.MontoTotalFormateado = objHerramientas.FormatearMonto(documento.Total)
 
         Return datosDocumento
     End Function

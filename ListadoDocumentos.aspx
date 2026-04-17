@@ -1,5 +1,10 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="ListadoDocumentos.aspx.vb" Inherits="Proyecto_Sist_Cuentas_x_Pagar.ListadoDocumentos" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+
+<asp:Content ID="Content1" ContentPlaceHolderID="HojasEstilos" runat="server">
+    <link href="styles/styles_listDocumentos.css" rel="stylesheet" />
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="main__wrapper main__wrapper__flex">
         <main class="page__main page__main__list__docs" >
             <article class="container__resumen__movimientos">

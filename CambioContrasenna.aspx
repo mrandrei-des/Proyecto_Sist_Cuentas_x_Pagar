@@ -1,6 +1,10 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="CambioContrasenna.aspx.vb" Inherits="Proyecto_Sist_Cuentas_x_Pagar.CambioContrasenna" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="HojasEstilos" runat="server">
+    <link href="styles/styles_login.css" rel="stylesheet" />
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="main__wrapper">
         <main class="page__main page__main--login" runat="server" id="divMain">
             <section class="contenedor__section--titulo">

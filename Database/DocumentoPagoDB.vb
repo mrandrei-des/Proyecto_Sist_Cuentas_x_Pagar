@@ -188,6 +188,7 @@ Public Class DocumentoPagoDB
             End If
 
             Dim listaDocumentos As New List(Of Object)
+            Dim objHerramientas As New Herramientas
             If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
                 For Each documento As DataRow In dt.Rows
                     Dim modObjeto As Object = New With {
@@ -197,7 +198,7 @@ Public Class DocumentoPagoDB
                         .tipoDocumento = documento("TipoDocumento").ToString(),
                         .numDocumento = documento("NumeroDocumento").ToString(),
                         .fecha = documento("FechaFormateada").ToString(),
-                        .montoTotal = Double.Parse(documento("Total").ToString()),
+                        .montoTotal = objHerramientas.FormatearMonto(Double.Parse(documento("Total").ToString())),
                         .simboloMoneda = documento("SimboloMoneda").ToString()
                     }
                     listaDocumentos.Add(modObjeto)

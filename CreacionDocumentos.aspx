@@ -1,6 +1,11 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="CreacionDocumentos.aspx.vb" EnableEventValidation="false" Inherits="Proyecto_Sist_Cuentas_x_Pagar.CreacionDocumentos" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="HojasEstilos" runat="server">
+    <link href="styles/styles__aside__docs_pendientes.css" rel="stylesheet" />
+    <link href="styles/styles_dialog_confirm.css" rel="stylesheet" />
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
     <%-- INICIO DEL MODAL --%>
     <div class="contenedor__dialog" id="contenedor__dialogConfirm" runat="server">
@@ -170,7 +175,7 @@
                             <%-- Monto Documento --%>
                             <div class="formulario__contenedor-input">
                                 <asp:Label ID="lblMonto" runat="server" CssClass="formulario__label">Monto Total</asp:Label>
-                                <asp:TextBox ID="txtMontoTotal" runat="server" CssClass="formulario__input" required="true" placeholder="₡0.00"></asp:TextBox>
+                                <asp:TextBox ID="txtMontoTotal" runat="server" CssClass="formulario__input" required="true" placeholder="₡0,00"></asp:TextBox>
                                 <%-- Validación Monto Documento --%>
                                 <div class="formulario__contenedor-mensajes" runat="server" id="contenedorMensajesMonto">
 <%--                                    <p class="formulario__mensaje">

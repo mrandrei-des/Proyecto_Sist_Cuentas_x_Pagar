@@ -1,6 +1,12 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="ListadoProveedores.aspx.vb" Inherits="Proyecto_Sist_Cuentas_x_Pagar.ListadoProveedores" EnableEventValidation="false" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="HojasEstilos" runat="server">
+    <link href="styles/styles_listado.css" rel="stylesheet" />
+    <link href="styles/styles_tablas.css" rel="stylesheet" />
+    <link href="styles/styles_dialog.css" rel="stylesheet" />
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <%-- INICIO DEL MODAL --%>
     <div class="dialog" runat="server" id="modalModify" role="dialog">
         <div class="contenedor__modal contenedor__modal--modify">

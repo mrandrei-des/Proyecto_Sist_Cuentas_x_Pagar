@@ -12,6 +12,7 @@
     </asp:PlaceHolder>
 
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
     <link href="~/styles/styles_reset_elementos.css" rel="stylesheet" type="text/css" />
     <link href="~/styles/fonts.css" rel="stylesheet" type="text/css" />
     <link href="~/styles/styles_colores.css" rel="stylesheet" type="text/css" />
@@ -22,18 +23,9 @@
     <link href="~/styles/styles_header.css" rel="stylesheet" type="text/css" />
     <link href="~/styles/styles_main.css" rel="stylesheet" type="text/css" />
     <link href="~/styles/styles_footer.css" rel="stylesheet" type="text/css" />
-    <link href="~/styles/styles_dialog.css" rel="stylesheet" type="text/css" /> 
-    <link href="~/styles/styles_dialog_confirm.css" rel="stylesheet" type="text/css" /> 
-    <link href="~/styles/styles_login.css" rel="stylesheet" type="text/css" /> 
-    <link href="~/styles/styles_listDocumentos.css" rel="stylesheet" type="text/css" />
     <link href="~/styles/styles_registro.css" rel="stylesheet" type="text/css" />
     <link href="~/styles/styles_formulario.css" rel="stylesheet" type="text/css" />
-    <link href="~/styles/styles_config.css" rel="stylesheet" type="text/css" />
-    <link href="~/styles/styles_listado.css" rel="stylesheet" type="text/css" />
-    <link href="~/styles/styles_tablas.css" rel="stylesheet" type="text/css" />
-    <link href="~/styles/styles__aside__docs_pendientes.css" rel="stylesheet" />
-    <link href="~/styles/styles_home.css" rel="stylesheet" type="text/css" />
-
+    <asp:ContentPlaceHolder ID="HojasEstilos" runat="server" />
 </head>
 <body>
     <%-- Este form es indispensable, hace de contenedor principal al mismo nivel que body, cualquier estilo debe considerarse a él --%>

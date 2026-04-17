@@ -190,6 +190,7 @@ Public Class FacturaDB
             End If
 
             Dim listaFacturas As New List(Of Object)
+            Dim objHerramientas As New Herramientas
             If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
                 For Each factura As DataRow In dt.Rows
                     Dim modObjeto As Object = New With {
@@ -199,7 +200,7 @@ Public Class FacturaDB
                         .tipoDocumento = factura("TipoFactura").ToString(),
                         .numDocumento = factura("NumeroFactura").ToString(),
                         .fecha = factura("FechaFormateada").ToString(),
-                        .montoTotal = Double.Parse(factura("Total").ToString()),
+                        .montoTotal = objHerramientas.FormatearMonto(Double.Parse(factura("Total").ToString())),
                         .simboloMoneda = factura("SimboloMoneda").ToString()
                     }
                     listaFacturas.Add(modObjeto)

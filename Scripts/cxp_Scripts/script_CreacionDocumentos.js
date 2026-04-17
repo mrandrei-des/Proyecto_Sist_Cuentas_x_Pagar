@@ -246,7 +246,7 @@ function desplegarPendientes(listaDocsPendientes) {
             numDocumento: documento.numDocumento
         });
 
-        var tipoDocumento = idCategoria == 1 ? 'Num Factura: ' : 'Num Pago: ';
+        var tipoDocumento = idCategoria == 1 ? 'FAC - ' : 'PAG - ';
 
         itemInfo.className = 'aside__item__info'
         itemActions.className = 'aside__item__actions'
@@ -356,7 +356,7 @@ function llenarCamposDocumentoCargado(documento) {
     document.getElementById('MainContent_hfNumProveedor').value = documento.NumProveedor
     document.getElementById('MainContent_txtNumDocumento').value = documento.NumDocumento
     document.getElementById('MainContent_txtFechaEmision').value = documento.FechaDoc
-    document.getElementById('MainContent_txtMontoTotal').value = documento.MontoTotal
+    document.getElementById('MainContent_txtMontoTotal').value = documento.MontoTotal //MontoTotalFormateado
     document.getElementById('MainContent_txtObservacion').value = documento.Observacion
 
     moverSelectOption(document.getElementById('MainContent_ddlMoneda'), documento.MonedaDoc)
