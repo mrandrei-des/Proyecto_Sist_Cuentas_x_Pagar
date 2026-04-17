@@ -2,6 +2,7 @@
 
 Public Class index
     Inherits System.Web.UI.Page
+    Private Const IDENTIFICADOR As String = "HOME"
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         ' Busca al elemento HTML que se le indique y se le dan estilos de línea
@@ -9,18 +10,44 @@ Public Class index
         enlace.Style.Add("background-color", "var(--colorLetraOscuroSecundario)")
         Dim nombreUsuario As String
 
-        If Session("RolUsuarioLoggeado") IsNot Nothing Then
-            If Convert.ToInt32(Session("RolUsuarioLoggeado").ToString()) <> 1 Then
-                ' SI UN USUARIO ESCRIBE LA URL DEBE REVISARSE SI REALMENTE PUEDE ENTRAR AHÍ
-                Response.Redirect("index.aspx", False)
+        If UsuarioPuedeContinuar() Then
+            nombreUsuario = Session("UsuarioLoggeado")
+            CargaSaludoUsuario(nombreUsuario)
+            CargarContadoresMetricas()
+        Else
+            Session.Clear()
+            Response.Redirect("Login.aspx", False)
+        End If
+
+    End Sub
+
+    Private Function UsuarioPuedeContinuar() As Boolean
+        If Session("UsuarioLoggeado") IsNot Nothing Then
+            If Session("RolUsuarioLoggeado") IsNot Nothing Then
+                If Session("RolUsuarioLoggeado") = 1 Then
+                    Return True
+                End If
+
+                If Session("ListaAccesos") IsNot Nothing Then
+                    Dim listaAccesos As New List(Of String)
+                    listaAccesos = Session("ListaAccesos")
+
+                    Dim objRedireccion As New Redireccionamiento
+                    If objRedireccion.PermisoEnLista(listaAccesos, IDENTIFICADOR) Then
+                        Return True
+                    Else
+                        Dim permisoAcceder As String, nombrePagina As String
+                        permisoAcceder = listaAccesos.Item(0)
+
+                        nombrePagina = objRedireccion.DevuelvePaginaInicioUsuario(permisoAcceder)
+                        Response.Redirect(nombrePagina, True)
+                    End If
+                End If
             End If
         End If
 
-        nombreUsuario = "andre"
-
-        CargaSaludoUsuario(nombreUsuario)
-        CargarContadoresMetricas()
-    End Sub
+        Return False
+    End Function
 
     Private Sub CargaSaludoUsuario(usuarioLoggeado As String)
         Dim objHerramientas As New Herramientas

@@ -1,10 +1,11 @@
-﻿Imports Proyecto_Sist_Cuentas_x_Pagar.Utils
+﻿Imports System.Security.Policy
+Imports Proyecto_Sist_Cuentas_x_Pagar.Utils
 
 Public Class Login
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-
+        Session.Clear()
     End Sub
 
     Protected Sub btnInicioSesion_Click(sender As Object, e As EventArgs)
@@ -31,17 +32,24 @@ Public Class Login
         End If
 
         If modUsuario.NombreUsuario IsNot Nothing Then
-            'Session("Usuario") = modUsuario
+
+            Dim listaPermisosUsuario As New List(Of String)
+            Dim objRedireccion As New Redireccionamiento
+
+            listaPermisosUsuario = ObtenerIdentificadoresPermisos_Usuario(modUsuario.Rol)
+
             Session("UsuarioLoggeado") = modUsuario.NombreUsuario
             Session("RolUsuarioLoggeado") = modUsuario.Rol
+            Session("ListaAccesos") = listaPermisosUsuario
 
-            ' DEPENDIENTO DEL USUARIO Y ROLES QUE TENGO LO DIRIGE A UNA PANTALLA EN ESPECIAL
-            If modUsuario.Rol = 1 Then
-                Response.Redirect("index.aspx", False)
-            Else
-                Response.Redirect("index.aspx", False)
+            Dim identificadorInicio As String = ""
+            If modUsuario.Rol <> 1 Then
+                identificadorInicio = listaPermisosUsuario.Item(0)
             End If
 
+            Dim paginaInicio As String = objRedireccion.DevuelvePaginaInicioUsuario(identificadorInicio)
+
+            Response.Redirect(paginaInicio, False)
         Else
             SwalUtils.ShowSwalError(Me, "El usuario o la contraseña no coinciden.")
         End If
@@ -79,4 +87,15 @@ Public Class Login
 
         Return respuestaValidacion
     End Function
+
+    Private Function ObtenerIdentificadoresPermisos_Usuario(idRolConsultar As Integer) As List(Of String)
+        Dim listaPermisos As New List(Of String)
+        Dim objPermisoDB As New PermisoDB
+        Dim errorMessage As String = ""
+
+        listaPermisos = objPermisoDB.ConsultarIdentificadorPermisos_x_idRol(idRolConsultar, errorMessage)
+        Return listaPermisos
+    End Function
+
+
 End Class

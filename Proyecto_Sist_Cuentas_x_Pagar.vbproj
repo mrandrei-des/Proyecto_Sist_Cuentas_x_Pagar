@@ -301,6 +301,7 @@
     <Compile Include="Models\Permiso.vb" />
     <Compile Include="Models\UltimosCambios.vb" />
     <Compile Include="Models\ValidacionRegex.vb" />
+    <Compile Include="Utils\Redireccionamiento.vb" />
     <Compile Include="Utils\Simple3Des.vb" />
     <Compile Include="WebMethods_CxP\ActualizarPermisos.aspx.designer.vb">
       <DependentUpon>ActualizarPermisos.aspx</DependentUpon>

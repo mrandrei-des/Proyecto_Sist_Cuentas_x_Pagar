@@ -60,6 +60,32 @@ Public Class PermisoDB
         End Try
     End Function
 
+    Public Function ConsultarIdentificadorPermisos_x_idRol(idRol As Integer, ByRef errorMessage As String) As List(Of String)
+        Try
+            Dim query As String = "sp_Consulta_IdentificadorPermisos_x_Rol"
+            Dim parameters As New List(Of SqlParameter) From {
+                New SqlParameter("@ID_Rol", idRol)
+            }
+
+            Dim dt As DataTable = db.ExecuteQuery(errorMessage, query, True, parameters)
+
+            Dim listaPermisosAsignados As New List(Of String)()
+
+            If dt Is Nothing AndAlso errorMessage <> "" Then
+                Return Nothing
+            End If
+
+            If dt IsNot Nothing AndAlso dt.Rows.Count > 0 Then
+                For x As Integer = 0 To dt.Rows.Count - 1
+                    listaPermisosAsignados.Add(dt.Rows(x)("idPermiso").ToString())
+                Next
+            End If
+            Return listaPermisosAsignados
+        Catch ex As Exception
+            Return Nothing
+        End Try
+    End Function
+
     Public Function AsignarPermisos_x_Rol(idRol As Integer, idGrupo As Integer, listaPermisos As List(Of Integer), usuarioInserta As String, ByRef errorMessage As String) As Boolean
         Try
             If EliminarPermisos_x_Rol(idRol, idGrupo, errorMessage) Then

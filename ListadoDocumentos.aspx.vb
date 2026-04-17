@@ -4,9 +4,16 @@ Imports Proyecto_Sist_Cuentas_x_Pagar.Utils
 Public Class ListadoDocumentos
     Inherits System.Web.UI.Page
 
+    Private Const IDENTIFICADOR As String = "LIST_DOCUMENTOS"
     Dim montoDocsUSD As Double, montoDocsCRC As Double, montoFactUSD As Double, montoFactCRC As Double
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
+        If Not UsuarioPuedeContinuar() Then
+            Session.Clear()
+            Response.Redirect("Login.aspx", False)
+        End If
+
         Dim enlace As HtmlAnchor = Master.FindControl("enlaceRegistroDocumentos")
         enlace.Style.Add("background-color", "var(--colorLetraOscuroSecundario)")
         If Not IsPostBack Then
@@ -19,6 +26,34 @@ Public Class ListadoDocumentos
         MostrarTotales_Documentos()
         MostrarMontosBalances()
     End Sub
+
+    Private Function UsuarioPuedeContinuar() As Boolean
+        If Session("UsuarioLoggeado") IsNot Nothing Then
+            If Session("RolUsuarioLoggeado") IsNot Nothing Then
+                If Session("RolUsuarioLoggeado") = 1 Then
+                    Return True
+                End If
+
+                If Session("ListaAccesos") IsNot Nothing Then
+                    Dim listaAccesos As New List(Of String)
+                    listaAccesos = Session("ListaAccesos")
+
+                    Dim objRedireccion As New Redireccionamiento
+                    If objRedireccion.PermisoEnLista(listaAccesos, IDENTIFICADOR) Then
+                        Return True
+                    Else
+                        Dim permisoAcceder As String, nombrePagina As String
+                        permisoAcceder = listaAccesos.Item(0)
+
+                        nombrePagina = objRedireccion.DevuelvePaginaInicioUsuario(permisoAcceder)
+                        Response.Redirect(nombrePagina, True)
+                    End If
+                End If
+            End If
+        End If
+
+        Return False
+    End Function
 
     Private Sub MostrarTotales_Facturas()
 

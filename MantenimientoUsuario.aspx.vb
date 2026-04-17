@@ -4,7 +4,15 @@ Imports Proyecto_Sist_Cuentas_x_Pagar.Utils
 Public Class Usuario
     Inherits System.Web.UI.Page
 
+    Private Const IDENTIFICADOR As String = "CREAR_USUARIOS"
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
+        If Not UsuarioPuedeContinuar() Then
+            Session.Clear()
+            Response.Redirect("Login.aspx", False)
+        End If
+
         ' Busca al elemento HTML que se le indique y se le dan estilos de línea
         Dim enlace As HtmlAnchor = Master.FindControl("enlaceUsuarios")
         enlace.Style.Add("background-color", "var(--colorLetraOscuroSecundario)")
@@ -15,10 +23,38 @@ Public Class Usuario
         End If
     End Sub
 
+    Private Function UsuarioPuedeContinuar() As Boolean
+        If Session("UsuarioLoggeado") IsNot Nothing Then
+            If Session("RolUsuarioLoggeado") IsNot Nothing Then
+                If Session("RolUsuarioLoggeado") = 1 Then
+                    Return True
+                End If
+
+                If Session("ListaAccesos") IsNot Nothing Then
+                    Dim listaAccesos As New List(Of String)
+                    listaAccesos = Session("ListaAccesos")
+
+                    Dim objRedireccion As New Redireccionamiento
+                    If objRedireccion.PermisoEnLista(listaAccesos, IDENTIFICADOR) Then
+                        Return True
+                    Else
+                        Dim permisoAcceder As String, nombrePagina As String
+                        permisoAcceder = listaAccesos.Item(0)
+
+                        nombrePagina = objRedireccion.DevuelvePaginaInicioUsuario(permisoAcceder)
+                        Response.Redirect(nombrePagina, True)
+                    End If
+                End If
+            End If
+        End If
+
+        Return False
+    End Function
+
     Protected Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
         Dim modUsuario As New Models.Usuario
         Dim objUsuarioDB As New UsuarioDB
-        Dim errorMessage As String = "", usuarioCreacion As String = "andre"
+        Dim errorMessage As String = "", usuarioCreacion As String = Session("UsuarioLoggeado")
         Dim nombreUsuario As String = txtUsuario.Text.Trim(), contrasenna As String = txtContrasenna.Text.Trim(), nombre As String = txtNombre.Text.Trim()
         Dim apellido1 As String = txtApellidoUno.Text.Trim(), apellido2 As String = txtApellidoDos.Text.Trim(), correo As String = txtCorreoUsuario.Text.Trim(), estado As String = ddlEstadoUsuario.SelectedItem.Value, rol As String = ddlRoles.SelectedItem.Value
 

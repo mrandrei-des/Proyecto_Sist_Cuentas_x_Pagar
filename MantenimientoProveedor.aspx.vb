@@ -4,7 +4,15 @@ Imports Proyecto_Sist_Cuentas_x_Pagar.Utils
 Public Class MantenimientoProveedor
     Inherits System.Web.UI.Page
 
+    Private Const IDENTIFICADOR As String = "CREAR_PROVEEDORES"
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
+        If Not UsuarioPuedeContinuar() Then
+            Session.Clear()
+            Response.Redirect("Login.aspx", False)
+        End If
+
         ' Busca al elemento HTML que se le indique y se le dan estilos de línea
         Dim enlace As HtmlAnchor = Master.FindControl("enlaceProveedores")
         enlace.Style.Add("background-color", "var(--colorLetraOscuroSecundario)")
@@ -14,6 +22,34 @@ Public Class MantenimientoProveedor
             prcLlena_ddlEstado()
         End If
     End Sub
+
+    Private Function UsuarioPuedeContinuar() As Boolean
+        If Session("UsuarioLoggeado") IsNot Nothing Then
+            If Session("RolUsuarioLoggeado") IsNot Nothing Then
+                If Session("RolUsuarioLoggeado") = 1 Then
+                    Return True
+                End If
+
+                If Session("ListaAccesos") IsNot Nothing Then
+                    Dim listaAccesos As New List(Of String)
+                    listaAccesos = Session("ListaAccesos")
+
+                    Dim objRedireccion As New Redireccionamiento
+                    If objRedireccion.PermisoEnLista(listaAccesos, IDENTIFICADOR) Then
+                        Return True
+                    Else
+                        Dim permisoAcceder As String, nombrePagina As String
+                        permisoAcceder = listaAccesos.Item(0)
+
+                        nombrePagina = objRedireccion.DevuelvePaginaInicioUsuario(permisoAcceder)
+                        Response.Redirect(nombrePagina, True)
+                    End If
+                End If
+            End If
+        End If
+
+        Return False
+    End Function
 
     Private Sub LimpiarCampos()
         ddlTipoIdentificacion.SelectedIndex = 0
@@ -78,7 +114,7 @@ Public Class MantenimientoProveedor
     Protected Sub btnGuardar_Click(sender As Object, e As EventArgs)
         Dim modProveedor As New Models.Proveedor
         Dim objProveedorDB As New ProveedorDB
-        Dim errorMessage As String = "", usuarioCreacion As String = "andre"
+        Dim errorMessage As String = "", usuarioCreacion As String = Session("UsuarioLoggeado")
         Dim tipoIdentificacion As String = ddlTipoIdentificacion.SelectedItem.Value
         Dim numeroIdentificacion As String = txtIdentificacion.Text, nombre As String = txtNombre.Text, correo As String = txtCorreo.Text, estado As String = ddlEstado.SelectedItem.Value
 

@@ -3,7 +3,15 @@
 Public Class MantRolesPermisos
     Inherits System.Web.UI.Page
 
+    Private Const IDENTIFICADOR As String = "CREAR_MANT_ROLES"
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
+        If Not UsuarioPuedeContinuar() Then
+            Session.Clear()
+            Response.Redirect("Login.aspx", False)
+        End If
+
         Dim enlace As HtmlAnchor = Master.FindControl("enlaceUsuarios")
         enlace.Style.Add("background-color", "var(--colorLetraOscuroSecundario)")
 
@@ -14,6 +22,34 @@ Public Class MantRolesPermisos
         End If
     End Sub
 
+    Private Function UsuarioPuedeContinuar() As Boolean
+        If Session("UsuarioLoggeado") IsNot Nothing Then
+            If Session("RolUsuarioLoggeado") IsNot Nothing Then
+                If Session("RolUsuarioLoggeado") = 1 Then
+                    Return True
+                End If
+
+                If Session("ListaAccesos") IsNot Nothing Then
+                    Dim listaAccesos As New List(Of String)
+                    listaAccesos = Session("ListaAccesos")
+
+                    Dim objRedireccion As New Redireccionamiento
+                    If objRedireccion.PermisoEnLista(listaAccesos, IDENTIFICADOR) Then
+                        Return True
+                    Else
+                        Dim permisoAcceder As String, nombrePagina As String
+                        permisoAcceder = listaAccesos.Item(0)
+
+                        nombrePagina = objRedireccion.DevuelvePaginaInicioUsuario(permisoAcceder)
+                        Response.Redirect(nombrePagina, True)
+                    End If
+                End If
+            End If
+        End If
+
+        Return False
+    End Function
+
     Protected Sub btnNuevo_Click(sender As Object, e As EventArgs)
         txtNombreRol.Text = String.Empty
         hdfRolSeleccionado.Value = 0
@@ -23,7 +59,7 @@ Public Class MantRolesPermisos
     End Sub
 
     Protected Sub btnAgregar_Click(sender As Object, e As EventArgs)
-        Dim nombreRol As String = txtNombreRol.Text, errorMessage As String = "", usuarioCreacion As String = "andre"
+        Dim nombreRol As String = txtNombreRol.Text, errorMessage As String = "", usuarioCreacion As String = Session("UsuarioLoggeado")
 
         If (Not ValidarDatos(nombreRol)) Then
             SwalUtils.ShowSwalError(Me, "Atención", "Los datos ingresados no son válidos. Por favor revisar")
@@ -57,7 +93,7 @@ Public Class MantRolesPermisos
 
     Protected Sub btnModificar_Click(sender As Object, e As EventArgs)
         Dim rolSeleccionado As Integer = Convert.ToInt32(hdfRolSeleccionado.Value)
-        Dim nombreRol As String = txtNombreRol.Text, errorMessage As String = "", usuarioModificacion As String = "andre"
+        Dim nombreRol As String = txtNombreRol.Text, errorMessage As String = "", usuarioModificacion As String = Session("UsuarioLoggeado")
 
         If (Not ValidarDatos(nombreRol)) Then
             SwalUtils.ShowSwalError(Me, "Atención", "Los datos ingresados no son válidos. Por favor revisar")
@@ -91,7 +127,7 @@ Public Class MantRolesPermisos
 
     Protected Sub btnEliminar_Click(sender As Object, e As EventArgs)
         Dim rolSeleccionado As Integer = Convert.ToInt32(hdfRolSeleccionado.Value)
-        Dim errorMessage As String = "", usuarioEliminacion As String = "andre"
+        Dim errorMessage As String = "", usuarioEliminacion As String = Session("UsuarioLoggeado")
         ' Elimina el rol seleccionado siempre y cuando no tenga usuarios asociados
 
         ' Verificar si el rol se encuentra en el sistema

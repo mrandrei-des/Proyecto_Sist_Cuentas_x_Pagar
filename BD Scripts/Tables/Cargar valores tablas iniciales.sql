@@ -46,8 +46,6 @@
 	INSERT INTO Roles (ID_Rol, Descripcion, Estado, UsuarioCreacion, FechaCreacion)
 	VALUES (1, 'Administrador', 4, 'andre', GETDATE()),
 		   (2, 'Digitador Facturas', 4, 'andre', GETDATE()),
-		   (3, 'Digitador Documentos Pago', 4, 'andre', GETDATE()),
-		   (4, 'Asociador Pagos', 4, 'andre', GETDATE()),
 		   (5, 'Reportes', 4, 'andre', GETDATE()),
 		   (6, 'Creador Proveedores', 4, 'andre', GETDATE())
 */
@@ -58,13 +56,15 @@
 */
 
 /* Permisos
-	INSERT INTO Permisos (Titulo, Descripcion, Estado, ID_Grupo, UsuarioCreacion, FechaCreacion)
-	VALUES ('Creación de usuarios', 'Permite que el usuario pueda crear usuarios en el sistema', 4, 1, 'andre', GETDATE()), ('Listado y Mantenimiento de usuarios', 'Permite que el usuario pueda ver darles mantenimiento a todos los usuarios registrados en el sistema', 4, 1, 'andre', GETDATE()), ('Cambio Contraseña', 'Permite que el usuario pueda realizar su propio cambio de contraseña', 4, 1, 'andre', GETDATE()),
-	('Creación de proveedores', 'El usuario podrá registrar nuevos proveedores', 4, 2, 'andre', GETDATE()), ('Listado de proveedores', 'Permite que el usuario pueda ver y darles mantenimiento a todos los proveedores registrados', 4, 2, 'andre', GETDATE()),
-	('Creación, Mantenimiento y Aplicación de documentos', 'Permitir que el usuario pueda registrar facturas y documentos de pago además, pueda darles mantenimiento y aplicarlos para dejarlos en firme', 4, 3, 'andre', GETDATE()), ('Listado de documentos', 'Le permite al usuario ver los documentos que se encuentran aplicados en el sistema', 4, 3, 'andre', GETDATE()), ('Creación de Roles y Configuración de Permisos', 'Permite que el usuario pueda crear y darle mantenimiento a los roles del sistema además, le permite cambiar los permisos que cada rol tiene configurado', 4, 1, 'andre', GETDATE()), 
-	('Reportes sobre documentos', 'Permite que el usuario pueda generar reportes y consultas sobre los documentos registrados', 4, 4, 'andre', GETDATE()),
-	('Reportes sobre proveedores', 'Permitir que el usuario pueda generar reportes sobre los proveedores', 4, 4, 'andre', GETDATE()),
-	('Reportes sobre usuarios', 'Permite que el usuario pueda generar reportes y consultas sobre los usuarios del sistema', 4, 4, 'andre', GETDATE())
+	INSERT INTO Permisos (Titulo, Descripcion, Estado, ID_Grupo, UsuarioCreacion, FechaCreacion, Identificador)
+	VALUES ('Creación de usuarios', 'Permite que el usuario pueda crear usuarios en el sistema', 4, 1, 'andre', GETDATE(), 'CREAR_USUARIOS'), ('Listado y Mantenimiento de usuarios', 'Permite que el usuario pueda ver darles mantenimiento a todos los usuarios registrados en el sistema', 4, 1, 'andre', GETDATE(), 'LIST_MANT_USUARIOS'), ('Cambio Contraseña', 'Permite que el usuario pueda realizar su propio cambio de contraseña', 4, 1, 'andre', GETDATE(), 'CAMBIO_CONTRASENNA'),
+	('Creación de proveedores', 'El usuario podrá registrar nuevos proveedores', 4, 2, 'andre', GETDATE(), 'CREAR_PROVEEDORES'), ('Listado de proveedores', 'Permite que el usuario pueda ver y darles mantenimiento a todos los proveedores registrados', 4, 2, 'andre', GETDATE(), 'LIST_MANT_PROVEEDORES'),
+	('Creación, Mantenimiento y Aplicación de documentos', 'Permitir que el usuario pueda registrar facturas y documentos de pago además, pueda darles mantenimiento y aplicarlos para dejarlos en firme', 4, 3, 'andre', GETDATE(), 'CREAR_MANT_DOCUMENTOS'), 
+	('Listado de documentos', 'Le permite al usuario ver los documentos que se encuentran aplicados en el sistema', 4, 3, 'andre', GETDATE(), 'LIST_DOCUMENTOS'), 
+	('Creación de Roles y Configuración de Permisos', 'Permite que el usuario pueda crear y darle mantenimiento a los roles del sistema además, le permite cambiar los permisos que cada rol tiene configurado', 4, 1, 'andre', GETDATE(), 'CREAR_MANT_ROLES'), 
+	('Reportes sobre documentos', 'Permite que el usuario pueda generar reportes y consultas sobre los documentos registrados', 4, 4, 'andre', GETDATE(), 'REPO_DOCUMENTOS'),
+	('Reportes sobre proveedores', 'Permitir que el usuario pueda generar reportes sobre los proveedores', 4, 4, 'andre', GETDATE(), 'REPO_PROVEEDORES'),
+	('Reportes sobre usuarios', 'Permite que el usuario pueda generar reportes y consultas sobre los usuarios del sistema', 4, 4, 'andre', GETDATE(), 'REPO_USUARIOS')
 */
 
 /* Permisos por ID

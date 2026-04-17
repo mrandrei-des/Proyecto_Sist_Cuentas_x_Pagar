@@ -9,12 +9,19 @@ Imports Proyecto_Sist_Cuentas_x_Pagar.Utils
 Public Class CreacionDocumentos
     Inherits System.Web.UI.Page
 
-    ' PENDIENTE IMPLEMENTAR UNA TABLA O ALGO PARA LISTAR LAS FACTURAS/DOCUMENTOS DE PAGO PENDIENTES
+    Private Const IDENTIFICADOR As String = "CREAR_MANT_DOCUMENTOS"
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
+        If Not UsuarioPuedeContinuar() Then
+            Session.Clear()
+            Response.Redirect("Login.aspx", False)
+        End If
+
         ' Busca al elemento HTML que se le indique y se le dan estilos de línea
         Dim enlace As HtmlAnchor = Master.FindControl("enlaceRegistroDocumentos")
         enlace.Style.Add("background-color", "var(--colorLetraOscuroSecundario)")
+
         If Not IsPostBack Then
             hfCategoria.Value = 1
             hfFiltCategoria.Value = 1
@@ -28,7 +35,36 @@ Public Class CreacionDocumentos
             btnModificar.CssClass = "boton boton__modificar boton__ocultar"
             btnEliminar.CssClass = "boton boton__eliminar boton__ocultar"
         End If
+
     End Sub
+
+    Private Function UsuarioPuedeContinuar() As Boolean
+        If Session("UsuarioLoggeado") IsNot Nothing Then
+            If Session("RolUsuarioLoggeado") IsNot Nothing Then
+                If Session("RolUsuarioLoggeado") = 1 Then
+                    Return True
+                End If
+
+                If Session("ListaAccesos") IsNot Nothing Then
+                    Dim listaAccesos As New List(Of String)
+                    listaAccesos = Session("ListaAccesos")
+
+                    Dim objRedireccion As New Redireccionamiento
+                    If objRedireccion.PermisoEnLista(listaAccesos, IDENTIFICADOR) Then
+                        Return True
+                    Else
+                        Dim permisoAcceder As String, nombrePagina As String
+                        permisoAcceder = listaAccesos.Item(0)
+
+                        nombrePagina = objRedireccion.DevuelvePaginaInicioUsuario(permisoAcceder)
+                        Response.Redirect(nombrePagina, True)
+                    End If
+                End If
+            End If
+        End If
+
+        Return False
+    End Function
 
     Private Sub prcLlena_ddls()
         Dim idCategoria As Integer = Convert.ToInt32(hfCategoria.Value)
@@ -227,14 +263,6 @@ Public Class CreacionDocumentos
         If respuestaCreacion Then
             SwalUtils.ShowSwal(Me, $"¡{nombreDocumento} exitosamente!", "El documento está listo para ser aplicado.")
             prcLimpiarCampos()
-
-            'btnGuardar.CssClass = "boton boton__guardar boton__ocultar"
-            'btnAplicar.CssClass = "boton boton__aplicar"
-            'btnFiltFacturaForm.Enabled = False
-            'btnFiltPagoForm.Enabled = False
-            'ddlTipoDocumento.Enabled = False
-            'txtProveedor.Enabled = False
-            'txtNumDocumento.Enabled = False
         Else
             nombreDocumento = IIf(idCategoriaDocumento = 1, "la factura", "el documento de pago")
             SwalUtils.ShowSwalError(Me, "Atención", $"No se logró guardar {nombreDocumento}. {errorMessage}")
@@ -256,7 +284,7 @@ Public Class CreacionDocumentos
         Dim observacion As String = txtObservacion.Text.ToString()
         Dim fechaEmision As String = txtFechaEmision.Text
         Dim moneda As String = ddlMoneda.SelectedValue.ToString(), montoTotal As String = txtMontoTotal.Text, saldoActual = txtMontoTotal.Text
-        Dim usuarioModifico As String = "andre"
+        Dim usuarioModifico As String = Session("UsuarioLoggeado")
 
         'Validar los datos
         If Not ValidarDatos(idCategoriaDocumento, idProveedor, idTipoDocumento, numDocumento, observacion, fechaEmision, moneda, montoTotal, saldoActual) Then
@@ -377,7 +405,7 @@ Public Class CreacionDocumentos
         End If
 
         Dim idCategoriaDoc As Integer = Convert.ToInt32(idCategoriaDocumento)
-        Dim usuarioElimino As String = "andre"
+        Dim usuarioElimino As String = Session("UsuarioLoggeado")
 
         If idCategoriaDoc = 1 Then
 
@@ -535,7 +563,7 @@ Public Class CreacionDocumentos
         End If
 
         errorMessage = ""
-        Dim usuarioAplica As String = "andre"
+        Dim usuarioAplica As String = Session("UsuarioLoggeado")
         Dim respuestaAplicacion As Boolean
 
         If idCategoriaDoc = 1 Then

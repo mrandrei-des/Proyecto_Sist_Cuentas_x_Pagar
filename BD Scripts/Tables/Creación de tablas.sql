@@ -151,6 +151,7 @@ Estado int not null,
 ID_Grupo int not null,
 UsuarioCreacion varchar(25) not null,
 FechaCreacion datetime not null default GETDATE(),
+Identificador varchar(30) not null
 PRIMARY KEY (ID_Permiso),
 FOREIGN KEY (Estado) References Estados(ID_Estado),
 FOREIGN KEY (ID_Grupo) References GruposPermisos(ID_Grupo),

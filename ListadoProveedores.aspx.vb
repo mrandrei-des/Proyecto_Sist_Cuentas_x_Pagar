@@ -6,7 +6,15 @@ Public Class ListadoProveedores
     Inherits System.Web.UI.Page
 
     '' INICIO EVENTOS DE LA PÁGINA
+    Private Const IDENTIFICADOR As String = "LIST_MANT_PROVEEDORES"
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
+        If Not UsuarioPuedeContinuar() Then
+            Session.Clear()
+            Response.Redirect("Login.aspx", False)
+        End If
+
         ' Busca al elemento HTML que se le indique y se le dan estilos de línea
         Dim enlace As HtmlAnchor = Master.FindControl("enlaceProveedores")
         enlace.Style.Add("background-color", "var(--colorLetraOscuroSecundario)")
@@ -16,6 +24,34 @@ Public Class ListadoProveedores
             prcLlena_ddls_Estado()
         End If
     End Sub
+
+    Private Function UsuarioPuedeContinuar() As Boolean
+        If Session("UsuarioLoggeado") IsNot Nothing Then
+            If Session("RolUsuarioLoggeado") IsNot Nothing Then
+                If Session("RolUsuarioLoggeado") = 1 Then
+                    Return True
+                End If
+
+                If Session("ListaAccesos") IsNot Nothing Then
+                    Dim listaAccesos As New List(Of String)
+                    listaAccesos = Session("ListaAccesos")
+
+                    Dim objRedireccion As New Redireccionamiento
+                    If objRedireccion.PermisoEnLista(listaAccesos, IDENTIFICADOR) Then
+                        Return True
+                    Else
+                        Dim permisoAcceder As String, nombrePagina As String
+                        permisoAcceder = listaAccesos.Item(0)
+
+                        nombrePagina = objRedireccion.DevuelvePaginaInicioUsuario(permisoAcceder)
+                        Response.Redirect(nombrePagina, True)
+                    End If
+                End If
+            End If
+        End If
+
+        Return False
+    End Function
 
     Protected Sub btnLimpiarFiltros_Click(sender As Object, e As EventArgs)
         prcLimpiarFiltros()
@@ -28,7 +64,7 @@ Public Class ListadoProveedores
 
         Dim indexColIDProveedor = Convert.ToInt32(e.CommandArgument)
         Dim idProveedorAfectado = Convert.ToInt32(gvProveedores.DataKeys(indexColIDProveedor).Value)
-        Dim nombreUsuarioEjecutaAccion = "andre"
+        Dim nombreUsuarioEjecutaAccion = Session("UsuarioLoggeado")
 
         ' Guardamos el id del proveedor seleccionado en un campo oculto para usarlo posteriormente en el evento de modificación, ya que al abrir el modal se pierde la referencia del rowCommand y por ende del id del proveedor afectado, por lo que al guardarlo en un campo oculto, este valor se mantiene disponible para el evento de modificación
         hfIdProveedor.Value = idProveedorAfectado
@@ -50,7 +86,7 @@ Public Class ListadoProveedores
         Dim modProveedor As New Models.Proveedor
         Dim objProveedorDB As New ProveedorDB
         Dim errorMessage As String = ""
-        Dim nombreUsuarioEjecutaAccion = "andre"
+        Dim nombreUsuarioEjecutaAccion = Session("UsuarioLoggeado")
         Dim idProveedorAfectado As Integer = Convert.ToInt32(hfIdProveedor.Value)
         Dim nombre As String = txtNombre.Text, correo As String = txtCorreo.Text, estado As String = ddlEstado.SelectedValue
 
