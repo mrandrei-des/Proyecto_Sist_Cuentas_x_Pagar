@@ -45,7 +45,7 @@ function renderizarPendientes(listaDocumentos) {
 
     listaDocumentos.forEach(documento => {
         var pendienteDoc = document.createElement('div')
-        var tipoDocumento = document.IdCategoria == 1 ? 'FAC - ' : 'PAG - ';
+        var tipoDocumento = documento.IdCategoria == 1 ? 'FAC - ' : 'PAG - ';
         var cantDias = documento.CantDias == 1 ? `1 día` : `${documento.CantDias} días`
 
         var claseDiasAntiguo = ''
